@@ -1,0 +1,1436 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic|Georgia:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MongoDB3.2,分布式数据库," />
+
+
+
+
+
+  <link rel="alternate" href="https://www.leolan.top/atom.xml" title="LeoLan's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/200.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="本节是根据烂泥大神分享的笔记摘录的！
+安装这里安装的是3.2版本。
+yum安装123456789101112vim /etc/yum.repos.d/mongodb.repo[MongoDB]name=MongoDB Repositorybaseurl=http://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.2/x86_64/g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB">
+<meta property="og:url" content="https://www.leolan.top/posts/51937/index.html">
+<meta property="og:site_name" content="LeoLan's Blog">
+<meta property="og:description" content="本节是根据烂泥大神分享的笔记摘录的！
+安装这里安装的是3.2版本。
+yum安装123456789101112vim /etc/yum.repos.d/mongodb.repo[MongoDB]name=MongoDB Repositorybaseurl=http://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.2/x86_64/g">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB001.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB002.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB003.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB004.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB005.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB006.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB007.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB008.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB009.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB010.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB011.png">
+<meta property="og:updated_time" content="2017-02-27T08:47:33.050Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MongoDB">
+<meta name="twitter:description" content="本节是根据烂泥大神分享的笔记摘录的！
+安装这里安装的是3.2版本。
+yum安装123456789101112vim /etc/yum.repos.d/mongodb.repo[MongoDB]name=MongoDB Repositorybaseurl=http://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.2/x86_64/g">
+<meta name="twitter:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB001.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6343395544286627000',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.leolan.top/posts/51937/"/>
+
+
+
+
+
+  <title> MongoDB | LeoLan's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">LeoLan's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">有时候正是不报期望的人做出了人们不敢期望之事！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签云
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时间轴
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-commenting"></i> <br />
+            
+            给我留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            本地搜索
+          </a>
+        </li>
+               
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://www.leolan.top/posts/51937/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="LeoLan">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="LeoLan's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="LeoLan's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MongoDB
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-10T14:24:38+08:00">
+              2016-11-10
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2017-02-27T16:47:33+08:00">
+              2017-02-27
+            </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/posts/51937/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/51937/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/posts/51937/" class="leancloud_visitors" data-flag-title="MongoDB">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+         <span class="post-time">
+     &nbsp; | &nbsp;
+           <span class="post-meta-item-icon">
+             <i class="fa fa-calendar-o"></i>
+           </span>
+           <span class="post-meta-item-text">字数统计:</span>
+           <span class="post-count">1,062(字)</span>
+           
+         </span>
+
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><strong>本节是根据<a href="http://www.ilanni.com/" target="_blank" rel="external">烂泥大神</a>分享的笔记摘录的！</strong></p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>这里安装的是3.2版本。</p>
+<h2 id="yum安装"><a href="#yum安装" class="headerlink" title="yum安装"></a>yum安装</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">vim /etc/yum<span class="selector-class">.repos</span><span class="selector-class">.d</span>/mongodb<span class="selector-class">.repo</span></div><div class="line"></div><div class="line">[MongoDB]</div><div class="line">name=MongoDB Repository</div><div class="line">baseurl=http:<span class="comment">//repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.2/x86_64/</span></div><div class="line">gpgcheck=<span class="number">0</span></div><div class="line">enabled=<span class="number">1</span></div><div class="line"></div><div class="line">yum -y install mongodb-org</div><div class="line">/etc/init.d/mongod restart</div><div class="line">chkconfig mongod on</div><div class="line">mongod --version</div></pre></td></tr></table></figure>
+<h2 id="源码安装"><a href="#源码安装" class="headerlink" title="源码安装"></a>源码安装</h2><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">wget http:<span class="comment">//fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel62-3.2.8.tgz</span></div><div class="line">或：</div><div class="line">wget https:<span class="comment">//fossies.org/linux/misc/mongodb-linux-x86_64-3.2.8.tgz</span></div><div class="line"></div><div class="line">tar -xf mongodb-linux-x86_64-rhel62<span class="number">-3.2</span><span class="number">.8</span>.tgz -C <span class="meta-keyword">/usr/</span>local/    <span class="meta">#注意解压的包名</span></div><div class="line">cd <span class="meta-keyword">/usr/</span>local/</div><div class="line">mv mongodb-linux-x86_64-rhel62<span class="number">-3.2</span><span class="number">.8</span> mongodb</div><div class="line">mkdir <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/mongodb/</span>data</div><div class="line"></div><div class="line">vim <span class="meta-keyword">/etc/</span>profile</div><div class="line">export PATH=$PATH:<span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/mongodb/</span>bin</div><div class="line"></div><div class="line">source <span class="meta-keyword">/etc/</span>profile</div><div class="line">安装好直接可以用了</div></pre></td></tr></table></figure>
+<hr>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">vim /usr/local/mongodb/mongodb.conf</div><div class="line"><span class="meta">#端口</span></div><div class="line">port=<span class="number">27017</span></div><div class="line"><span class="meta">#数据文件存放目录</span></div><div class="line">dbpath= /usr/local/mongodb/data</div><div class="line"><span class="meta">#日志文件存放目录</span></div><div class="line">logpath= /usr/local/mongodb/mongodb.log</div><div class="line"><span class="meta">#使用追加的方式写日志</span></div><div class="line">logappend=<span class="literal">true</span></div><div class="line"><span class="meta">#以守护程序的方式启用，即在后台运行</span></div><div class="line">fork=<span class="literal">true</span></div><div class="line"><span class="meta">#最大同时连接数</span></div><div class="line">maxConns=<span class="number">500</span></div><div class="line"><span class="meta">#只允许通过本机访问</span></div><div class="line"><span class="meta">#bind_ip=127.0.0.1</span></div><div class="line"><span class="meta">#启用验证</span></div><div class="line"><span class="meta">#auth = true  #注释掉不启用用户认证，创建好用户后再启用</span></div></pre></td></tr></table></figure>
+<h2 id="启动mongodb："><a href="#启动mongodb：" class="headerlink" title="启动mongodb："></a>启动mongodb：</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/usr/</span>local<span class="regexp">/mongodb/</span>bin<span class="regexp">/mongod -f /u</span>sr<span class="regexp">/local/m</span>ongodb<span class="regexp">/mongodb.conf</span></div></pre></td></tr></table></figure>
+<hr>
+<h1 id="创建用户、管理用户"><a href="#创建用户、管理用户" class="headerlink" title="创建用户、管理用户"></a>创建用户、管理用户</h1><p><strong>read</strong>：允许用户读取指定数据库<br><strong>readWrite</strong>：允许用户读写指定数据库<br><strong>dbAdmin</strong>：允许用户在指定数据库中执行管理函数，如索引创建、删除，查看统计或访问system.profile<br><strong>userAdmin</strong>：允许用户向system.users集合写入，可以找指定数据库里创建、删除和管理用户<br><strong>clusterAdmin</strong>：只在admin数据库中可用，赋予用户所有分片和复制集相关函数的管理权限。<br><strong>readAnyDatabase</strong>：只在admin数据库中可用，赋予用户所有数据库的读权限<br><strong>readWriteAnyDatabase</strong>：只在admin数据库中可用，赋予用户所有数据库的读写权限<br><strong>userAdminAnyDatabase</strong>：只在admin数据库中可用，赋予用户所有数据库的userAdmin权限<br><strong>dbAdminAnyDatabase</strong>：只在admin数据库中可用，赋予用户所有数据库的dbAdmin权限。<br><strong>root</strong>：只在admin数据库中可用。超级账号，超级权限</p>
+<h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><p>对<strong>admin</strong>数据库，创建一个<strong>suadmin</strong>用户，密码是<strong>ilannipasswd</strong>，并且赋予<strong>dbAdminAnyDatabase和userAdminAnyDatabase权限</strong><br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">mongo</span></div><div class="line"><span class="selector-tag">use</span> <span class="selector-tag">admin</span></div><div class="line"><span class="selector-tag">db</span><span class="selector-class">.createUser</span>(&#123;<span class="attribute">user</span>:<span class="string">'suadmin'</span>,pwd:<span class="string">'ilannipasswd'</span>,roles:[&#123;role:<span class="string">'dbAdminAnyDatabase'</span>,db:<span class="string">'admin'</span>&#125;,&#123;<span class="attribute">role</span>:<span class="string">'userAdminAnyDatabase'</span>,db:<span class="string">'admin'</span>&#125;]&#125;)</div></pre></td></tr></table></figure></p>
+<h3 id="验证刚刚创建的用户"><a href="#验证刚刚创建的用户" class="headerlink" title="验证刚刚创建的用户"></a>验证刚刚创建的用户</h3><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">db</span><span class="selector-class">.auth</span>(<span class="string">'suadmin'</span>,<span class="string">'ilannipasswd'</span>)</div><div class="line">或者：</div><div class="line"><span class="selector-tag">db</span><span class="selector-class">.createUser</span>(&#123;<span class="attribute">user</span>:<span class="string">'suadmin'</span>,<span class="attribute">pwd</span>:<span class="string">'ilannipasswd'</span>,<span class="attribute">roles</span>:[&#123;<span class="attribute">role</span>:<span class="string">'dbAdminAnyDatabase'</span>,<span class="attribute">db</span>:<span class="string">'admin'</span>&#125;]&#125;)</div></pre></td></tr></table></figure>
+<p><img src="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB001.png" alt=""><br>返回1表示成功。</p>
+<p>然后退出mongodb，启用用户验证<strong>auth = true</strong>，再次启动<strong>mongodb</strong><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">pgrep -f mongodb |xargs <span class="keyword">kill</span> <span class="number">-2</span></div><div class="line">vim /usr/<span class="keyword">local</span>/mongodb/mongodb.conf</div><div class="line">#启用验证</div><div class="line">auth = <span class="literal">true</span></div><div class="line"></div><div class="line">#启动mongo</div><div class="line">/usr/<span class="keyword">local</span>/mongodb/<span class="keyword">bin</span>/mongod -f /usr/<span class="keyword">local</span>/mongodb/mongodb.conf</div><div class="line"></div><div class="line"></div><div class="line">mongo localhost:<span class="number">27017</span>/<span class="keyword">admin</span> -u suadmin -p ilannipasswd</div><div class="line"><span class="keyword">show</span> <span class="keyword">users</span></div><div class="line"><span class="keyword">show</span> dbs</div><div class="line"><span class="keyword">show</span> collections</div></pre></td></tr></table></figure></p>
+<p>查看整个mongoDB全部的用户：<code>db.system.users.find()</code><br><img src="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB002.png" alt=""></p>
+<h2 id="接着测试-创建库-创建用户"><a href="#接着测试-创建库-创建用户" class="headerlink" title="接着测试,创建库,创建用户"></a>接着测试,创建库,创建用户</h2><p>创建ilanni数据库，然后创建ilanniadmin用户，授予readWrite权限<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">use</span> <span class="selector-tag">ilanni</span></div><div class="line"><span class="selector-tag">db</span><span class="selector-class">.createUser</span>(&#123;<span class="attribute">user</span>:<span class="string">'ilanniadmin'</span>,<span class="attribute">pwd</span>:<span class="string">'ilanni123456'</span>,<span class="attribute">roles</span>:[&#123;<span class="attribute">role</span>:<span class="string">'readWrite'</span>,<span class="attribute">db</span>:<span class="string">'ilanni'</span>&#125;]&#125;)</div><div class="line">或者</div><div class="line"><span class="selector-tag">db</span><span class="selector-class">.createUser</span>(&#123;<span class="attribute">user</span>:<span class="string">'ilanniadmin'</span>,<span class="attribute">pwd</span>:<span class="string">'ilanni123456'</span>,<span class="attribute">roles</span>:[&#123;<span class="attribute">role</span>:<span class="string">'dbAdmin'</span>,<span class="attribute">db</span>:<span class="string">'ilanni'</span>&#125;,&#123;<span class="attribute">role</span>:<span class="string">'readWrite'</span>,<span class="attribute">db</span>:<span class="string">'ilanni'</span>&#125;]&#125;)</div></pre></td></tr></table></figure></p>
+<p>验证刚刚创建的用户：<code>db.auth(&#39;ilanniadmin&#39;,&#39;ilanni123456&#39;)</code><br><img src="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB003.png" alt=""><br>注意，在<strong>use ilanni</strong>后，ilanni实际上还没真正建立起来，只是表明目前是在使用ilanni了。如果什么都不操作离开的话,这个库就会被系统删除.所以我们还要执行下面的命令:<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">db.ilanni.<span class="keyword">insert</span>(&#123;<span class="string">'name'</span>:<span class="string">'tompig'</span>&#125;);</div><div class="line">db.ilanni.<span class="keyword">insert</span>(&#123;<span class="string">'name'</span>:<span class="string">'tompig1'</span>,<span class="string">'id'</span>:<span class="number">1</span>&#125;);</div></pre></td></tr></table></figure></p>
+<p>使用刚刚创建的<strong>ilanniadmin</strong>用户登陆数据库，然后插入一些，并查看<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mongo localhost:<span class="number">27017</span>/ilanni -u ilanniadmin -<span class="selector-tag">p</span> ilanni123456</div><div class="line">db<span class="selector-class">.ilanni</span><span class="selector-class">.findOne</span>()</div><div class="line">db<span class="selector-class">.ilanni</span><span class="selector-class">.find</span>()</div></pre></td></tr></table></figure></p>
+<p><img src="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB004.png" alt=""><br>现在我们再使用<strong>suadmin</strong>用户登陆到服务器，查看服务器上的数据库<br><figure class="highlight nsis"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mongo localhost:<span class="number">27017</span>/<span class="literal">admin</span> -u suadmin -p ilanni123456</div><div class="line"><span class="literal">show</span> dbs</div></pre></td></tr></table></figure></p>
+<p><img src="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB005.png" alt=""><br>通过上图，我们可以看到刚刚创建的ilanni数据库</p>
+<h2 id="删除库，删除用户"><a href="#删除库，删除用户" class="headerlink" title="删除库，删除用户"></a>删除库，删除用户</h2><p>现在我们来测试数据库的删除<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">mongo</span> <span class="selector-tag">localhost</span><span class="selector-pseudo">:27017</span>/<span class="selector-tag">admin</span> <span class="selector-tag">-u</span> <span class="selector-tag">suadmin</span> <span class="selector-tag">-p</span> <span class="selector-tag">ilannipasswd</span></div><div class="line"><span class="selector-tag">use</span> <span class="selector-tag">ilanni</span></div><div class="line"><span class="selector-tag">db</span><span class="selector-class">.dropDatabase</span>();</div></pre></td></tr></table></figure></p>
+<p><img src="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB006.png" alt=""><br>通过shell删除ilanni数据库</p>
+<p>现在我们来测试用户的删除</p>
+<p>导入数据：<code>mongoimport --port 27017 -d tms -c mod &lt; mongo_data/mod.json</code><br><img src="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB007.png" alt=""></p>
+<p>命令行连接mongodb数据库：<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">./mongo</div><div class="line">help        <span class="meta">#查看帮助</span></div><div class="line"><span class="keyword">show</span> dbs    <span class="meta">#查看所有的mongodb数据库</span></div><div class="line"><span class="keyword">use</span> tms     <span class="meta">#使用tms数据库</span></div><div class="line">db.status() <span class="meta">#查看数据库的信息</span></div></pre></td></tr></table></figure></p>
+<p><img src="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB008.png" alt=""><br><img src="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB009.png" alt=""></p>
+<p>删除数据库<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> dbs</div><div class="line"><span class="keyword">use</span> tms</div><div class="line">db.dropDatabase()</div></pre></td></tr></table></figure></p>
+<p><img src="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB010.png" alt=""><br>导出数据：<code>mongoexport --port 27017 -d tms -c mod -o tms.json</code><br><img src="http://ofyfogrgx.bkt.clouddn.com//blog/MongoDB011.png" alt=""></p>
+<hr>
+
+<!--这里是每篇文章的尾巴-->
+<html>
+  <body>
+    <h1>结语</h1>
+      <p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p>
+      <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<!--
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p></blockquote></div>
+    <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎收藏书签，欢迎多提宝贵意见，非常感谢！</p>
+    <footer><strong>Welcome to LeoLan'S BLOG</strong>
+    <cite><a href="#" onclick="go_my_site()" rel="external">Leo Lan Blog Share For you!</a></cite></footer></blockquote></div>
+  </body>
+</html>
+-->
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div style="margin-bottom: 10px;font-size: 16px;font-weight: 600;">想请我吃辣条吗？</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/alipay.jpg" alt="LeoLan Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/weixinpay.png" alt="LeoLan WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>微信打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+<h3 id="最近访客"><a href="#最近访客" class="headerlink" title="最近访客"></a>最近访客</h3><div class="ds-recent-visitors" data-num-items="36" data-avatar-size="42" id="ds-recent-visitors"></div>
+      
+    </div>
+
+<!--这是文章底部标签云链接
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MongoDB3-2/" rel="tag"># MongoDB3.2</a>
+          
+            <a href="/tags/分布式数据库/" rel="tag"># 分布式数据库</a>
+          
+        </div>
+      
+-->
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/34699/" rel="next" title="jenkins">
+                <i class="fa fa-chevron-left"></i> jenkins
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/22149/" rel="prev" title="GitLab服务器搭建">
+                GitLab服务器搭建 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js;
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="posts/51937/"
+           data-title="MongoDB" data-url="https://www.leolan.top/posts/51937/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="LeoLan" />
+          <p class="site-author-name" itemprop="name">LeoLan</p>
+          <p class="site-description motion-element" itemprop="description">Better late than never</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">68</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="https://www.leolan.top/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+
+<!-- 自定义High一下的功能 -->
+ <a rel="alternate" class="mw-harlem_shake_slow wobble shake" href='javascript:(
+   function go() {
+   var songs = [
+               "http://ofyfogrgx.bkt.clouddn.com/tongxingSibel%20-%20Im%20Sorry.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com/Music-sunburst.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com//blog/Apple%20&%20Stone%20-%20Lost.mp3"
+   ];
+
+<!--"http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150103346.mp3","http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150842689.mp3",-->
+
+   function c() {
+       var e = document.createElement("link");
+       e.setAttribute("type", "text/css");
+       e.setAttribute("rel", "stylesheet");
+       e.setAttribute("href", f);
+       e.setAttribute("class", l);
+       document.body.appendChild(e)
+   }
+   function h() {
+       var e = document.getElementsByClassName(l);
+       for (var t = 0; t < e.length; t++) {
+           document.body.removeChild(e[t])
+       }
+   }
+   function p() {
+       var e = document.createElement("div");
+       e.setAttribute("class", a);
+       document.body.appendChild(e);
+       setTimeout(function() {
+           document.body.removeChild(e)
+       }, 100)
+   }
+   function d(e) {
+       return {
+           height : e.offsetHeight,
+           width : e.offsetWidth
+       }
+   }
+   function v(i) {
+       var s = d(i);
+       return s.height > e && s.height < n && s.width > t && s.width < r
+   }
+   function m(e) {
+       var t = e;
+       var n = 0;
+       while (!!t) {
+           n += t.offsetTop;
+           t = t.offsetParent
+       }
+       return n
+   }
+   function g() {
+       var e = document.documentElement;
+       if (!!window.innerWidth) {
+           return window.innerHeight
+       } else if (e && !isNaN(e.clientHeight)) {
+           return e.clientHeight
+       }
+       return 0
+   }
+   function y() {
+       if (window.pageYOffset) {
+           return window.pageYOffset
+       }
+       return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+   }
+   function E(e) {
+       var t = m(e);
+       return t >= w && t <= b + w
+   }
+   function S() {
+       var e = document.getElementById("audio_element_id");
+       if(e != null){
+           var index = parseInt(e.getAttribute("curSongIndex"));
+           if(index > songs.length - 2) {
+               index = 0;
+           } else {
+               index++;
+           }
+           e.setAttribute("curSongIndex", index);
+           N();
+       }
+       e.src = i;
+       e.play()
+   }
+   function x(e) {
+       e.className += " " + s + " " + o
+   }
+   function T(e) {
+       e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+   }
+   function N() {
+       var e = document.getElementsByClassName(s);
+       var t = new RegExp("\\b" + s + "\\b");
+       for (var n = 0; n < e.length; ) {
+           e[n].className = e[n].className.replace(t, "")
+       }
+   }
+   function initAudioEle() {
+       var e = document.getElementById("audio_element_id");
+       if(e === null){
+           e = document.createElement("audio");
+           e.setAttribute("class", l);
+           e.setAttribute("curSongIndex", 0);
+           e.id = "audio_element_id";
+           e.loop = false;
+           e.bgcolor = 0;
+           e.addEventListener("canplay", function() {
+           setTimeout(function() {
+               x(k)
+           }, 500);
+           setTimeout(function() {
+               N();
+               p();
+               for (var e = 0; e < O.length; e++) {
+                   T(O[e])
+               }
+           }, 15500)
+       }, true);
+       e.addEventListener("ended", function() {
+           N();
+           h();
+           go();
+       }, true);
+       e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+       document.body.appendChild(e);
+       }
+   }
+   
+   initAudioEle();
+   var e = 30;
+   var t = 30;
+   var n = 350;
+   var r = 350;
+   var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+   var i = songs[curSongIndex];
+   
+   var s = "mw-harlem_shake_me";
+   var o = "im_first";
+   var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+   var a = "mw-strobe_light";
+   /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css
+   //7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css  七牛云地址*/
+   var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";  
+   /* var f = "/css/harlem_shake_style.css";  */
+
+   var l = "mw_added_css";
+   var b = g();
+   var w = y();
+   var C = document.getElementsByTagName("*");
+   var k = null;
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           if (E(A)) {
+               k = A;
+               break
+           }
+       }
+   }
+   if (A === null) {
+       console.warn("Could not find a node of the right size. Please try a different page.");
+       return
+   }
+   c();
+   S();
+   var O = [];
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           O.push(A)
+       }
+   }
+   })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High</a>
+</div>
+         <!-- end High一下 -->
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/myleolan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://coding.net/u/leolan" target="_blank" title="Coding">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  Coding
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://quickconnect.to/myleolan" target="_blank" title="Cloud1">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud1
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://git.oschina.net/leolan" target="_blank" title="OSchina">
+                  
+                    <i class="fa fa-fw fa-git-square"></i>
+                  
+                  OSchina
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://leolan.picp.net" target="_blank" title="Cloud2">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud2
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.leolan.top/posts/44568/" target="_blank" title="Links">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Links
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-heartbeat"></i>
+              友链
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://jerry.hk/" title="Jerry Locke" target="_blank" rel="external nofollow">Jerry Locke</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://login926.top" title="Raintons" target="_blank" rel="external nofollow">Raintons</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.anotherhome.net" title="DIYgod" target="_blank" rel="external nofollow">DIYgod</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mblack.cn/" title="小黑" target="_blank" rel="external nofollow">小黑</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.iamlj.com/" title="Jing's Blog" target="_blank" rel="external nofollow">Jing's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://cyang.tech/" title="cyang's blog" target="_blank" rel="external nofollow">cyang's blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.showerlee.com/" title="一路向北" target="_blank" rel="external nofollow">一路向北</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://lusongsong.com/" title="卢松松的博客" target="_blank" rel="external nofollow">卢松松的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://v.lusongsong.com/" title="松松视频" target="_blank" rel="external nofollow">松松视频</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#yum安装"><span class="nav-number">1.1.</span> <span class="nav-text">yum安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码安装"><span class="nav-number">1.2.</span> <span class="nav-text">源码安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#修改配置文件"><span class="nav-number">2.1.</span> <span class="nav-text">修改配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动mongodb："><span class="nav-number">2.2.</span> <span class="nav-text">启动mongodb：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建用户、管理用户"><span class="nav-number">3.</span> <span class="nav-text">创建用户、管理用户</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建用户"><span class="nav-number">3.1.</span> <span class="nav-text">创建用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#验证刚刚创建的用户"><span class="nav-number">3.1.1.</span> <span class="nav-text">验证刚刚创建的用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接着测试-创建库-创建用户"><span class="nav-number">3.2.</span> <span class="nav-text">接着测试,创建库,创建用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除库，删除用户"><span class="nav-number">3.3.</span> <span class="nav-text">删除库，删除用户</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LeoLan</span>
+</div>
+
+<div class="powered-by">
+  <a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备16026009号-2</a>  |  本站总访问量<span id="busuanzi_value_site_pv"></span>
+</div>
+
+<div class="theme-info">
+  您是第<span id="busuanzi_value_site_uv"></span>位小伙伴
+</div>
+
+<script async src="/js/src/busuanzi.pure.mini.js">
+</script>
+
+<!--
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+-->
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"leolan"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '/js/src/duoshuo_embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementById('footer')
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("zieuxKa4IjAP6VgxxvBe4vkj-gzGzoHsz", "MHGN54IEuofFNV1AROiRkEoG");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js" count="50" zindex="-2" opacity="1" color="0,104,183"></script>
+
+</body>
+</html>

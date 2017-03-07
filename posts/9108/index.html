@@ -1,0 +1,1455 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic|Georgia:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Btrfs" />
+
+
+
+
+
+  <link rel="alternate" href="https://www.leolan.top/atom.xml" title="LeoLan's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/200.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Btrfs简介Btrfs 是一个 Linux 中的新的写时复制(copy-on-write (COW))的文件系统，目的是实现高级功能的同时着重与容错功能，修复功能以及易于管理。
+Btrfs核心特性：多物理卷支持：btrfs可由多个底层物理卷组成；支持RAID，以联机“添加”、“移除”、“修改”；
+写时复制更新机制(CoW)：复制、更新及替换指针，而非“就地”更新；在文件进行修改的时候，首先将">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Btrfs文件系统">
+<meta property="og:url" content="https://www.leolan.top/posts/9108/index.html">
+<meta property="og:site_name" content="LeoLan's Blog">
+<meta property="og:description" content="Btrfs简介Btrfs 是一个 Linux 中的新的写时复制(copy-on-write (COW))的文件系统，目的是实现高级功能的同时着重与容错功能，修复功能以及易于管理。
+Btrfs核心特性：多物理卷支持：btrfs可由多个底层物理卷组成；支持RAID，以联机“添加”、“移除”、“修改”；
+写时复制更新机制(CoW)：复制、更新及替换指针，而非“就地”更新；在文件进行修改的时候，首先将">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/102726838.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/102942852.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/103630400.png">
+<meta property="og:updated_time" content="2017-02-27T08:47:33.056Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Btrfs文件系统">
+<meta name="twitter:description" content="Btrfs简介Btrfs 是一个 Linux 中的新的写时复制(copy-on-write (COW))的文件系统，目的是实现高级功能的同时着重与容错功能，修复功能以及易于管理。
+Btrfs核心特性：多物理卷支持：btrfs可由多个底层物理卷组成；支持RAID，以联机“添加”、“移除”、“修改”；
+写时复制更新机制(CoW)：复制、更新及替换指针，而非“就地”更新；在文件进行修改的时候，首先将">
+<meta name="twitter:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/102726838.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6343395544286627000',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.leolan.top/posts/9108/"/>
+
+
+
+
+
+  <title> Btrfs文件系统 | LeoLan's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">LeoLan's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">有时候正是不报期望的人做出了人们不敢期望之事！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签云
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时间轴
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-commenting"></i> <br />
+            
+            给我留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            本地搜索
+          </a>
+        </li>
+               
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://www.leolan.top/posts/9108/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="LeoLan">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="LeoLan's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="LeoLan's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Btrfs文件系统
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-06T10:23:06+08:00">
+              2017-01-06
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2017-02-27T16:47:33+08:00">
+              2017-02-27
+            </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂项/" itemprop="url" rel="index">
+                    <span itemprop="name">杂项</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/posts/9108/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/9108/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/posts/9108/" class="leancloud_visitors" data-flag-title="Btrfs文件系统">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+         <span class="post-time">
+     &nbsp; | &nbsp;
+           <span class="post-meta-item-icon">
+             <i class="fa fa-calendar-o"></i>
+           </span>
+           <span class="post-meta-item-text">字数统计:</span>
+           <span class="post-count">2,143(字)</span>
+           
+         </span>
+
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="Btrfs简介"><a href="#Btrfs简介" class="headerlink" title="Btrfs简介"></a>Btrfs简介</h1><p>Btrfs 是一个 Linux 中的新的写时复制(copy-on-write (COW))的文件系统，目的是实现高级功能的同时着重与容错功能，修复功能以及易于管理。</p>
+<p><strong>Btrfs核心特性</strong>：<br>多物理卷支持：btrfs可由多个底层物理卷组成；支持RAID，以联机“添加”、“移除”、“修改”；</p>
+<p><strong>写时复制更新机制(CoW)</strong>：复制、更新及替换指针，而非“就地”更新；在文件进行修改的时候，首先将文件复制一份出来，在复制出来的文件上进行修改，修改完成之后，将指向原有文件的指针修改指向到修改完成的文件上，若修改完成的文件出现了错误，则我们可以通过原文件进行修复</p>
+<p><strong>数据及元数据校验码</strong>：checksum ,当存储某个文件时，checksum会将数据的源数据和数据的校验码，分别通过文件的属性扩展进行保存，当我们再次读取数据时可以方便的检测数据是否受损，如果文件受损系统可以完成自动修复；</p>
+<p><strong>子卷</strong>：sub_volume，在一个卷上创建多个子卷，在每一个子卷上创建文件系统，并挂载使用；</p>
+<p><strong>快照</strong>：支持快照的快照；因此可以实现类似增量快照的机制</p>
+<p><strong>透明压缩 </strong>：如果我们在存储文件时，进行压缩存储，那么在文件发往btrfs时，会自动的占用时钟周期，完成数据的压缩存放，而用户并不知道，在用户读取文件时，会自动的进行文件的解压缩，可以实现节约磁盘空间。但是压缩和解压缩会占用时钟周期；</p>
+<p>Btrfs确实比ext4多了很多功能，快照功能更是很有使用价值，管理也比ext格式要方便一些。</p>
+<hr>
+<h1 id="创建Btrfs文件系统"><a href="#创建Btrfs文件系统" class="headerlink" title="创建Btrfs文件系统"></a>创建Btrfs文件系统</h1><p>mkfs.btrfs</p>
+<ul>
+<li><strong>-L ‘LABEL’</strong>：指定文件系统的卷标；</li>
+<li><strong>-d [type]</strong>: raid0, raid1, raid5, raid6, raid10, single  指明数据的存放方式，支持RAID机制；</li>
+<li><strong>-m [profile]</strong>：raid0, raid1, raid5, raid6, raid10, single, dup 指明元数据的存放方式，是否可跨越多个物理卷，支持RAID机制；</li>
+<li><strong>-O [feature]</strong>：在格式化文件系统的时候，是否直接开启文件系统的某些特性；</li>
+<li><strong>-O list-all</strong>：列出支持的所有特性；</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fdisk <span class="_">-l</span></div></pre></td></tr></table></figure>
+<p>拿这个20G的盘开刀。<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/102726838.png" alt="mark"><br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mkfs.btrfs -L my20G_date <span class="meta-keyword">/dev/</span>sdae   <span class="meta">#创建btrfs 文件系统</span></div><div class="line"><span class="meta">#也可以多块硬盘mkfs.btrfs -L my20G_date /dev/sdae /dev/sdc 这样就把两块硬盘合并起来管理。</span></div><div class="line"></div><div class="line">blkid <span class="meta-keyword">/dev/</span>sdae                      <span class="meta">#查看设备sdae的属性,可以看到TYPE=<span class="string">"btrfs"</span></span></div><div class="line">btrfs filesystem show                <span class="meta">#查看系统上的所有btrfs文件系统</span></div></pre></td></tr></table></figure></p>
+<p><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/102942852.png" alt="mark"><br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mkdir /my20G                      <span class="comment">#创建挂载目录</span></div><div class="line">mount <span class="regexp">/dev/sdae /my20G/</span>           <span class="comment">#挂载  </span></div><div class="line">mount | grep /my20G               <span class="comment">#已挂载成功</span></div><div class="line">df -h</div><div class="line"></div><div class="line"><span class="comment">#man btrfs filesystem 可用来查看命令帮助文档</span></div></pre></td></tr></table></figure></p>
+<p><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/103630400.png" alt="mark"></p>
+<hr>
+<h1 id="调整btrfs文件系统大小-逻辑边界"><a href="#调整btrfs文件系统大小-逻辑边界" class="headerlink" title="调整btrfs文件系统大小(逻辑边界)"></a>调整btrfs文件系统大小(逻辑边界)</h1><p>btrfs调整大小只要一条命令就行，几乎是瞬间完成的。<br><strong>命令格式</strong>：<code>btrfs filesystem resize &lt;size(单位G,K,M)&gt;或者max &lt;path&gt;</code><br><figure class="highlight glsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">btrfs filesystem resize <span class="number">-10</span>G /my20G    <span class="meta">#将分区缩小10G，单位可以是M，K。</span></div><div class="line">df -h                                  <span class="meta">#可以看到已经缩小了10G了</span></div><div class="line"></div><div class="line">btrfs filesystem resize +<span class="number">5000</span>M /my20G  <span class="meta">#将分区扩大5000M，单位可以是M，K。</span></div><div class="line">df -h                                  <span class="meta">#可以看到已经增加了近5G空间</span></div><div class="line"></div><div class="line">btrfs filesystem resize <span class="built_in">max</span> /my20G     <span class="meta">#max，将文件系统大小调整至其物理边界，可用最大的存储空间。</span></div></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="调整btrfs物理边界大小"><a href="#调整btrfs物理边界大小" class="headerlink" title="调整btrfs物理边界大小"></a>调整btrfs物理边界大小</h1><p>物理边界就属于硬件范畴了，增加或去掉硬盘。<br><strong>命令格式</strong>：<code>btrfs device &lt;add/delete/scan&gt; &lt;dev&gt; &lt;mount_point&gt;</code><br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">btrfs device <span class="keyword">add</span><span class="bash"> /dev/sdd /my20G    <span class="comment">#为btrfs文件系统，增加一块硬盘sdd</span></span></div><div class="line">df -lh                              <span class="comment">#完成后，容量已经扩充了</span></div></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="透明压缩"><a href="#透明压缩" class="headerlink" title="透明压缩"></a>透明压缩</h1><p>只需在挂载时候，使用-o 并指定压缩方式即可，对用户是透明的，可以选择lzo或zlib两种压缩方式<br><strong>命令格式</strong>：<code>mount -o compress={lzo|zlib} DEVICE MOUNT_POINT</code><br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mount -o compress=lzo <span class="meta-keyword">/dev/</span>sdae /my20G</div><div class="line">mount -o compress=zlib <span class="meta-keyword">/dev/</span>sdae /my20G</div></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="btrfs文件均衡"><a href="#btrfs文件均衡" class="headerlink" title="btrfs文件均衡"></a>btrfs文件均衡</h1><p><strong>命令格式</strong>：<code>btrfs balance start [OPTIONS] &lt;FILTERS&gt; MOUNT_POINT</code><br>常用选项有：</p>
+<ul>
+<li><strong>-d</strong>: 指定数据的组织机制</li>
+<li><strong>-s</strong>：指定元数据的组织机制</li>
+<li><strong>-m</strong>：指定文件系统的组织机制</li>
+</ul>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">btrfs </span>device <span class="keyword">add </span>/dev/sdd /my20G            #为<span class="keyword">btrfs文件系统，增加一块硬盘sdd</span></div><div class="line"><span class="keyword">btrfs </span>filesystem show                       #查看<span class="keyword">btrf文件系统信息</span></div><div class="line"><span class="keyword">btrfs </span><span class="keyword">balance </span>start /my20G                  #均衡文件</div><div class="line"></div><div class="line"><span class="keyword">btrfs </span><span class="keyword">balance </span>start -mconvert<span class="symbol">=raid5</span> /my20G  #均衡文件，并使用raid5(最少<span class="number">3</span>块硬盘)组织文件系统，RAID模式还要注意每块硬盘的容量大小。</div></pre></td></tr></table></figure>
+<hr>
+<h1 id="删除btrfs的物理卷"><a href="#删除btrfs的物理卷" class="headerlink" title="删除btrfs的物理卷"></a>删除btrfs的物理卷</h1><p>如果只有一个硬盘的话是无法删除的。<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">btrfs device <span class="keyword">delete</span> /dev/sdd /my20G    <span class="meta">#将sdd设备移除</span></div><div class="line">df -lh /my20G                          <span class="meta">#容量减少了</span></div><div class="line">btrfs filesystem <span class="keyword">show</span> /my20G           <span class="meta">#sdd被删掉了</span></div></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="ext文件系统和btrfs文件系统互转"><a href="#ext文件系统和btrfs文件系统互转" class="headerlink" title="ext文件系统和btrfs文件系统互转"></a>ext文件系统和btrfs文件系统互转</h1><p><strong>命令格式</strong>：<code>btrfs-convert [-r] Device</code><br><strong>-r</strong>：从btrfs回滚到之前的文件系统,不使用-r 代表从普通文件系统，转化成btrfs文件系统<br>先说说硬盘拆分，架设现在用了3块硬盘组的RAID5，先降级为RAID1才可以拆掉其中一块</p>
+<h2 id="拆分硬盘"><a href="#拆分硬盘" class="headerlink" title="拆分硬盘"></a>拆分硬盘</h2><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">btrfs </span><span class="keyword">balance </span>start  -mconvert<span class="symbol">=raid1</span> /my20G</div><div class="line"><span class="keyword">btrfs </span><span class="keyword">balance </span>start  -dconvert<span class="symbol">=raid1</span> /my20G</div><div class="line"><span class="keyword">btrfs </span>device delete /dev/sdd /my20G           #此时移除设备sdd</div></pre></td></tr></table></figure>
+<h2 id="从ext4转为Btrfs"><a href="#从ext4转为Btrfs" class="headerlink" title="从ext4转为Btrfs"></a>从ext4转为Btrfs</h2><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#创建ext4分区</span></div><div class="line">fdisk <span class="meta-keyword">/dev/</span>sdd                                <span class="meta">#将sdd重新创建分区sdd1</span></div><div class="line">mkfs.ext4 <span class="meta-keyword">/dev/</span>sdd1                           <span class="meta">#格式化为ext4文件系统</span></div><div class="line">mount <span class="meta-keyword">/dev/</span>sdd1 /mnt                          <span class="meta">#挂载sdd1</span></div><div class="line"></div><div class="line">ls /mnt </div><div class="line">cp <span class="meta-keyword">/etc/</span>fstab /mnt       <span class="meta">#复制文件fstab到 /mnt</span></div><div class="line">ls /mnt </div><div class="line">umount /mnt              <span class="meta">#卸载文件系统，不要在线做文件系统转换</span></div><div class="line">fsck -f <span class="meta-keyword">/dev/</span>sdd1        <span class="meta">#做强制检测</span></div><div class="line"></div><div class="line"><span class="meta">#将ext4装换为Btrfs</span></div><div class="line">btrfs-convert <span class="meta-keyword">/dev/</span>sdd1   </div><div class="line">btrfs filesystem show    <span class="meta">#sdd1已经转化成了btrfs文件系统</span></div><div class="line">mount <span class="meta-keyword">/dev/</span>sdd1 /mnt</div><div class="line">ls /mnt</div><div class="line">cat <span class="meta-keyword">/mnt/</span>fstab           <span class="meta">#之前的文件fstab仍旧可以正常访问</span></div></pre></td></tr></table></figure>
+<h2 id="从Btrfs转为ext4"><a href="#从Btrfs转为ext4" class="headerlink" title="从Btrfs转为ext4"></a>从Btrfs转为ext4</h2><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">umount /mnt</div><div class="line">btrfs-convert -r <span class="meta-keyword">/dev/</span>sdd1</div><div class="line">mount <span class="meta-keyword">/dev/</span>sdd1 /mnt</div><div class="line">ls /mnt</div><div class="line">blkid <span class="meta-keyword">/dev/</span>sdd1          <span class="meta">#参考sdd1信息，可见TYPE=<span class="string">"ext4"</span></span></div><div class="line">cat <span class="meta-keyword">/mnt/</span>fstab           <span class="meta">#且原文件仍旧可以正常访问</span></div></pre></td></tr></table></figure>
+<hr>
+<h1 id="btrfs子卷管理"><a href="#btrfs子卷管理" class="headerlink" title="btrfs子卷管理"></a>btrfs子卷管理</h1><h2 id="创建子卷："><a href="#创建子卷：" class="headerlink" title="创建子卷："></a>创建子卷：</h2><p><strong>命令格式</strong>： <code>btrfs subvolume create /PATH</code>  此路径必须是在btrfs文件系统的挂载目录下<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">btrfs </span><span class="keyword">subvolume </span>create /my20G/<span class="keyword">subvol </span>   #创建子卷，子卷名为<span class="keyword">subvol</span></div><div class="line"></div><div class="line"><span class="keyword">btrfs </span><span class="keyword">subvolume </span>create /my20G/<span class="keyword">subvol1 </span>  #再创建子卷，子卷名为<span class="keyword">subvol1</span></div><div class="line"></div><div class="line"><span class="keyword">btrfs </span><span class="keyword">subvolume </span>list /my20G             #查看<span class="keyword">btrfs </span>文件系统下的所有子卷信息</div><div class="line"><span class="symbol">ID</span> <span class="number">262</span> gen <span class="number">73</span> top level <span class="number">5</span> path <span class="keyword">subvol </span>  <span class="symbol">#ID</span> <span class="number">262</span> 是子卷<span class="keyword">subvol的ID，可以用该ID来挂载该卷</span></div><div class="line"><span class="symbol">ID</span> <span class="number">263</span> gen <span class="number">74</span> top level <span class="number">5</span> path <span class="keyword">subvol1</span></div></pre></td></tr></table></figure></p>
+<h2 id="挂载子卷"><a href="#挂载子卷" class="headerlink" title="挂载子卷"></a>挂载子卷</h2><p><strong>命令格式</strong>：  <code>mount -o subvol=SUBVOLUME  DEVICE /MOUNT_POIN</code><br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mount -o subvol=subvol <span class="meta-keyword">/dev/</span>sdae /mnt  <span class="meta">#将子卷单独挂载到/mnt目录下</span></div><div class="line">ls /mnt                                <span class="meta">#此时是没有任何内容的</span></div></pre></td></tr></table></figure></p>
+<h3 id="查看子卷相关信息"><a href="#查看子卷相关信息" class="headerlink" title="查看子卷相关信息"></a>查看子卷相关信息</h3><h4 id="挂载父卷，子卷自动被挂载"><a href="#挂载父卷，子卷自动被挂载" class="headerlink" title="挂载父卷，子卷自动被挂载"></a>挂载父卷，子卷自动被挂载</h4><p><strong>命令格式</strong>：<code>btrfs subvolume show MOUNT_POINT</code><br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">btrfs subvolume show /mnt              <span class="meta">#查看子卷信息</span></div><div class="line">cp <span class="meta-keyword">/var/</span>log/messages /mnt              <span class="meta">#复制messages文件到子卷subvol</span></div><div class="line">ls /mnt</div><div class="line">umount /mnt                            <span class="meta">#卸载子卷subvol</span></div><div class="line">mount <span class="meta-keyword">/dev/</span>sdae /my20G                 <span class="meta">#将这个btrfs文件系统挂载到/my20G目录</span></div><div class="line">ls /my20G</div><div class="line">ls /my20G/subvol                       <span class="meta">#可见子卷subvol的内容是可见的，所以说一旦父卷挂载，子卷就被自动挂载了</span></div></pre></td></tr></table></figure></p>
+<h4 id="挂载子卷，父卷不会自动被挂载"><a href="#挂载子卷，父卷不会自动被挂载" class="headerlink" title="挂载子卷，父卷不会自动被挂载"></a>挂载子卷，父卷不会自动被挂载</h4><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">umount /my20G                             <span class="comment">#卸载父卷，</span></div><div class="line">mount -o subvol=subvol /dev/sdae /my20G   <span class="comment">#单独挂载子卷</span></div><div class="line">ls <span class="regexp">/my20G/</span>                                <span class="comment">#此时/my20G下只有子卷的内容，并不会有父卷的内容：如subvol,subvol1目录</span></div></pre></td></tr></table></figure>
+<p><strong>注</strong>：由于是子卷，如果父卷已经挂载，则子卷就自动被挂载了<br>反之，如果只挂载子卷，父卷内容是不会自动挂载的，其内容，不可见</p>
+<h4 id="分别挂载子卷和父卷（不要先挂载父卷）"><a href="#分别挂载子卷和父卷（不要先挂载父卷）" class="headerlink" title="分别挂载子卷和父卷（不要先挂载父卷）"></a>分别挂载子卷和父卷（不要先挂载父卷）</h4><p>子卷，父卷也可以分别挂载：（可是没必要单独挂载子卷，父卷挂载完成后，子卷也就被自动挂载了)<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">umount /my20G                             <span class="meta">#卸载子卷</span></div><div class="line">mount -o subvol=subvol <span class="meta-keyword">/dev/</span>sdae /mnt     <span class="meta">#挂载子卷到/mnt目录</span></div><div class="line">mount <span class="meta-keyword">/dev/</span>sdae /my20G                    <span class="meta">#挂载父卷到/my20G目录</span></div><div class="line">ls /my20G/                                <span class="meta">#此时父卷挂载成功</span></div><div class="line">ls /mnt                                   <span class="meta">#子卷内容也可单独显示</span></div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="删除子卷"><a href="#删除子卷" class="headerlink" title="删除子卷"></a>删除子卷</h2><p><strong>命令格式</strong>：<code>btrfs subvolume delete /MOUNT_POINT</code><br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">btrfs </span><span class="keyword">subvolume </span>delete /my20G/<span class="keyword">subvol </span>     #删除子卷<span class="keyword">subvol</span></div><div class="line"><span class="keyword">btrfs </span><span class="keyword">subvolume </span>list /my20G               #已经没有了子卷<span class="keyword">subvol信息了</span></div></pre></td></tr></table></figure></p>
+<h2 id="子卷快照"><a href="#子卷快照" class="headerlink" title="子卷快照"></a>子卷快照</h2><p><strong>命令格式</strong>：<code>btrfs subvolume snapshot /PATH/TO/SUBVOLUME /PATH/TO/SNAPSHOT</code><br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">cp</span> /etc/passwd /my20G/<span class="keyword">subvol1/ </span>                                    #复制passwd文档到子卷<span class="keyword">subvol1内</span></div><div class="line"><span class="keyword">btrfs </span><span class="keyword">subvolume </span>snapshot /my20G/<span class="keyword">subvol1/ </span>/my20G/<span class="keyword">subvol1_snapshot </span>  #创建快照<span class="keyword">subvol1_snapshot</span></div><div class="line"><span class="keyword">btrfs </span><span class="keyword">subvolume </span>list /my20G                                        #快照子卷<span class="keyword">subvol1_snapshot创建完成</span></div><div class="line"></div><div class="line"><span class="symbol">echo</span> <span class="string">"TEST FOR SNAPSHOT"</span> &gt;&gt; /my20G/<span class="keyword">subvol1/passwd </span>  #在passwd文档后追加一行 <span class="string">"TEST FOR SNAPSHOT"</span> </div><div class="line"><span class="symbol">tail</span> -<span class="number">1</span> /my20G/<span class="keyword">subvol1/passwd </span>                      #此时子卷中数据更新了</div><div class="line"><span class="symbol">tail</span> -<span class="number">1</span> /my20G/<span class="keyword">subvol1_snapshot/passwd </span>             #此时快照中的passwd并没有更新，末尾没有<span class="string">"TEST FOR SNAPSHOT"</span> 这行。</div></pre></td></tr></table></figure></p>
+<p><strong>注</strong>：在子卷创建快照后，对原子卷做的修改操作并不会反映到快照中。</p>
+<hr>
+<blockquote>
+<p>原文：<a href="http://siyuan710.blog.51cto.com/10648912/1699070" target="_blank" rel="external">http://siyuan710.blog.51cto.com/10648912/1699070</a></p>
+</blockquote>
+
+<!--这里是每篇文章的尾巴-->
+<html>
+  <body>
+    <h1>结语</h1>
+      <p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p>
+      <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<!--
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p></blockquote></div>
+    <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎收藏书签，欢迎多提宝贵意见，非常感谢！</p>
+    <footer><strong>Welcome to LeoLan'S BLOG</strong>
+    <cite><a href="#" onclick="go_my_site()" rel="external">Leo Lan Blog Share For you!</a></cite></footer></blockquote></div>
+  </body>
+</html>
+-->
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div style="margin-bottom: 10px;font-size: 16px;font-weight: 600;">想请我吃辣条吗？</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/alipay.jpg" alt="LeoLan Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/weixinpay.png" alt="LeoLan WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>微信打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+<h3 id="最近访客"><a href="#最近访客" class="headerlink" title="最近访客"></a>最近访客</h3><div class="ds-recent-visitors" data-num-items="36" data-avatar-size="42" id="ds-recent-visitors"></div>
+      
+    </div>
+
+<!--这是文章底部标签云链接
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Btrfs文件系统/" rel="tag"># Btrfs文件系统</a>
+          
+        </div>
+      
+-->
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/3958/" rel="next" title="黑苹果">
+                <i class="fa fa-chevron-left"></i> 黑苹果
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/3959/" rel="prev" title="RAID">
+                RAID <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js;
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="posts/9108/"
+           data-title="Btrfs文件系统" data-url="https://www.leolan.top/posts/9108/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="LeoLan" />
+          <p class="site-author-name" itemprop="name">LeoLan</p>
+          <p class="site-description motion-element" itemprop="description">Better late than never</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">68</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="https://www.leolan.top/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+
+<!-- 自定义High一下的功能 -->
+ <a rel="alternate" class="mw-harlem_shake_slow wobble shake" href='javascript:(
+   function go() {
+   var songs = [
+               "http://ofyfogrgx.bkt.clouddn.com/tongxingSibel%20-%20Im%20Sorry.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com/Music-sunburst.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com//blog/Apple%20&%20Stone%20-%20Lost.mp3"
+   ];
+
+<!--"http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150103346.mp3","http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150842689.mp3",-->
+
+   function c() {
+       var e = document.createElement("link");
+       e.setAttribute("type", "text/css");
+       e.setAttribute("rel", "stylesheet");
+       e.setAttribute("href", f);
+       e.setAttribute("class", l);
+       document.body.appendChild(e)
+   }
+   function h() {
+       var e = document.getElementsByClassName(l);
+       for (var t = 0; t < e.length; t++) {
+           document.body.removeChild(e[t])
+       }
+   }
+   function p() {
+       var e = document.createElement("div");
+       e.setAttribute("class", a);
+       document.body.appendChild(e);
+       setTimeout(function() {
+           document.body.removeChild(e)
+       }, 100)
+   }
+   function d(e) {
+       return {
+           height : e.offsetHeight,
+           width : e.offsetWidth
+       }
+   }
+   function v(i) {
+       var s = d(i);
+       return s.height > e && s.height < n && s.width > t && s.width < r
+   }
+   function m(e) {
+       var t = e;
+       var n = 0;
+       while (!!t) {
+           n += t.offsetTop;
+           t = t.offsetParent
+       }
+       return n
+   }
+   function g() {
+       var e = document.documentElement;
+       if (!!window.innerWidth) {
+           return window.innerHeight
+       } else if (e && !isNaN(e.clientHeight)) {
+           return e.clientHeight
+       }
+       return 0
+   }
+   function y() {
+       if (window.pageYOffset) {
+           return window.pageYOffset
+       }
+       return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+   }
+   function E(e) {
+       var t = m(e);
+       return t >= w && t <= b + w
+   }
+   function S() {
+       var e = document.getElementById("audio_element_id");
+       if(e != null){
+           var index = parseInt(e.getAttribute("curSongIndex"));
+           if(index > songs.length - 2) {
+               index = 0;
+           } else {
+               index++;
+           }
+           e.setAttribute("curSongIndex", index);
+           N();
+       }
+       e.src = i;
+       e.play()
+   }
+   function x(e) {
+       e.className += " " + s + " " + o
+   }
+   function T(e) {
+       e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+   }
+   function N() {
+       var e = document.getElementsByClassName(s);
+       var t = new RegExp("\\b" + s + "\\b");
+       for (var n = 0; n < e.length; ) {
+           e[n].className = e[n].className.replace(t, "")
+       }
+   }
+   function initAudioEle() {
+       var e = document.getElementById("audio_element_id");
+       if(e === null){
+           e = document.createElement("audio");
+           e.setAttribute("class", l);
+           e.setAttribute("curSongIndex", 0);
+           e.id = "audio_element_id";
+           e.loop = false;
+           e.bgcolor = 0;
+           e.addEventListener("canplay", function() {
+           setTimeout(function() {
+               x(k)
+           }, 500);
+           setTimeout(function() {
+               N();
+               p();
+               for (var e = 0; e < O.length; e++) {
+                   T(O[e])
+               }
+           }, 15500)
+       }, true);
+       e.addEventListener("ended", function() {
+           N();
+           h();
+           go();
+       }, true);
+       e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+       document.body.appendChild(e);
+       }
+   }
+   
+   initAudioEle();
+   var e = 30;
+   var t = 30;
+   var n = 350;
+   var r = 350;
+   var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+   var i = songs[curSongIndex];
+   
+   var s = "mw-harlem_shake_me";
+   var o = "im_first";
+   var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+   var a = "mw-strobe_light";
+   /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css
+   //7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css  七牛云地址*/
+   var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";  
+   /* var f = "/css/harlem_shake_style.css";  */
+
+   var l = "mw_added_css";
+   var b = g();
+   var w = y();
+   var C = document.getElementsByTagName("*");
+   var k = null;
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           if (E(A)) {
+               k = A;
+               break
+           }
+       }
+   }
+   if (A === null) {
+       console.warn("Could not find a node of the right size. Please try a different page.");
+       return
+   }
+   c();
+   S();
+   var O = [];
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           O.push(A)
+       }
+   }
+   })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High</a>
+</div>
+         <!-- end High一下 -->
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/myleolan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://coding.net/u/leolan" target="_blank" title="Coding">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  Coding
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://quickconnect.to/myleolan" target="_blank" title="Cloud1">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud1
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://git.oschina.net/leolan" target="_blank" title="OSchina">
+                  
+                    <i class="fa fa-fw fa-git-square"></i>
+                  
+                  OSchina
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://leolan.picp.net" target="_blank" title="Cloud2">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud2
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.leolan.top/posts/44568/" target="_blank" title="Links">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Links
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-heartbeat"></i>
+              友链
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://jerry.hk/" title="Jerry Locke" target="_blank" rel="external nofollow">Jerry Locke</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://login926.top" title="Raintons" target="_blank" rel="external nofollow">Raintons</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.anotherhome.net" title="DIYgod" target="_blank" rel="external nofollow">DIYgod</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mblack.cn/" title="小黑" target="_blank" rel="external nofollow">小黑</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.iamlj.com/" title="Jing's Blog" target="_blank" rel="external nofollow">Jing's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://cyang.tech/" title="cyang's blog" target="_blank" rel="external nofollow">cyang's blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.showerlee.com/" title="一路向北" target="_blank" rel="external nofollow">一路向北</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://lusongsong.com/" title="卢松松的博客" target="_blank" rel="external nofollow">卢松松的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://v.lusongsong.com/" title="松松视频" target="_blank" rel="external nofollow">松松视频</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Btrfs简介"><span class="nav-number">1.</span> <span class="nav-text">Btrfs简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建Btrfs文件系统"><span class="nav-number">2.</span> <span class="nav-text">创建Btrfs文件系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#调整btrfs文件系统大小-逻辑边界"><span class="nav-number">3.</span> <span class="nav-text">调整btrfs文件系统大小(逻辑边界)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#调整btrfs物理边界大小"><span class="nav-number">4.</span> <span class="nav-text">调整btrfs物理边界大小</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#透明压缩"><span class="nav-number">5.</span> <span class="nav-text">透明压缩</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#btrfs文件均衡"><span class="nav-number">6.</span> <span class="nav-text">btrfs文件均衡</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除btrfs的物理卷"><span class="nav-number">7.</span> <span class="nav-text">删除btrfs的物理卷</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ext文件系统和btrfs文件系统互转"><span class="nav-number">8.</span> <span class="nav-text">ext文件系统和btrfs文件系统互转</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#拆分硬盘"><span class="nav-number">8.1.</span> <span class="nav-text">拆分硬盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从ext4转为Btrfs"><span class="nav-number">8.2.</span> <span class="nav-text">从ext4转为Btrfs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从Btrfs转为ext4"><span class="nav-number">8.3.</span> <span class="nav-text">从Btrfs转为ext4</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#btrfs子卷管理"><span class="nav-number">9.</span> <span class="nav-text">btrfs子卷管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建子卷："><span class="nav-number">9.1.</span> <span class="nav-text">创建子卷：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载子卷"><span class="nav-number">9.2.</span> <span class="nav-text">挂载子卷</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看子卷相关信息"><span class="nav-number">9.2.1.</span> <span class="nav-text">查看子卷相关信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#挂载父卷，子卷自动被挂载"><span class="nav-number">9.2.1.1.</span> <span class="nav-text">挂载父卷，子卷自动被挂载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#挂载子卷，父卷不会自动被挂载"><span class="nav-number">9.2.1.2.</span> <span class="nav-text">挂载子卷，父卷不会自动被挂载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分别挂载子卷和父卷（不要先挂载父卷）"><span class="nav-number">9.2.1.3.</span> <span class="nav-text">分别挂载子卷和父卷（不要先挂载父卷）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除子卷"><span class="nav-number">9.3.</span> <span class="nav-text">删除子卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子卷快照"><span class="nav-number">9.4.</span> <span class="nav-text">子卷快照</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LeoLan</span>
+</div>
+
+<div class="powered-by">
+  <a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备16026009号-2</a>  |  本站总访问量<span id="busuanzi_value_site_pv"></span>
+</div>
+
+<div class="theme-info">
+  您是第<span id="busuanzi_value_site_uv"></span>位小伙伴
+</div>
+
+<script async src="/js/src/busuanzi.pure.mini.js">
+</script>
+
+<!--
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+-->
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"leolan"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '/js/src/duoshuo_embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementById('footer')
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("zieuxKa4IjAP6VgxxvBe4vkj-gzGzoHsz", "MHGN54IEuofFNV1AROiRkEoG");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js" count="50" zindex="-2" opacity="1" color="0,104,183"></script>
+
+</body>
+</html>

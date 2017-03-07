@@ -1,0 +1,1556 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic|Georgia:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="RAID" />
+
+
+
+
+
+  <link rel="alternate" href="https://www.leolan.top/atom.xml" title="LeoLan's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/200.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="RAID简介RAID 的意思是廉价磁盘冗余阵列（Redundant Array of Inexpensive Disks），但现在它被称为独立磁盘冗余阵列（Redundant Array of Independent Drives）。早先一个容量很小的磁盘都是非常昂贵的，但是现在我们可以很便宜的买到一个更大的磁盘。Raid 是一系列放在一起，成为一个逻辑卷的磁盘集合。
+RAID 包含一组或者一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RAID">
+<meta property="og:url" content="https://www.leolan.top/posts/3959/index.html">
+<meta property="og:site_name" content="LeoLan's Blog">
+<meta property="og:description" content="RAID简介RAID 的意思是廉价磁盘冗余阵列（Redundant Array of Inexpensive Disks），但现在它被称为独立磁盘冗余阵列（Redundant Array of Independent Drives）。早先一个容量很小的磁盘都是非常昂贵的，但是现在我们可以很便宜的买到一个更大的磁盘。Raid 是一系列放在一起，成为一个逻辑卷的磁盘集合。
+RAID 包含一组或者一">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/162145611.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/163022108.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/163031427.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/163053419.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/163103166.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/163111922.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/163122495.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170112/113446699.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170112/113554117.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170112/113637514.png">
+<meta property="og:updated_time" content="2017-02-27T08:47:33.064Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RAID">
+<meta name="twitter:description" content="RAID简介RAID 的意思是廉价磁盘冗余阵列（Redundant Array of Inexpensive Disks），但现在它被称为独立磁盘冗余阵列（Redundant Array of Independent Drives）。早先一个容量很小的磁盘都是非常昂贵的，但是现在我们可以很便宜的买到一个更大的磁盘。Raid 是一系列放在一起，成为一个逻辑卷的磁盘集合。
+RAID 包含一组或者一">
+<meta name="twitter:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/162145611.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6343395544286627000',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.leolan.top/posts/3959/"/>
+
+
+
+
+
+  <title> RAID | LeoLan's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">LeoLan's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">有时候正是不报期望的人做出了人们不敢期望之事！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签云
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时间轴
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-commenting"></i> <br />
+            
+            给我留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            本地搜索
+          </a>
+        </li>
+               
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://www.leolan.top/posts/3959/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="LeoLan">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="LeoLan's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="LeoLan's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                RAID
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-06T15:21:17+08:00">
+              2017-01-06
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2017-02-27T16:47:33+08:00">
+              2017-02-27
+            </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/系统管理/" itemprop="url" rel="index">
+                    <span itemprop="name">系统管理</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/posts/3959/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/3959/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/posts/3959/" class="leancloud_visitors" data-flag-title="RAID">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+         <span class="post-time">
+     &nbsp; | &nbsp;
+           <span class="post-meta-item-icon">
+             <i class="fa fa-calendar-o"></i>
+           </span>
+           <span class="post-meta-item-text">字数统计:</span>
+           <span class="post-count">3,055(字)</span>
+           
+         </span>
+
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="RAID简介"><a href="#RAID简介" class="headerlink" title="RAID简介"></a>RAID简介</h1><p>RAID 的意思是廉价磁盘冗余阵列（Redundant Array of Inexpensive Disks），但现在它被称为独立磁盘冗余阵列（Redundant Array of Independent Drives）。早先一个容量很小的磁盘都是非常昂贵的，但是现在我们可以很便宜的买到一个更大的磁盘。Raid 是一系列放在一起，成为一个逻辑卷的磁盘集合。</p>
+<p>RAID 包含一组或者一个集合甚至一个阵列。使用一组磁盘结合驱动器组成 RAID 阵列或 RAID 集。将至少两个磁盘连接到一个 RAID 控制器，而成为一个逻辑卷，也可以将多个驱动器放在一个组中。一组磁盘只能使用一个 RAID 级别。使用 RAID 可以提高服务器的性能。不同 RAID 的级别，性能会有所不同。它通过容错和高可用性来保存我们的数据。</p>
+<p><strong>软件 RAID 和硬件 RAID</strong></p>
+<p>软件 RAID 的性能较低，因为其使用主机的资源。 需要加载 RAID 软件以从软件 RAID 卷中读取数据。在加载 RAID 软件前，操作系统需要引导起来才能加载 RAID 软件。在软件 RAID 中无需物理硬件。零成本投资。</p>
+<p>硬件 RAID 的性能较高。他们采用 PCI Express 卡物理地提供有专用的 RAID 控制器。它不会使用主机资源。他们有 NVRAM 用于缓存的读取和写入。缓存用于 RAID 重建时，即使出现电源故障，它会使用后备的电池电源保持缓存。对于大规模使用是非常昂贵的投资。</p>
+<p>硬件 RAID 卡如下所示：<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/162145611.png" alt="mark"></p>
+<hr>
+<h1 id="RAID级别"><a href="#RAID级别" class="headerlink" title="RAID级别"></a>RAID级别</h1><h2 id="重要的-RAID-概念"><a href="#重要的-RAID-概念" class="headerlink" title="重要的 RAID 概念"></a>重要的 RAID 概念</h2><ul>
+<li><strong>校验方式</strong>：用在 RAID 重建中从校验所保存的信息中重新生成丢失的内容。 RAID 5，RAID 6 基于校验。</li>
+<li><strong>条带化</strong>：是将切片数据随机存储到多个磁盘。它不会在单个磁盘中保存完整的数据。如果我们使用2个磁盘，则每个磁盘存储我们的一半数据。</li>
+<li><strong>镜像</strong>：被用于 RAID 1 和 RAID 10。镜像会自动备份数据。在 RAID 1 中，它会保存相同的内容到其他盘上。</li>
+<li><strong>热备份</strong>：只是我们的服务器上的一个备用驱动器，它可以自动更换发生故障的驱动器。在我们的阵列中，如果任何一个驱动器损坏，热备份驱动器会自动用于重建 RAID。</li>
+<li><strong>块</strong>：是 RAID 控制器每次读写数据时的最小单位，最小 4KB。通过定义块大小，我们可以增加 I/O 性能。</li>
+</ul>
+<p>RAID有不同的级别。在这里列出在真实环境下的使用最多的 RAID 级别。其他级别的阵列参考：<a href="http://baike.baidu.com/link?url=-Oj6p9Kk0y5M7yNzaGrxRIECftLqNj5MqUg6qOZ4krc0RqxJhEZu61E1LCgjJORlpf6oV8qbnMQM4HIvL4MLLz80J-nCnAPse7xJI3wvdPuRHy5Gm9RTZ4CXpoKRl7AjSjU-ie9p4dgBF9ZpFdSB2f0-n9YDpFMlX2kzNntXViO" target="_blank" rel="external">磁盘阵列</a></p>
+<p>RAID0 = 条带化　　　<strong>提高读写性能</strong><br>RAID1 = 镜像　　　　<strong>提高读写性能、冗余性</strong><br>RAID5 = 单磁盘分布式奇偶校验　　　<strong>提高读写性能、冗余性(允许1块硬盘发生故障)</strong><br>RAID6 = 双磁盘分布式奇偶校验　　　<strong>提高读写性能、冗余性(运行2块硬盘发生故障)</strong><br>RAID10 = 镜像 + 条带。（嵌套RAID）<br><strong>RAID 在大多数 Linux 发行版上使用名为 mdadm 的软件包进行管理。</strong></p>
+<hr>
+<h2 id="RAID-0-条带化"><a href="#RAID-0-条带化" class="headerlink" title="RAID 0  条带化"></a>RAID 0  条带化</h2><p><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/163022108.png" alt="mark"></p>
+<ul>
+<li>高性能。</li>
+<li>RAID 0 中容量零损失。</li>
+<li>零容错。</li>
+<li>写和读有很高的性能。</li>
+<li><strong>最少两块硬盘</strong></li>
+</ul>
+<p>条带化有很好的性能。在 RAID 0（条带化）中数据将使用切片的方式被写入到磁盘。一半的内容放在一个磁盘上，另一半内容将被写入到另一个磁盘。</p>
+<p>假设我们有2个磁盘驱动器，每次写入数据都是分两半写入两个磁盘的注：实际上不可能按字节切片，是按数据块切片的。</p>
+<p>在这种情况下，如果驱动器中的任何一个发生故障，就会丢失数据，因为一个盘中只有一半的数据，不能用于重建 RAID。不过，当比较写入速度和性能时，RAID 0 是非常好的。创建 RAID 0（条带化）至少需要2个磁盘。如果你的数据是非常宝贵的，那么不要使用此 RAID 级别。</p>
+<hr>
+<h2 id="RAID-1-镜像化"><a href="#RAID-1-镜像化" class="headerlink" title="RAID 1  镜像化"></a>RAID 1  镜像化</h2><p><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/163031427.png" alt="mark"></p>
+<ul>
+<li>良好的性能。</li>
+<li>总容量丢失一半可用空间。</li>
+<li>完全容错。</li>
+<li>重建会更快。</li>
+<li>写性能变慢。</li>
+<li>读性能变好。</li>
+<li>能用于操作系统和小规模的数据库。</li>
+<li><strong>最少两块硬盘</strong></li>
+</ul>
+<p>镜像也有不错的性能。镜像可以对我们的数据做一份相同的副本。假设我们有两个2TB的硬盘驱动器，我们总共有4TB，但在镜像中，但是放在 RAID 控制器后面的驱动器形成了一个逻辑驱动器，我们只能看到这个逻辑驱动器有2TB。</p>
+<p>当我们保存数据时，它将同时写入这两个2TB驱动器中。创建 RAID 1（镜像化）最少需要两个驱动器。如果发生磁盘故障，我们可以通过更换一个新的磁盘恢复 RAID 。如果在 RAID 1 中任何一个磁盘发生故障，我们可以从另一个磁盘中获取相同的数据，因为另外的磁盘中也有相同的数据。所以是零数据丢失。</p>
+<hr>
+<h2 id="RAID-5-分布式奇偶校验"><a href="#RAID-5-分布式奇偶校验" class="headerlink" title="RAID 5  分布式奇偶校验"></a>RAID 5  分布式奇偶校验</h2><p><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/163053419.png" alt="mark"></p>
+<ul>
+<li>性能卓越</li>
+<li>读速度将非常好。</li>
+<li>写速度处于平均水准，如果我们不使用硬件 RAID 控制器，写速度缓慢。</li>
+<li>从所有驱动器的奇偶校验信息中重建。</li>
+<li>完全容错。</li>
+<li>1个磁盘空间将用于奇偶校验。</li>
+<li>可以被用在文件服务器，Web服务器，非常重要的备份中。</li>
+<li><strong>最少三块硬盘</strong></li>
+</ul>
+<p>RAID 5 多用于企业级。 RAID 5 的以分布式奇偶校验的方式工作。奇偶校验信息将被用于重建数据。它从剩下的正常驱动器上的信息来重建。在驱动器发生故障时，这可以保护我们的数据。</p>
+<p>假设我们有4个驱动器，如果一个驱动器发生故障而后我们更换发生故障的驱动器后，我们可以从奇偶校验中重建数据到更换的驱动器上。奇偶校验信息存储在所有的4个驱动器上，如果我们有4个 1TB 的驱动器。奇偶校验信息将被存储在每个驱动器的256G中，而其它768GB是用户自己使用的。单个驱动器故障后，RAID 5 依旧正常工作，如果驱动器损坏个数超过1个会导致数据的丢失。</p>
+<hr>
+<h2 id="RAID-6-双分布式奇偶校验磁盘"><a href="#RAID-6-双分布式奇偶校验磁盘" class="headerlink" title="RAID 6 双分布式奇偶校验磁盘"></a>RAID 6 双分布式奇偶校验磁盘</h2><p><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/163103166.png" alt="mark"></p>
+<ul>
+<li>性能不佳。</li>
+<li>读的性能很好。</li>
+<li>如果我们不使用硬件 RAID 控制器写的性能会很差。</li>
+<li>从两个奇偶校验驱动器上重建。</li>
+<li>完全容错。</li>
+<li>2个磁盘空间将用于奇偶校验。</li>
+<li>可用于大型阵列。</li>
+<li>用于备份和视频流中，用于大规模。</li>
+<li><strong>最少四块硬盘</strong></li>
+</ul>
+<p>RAID 6 和 RAID 5 相似但它有两个分布式奇偶校验。大多用在大数量的阵列中。我们最少需要4个驱动器，即使有2个驱动器发生故障，我们依然可以更换新的驱动器后重建数据。</p>
+<p>它比 RAID 5 慢，因为它将数据同时写到4个驱动器上。当我们使用硬件 RAID 控制器时速度就处于平均水准。如果我们有6个的1TB驱动器，4个驱动器将用于数据保存，2个驱动器将用于校验。</p>
+<hr>
+<h2 id="RAID-10-镜像-条带"><a href="#RAID-10-镜像-条带" class="headerlink" title="RAID 10  镜像+条带"></a>RAID 10  镜像+条带</h2><p><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/163111922.png" alt="mark"><br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/163122495.png" alt="mark"></p>
+<ul>
+<li>良好的读写性能。</li>
+<li>总容量一半用于容错。</li>
+<li>从副本数据中快速重建。</li>
+<li>由于其高性能和高可用性，常被用于数据库的存储中。</li>
+<li><strong>最少四块硬盘</strong></li>
+</ul>
+<p>RAID 10 可以被称为1 + 0或0 +1。它将做<strong>镜像+条带</strong>两个工作。<br>在 RAID 10 中首先做镜像然后做条带。<br>在 RAID 01 上首先做条带，然后做镜像。<br><strong>RAID 10 比 01 好。</strong></p>
+<p>假设，我们有4个驱动器。当我逻辑卷上写数据时，它会使用镜像和条带的方式将数据保存到4个驱动器上。</p>
+<p>如果我在 RAID 10 上写入数据“TECMINT”，数据将使用如下方式保存。首先将“T”同时写入两个磁盘，“E”也将同时写入另外两个磁盘，所有数据都写入两块磁盘。这样可以将每个数据复制到另外的磁盘。</p>
+<p>同时它将使用 RAID 0 方式写入数据，遵循将“T”写入第一组盘，“E”写入第二组盘。再次将“C”写入第一组盘，“M”到第二组盘。</p>
+<hr>
+<hr>
+<h1 id="RAID-容量计算器"><a href="#RAID-容量计算器" class="headerlink" title="RAID 容量计算器"></a>RAID 容量计算器</h1><p><strong>这里引用了群晖官方的RAID计算器。</strong></p>
+<center><br>    <h2><font color="#F75000"><a href="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/173559041.html" target="_blank" rel="external nofollow">RAID 容量计算器</a></font></h2><br></center>
+
+<hr>
+<hr>
+<h1 id="管理RAID"><a href="#管理RAID" class="headerlink" title="管理RAID"></a>管理RAID</h1><hr>
+<h2 id="mdadm"><a href="#mdadm" class="headerlink" title="mdadm"></a>mdadm</h2><h3 id="安装mdadm"><a href="#安装mdadm" class="headerlink" title="安装mdadm"></a>安装mdadm</h3><p>Linux系统基本都带有 mdadm 软件包。没有的话先安装<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum <span class="keyword">install</span> mdadm -y</div><div class="line">apt-<span class="keyword">get</span> <span class="keyword">install</span> mdadm</div></pre></td></tr></table></figure></p>
+<hr>
+<p>下面盗几张图，自己没有截图啦。</p>
+<h4 id="新建分区"><a href="#新建分区" class="headerlink" title="新建分区"></a>新建分区</h4><p>创建RAID0 需要两块硬盘，拿/dev/sdb 和/dev/sdc 来实验。<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fdisk <span class="regexp">/dev/</span>sdb        <span class="comment">#对sdb 进行分区</span></div></pre></td></tr></table></figure></p>
+<p>输入”m”, 获取帮助，输入”p”, 查看分区前磁盘状态。<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20170112/113446699.png" alt="mark"><br>输入”n” 新建分区，将整个磁盘都划分成一个分区，然后输入”p” 查看分区情况。<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20170112/113554117.png" alt="mark"></p>
+<hr>
+<h4 id="修改分区类型"><a href="#修改分区类型" class="headerlink" title="修改分区类型"></a>修改分区类型</h4><p>默认新建分区的类型是Linux，代号83，需要将其修改为raid 类型。输入”t” ，然后输入”L” </p>
+<p>列出所有的文件格式，这里我们选择”fd Linux raid auto”, 输入”fd”，然后再输入”p” 查看分区情况，分区格式已经变成了Linux raid autodetect。<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20170112/113637514.png" alt="mark"><br>输入”w” 保存分区。<br>使用同样方法对/dev/sdc 进行分区操作。</p>
+<hr>
+<h4 id="同步分区情况"><a href="#同步分区情况" class="headerlink" title="同步分区情况"></a>同步分区情况</h4><p>使用<code>partprobe</code> 命令同步分区情况。</p>
+<p>查看现在的状态<code>fdisk -l /dev/sdb /dev/sdc</code></p>
+<h4 id="用sdb和sdc创建RAID-0："><a href="#用sdb和sdc创建RAID-0：" class="headerlink" title="用sdb和sdc创建RAID 0："></a>用sdb和sdc创建RAID 0：</h4><figure class="highlight q"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mdadm -C /<span class="built_in">dev</span>/md0 -a yes -l <span class="number">0</span> -n <span class="number">2</span> /<span class="built_in">dev</span>/sdb /<span class="built_in">dev</span> sdc</div><div class="line">或</div><div class="line">mdadm -C /<span class="built_in">dev</span>/md0 -ayes -l0 -n2 /<span class="built_in">dev</span>/sd[b,c]<span class="number">1</span></div></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-C，--create</td>
+<td>创建阵列</td>
+</tr>
+<tr>
+<td>-a，--auto</td>
+<td>同意创建设备，如不加此参数时必须先使用mknod 命令来创建一个RAID设备，不过推荐使用-a yes参数一次性创建</td>
+</tr>
+<tr>
+<td>-l，--level</td>
+<td>阵列模式，支持的阵列模式有 linear, raid0, raid1, raid4, raid5, raid6, raid10, multipath, faulty, container</td>
+</tr>
+<tr>
+<td>-n，--raid-devices</td>
+<td>阵列中活动磁盘的数目，该数目加上备用磁盘的数目应该等于阵列中总的磁盘数目</td>
+</tr>
+<tr>
+<td>/dev/md0　</td>
+<td>阵列的设备名称</td>
+</tr>
+<tr>
+<td>/dev/sd{b,c}1　</td>
+<td>参与创建阵列的磁盘名称</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="创建RAID-配置文件-etc-mdadm-conf"><a href="#创建RAID-配置文件-etc-mdadm-conf" class="headerlink" title="创建RAID 配置文件/etc/mdadm.conf"></a>创建RAID 配置文件/etc/mdadm.conf</h4><p>RAID 的配置文件为<strong>/etc/mdadm.conf</strong>，默认是不存在的，需要手工创建。</p>
+<p>该配置文件的主要作用是系统启动的时候能够自动加载软RAID，同时也方便日后管理。但不是必须的，<strong>推荐对该文件进行配置</strong>。</p>
+<p>我们这里需要创建这个文件，测试中发现，如果没有这个文件，则reboot 后，已经创建好的md0 会自动变成md127。</p>
+<p>/etc/mdadm.conf 文件内容包括：<br>由<strong>DEVICE</strong> 选项指定用于软RAID的所有设备。<br><strong>ARRAY</strong> 选项所指定阵列的设备名、RAID级别、阵列中活动设备的数目以及设备的UUID号。</p>
+<p><strong>创建/etc/mdadm.conf</strong><br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">echo DEVICE /dev/sd&#123;b,c&#125;<span class="number">1</span> <span class="meta">&gt;&gt; </span>/etc/mdadm.conf</div><div class="line">mdadm –Ds <span class="meta">&gt;&gt; </span>/etc/mdadm.conf</div></pre></td></tr></table></figure></p>
+<hr>
+<h4 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><p>当前生成的/etc/mdadm.conf 文件内容并不符合所规定的格式，所以也是不生效的，这时需要手工修改该文件内容为如下格式：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># cat /etc/mdadm.conf</span></div><div class="line"></div><div class="line">DEVICE <span class="regexp">/dev/</span>sdb1 <span class="regexp">/dev/</span>sdc1</div><div class="line"></div><div class="line">ARRAY <span class="regexp">/dev/m</span>d0 level=raid0 num-devices=<span class="number">2</span> UUID=<span class="number">5160</span>ea40:cb2b44f1:c650d2ef:<span class="number">0</span>db09fd0</div></pre></td></tr></table></figure></p>
+<hr>
+<h4 id="格式化磁盘阵列"><a href="#格式化磁盘阵列" class="headerlink" title="格式化磁盘阵列"></a>格式化磁盘阵列</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkfs<span class="selector-class">.ext4</span> /dev/md0</div></pre></td></tr></table></figure>
+<h4 id="建立挂载点并挂载"><a href="#建立挂载点并挂载" class="headerlink" title="建立挂载点并挂载"></a>建立挂载点并挂载</h4><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir /raid0</div><div class="line">mount <span class="meta-keyword">/dev/</span>md0 <span class="meta-keyword">/raid0/</span></div></pre></td></tr></table></figure>
+<hr>
+<h4 id="写入-etc-fstab"><a href="#写入-etc-fstab" class="headerlink" title="写入/etc/fstab"></a>写入/etc/fstab</h4><p>为了下次开机还能正常使用我们的RAID设备，需要将挂载的信息写入/etc/fstab 文件中。然后reboot 测试开机是否自动挂载，raid0 创建完毕。</p>
+<hr>
+<p>参考资料：<br><a href="http://www.centoscn.com/image-text/config/2015/0213/4713.html" target="_blank" rel="external">http://www.centoscn.com/image-text/config/2015/0213/4713.html</a><br><a href="http://www.cnblogs.com/mchina/p/linux-centos-disk-array-software_raid.html" target="_blank" rel="external">http://www.cnblogs.com/mchina/p/linux-centos-disk-array-software_raid.html</a></p>
+<hr>
+
+<!--这里是每篇文章的尾巴-->
+<html>
+  <body>
+    <h1>结语</h1>
+      <p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p>
+      <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<!--
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p></blockquote></div>
+    <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎收藏书签，欢迎多提宝贵意见，非常感谢！</p>
+    <footer><strong>Welcome to LeoLan'S BLOG</strong>
+    <cite><a href="#" onclick="go_my_site()" rel="external">Leo Lan Blog Share For you!</a></cite></footer></blockquote></div>
+  </body>
+</html>
+-->
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div style="margin-bottom: 10px;font-size: 16px;font-weight: 600;">想请我吃辣条吗？</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/alipay.jpg" alt="LeoLan Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/weixinpay.png" alt="LeoLan WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>微信打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+<h3 id="最近访客"><a href="#最近访客" class="headerlink" title="最近访客"></a>最近访客</h3><div class="ds-recent-visitors" data-num-items="36" data-avatar-size="42" id="ds-recent-visitors"></div>
+      
+    </div>
+
+<!--这是文章底部标签云链接
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RAID/" rel="tag"># RAID</a>
+          
+        </div>
+      
+-->
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/9108/" rel="next" title="Btrfs文件系统">
+                <i class="fa fa-chevron-left"></i> Btrfs文件系统
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/32284/" rel="prev" title="fail2ban 防爆力破解">
+                fail2ban 防爆力破解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js;
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="posts/3959/"
+           data-title="RAID" data-url="https://www.leolan.top/posts/3959/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="LeoLan" />
+          <p class="site-author-name" itemprop="name">LeoLan</p>
+          <p class="site-description motion-element" itemprop="description">Better late than never</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">68</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="https://www.leolan.top/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+
+<!-- 自定义High一下的功能 -->
+ <a rel="alternate" class="mw-harlem_shake_slow wobble shake" href='javascript:(
+   function go() {
+   var songs = [
+               "http://ofyfogrgx.bkt.clouddn.com/tongxingSibel%20-%20Im%20Sorry.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com/Music-sunburst.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com//blog/Apple%20&%20Stone%20-%20Lost.mp3"
+   ];
+
+<!--"http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150103346.mp3","http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150842689.mp3",-->
+
+   function c() {
+       var e = document.createElement("link");
+       e.setAttribute("type", "text/css");
+       e.setAttribute("rel", "stylesheet");
+       e.setAttribute("href", f);
+       e.setAttribute("class", l);
+       document.body.appendChild(e)
+   }
+   function h() {
+       var e = document.getElementsByClassName(l);
+       for (var t = 0; t < e.length; t++) {
+           document.body.removeChild(e[t])
+       }
+   }
+   function p() {
+       var e = document.createElement("div");
+       e.setAttribute("class", a);
+       document.body.appendChild(e);
+       setTimeout(function() {
+           document.body.removeChild(e)
+       }, 100)
+   }
+   function d(e) {
+       return {
+           height : e.offsetHeight,
+           width : e.offsetWidth
+       }
+   }
+   function v(i) {
+       var s = d(i);
+       return s.height > e && s.height < n && s.width > t && s.width < r
+   }
+   function m(e) {
+       var t = e;
+       var n = 0;
+       while (!!t) {
+           n += t.offsetTop;
+           t = t.offsetParent
+       }
+       return n
+   }
+   function g() {
+       var e = document.documentElement;
+       if (!!window.innerWidth) {
+           return window.innerHeight
+       } else if (e && !isNaN(e.clientHeight)) {
+           return e.clientHeight
+       }
+       return 0
+   }
+   function y() {
+       if (window.pageYOffset) {
+           return window.pageYOffset
+       }
+       return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+   }
+   function E(e) {
+       var t = m(e);
+       return t >= w && t <= b + w
+   }
+   function S() {
+       var e = document.getElementById("audio_element_id");
+       if(e != null){
+           var index = parseInt(e.getAttribute("curSongIndex"));
+           if(index > songs.length - 2) {
+               index = 0;
+           } else {
+               index++;
+           }
+           e.setAttribute("curSongIndex", index);
+           N();
+       }
+       e.src = i;
+       e.play()
+   }
+   function x(e) {
+       e.className += " " + s + " " + o
+   }
+   function T(e) {
+       e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+   }
+   function N() {
+       var e = document.getElementsByClassName(s);
+       var t = new RegExp("\\b" + s + "\\b");
+       for (var n = 0; n < e.length; ) {
+           e[n].className = e[n].className.replace(t, "")
+       }
+   }
+   function initAudioEle() {
+       var e = document.getElementById("audio_element_id");
+       if(e === null){
+           e = document.createElement("audio");
+           e.setAttribute("class", l);
+           e.setAttribute("curSongIndex", 0);
+           e.id = "audio_element_id";
+           e.loop = false;
+           e.bgcolor = 0;
+           e.addEventListener("canplay", function() {
+           setTimeout(function() {
+               x(k)
+           }, 500);
+           setTimeout(function() {
+               N();
+               p();
+               for (var e = 0; e < O.length; e++) {
+                   T(O[e])
+               }
+           }, 15500)
+       }, true);
+       e.addEventListener("ended", function() {
+           N();
+           h();
+           go();
+       }, true);
+       e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+       document.body.appendChild(e);
+       }
+   }
+   
+   initAudioEle();
+   var e = 30;
+   var t = 30;
+   var n = 350;
+   var r = 350;
+   var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+   var i = songs[curSongIndex];
+   
+   var s = "mw-harlem_shake_me";
+   var o = "im_first";
+   var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+   var a = "mw-strobe_light";
+   /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css
+   //7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css  七牛云地址*/
+   var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";  
+   /* var f = "/css/harlem_shake_style.css";  */
+
+   var l = "mw_added_css";
+   var b = g();
+   var w = y();
+   var C = document.getElementsByTagName("*");
+   var k = null;
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           if (E(A)) {
+               k = A;
+               break
+           }
+       }
+   }
+   if (A === null) {
+       console.warn("Could not find a node of the right size. Please try a different page.");
+       return
+   }
+   c();
+   S();
+   var O = [];
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           O.push(A)
+       }
+   }
+   })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High</a>
+</div>
+         <!-- end High一下 -->
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/myleolan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://coding.net/u/leolan" target="_blank" title="Coding">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  Coding
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://quickconnect.to/myleolan" target="_blank" title="Cloud1">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud1
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://git.oschina.net/leolan" target="_blank" title="OSchina">
+                  
+                    <i class="fa fa-fw fa-git-square"></i>
+                  
+                  OSchina
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://leolan.picp.net" target="_blank" title="Cloud2">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud2
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.leolan.top/posts/44568/" target="_blank" title="Links">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Links
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-heartbeat"></i>
+              友链
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://jerry.hk/" title="Jerry Locke" target="_blank" rel="external nofollow">Jerry Locke</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://login926.top" title="Raintons" target="_blank" rel="external nofollow">Raintons</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.anotherhome.net" title="DIYgod" target="_blank" rel="external nofollow">DIYgod</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mblack.cn/" title="小黑" target="_blank" rel="external nofollow">小黑</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.iamlj.com/" title="Jing's Blog" target="_blank" rel="external nofollow">Jing's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://cyang.tech/" title="cyang's blog" target="_blank" rel="external nofollow">cyang's blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.showerlee.com/" title="一路向北" target="_blank" rel="external nofollow">一路向北</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://lusongsong.com/" title="卢松松的博客" target="_blank" rel="external nofollow">卢松松的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://v.lusongsong.com/" title="松松视频" target="_blank" rel="external nofollow">松松视频</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RAID简介"><span class="nav-number">1.</span> <span class="nav-text">RAID简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RAID级别"><span class="nav-number">2.</span> <span class="nav-text">RAID级别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重要的-RAID-概念"><span class="nav-number">2.1.</span> <span class="nav-text">重要的 RAID 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAID-0-条带化"><span class="nav-number">2.2.</span> <span class="nav-text">RAID 0  条带化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAID-1-镜像化"><span class="nav-number">2.3.</span> <span class="nav-text">RAID 1  镜像化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAID-5-分布式奇偶校验"><span class="nav-number">2.4.</span> <span class="nav-text">RAID 5  分布式奇偶校验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAID-6-双分布式奇偶校验磁盘"><span class="nav-number">2.5.</span> <span class="nav-text">RAID 6 双分布式奇偶校验磁盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAID-10-镜像-条带"><span class="nav-number">2.6.</span> <span class="nav-text">RAID 10  镜像+条带</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RAID-容量计算器"><span class="nav-number">3.</span> <span class="nav-text">RAID 容量计算器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">RAID 容量计算器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#管理RAID"><span class="nav-number">4.</span> <span class="nav-text">管理RAID</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mdadm"><span class="nav-number">4.1.</span> <span class="nav-text">mdadm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装mdadm"><span class="nav-number">4.1.1.</span> <span class="nav-text">安装mdadm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新建分区"><span class="nav-number">4.1.1.1.</span> <span class="nav-text">新建分区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改分区类型"><span class="nav-number">4.1.1.2.</span> <span class="nav-text">修改分区类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同步分区情况"><span class="nav-number">4.1.1.3.</span> <span class="nav-text">同步分区情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用sdb和sdc创建RAID-0："><span class="nav-number">4.1.1.4.</span> <span class="nav-text">用sdb和sdc创建RAID 0：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建RAID-配置文件-etc-mdadm-conf"><span class="nav-number">4.1.1.5.</span> <span class="nav-text">创建RAID 配置文件/etc/mdadm.conf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改配置文件"><span class="nav-number">4.1.1.6.</span> <span class="nav-text">修改配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#格式化磁盘阵列"><span class="nav-number">4.1.1.7.</span> <span class="nav-text">格式化磁盘阵列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#建立挂载点并挂载"><span class="nav-number">4.1.1.8.</span> <span class="nav-text">建立挂载点并挂载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写入-etc-fstab"><span class="nav-number">4.1.1.9.</span> <span class="nav-text">写入/etc/fstab</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LeoLan</span>
+</div>
+
+<div class="powered-by">
+  <a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备16026009号-2</a>  |  本站总访问量<span id="busuanzi_value_site_pv"></span>
+</div>
+
+<div class="theme-info">
+  您是第<span id="busuanzi_value_site_uv"></span>位小伙伴
+</div>
+
+<script async src="/js/src/busuanzi.pure.mini.js">
+</script>
+
+<!--
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+-->
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"leolan"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '/js/src/duoshuo_embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementById('footer')
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("zieuxKa4IjAP6VgxxvBe4vkj-gzGzoHsz", "MHGN54IEuofFNV1AROiRkEoG");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js" count="50" zindex="-2" opacity="1" color="0,104,183"></script>
+
+</body>
+</html>

@@ -1,0 +1,1488 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic|Georgia:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="检查Linux服务器性能,top,free," />
+
+
+
+
+
+  <link rel="alternate" href="https://www.leolan.top/atom.xml" title="LeoLan's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/200.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="关于服务器负载load average值，参考：理解Linux系统中的load average（图文版）
+uptime123:51:26 up 21:31,  1 user,  load average: 30.02, 26.43, 19.02
+这个命令可以快速查看机器的负载情况。在Linux系统中，这些数据表示等待CPU资源的进程和阻塞在不可中断IO进程（进程状态为D）的数量。这些数据可以让">
+<meta property="og:type" content="article">
+<meta property="og:title" content="检查Linux服务器性能">
+<meta property="og:url" content="https://www.leolan.top/posts/64139/index.html">
+<meta property="og:site_name" content="LeoLan's Blog">
+<meta property="og:description" content="关于服务器负载load average值，参考：理解Linux系统中的load average（图文版）
+uptime123:51:26 up 21:31,  1 user,  load average: 30.02, 26.43, 19.02
+这个命令可以快速查看机器的负载情况。在Linux系统中，这些数据表示等待CPU资源的进程和阻塞在不可中断IO进程（进程状态为D）的数量。这些数据可以让">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/%E6%A3%80%E6%9F%A5Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD1.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/%E6%A3%80%E6%9F%A5Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD2.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/%E6%A3%80%E6%9F%A5Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD3.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/%E6%A3%80%E6%9F%A5Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD4.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/%E6%A3%80%E6%9F%A5Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD5.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/%E6%A3%80%E6%9F%A5Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD6.png">
+<meta property="og:updated_time" content="2017-02-27T08:47:33.062Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="检查Linux服务器性能">
+<meta name="twitter:description" content="关于服务器负载load average值，参考：理解Linux系统中的load average（图文版）
+uptime123:51:26 up 21:31,  1 user,  load average: 30.02, 26.43, 19.02
+这个命令可以快速查看机器的负载情况。在Linux系统中，这些数据表示等待CPU资源的进程和阻塞在不可中断IO进程（进程状态为D）的数量。这些数据可以让">
+<meta name="twitter:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/%E6%A3%80%E6%9F%A5Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6343395544286627000',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.leolan.top/posts/64139/"/>
+
+
+
+
+
+  <title> 检查Linux服务器性能 | LeoLan's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">LeoLan's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">有时候正是不报期望的人做出了人们不敢期望之事！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签云
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时间轴
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-commenting"></i> <br />
+            
+            给我留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            本地搜索
+          </a>
+        </li>
+               
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://www.leolan.top/posts/64139/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="LeoLan">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="LeoLan's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="LeoLan's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                检查Linux服务器性能
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-08T09:53:54+08:00">
+              2016-11-08
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2017-02-27T16:47:33+08:00">
+              2017-02-27
+            </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/系统管理/" itemprop="url" rel="index">
+                    <span itemprop="name">系统管理</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/posts/64139/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/64139/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/posts/64139/" class="leancloud_visitors" data-flag-title="检查Linux服务器性能">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+         <span class="post-time">
+     &nbsp; | &nbsp;
+           <span class="post-meta-item-icon">
+             <i class="fa fa-calendar-o"></i>
+           </span>
+           <span class="post-meta-item-text">字数统计:</span>
+           <span class="post-count">3,433(字)</span>
+           
+         </span>
+
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="关于服务器负载"><a href="#关于服务器负载" class="headerlink" title="关于服务器负载"></a>关于服务器负载</h1><p>load average值，参考：<a href="http://heipark.iteye.com/blog/1340384" target="_blank" rel="external">理解Linux系统中的load average（图文版）</a></p>
+<h1 id="uptime"><a href="#uptime" class="headerlink" title="uptime"></a>uptime</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">23<span class="selector-pseudo">:51</span><span class="selector-pseudo">:26</span> <span class="selector-tag">up</span> 21<span class="selector-pseudo">:31</span>,  1 <span class="selector-tag">user</span>,  <span class="selector-tag">load</span> <span class="selector-tag">average</span>: 30<span class="selector-class">.02</span>, 26<span class="selector-class">.43</span>, 19<span class="selector-class">.02</span></div></pre></td></tr></table></figure>
+<p>这个命令可以快速查看机器的负载情况。在Linux系统中，这些数据表示等待CPU资源的进程和阻塞在不可中断IO进程（进程状态为D）的数量。这些数据可以让我们对系统资源使用有一个宏观的了解。</p>
+<p>命令的输出分别表示1分钟、5分钟、15分钟的平均负载情况。通过这三个数据，可以了解服务器负载是在趋于紧张还是区域缓解。如果1分钟平均负载很高，而15分钟平均负载很低，说明服务器正在命令高负载情况，需要进一步排查CPU资源都消耗在了哪里。反之，如果15分钟平均负载很高，1分钟平均负载较低，则有可能是CPU资源紧张时刻已经过去。</p>
+<p>上面例子中的输出，可以看见最近1分钟的平均负载非常高，且远高于最近15分钟负载，因此我们需要继续排查当前系统中有什么进程消耗了大量的资源。可以通过下文将会介绍的vmstat、mpstat等命令进一步排查。</p>
+<hr>
+<h1 id="dmesg-tail"><a href="#dmesg-tail" class="headerlink" title="dmesg | tail"></a>dmesg | tail</h1><figure class="highlight scheme"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[<span class="name">1880957.563150</span>] perl invoked oom-killer: gfp_mask=0x280da, order=0, oom_score_adj=0</div><div class="line">[<span class="name"><span class="builtin-name">...</span></span>]</div><div class="line">[<span class="name">1880957.563400</span>] Out of memory: Kill process <span class="number">18694</span> (<span class="name">perl</span>) score <span class="number">246</span> or sacrifice child</div><div class="line">[<span class="name">1880957.563408</span>] Killed process <span class="number">18694</span> (<span class="name">perl</span>) total-vm:1972392kB, anon-rss:1953348kB, file-rss:0kB</div><div class="line">[<span class="name">2320864.954447</span>] TCP: Possible SYN flooding on port <span class="number">7001</span>. Dropping request.  Check SNMP counters.</div></pre></td></tr></table></figure>
+<p>该命令会输出系统日志的最后10行。示例中的输出，可以看见一次内核的oom kill和一次TCP丢包。这些日志可以帮助排查性能问题。千万不要忘了这一步。</p>
+<hr>
+<h1 id="vmstat-1"><a href="#vmstat-1" class="headerlink" title="vmstat 1"></a>vmstat 1</h1><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">procs ---------memory---------- ---swap-- -----io---- -system-- ------cpu-----</div><div class="line"> r  b swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st</div><div class="line"><span class="number">34</span>  <span class="number">0</span>    <span class="number">0</span> <span class="number">200889792</span>  <span class="number">73708</span> <span class="number">591828</span>    <span class="number">0</span>    <span class="number">0</span>     <span class="number">0</span>     <span class="number">5</span>    <span class="number">6</span>   <span class="number">10</span> <span class="number">96</span>  <span class="number">1</span>  <span class="number">3</span>  <span class="number">0</span>  <span class="number">0</span></div><div class="line"><span class="number">32</span>  <span class="number">0</span>    <span class="number">0</span> <span class="number">200889920</span>  <span class="number">73708</span> <span class="number">591860</span>    <span class="number">0</span>    <span class="number">0</span>     <span class="number">0</span>   <span class="number">592</span> <span class="number">13284</span> <span class="number">4282</span> <span class="number">98</span>  <span class="number">1</span>  <span class="number">1</span>  <span class="number">0</span>  <span class="number">0</span></div><div class="line"><span class="number">32</span>  <span class="number">0</span>    <span class="number">0</span> <span class="number">200890112</span>  <span class="number">73708</span> <span class="number">591860</span>    <span class="number">0</span>    <span class="number">0</span>     <span class="number">0</span>     <span class="number">0</span> <span class="number">9501</span> <span class="number">2154</span> <span class="number">99</span>  <span class="number">1</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span></div><div class="line"><span class="number">32</span>  <span class="number">0</span>    <span class="number">0</span> <span class="number">200889568</span>  <span class="number">73712</span> <span class="number">591856</span>    <span class="number">0</span>    <span class="number">0</span>     <span class="number">0</span>    <span class="number">48</span> <span class="number">11900</span> <span class="number">2459</span> <span class="number">99</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span></div><div class="line"><span class="number">32</span>  <span class="number">0</span>    <span class="number">0</span> <span class="number">200890208</span>  <span class="number">73712</span> <span class="number">591860</span>    <span class="number">0</span>    <span class="number">0</span>     <span class="number">0</span>     <span class="number">0</span> <span class="number">15898</span> <span class="number">4840</span> <span class="number">98</span>  <span class="number">1</span>  <span class="number">1</span>  <span class="number">0</span>  <span class="number">0</span></div></pre></td></tr></table></figure>
+<p>vmstat 命令，每行会输出一些系统核心指标，这些指标可以让我们更详细的了解系统状态。后面跟的参数1，表示每秒输出一次统计信息，表头提示了每一列的含义，这几介绍一些和性能调优相关的列：<br>  ● <strong>r</strong>：等待在CPU资源的进程数。这个数据比平均负载更加能够体现CPU负载情况，数据中不包含等待IO的进程。如果这个数值大于机器CPU核数，那么机器的CPU资源已经饱和。<br>  ● <strong>free</strong>：系统可用内存数（以千字节为单位），如果剩余内存不足，也会导致系统性能问题。下文介绍到的free命令，可以更详细的了解系统内存的使用情况。<br>  ● <strong>si, so</strong>：交换区写入和读取的数量。如果这个数据不为0，说明系统已经在使用交换区（swap），机器物理内存已经不足。<br>  ● <strong>us, sy, id, wa, st</strong>：这些都代表了CPU时间的消耗，它们分别表示<strong>用户时间（user）、系统（内核）时间（sys）、空闲时间（idle）、IO等待时间（wait）和被偷走的时间（stolen）</strong>，一般被其他虚拟机消耗）。<br>上述这些CPU时间，可以让我们很快了解CPU是否出于繁忙状态。一般情况下，如果用户时间和系统时间相加非常大，CPU出于忙于执行指令。如果IO等待时间很长，那么系统的瓶颈可能在磁盘IO。<br>示例命令的输出可以看见，大量CPU时间消耗在用户态，也就是用户应用程序消耗了CPU时间。这不一定是性能问题，需要结合r队列，一起分析。</p>
+<hr>
+<h1 id="mpstat-P-ALL-1"><a href="#mpstat-P-ALL-1" class="headerlink" title="mpstat -P ALL 1"></a>mpstat -P ALL 1</h1><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">Linux</span> <span class="selector-tag">3</span><span class="selector-class">.13</span><span class="selector-class">.0-49-generic</span> (titanclusters-xxxxx)  <span class="selector-tag">07</span>/<span class="selector-tag">14</span>/<span class="selector-tag">2015</span>  <span class="selector-tag">_x86_64_</span> (<span class="number">32</span> CPU)</div><div class="line"><span class="selector-tag">07</span><span class="selector-pseudo">:38</span><span class="selector-pseudo">:49</span> <span class="selector-tag">PM</span>  <span class="selector-tag">CPU</span>   %<span class="selector-tag">usr</span>  %<span class="selector-tag">nice</span>   %<span class="selector-tag">sys</span> %<span class="selector-tag">iowait</span>   %<span class="selector-tag">irq</span>  %<span class="selector-tag">soft</span>  %<span class="selector-tag">steal</span>  %<span class="selector-tag">guest</span>  %<span class="selector-tag">gnice</span>  %<span class="selector-tag">idle</span></div><div class="line"><span class="selector-tag">07</span><span class="selector-pseudo">:38</span><span class="selector-pseudo">:50</span> <span class="selector-tag">PM</span>  <span class="keyword">all</span>  <span class="selector-tag">98</span><span class="selector-class">.47</span>   <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">0</span><span class="selector-class">.75</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">0</span><span class="selector-class">.00</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">0</span><span class="selector-class">.78</span></div><div class="line"><span class="selector-tag">07</span><span class="selector-pseudo">:38</span><span class="selector-pseudo">:50</span> <span class="selector-tag">PM</span>    <span class="selector-tag">0</span>  <span class="selector-tag">96</span><span class="selector-class">.04</span>   <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">2</span><span class="selector-class">.97</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">0</span><span class="selector-class">.00</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">0</span><span class="selector-class">.99</span></div><div class="line"><span class="selector-tag">07</span><span class="selector-pseudo">:38</span><span class="selector-pseudo">:50</span> <span class="selector-tag">PM</span>    <span class="selector-tag">1</span>  <span class="selector-tag">97</span><span class="selector-class">.00</span>   <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">1</span><span class="selector-class">.00</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">0</span><span class="selector-class">.00</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">2</span><span class="selector-class">.00</span></div><div class="line"><span class="selector-tag">07</span><span class="selector-pseudo">:38</span><span class="selector-pseudo">:50</span> <span class="selector-tag">PM</span>    <span class="selector-tag">2</span>  <span class="selector-tag">98</span><span class="selector-class">.00</span>   <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">1</span><span class="selector-class">.00</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">0</span><span class="selector-class">.00</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">1</span><span class="selector-class">.00</span></div><div class="line"><span class="selector-tag">07</span><span class="selector-pseudo">:38</span><span class="selector-pseudo">:50</span> <span class="selector-tag">PM</span>    <span class="selector-tag">3</span>  <span class="selector-tag">96</span><span class="selector-class">.97</span>   <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">0</span><span class="selector-class">.00</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">0</span><span class="selector-class">.00</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>    <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">3</span><span class="selector-class">.03</span></div></pre></td></tr></table></figure>
+<p>该命令可以显示每个CPU的占用情况，如果有一个CPU占用率特别高，那么有可能是一个单线程应用程序引起的。</p>
+<hr>
+<h1 id="pidstat-1"><a href="#pidstat-1" class="headerlink" title="pidstat 1"></a>pidstat 1</h1><figure class="highlight tap"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Linux 3.13.0-49-generic (titanclusters-xxxxx)  07/14/2015    _x86_64_    (32 CPU)</div><div class="line">07:41:02 PM   UID       PID    %usr %system  %guest    %CPU   CPU  Command</div><div class="line">07:41:03 PM    <span class="number"> 0 </span>       <span class="number"> 9 </span>   0.00    0.94    0.00    0.94    <span class="number"> 1 </span> rcuos/0</div><div class="line">07:41:03 PM    <span class="number"> 0 </span>    <span class="number"> 4214 </span>   5.66    5.66    0.00   11.32   <span class="number"> 15 </span> mesos-slave</div><div class="line">07:41:03 PM    <span class="number"> 0 </span>    <span class="number"> 4354 </span>   0.94    0.94    0.00    1.89    <span class="number"> 8 </span> java</div><div class="line">07:41:03 PM    <span class="number"> 0 </span>    <span class="number"> 6521 </span>1596.23    1.89    0.00 1598.11   <span class="number"> 27 </span> java</div><div class="line">07:41:03 PM    <span class="number"> 0 </span>    <span class="number"> 6564 </span>1571.70    7.55    0.00 1579.25   <span class="number"> 28 </span> java</div><div class="line">07:41:03 PM<span class="number"> 60004 </span>   <span class="number"> 60154 </span>   0.94    4.72    0.00    5.66    <span class="number"> 9 </span> pidstat</div><div class="line">07:41:03 PM   UID       PID    %usr %system  %guest    %CPU   CPU  Command</div><div class="line">07:41:04 PM    <span class="number"> 0 </span>    <span class="number"> 4214 </span>   6.00    2.00    0.00    8.00   <span class="number"> 15 </span> mesos-slave</div><div class="line">07:41:04 PM    <span class="number"> 0 </span>    <span class="number"> 6521 </span>1590.00    1.00    0.00 1591.00   <span class="number"> 27 </span> java</div><div class="line">07:41:04 PM    <span class="number"> 0 </span>    <span class="number"> 6564 </span>1573.00   10.00    0.00 1583.00   <span class="number"> 28 </span> java</div><div class="line">07:41:04 PM  <span class="number"> 108 </span>    <span class="number"> 6718 </span>   1.00    0.00    0.00    1.00    <span class="number"> 0 </span> snmp-pass</div><div class="line">07:41:04 PM<span class="number"> 60004 </span>   <span class="number"> 60154 </span>   1.00    4.00    0.00    5.00    <span class="number"> 9 </span> pidstat</div></pre></td></tr></table></figure>
+<p>pidstat命令输出进程的CPU占用率，该命令会持续输出，并且不会覆盖之前的数据，可以方便观察系统动态。如上的输出，可以看见两个JAVA进程占用了将近1600%的CPU时间，既消耗了大约16个CPU核心的运算资源。</p>
+<hr>
+<h1 id="iostat-xz-1"><a href="#iostat-xz-1" class="headerlink" title="iostat -xz 1"></a>iostat -xz 1</h1><figure class="highlight cos"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Linux <span class="number">3.13</span>.0-<span class="number">49</span>-generic (titanclusters-xxxxx)  <span class="number">07</span>/<span class="number">14</span>/<span class="number">2015</span>  _x86_64_ (<span class="number">32</span> CPU)</div><div class="line">avg-cpu:  <span class="built_in">%user</span>   <span class="built_in">%nice</span> <span class="built_in">%system</span> <span class="built_in">%iowait</span>  <span class="built_in">%steal</span>   <span class="built_in">%idle</span></div><div class="line">          <span class="number">73.96</span>    <span class="number">0.00</span>    <span class="number">3.73</span>    <span class="number">0.03</span>    <span class="number">0.06</span>   <span class="number">22.21</span></div><div class="line">Device:   rrqm/<span class="keyword">s</span>   wrqm/<span class="keyword">s</span>     <span class="keyword">r</span>/<span class="keyword">s</span>     <span class="keyword">w</span>/<span class="keyword">s</span>    rkB/<span class="keyword">s</span>    wkB/<span class="keyword">s</span> avgrq-sz avgqu-sz   await r_await w_await  svctm  <span class="built_in">%util</span></div><div class="line">xvda        <span class="number">0.00</span>     <span class="number">0.23</span>    <span class="number">0.21</span>    <span class="number">0.18</span>     <span class="number">4.52</span>     <span class="number">2.08</span>    <span class="number">34.37</span>     <span class="number">0.00</span>    <span class="number">9.98</span>   <span class="number">13.80</span>    <span class="number">5.42</span>   <span class="number">2.44</span>   <span class="number">0.09</span></div><div class="line">xvdb        <span class="number">0.01</span>     <span class="number">0.00</span>    <span class="number">1.02</span>    <span class="number">8.94</span>   <span class="number">127.97</span>   <span class="number">598.53</span>   <span class="number">145.79</span>     <span class="number">0.00</span>    <span class="number">0.43</span>    <span class="number">1.78</span>    <span class="number">0.28</span>   <span class="number">0.25</span>   <span class="number">0.25</span></div><div class="line">xvdc        <span class="number">0.01</span>     <span class="number">0.00</span>    <span class="number">1.02</span>    <span class="number">8.86</span>   <span class="number">127.79</span>   <span class="number">595.94</span>   <span class="number">146.50</span>     <span class="number">0.00</span>    <span class="number">0.45</span>    <span class="number">1.82</span>    <span class="number">0.30</span>   <span class="number">0.27</span>   <span class="number">0.26</span></div><div class="line">dm-<span class="number">0</span>        <span class="number">0.00</span>     <span class="number">0.00</span>    <span class="number">0.69</span>    <span class="number">2.32</span>    <span class="number">10.47</span>    <span class="number">31.69</span>    <span class="number">28.01</span>     <span class="number">0.01</span>    <span class="number">3.23</span>    <span class="number">0.71</span>    <span class="number">3.98</span>   <span class="number">0.13</span>   <span class="number">0.04</span></div><div class="line">dm-<span class="number">1</span>        <span class="number">0.00</span>     <span class="number">0.00</span>    <span class="number">0.00</span>    <span class="number">0.94</span>     <span class="number">0.01</span>     <span class="number">3.78</span>     <span class="number">8.00</span>     <span class="number">0.33</span>  <span class="number">345.84</span>    <span class="number">0.04</span>  <span class="number">346.81</span>   <span class="number">0.01</span>   <span class="number">0.00</span></div><div class="line">dm-<span class="number">2</span>        <span class="number">0.00</span>     <span class="number">0.00</span>    <span class="number">0.09</span>    <span class="number">0.07</span>     <span class="number">1.35</span>     <span class="number">0.36</span>    <span class="number">22.50</span>     <span class="number">0.00</span>    <span class="number">2.55</span>    <span class="number">0.23</span>    <span class="number">5.62</span>   <span class="number">1.78</span>   <span class="number">0.03</span></div></pre></td></tr></table></figure>
+<p>iostat命令主要用于查看机器磁盘IO情况。该命令输出的列，主要含义是：<br>  ● <strong>r/s, w/s, rkB/s, wkB/s</strong>：分别表示每秒读写次数和每秒读写数据量（千字节）。读写量过大，可能会引起性能问题。<br>  ● <strong>await</strong>：IO操作的平均等待时间，单位是毫秒。这是应用程序在和磁盘交互时，需要消耗的时间，包括IO等待和实际操作的耗时。如果这个数值过大，可能是硬件设备遇到了瓶颈或者出现故障。<br>  ● <strong>avgqu-sz</strong>：向设备发出的请求平均数量。如果这个数值大于1，可能是硬件设备已经饱和（部分前端硬件设备支持并行写入）。<br>  ●<strong> %util</strong>：设备利用率。这个数值表示设备的繁忙程度，经验值是如果超过60，可能会影响IO性能（可以参照IO操作平均等待时间）。如果到达100%，说明硬件设备已经饱和。<br>如果显示的是逻辑设备的数据，那么设备利用率不代表后端实际的硬件设备已经饱和。值得注意的是，即使IO性能不理想，也不一定意味这应用程序性能会不好，可以利用诸如预读取、写缓存等策略提升应用性能。</p>
+<hr>
+<h1 id="free-–m"><a href="#free-–m" class="headerlink" title="free –m"></a>free –m</h1><figure class="highlight tap"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">             total       used       free     shared    buffers     cached</div><div class="line">Mem:       <span class="number"> 245998 </span>    <span class="number"> 24545 </span>   <span class="number"> 221453 </span>       <span class="number"> 83 </span>       <span class="number"> 59 </span>       541</div><div class="line">-/+ buffers/cache:     <span class="number"> 23944 </span>    222053</div><div class="line">Swap:           <span class="number"> 0 </span>        <span class="number"> 0 </span>         0</div></pre></td></tr></table></figure>
+<p>free命令可以查看系统内存的使用情况，-m参数表示按照兆字节展示。最后两列分别表示用于IO缓存的内存数，和用于文件系统页缓存的内存数。需要注意的是，第二行-/+ buffers/cache，看上去缓存占用了大量内存空间。这是Linux系统的内存使用策略，尽可能的利用内存，如果应用程序需要内存，这部分内存会立即被回收并分配给应用程序。因此，这部分内存一般也被当成是可用内存。<br>如果可用内存非常少，系统可能会动用交换区（如果配置了的话），这样会增加IO开销（可以在iostat命令中提现），降低系统性能。</p>
+<hr>
+<h1 id="sar-n-DEV-1"><a href="#sar-n-DEV-1" class="headerlink" title="sar -n DEV 1"></a>sar -n DEV 1</h1><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">Linux</span> <span class="selector-tag">3</span><span class="selector-class">.13</span><span class="selector-class">.0-49-generic</span> (titanclusters-xxxxx)  <span class="selector-tag">07</span>/<span class="selector-tag">14</span>/<span class="selector-tag">2015</span>     <span class="selector-tag">_x86_64_</span>    (<span class="number">32</span> CPU)</div><div class="line"><span class="selector-tag">12</span><span class="selector-pseudo">:16</span><span class="selector-pseudo">:48</span> <span class="selector-tag">AM</span>     <span class="selector-tag">IFACE</span>   <span class="selector-tag">rxpck</span>/<span class="selector-tag">s</span>   <span class="selector-tag">txpck</span>/<span class="selector-tag">s</span>    <span class="selector-tag">rxkB</span>/<span class="selector-tag">s</span>    <span class="selector-tag">txkB</span>/<span class="selector-tag">s</span>   <span class="selector-tag">rxcmp</span>/<span class="selector-tag">s</span>   <span class="selector-tag">txcmp</span>/<span class="selector-tag">s</span>  <span class="selector-tag">rxmcst</span>/<span class="selector-tag">s</span>   %<span class="selector-tag">ifutil</span></div><div class="line"><span class="selector-tag">12</span><span class="selector-pseudo">:16</span><span class="selector-pseudo">:49</span> <span class="selector-tag">AM</span>      <span class="selector-tag">eth0</span>  <span class="selector-tag">18763</span><span class="selector-class">.00</span>   <span class="selector-tag">5032</span><span class="selector-class">.00</span>  <span class="selector-tag">20686</span><span class="selector-class">.42</span>    <span class="selector-tag">478</span><span class="selector-class">.30</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span></div><div class="line"><span class="selector-tag">12</span><span class="selector-pseudo">:16</span><span class="selector-pseudo">:49</span> <span class="selector-tag">AM</span>        <span class="selector-tag">lo</span>     <span class="selector-tag">14</span><span class="selector-class">.00</span>     <span class="selector-tag">14</span><span class="selector-class">.00</span>      <span class="selector-tag">1</span><span class="selector-class">.36</span>      <span class="selector-tag">1</span><span class="selector-class">.36</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span></div><div class="line"><span class="selector-tag">12</span><span class="selector-pseudo">:16</span><span class="selector-pseudo">:49</span> <span class="selector-tag">AM</span>   <span class="selector-tag">docker0</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span></div><div class="line"><span class="selector-tag">12</span><span class="selector-pseudo">:16</span><span class="selector-pseudo">:49</span> <span class="selector-tag">AM</span>     <span class="selector-tag">IFACE</span>   <span class="selector-tag">rxpck</span>/<span class="selector-tag">s</span>   <span class="selector-tag">txpck</span>/<span class="selector-tag">s</span>    <span class="selector-tag">rxkB</span>/<span class="selector-tag">s</span>    <span class="selector-tag">txkB</span>/<span class="selector-tag">s</span>   <span class="selector-tag">rxcmp</span>/<span class="selector-tag">s</span>   <span class="selector-tag">txcmp</span>/<span class="selector-tag">s</span>  <span class="selector-tag">rxmcst</span>/<span class="selector-tag">s</span>   %<span class="selector-tag">ifutil</span></div><div class="line"><span class="selector-tag">12</span><span class="selector-pseudo">:16</span><span class="selector-pseudo">:50</span> <span class="selector-tag">AM</span>      <span class="selector-tag">eth0</span>  <span class="selector-tag">19763</span><span class="selector-class">.00</span>   <span class="selector-tag">5101</span><span class="selector-class">.00</span>  <span class="selector-tag">21999</span><span class="selector-class">.10</span>    <span class="selector-tag">482</span><span class="selector-class">.56</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span></div><div class="line"><span class="selector-tag">12</span><span class="selector-pseudo">:16</span><span class="selector-pseudo">:50</span> <span class="selector-tag">AM</span>        <span class="selector-tag">lo</span>     <span class="selector-tag">20</span><span class="selector-class">.00</span>     <span class="selector-tag">20</span><span class="selector-class">.00</span>      <span class="selector-tag">3</span><span class="selector-class">.25</span>      <span class="selector-tag">3</span><span class="selector-class">.25</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span></div><div class="line"><span class="selector-tag">12</span><span class="selector-pseudo">:16</span><span class="selector-pseudo">:50</span> <span class="selector-tag">AM</span>   <span class="selector-tag">docker0</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span></div></pre></td></tr></table></figure>
+<p>sar命令在这里可以查看网络设备的吞吐率。在排查性能问题时，可以通过网络设备的吞吐量，判断网络设备是否已经饱和。如示例输出中，eth0网卡设备，吞吐率大概在22 Mbytes/s，既176 Mbits/sec，没有达到1Gbit/sec的硬件上限。</p>
+<hr>
+<h1 id="sar-n-TCP-ETCP-1"><a href="#sar-n-TCP-ETCP-1" class="headerlink" title="sar -n TCP,ETCP 1"></a>sar -n TCP,ETCP 1</h1><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">Linux</span> <span class="selector-tag">3</span><span class="selector-class">.13</span><span class="selector-class">.0-49-generic</span> (titanclusters-xxxxx)  <span class="selector-tag">07</span>/<span class="selector-tag">14</span>/<span class="selector-tag">2015</span>    <span class="selector-tag">_x86_64_</span>    (<span class="number">32</span> CPU)</div><div class="line"><span class="selector-tag">12</span><span class="selector-pseudo">:17</span><span class="selector-pseudo">:19</span> <span class="selector-tag">AM</span>  <span class="selector-tag">active</span>/<span class="selector-tag">s</span> <span class="selector-tag">passive</span>/<span class="selector-tag">s</span>    <span class="selector-tag">iseg</span>/<span class="selector-tag">s</span>    <span class="selector-tag">oseg</span>/<span class="selector-tag">s</span></div><div class="line"><span class="selector-tag">12</span><span class="selector-pseudo">:17</span><span class="selector-pseudo">:20</span> <span class="selector-tag">AM</span>      <span class="selector-tag">1</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>  <span class="selector-tag">10233</span><span class="selector-class">.00</span>  <span class="selector-tag">18846</span><span class="selector-class">.00</span></div><div class="line"><span class="selector-tag">12</span><span class="selector-pseudo">:17</span><span class="selector-pseudo">:19</span> <span class="selector-tag">AM</span>  <span class="selector-tag">atmptf</span>/<span class="selector-tag">s</span>  <span class="selector-tag">estres</span>/<span class="selector-tag">s</span> <span class="selector-tag">retrans</span>/<span class="selector-tag">s</span> <span class="selector-tag">isegerr</span>/<span class="selector-tag">s</span>   <span class="selector-tag">orsts</span>/<span class="selector-tag">s</span></div><div class="line"><span class="selector-tag">12</span><span class="selector-pseudo">:17</span><span class="selector-pseudo">:20</span> <span class="selector-tag">AM</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span></div><div class="line"><span class="selector-tag">12</span><span class="selector-pseudo">:17</span><span class="selector-pseudo">:20</span> <span class="selector-tag">AM</span>  <span class="selector-tag">active</span>/<span class="selector-tag">s</span> <span class="selector-tag">passive</span>/<span class="selector-tag">s</span>    <span class="selector-tag">iseg</span>/<span class="selector-tag">s</span>    <span class="selector-tag">oseg</span>/<span class="selector-tag">s</span></div><div class="line"><span class="selector-tag">12</span><span class="selector-pseudo">:17</span><span class="selector-pseudo">:21</span> <span class="selector-tag">AM</span>      <span class="selector-tag">1</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>   <span class="selector-tag">8359</span><span class="selector-class">.00</span>   <span class="selector-tag">6039</span><span class="selector-class">.00</span></div><div class="line"><span class="selector-tag">12</span><span class="selector-pseudo">:17</span><span class="selector-pseudo">:20</span> <span class="selector-tag">AM</span>  <span class="selector-tag">atmptf</span>/<span class="selector-tag">s</span>  <span class="selector-tag">estres</span>/<span class="selector-tag">s</span> <span class="selector-tag">retrans</span>/<span class="selector-tag">s</span> <span class="selector-tag">isegerr</span>/<span class="selector-tag">s</span>   <span class="selector-tag">orsts</span>/<span class="selector-tag">s</span></div><div class="line"><span class="selector-tag">12</span><span class="selector-pseudo">:17</span><span class="selector-pseudo">:21</span> <span class="selector-tag">AM</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span>      <span class="selector-tag">0</span><span class="selector-class">.00</span></div></pre></td></tr></table></figure>
+<p>sar命令在这里用于查看TCP连接状态，其中包括：<br>  ● <strong>active/s</strong>：每秒本地发起的TCP连接数，既通过connect调用创建的TCP连接；<br>  ● <strong>passive/s</strong>：每秒远程发起的TCP连接数，即通过accept调用创建的TCP连接；<br>  ●<strong> retrans/s</strong>：每秒TCP重传数量；<br>TCP连接数可以用来判断性能问题是否由于建立了过多的连接，进一步可以判断是主动发起的连接，还是被动接受的连接。TCP重传可能是因为网络环境恶劣，或者服务器压力过大导致丢包。</p>
+<hr>
+<h1 id="top"><a href="#top" class="headerlink" title="top"></a>top</h1><table>
+<thead>
+<tr>
+<th>常用交互命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>q</td>
+<td>退出程序</td>
+</tr>
+<tr>
+<td>I</td>
+<td>切换显示平均负载和启动时间的信息</td>
+</tr>
+<tr>
+<td>P</td>
+<td>根据CPU使用百分比大小进行排序</td>
+</tr>
+<tr>
+<td>M</td>
+<td>根据驻留内存大小进行排序</td>
+</tr>
+<tr>
+<td>i</td>
+<td>忽略闲置和僵死的进程，这是一个开关式命令</td>
+</tr>
+<tr>
+<td>k</td>
+<td>终止一个进程，系统提示输入 PID 及发送的信号值。一般终止进程用15信号，不能正常结束则使用9信号。安全模式下该命令被屏蔽。</td>
+</tr>
+</tbody>
+</table>
+<p><img src="http://ofyfogrgx.bkt.clouddn.com//blog/%E6%A3%80%E6%9F%A5Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD1.png" alt=""><br><img src="http://ofyfogrgx.bkt.clouddn.com//blog/%E6%A3%80%E6%9F%A5Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD2.png" alt=""><br><img src="http://ofyfogrgx.bkt.clouddn.com//blog/%E6%A3%80%E6%9F%A5Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD3.png" alt=""><br><img src="http://ofyfogrgx.bkt.clouddn.com//blog/%E6%A3%80%E6%9F%A5Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD4.png" alt=""><br><img src="http://ofyfogrgx.bkt.clouddn.com//blog/%E6%A3%80%E6%9F%A5Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD5.png" alt=""><br><img src="http://ofyfogrgx.bkt.clouddn.com//blog/%E6%A3%80%E6%9F%A5Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD6.png" alt=""></p>
+<ul>
+<li><p><strong>NICE 值</strong>叫做静态优先级，是用户空间的一个优先级值，其取值范围是-20至19。这个值越小，表示进程”优先级”越高，而值越大“优先级”越低。nice值中的 -20 到 19，中 -20 优先级最高， 0 是默认的值，而 19 优先级最低</p>
+</li>
+<li><p><strong>PR 值</strong>表示 Priority 值叫动态优先级，是进程在内核中实际的优先级值，进程优先级的取值范围是通过一个宏定义的，这个宏的名称是MAX_PRIO，它的值为140。Linux实际上实现了140个优先级范围，取值范围是从0-139，这个值越小，优先级越高。而这其中的 0 - 99 是实时的值，而 100 - 139 是给用户的。</p>
+</li>
+</ul>
+<p>其中 PR 中的 100 to 139 值部分有这么一个对应 PR = 20 + (-20 to +19)，这里的 -20 to +19 便是nice值，所以说两个虽然都是优先级，而且有千丝万缕的关系，但是他们的值，他们的作用范围并不相同</p>
+<ul>
+<li><strong>VIRT</strong> 任务所使用的虚拟内存的总数，其中包含所有的代码，数据，共享库和被换出 swap空间的页面等所占据空间的总数</li>
+</ul>
+<p>top命令包含了前面好几个命令的检查的内容。比如：</p>
+<ul>
+<li>系统负载情况（uptime）</li>
+<li>系统内存使用情况（free）</li>
+<li>系统CPU使用情况（vmstat）等。</li>
+</ul>
+<p>因此通过这个命令，可以相对全面的查看系统负载的来源。同时，top命令支持排序，可以按照不同的列排序，方便查找出诸如内存占用最多的进程、CPU占用率最高的进程等。<br>但是，top命令相对于前面一些命令，输出是一个瞬间值，如果不持续盯着，可能会错过一些线索。这时可能需要暂停top命令刷新，来记录和比对数据。</p>
+<hr>
+
+<!--这里是每篇文章的尾巴-->
+<html>
+  <body>
+    <h1>结语</h1>
+      <p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p>
+      <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<!--
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p></blockquote></div>
+    <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎收藏书签，欢迎多提宝贵意见，非常感谢！</p>
+    <footer><strong>Welcome to LeoLan'S BLOG</strong>
+    <cite><a href="#" onclick="go_my_site()" rel="external">Leo Lan Blog Share For you!</a></cite></footer></blockquote></div>
+  </body>
+</html>
+-->
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div style="margin-bottom: 10px;font-size: 16px;font-weight: 600;">想请我吃辣条吗？</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/alipay.jpg" alt="LeoLan Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/weixinpay.png" alt="LeoLan WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>微信打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+<h3 id="最近访客"><a href="#最近访客" class="headerlink" title="最近访客"></a>最近访客</h3><div class="ds-recent-visitors" data-num-items="36" data-avatar-size="42" id="ds-recent-visitors"></div>
+      
+    </div>
+
+<!--这是文章底部标签云链接
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/检查Linux服务器性能/" rel="tag"># 检查Linux服务器性能</a>
+          
+            <a href="/tags/top/" rel="tag"># top</a>
+          
+            <a href="/tags/free/" rel="tag"># free</a>
+          
+        </div>
+      
+-->
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/21385/" rel="next" title="Linux常见面试题">
+                <i class="fa fa-chevron-left"></i> Linux常见面试题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/40647/" rel="prev" title="用github写开源书籍">
+                用github写开源书籍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js;
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="posts/64139/"
+           data-title="检查Linux服务器性能" data-url="https://www.leolan.top/posts/64139/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="LeoLan" />
+          <p class="site-author-name" itemprop="name">LeoLan</p>
+          <p class="site-description motion-element" itemprop="description">Better late than never</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">68</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="https://www.leolan.top/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+
+<!-- 自定义High一下的功能 -->
+ <a rel="alternate" class="mw-harlem_shake_slow wobble shake" href='javascript:(
+   function go() {
+   var songs = [
+               "http://ofyfogrgx.bkt.clouddn.com/tongxingSibel%20-%20Im%20Sorry.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com/Music-sunburst.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com//blog/Apple%20&%20Stone%20-%20Lost.mp3"
+   ];
+
+<!--"http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150103346.mp3","http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150842689.mp3",-->
+
+   function c() {
+       var e = document.createElement("link");
+       e.setAttribute("type", "text/css");
+       e.setAttribute("rel", "stylesheet");
+       e.setAttribute("href", f);
+       e.setAttribute("class", l);
+       document.body.appendChild(e)
+   }
+   function h() {
+       var e = document.getElementsByClassName(l);
+       for (var t = 0; t < e.length; t++) {
+           document.body.removeChild(e[t])
+       }
+   }
+   function p() {
+       var e = document.createElement("div");
+       e.setAttribute("class", a);
+       document.body.appendChild(e);
+       setTimeout(function() {
+           document.body.removeChild(e)
+       }, 100)
+   }
+   function d(e) {
+       return {
+           height : e.offsetHeight,
+           width : e.offsetWidth
+       }
+   }
+   function v(i) {
+       var s = d(i);
+       return s.height > e && s.height < n && s.width > t && s.width < r
+   }
+   function m(e) {
+       var t = e;
+       var n = 0;
+       while (!!t) {
+           n += t.offsetTop;
+           t = t.offsetParent
+       }
+       return n
+   }
+   function g() {
+       var e = document.documentElement;
+       if (!!window.innerWidth) {
+           return window.innerHeight
+       } else if (e && !isNaN(e.clientHeight)) {
+           return e.clientHeight
+       }
+       return 0
+   }
+   function y() {
+       if (window.pageYOffset) {
+           return window.pageYOffset
+       }
+       return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+   }
+   function E(e) {
+       var t = m(e);
+       return t >= w && t <= b + w
+   }
+   function S() {
+       var e = document.getElementById("audio_element_id");
+       if(e != null){
+           var index = parseInt(e.getAttribute("curSongIndex"));
+           if(index > songs.length - 2) {
+               index = 0;
+           } else {
+               index++;
+           }
+           e.setAttribute("curSongIndex", index);
+           N();
+       }
+       e.src = i;
+       e.play()
+   }
+   function x(e) {
+       e.className += " " + s + " " + o
+   }
+   function T(e) {
+       e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+   }
+   function N() {
+       var e = document.getElementsByClassName(s);
+       var t = new RegExp("\\b" + s + "\\b");
+       for (var n = 0; n < e.length; ) {
+           e[n].className = e[n].className.replace(t, "")
+       }
+   }
+   function initAudioEle() {
+       var e = document.getElementById("audio_element_id");
+       if(e === null){
+           e = document.createElement("audio");
+           e.setAttribute("class", l);
+           e.setAttribute("curSongIndex", 0);
+           e.id = "audio_element_id";
+           e.loop = false;
+           e.bgcolor = 0;
+           e.addEventListener("canplay", function() {
+           setTimeout(function() {
+               x(k)
+           }, 500);
+           setTimeout(function() {
+               N();
+               p();
+               for (var e = 0; e < O.length; e++) {
+                   T(O[e])
+               }
+           }, 15500)
+       }, true);
+       e.addEventListener("ended", function() {
+           N();
+           h();
+           go();
+       }, true);
+       e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+       document.body.appendChild(e);
+       }
+   }
+   
+   initAudioEle();
+   var e = 30;
+   var t = 30;
+   var n = 350;
+   var r = 350;
+   var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+   var i = songs[curSongIndex];
+   
+   var s = "mw-harlem_shake_me";
+   var o = "im_first";
+   var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+   var a = "mw-strobe_light";
+   /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css
+   //7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css  七牛云地址*/
+   var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";  
+   /* var f = "/css/harlem_shake_style.css";  */
+
+   var l = "mw_added_css";
+   var b = g();
+   var w = y();
+   var C = document.getElementsByTagName("*");
+   var k = null;
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           if (E(A)) {
+               k = A;
+               break
+           }
+       }
+   }
+   if (A === null) {
+       console.warn("Could not find a node of the right size. Please try a different page.");
+       return
+   }
+   c();
+   S();
+   var O = [];
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           O.push(A)
+       }
+   }
+   })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High</a>
+</div>
+         <!-- end High一下 -->
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/myleolan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://coding.net/u/leolan" target="_blank" title="Coding">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  Coding
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://quickconnect.to/myleolan" target="_blank" title="Cloud1">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud1
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://git.oschina.net/leolan" target="_blank" title="OSchina">
+                  
+                    <i class="fa fa-fw fa-git-square"></i>
+                  
+                  OSchina
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://leolan.picp.net" target="_blank" title="Cloud2">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud2
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.leolan.top/posts/44568/" target="_blank" title="Links">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Links
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-heartbeat"></i>
+              友链
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://jerry.hk/" title="Jerry Locke" target="_blank" rel="external nofollow">Jerry Locke</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://login926.top" title="Raintons" target="_blank" rel="external nofollow">Raintons</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.anotherhome.net" title="DIYgod" target="_blank" rel="external nofollow">DIYgod</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mblack.cn/" title="小黑" target="_blank" rel="external nofollow">小黑</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.iamlj.com/" title="Jing's Blog" target="_blank" rel="external nofollow">Jing's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://cyang.tech/" title="cyang's blog" target="_blank" rel="external nofollow">cyang's blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.showerlee.com/" title="一路向北" target="_blank" rel="external nofollow">一路向北</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://lusongsong.com/" title="卢松松的博客" target="_blank" rel="external nofollow">卢松松的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://v.lusongsong.com/" title="松松视频" target="_blank" rel="external nofollow">松松视频</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于服务器负载"><span class="nav-number">1.</span> <span class="nav-text">关于服务器负载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#uptime"><span class="nav-number">2.</span> <span class="nav-text">uptime</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dmesg-tail"><span class="nav-number">3.</span> <span class="nav-text">dmesg | tail</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vmstat-1"><span class="nav-number">4.</span> <span class="nav-text">vmstat 1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mpstat-P-ALL-1"><span class="nav-number">5.</span> <span class="nav-text">mpstat -P ALL 1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pidstat-1"><span class="nav-number">6.</span> <span class="nav-text">pidstat 1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iostat-xz-1"><span class="nav-number">7.</span> <span class="nav-text">iostat -xz 1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#free-–m"><span class="nav-number">8.</span> <span class="nav-text">free –m</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sar-n-DEV-1"><span class="nav-number">9.</span> <span class="nav-text">sar -n DEV 1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sar-n-TCP-ETCP-1"><span class="nav-number">10.</span> <span class="nav-text">sar -n TCP,ETCP 1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#top"><span class="nav-number">11.</span> <span class="nav-text">top</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LeoLan</span>
+</div>
+
+<div class="powered-by">
+  <a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备16026009号-2</a>  |  本站总访问量<span id="busuanzi_value_site_pv"></span>
+</div>
+
+<div class="theme-info">
+  您是第<span id="busuanzi_value_site_uv"></span>位小伙伴
+</div>
+
+<script async src="/js/src/busuanzi.pure.mini.js">
+</script>
+
+<!--
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+-->
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"leolan"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '/js/src/duoshuo_embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementById('footer')
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("zieuxKa4IjAP6VgxxvBe4vkj-gzGzoHsz", "MHGN54IEuofFNV1AROiRkEoG");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js" count="50" zindex="-2" opacity="1" color="0,104,183"></script>
+
+</body>
+</html>

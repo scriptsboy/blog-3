@@ -1,0 +1,1732 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic|Georgia:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MySQL常用命令," />
+
+
+
+
+
+  <link rel="alternate" href="https://www.leolan.top/atom.xml" title="LeoLan's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/200.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="密码新安装默认密码为空mysql -u root 即可进入，不要mysql -u root -p进不去的大于5.7的版本默认有随机密码，执行cat  /var/log/mysqld.log | grep password | grep &amp;#39;root@localhost&amp;#39; | awk -F &amp;#39;root@localhost: &amp;#39; &amp;#39;{print $2}&amp;#39">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL数据库">
+<meta property="og:url" content="https://www.leolan.top/posts/37198/index.html">
+<meta property="og:site_name" content="LeoLan's Blog">
+<meta property="og:description" content="密码新安装默认密码为空mysql -u root 即可进入，不要mysql -u root -p进不去的大于5.7的版本默认有随机密码，执行cat  /var/log/mysqld.log | grep password | grep &amp;#39;root@localhost&amp;#39; | awk -F &amp;#39;root@localhost: &amp;#39; &amp;#39;{print $2}&amp;#39">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/mysql%E6%95%B0%E6%8D%AE%E5%BA%93001.jpg">
+<meta property="og:updated_time" content="2017-02-27T08:47:33.050Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL数据库">
+<meta name="twitter:description" content="密码新安装默认密码为空mysql -u root 即可进入，不要mysql -u root -p进不去的大于5.7的版本默认有随机密码，执行cat  /var/log/mysqld.log | grep password | grep &amp;#39;root@localhost&amp;#39; | awk -F &amp;#39;root@localhost: &amp;#39; &amp;#39;{print $2}&amp;#39">
+<meta name="twitter:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/mysql%E6%95%B0%E6%8D%AE%E5%BA%93001.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6343395544286627000',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.leolan.top/posts/37198/"/>
+
+
+
+
+
+  <title> MySQL数据库 | LeoLan's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">LeoLan's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">有时候正是不报期望的人做出了人们不敢期望之事！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签云
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时间轴
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-commenting"></i> <br />
+            
+            给我留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            本地搜索
+          </a>
+        </li>
+               
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://www.leolan.top/posts/37198/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="LeoLan">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="LeoLan's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="LeoLan's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MySQL数据库
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-03T10:46:10+08:00">
+              2016-11-03
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2017-02-27T16:47:33+08:00">
+              2017-02-27
+            </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/posts/37198/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/37198/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/posts/37198/" class="leancloud_visitors" data-flag-title="MySQL数据库">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+         <span class="post-time">
+     &nbsp; | &nbsp;
+           <span class="post-meta-item-icon">
+             <i class="fa fa-calendar-o"></i>
+           </span>
+           <span class="post-meta-item-text">字数统计:</span>
+           <span class="post-count">3,189(字)</span>
+           
+         </span>
+
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="密码"><a href="#密码" class="headerlink" title="密码"></a>密码</h1><p><strong>新安装默认密码为空</strong><code>mysql -u root</code> 即可进入，不要<code>mysql -u root -p</code>进不去的<br>大于5.7的版本默认有随机密码，执行<code>cat  /var/log/mysqld.log | grep password | grep &#39;root@localhost&#39; | awk -F &#39;root@localhost: &#39; &#39;{print $2}&#39;</code>查看随机生成的密码。</p>
+<hr>
+<h2 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h2><ul>
+<li><p>1.用root 进入mysql后<br>mysql&gt;<code>set password =password(&#39;你的密码&#39;);</code><br>mysql&gt;<code>flush privileges;</code></p>
+</li>
+<li><p>2.使用GRANT语句<br>mysql&gt;<code>grant all on *.* to &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;你的密码&#39;with grant option ;</code><br>mysql&gt;<code>flush privileges;</code></p>
+</li>
+<li><p>3.进入mysql库修改user表<br>mysql&gt;<code>use mysql;</code><br>mysql&gt;<code>update user set password=password(&#39;你的密码&#39;) where user=&#39;root&#39;;</code><br>mysql&gt;<code>flush privileges;</code></p>
+</li>
+</ul>
+<hr>
+<h2 id="设置数据库密码"><a href="#设置数据库密码" class="headerlink" title="设置数据库密码"></a>设置数据库密码</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mysql -u root -p</div><div class="line">&gt; （输入密码）</div><div class="line">&gt; create user <span class="string">'用户名'</span>@<span class="string">'localhost'</span> identified by <span class="string">'密码'</span>;</div><div class="line">&gt; grant all privileges on 库名.* to <span class="string">'用户名'</span>@<span class="string">'localhost'</span>;</div><div class="line">&gt; flush privileges;</div><div class="line">&gt; <span class="keyword">exit</span>;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="修改Mysql密码"><a href="#修改Mysql密码" class="headerlink" title="修改Mysql密码"></a>修改Mysql密码</h2><ul>
+<li><p>方法一：<br>使用phpmyadmin，直接修改Mysql库的user 表。或者使用Navicat for Mysql 直接修改连接属性。<br>【据说可以用直接修改user表文件的方法：<br><strong>法一：</strong>关闭MySQL，Windows下打开Mysql\data\mysql，有三个文件user.frm,user.MYD,user.MYI找个知道密码的MySQL，替换相应的这三个文件，如果user表结构没改过，一般也没人去改，替换user.MYD就可以了。<br><strong>法二：</strong>也可以直接编辑user.MYD，找个十六进制编辑器，UltraEdit就有这个功能。关闭MySQL，打开user.MYD。将用户名root后面的八个字符改为565491d704013245，新密码就是123456。或者将它们对应的十六进制数字，（左边那里，一个字符对应两个数字），改为 00 02 02 02 02 02 02 02,这就是空密码，在编辑器右边看到的都是星号*，看起来很象小数点。重开MySQL，输入root和你的新密码。】</p>
+</li>
+<li><p>方法二：使用mysqladmin<br>cd到mysql的bin文件夹，然后执行如下<br>D:\Mysql\bin&gt;<code>mysqladmin -u root -p password 新密码</code><br>Enter password:(在此输入原密码)<br>格式：<strong>mysqladmin -u用户名 -p旧密码 password 新密码。</strong></p>
+</li>
+</ul>
+<hr>
+<h2 id="忘记密码"><a href="#忘记密码" class="headerlink" title="忘记密码"></a>忘记密码</h2><ul>
+<li>1.用root或者运行mysqld的用户登录系统； </li>
+<li>2．利用kill命令结束掉mysqld的进程； </li>
+<li>3．使用<strong>–skip-grant-tables</strong>参数启动MySQL Server </li>
+<li>shell&gt;<code>mysqld_safe --skip-grant-tables &amp;</code> </li>
+<li>UPDATE user SET password=PASSWORD(“new password”) WHERE user=’root’;</li>
+<li>4.为root@localhost设置新密码 </li>
+<li>shell&gt;<code>mysqladmin -u root flush-privileges password &quot;newpassword&quot;</code></li>
+<li>5．重启MySQL Server</li>
+</ul>
+<hr>
+<hr>
+<h1 id="MySQL特性"><a href="#MySQL特性" class="headerlink" title="MySQL特性"></a>MySQL特性</h1><h2 id="MySQL-数据类型"><a href="#MySQL-数据类型" class="headerlink" title="MySQL 数据类型"></a>MySQL 数据类型</h2><p>下面的可使用的各种 MySQL 数据类型：</p>
+<table>
+<thead>
+<tr>
+<th>数值类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int(size)</td>
+<td>仅支持整数。在 size 参数中规定数字的最大值。</td>
+</tr>
+<tr>
+<td>smallint(size)</td>
+<td>仅支持整数。在 size 参数中规定数字的最大值。</td>
+</tr>
+<tr>
+<td>tinyint(size)</td>
+<td>仅支持整数。在 size 参数中规定数字的最大值。</td>
+</tr>
+<tr>
+<td>mediumint(size)</td>
+<td>仅支持整数。在 size 参数中规定数字的最大值。</td>
+</tr>
+<tr>
+<td>bigint(size)</td>
+<td>仅支持整数。在 size 参数中规定数字的最大值。</td>
+</tr>
+<tr>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>decimal(size,d)</td>
+<td>支持带有小数的数字。在 size 参数中规定数字的最大值。在 d 参数中规定小数点右侧的数字的最大值。</td>
+</tr>
+<tr>
+<td>double(size,d)</td>
+<td>支持带有小数的数字。在 size 参数中规定数字的最大值。在 d 参数中规定小数点右侧的数字的最大值。</td>
+</tr>
+<tr>
+<td>float(size,d)</td>
+<td>支持带有小数的数字。在 size 参数中规定数字的最大值。在 d 参数中规定小数点右侧的数字的最大值。</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>文本数据类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>char(size)</td>
+<td>支持固定长度的字符串。（可包含字母、数字以及特殊符号）。在 size 参数中规定固定长度。</td>
+</tr>
+<tr>
+<td>varchar(size)</td>
+<td>支持可变长度的字符串。（可包含字母、数字以及特殊符号）。在 size 参数中规定最大长度。</td>
+</tr>
+<tr>
+<td>tinytext</td>
+<td>支持可变长度的字符串，最大长度是 255 个字符。</td>
+</tr>
+<tr>
+<td>text blob</td>
+<td>支持可变长度的字符串，最大长度是 65535 个字符。</td>
+</tr>
+<tr>
+<td>mediumtext mediumblob</td>
+<td>支持可变长度的字符串，最大长度是 16777215 个字符。</td>
+</tr>
+<tr>
+<td>longtext longblob</td>
+<td>支持可变长度的字符串，最大长度是 4294967295 个字符。</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>日期数据类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>date(yyyy-mm-dd)</td>
+<td>支持日期或时间</td>
+</tr>
+<tr>
+<td>datetime(yyyy-mm-dd hh:mm:ss)</td>
+<td>支持日期或时间</td>
+</tr>
+<tr>
+<td>timestamp(yyyymmddhhmmss)</td>
+<td>支持日期或时间</td>
+</tr>
+<tr>
+<td>time(hh:mm:ss)</td>
+<td>支持日期或时间</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>杂项数据类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enum(value1,value2,ect)</td>
+<td>ENUM 是 ENUMERATED 列表的缩写。可以在括号中存放最多 65535 个值。</td>
+</tr>
+<tr>
+<td>set</td>
+<td>SET 与 ENUM 相似。但是，SET 可拥有最多 64 个列表项目，并可存放不止一个 choice</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="主键和自动递增字段"><a href="#主键和自动递增字段" class="headerlink" title="主键和自动递增字段"></a>主键和自动递增字段</h2><p>每个表都应有一个主键字段。<br>主键用于对表中的行进行唯一标识。每个主键值在表中必须是唯一的。此外，主键字段不能为空，这是由于数据库引擎需要一个值来对记录进行定位。<br>主键字段永远要被编入索引。这条规则没有例外。你必须对主键字段进行索引，这样数据库引擎才能快速定位给予该键值的行。<br>下面的例子把 <strong>personID</strong> 字段设置为主键字段。主键字段通常是 ID 号，且通常使用 <strong>AUTO_INCREMENT</strong> 设置。<strong>AUTO_INCREMENT</strong> 会在新记录被添加时逐一增加该字段的值。要确保主键字段不为空，我们必须向该字段添加 <strong>NOT NULL</strong> 设置。<br>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$sql = &quot;CREATE TABLE Persons </div><div class="line">(</div><div class="line">personID int NOT NULL AUTO_INCREMENT, </div><div class="line">PRIMARY KEY(personID),</div><div class="line">FirstName varchar(15),</div><div class="line">LastName varchar(15),</div><div class="line">Age int</div><div class="line">)&quot;;</div><div class="line"></div><div class="line">mysql_query($sql,$con);</div></pre></td></tr></table></figure></p>
+<hr>
+<hr>
+<h1 id="增"><a href="#增" class="headerlink" title="增"></a>增</h1><h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mysql&gt; CREATE DATABASE 库名;</div><div class="line">mysql&gt; USE 库名;</div><div class="line">mysql&gt; CREATE TABLE 表名 (字段名 VARCHAR(20), 字段名 CHAR(1));</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> demo;</div><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> pet(</div><div class="line">        <span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">20</span>),        #名字</div><div class="line">        owner <span class="built_in">varchar</span>(<span class="number">20</span>),       #主人</div><div class="line">        species <span class="built_in">varchar</span>(<span class="number">20</span>),     #种类</div><div class="line">        sex <span class="built_in">char</span>(<span class="number">1</span>),             #性别</div><div class="line">        birth <span class="built_in">date</span>,              #出生日期</div><div class="line">        death <span class="built_in">date</span>               #死亡日期</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>为了验证你的表是按你期望的方式创建，使用一个<strong>DESCRIBE</strong>语句：<br><img src="http://ofyfogrgx.bkt.clouddn.com//blog/mysql%E6%95%B0%E6%8D%AE%E5%BA%93001.jpg" alt=""></p>
+<hr>
+<h2 id="创建表-复杂形式-："><a href="#创建表-复杂形式-：" class="headerlink" title="创建表(复杂形式)："></a>创建表(复杂形式)：</h2><h3 id="创建customer表："><a href="#创建customer表：" class="headerlink" title="创建customer表："></a>创建customer表：</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> customers(</div><div class="line">    <span class="keyword">id</span> <span class="built_in">int</span> <span class="keyword">not</span> <span class="literal">null</span> auto_increment,</div><div class="line">    <span class="keyword">name</span> <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span>,</div><div class="line">    address <span class="built_in">char</span>(<span class="number">50</span>) <span class="literal">null</span>,</div><div class="line">    city <span class="built_in">char</span>(<span class="number">50</span>) <span class="literal">null</span>,</div><div class="line">    age <span class="built_in">int</span> <span class="keyword">not</span> <span class="literal">null</span>,</div><div class="line">    love <span class="built_in">char</span>(<span class="number">50</span>) <span class="keyword">not</span> <span class="literal">null</span> <span class="keyword">default</span> <span class="string">'No habbit'</span>,</div><div class="line">    primary <span class="keyword">key</span>(<span class="keyword">id</span>)</div><div class="line">)<span class="keyword">engine</span>=<span class="keyword">InnoDB</span>;</div></pre></td></tr></table></figure>
+<p><strong>SELECT last_insert_id();</strong>这个函数可以获得返回最后一个<strong>auto_increment</strong>值。默认值为：default ‘No habbit’,<br>引擎类型，多为<strong>engine = InnoDB</strong>，如果省略了<strong>engine=</strong>语句，则使用默认的引擎(MyISAM)</p>
+<hr>
+<hr>
+<h1 id="删"><a href="#删" class="headerlink" title="删"></a>删</h1><h2 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h2><p>mysql&gt; <code>DROP DATABASE 库名;</code></p>
+<h2 id="删除数据表"><a href="#删除数据表" class="headerlink" title="删除数据表"></a>删除数据表</h2><p>mysql&gt; <code>DROP TABLE 表名；</code></p>
+<h2 id="将表中记录清空"><a href="#将表中记录清空" class="headerlink" title="将表中记录清空"></a>将表中记录清空</h2><p>mysql&gt; <code>DELETE FROM 表名;</code></p>
+<hr>
+<h2 id="删除数据库中的数据"><a href="#删除数据库中的数据" class="headerlink" title="删除数据库中的数据"></a>删除数据库中的数据</h2><p><code>DELETE FROM</code> 语句用于从数据库表中删除记录。<br>语法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">DELETE FROM table_name</div><div class="line">WHERE column_name = some_value</div></pre></td></tr></table></figure></p>
+<p>注释：SQL 对大小写不敏感。DELETE FROM 与 delete from 等效。<br>为了让 PHP 执行上面的语句，我们必须使用 <strong>mysql_query</strong>( 函数。该函数用于向 SQL 连接发送查询和命令。<br>例子<br>稍早时，我们在本教程中创建了一个名为 “Persons” 的表。它看起来类似这样：</p>
+<table>
+<thead>
+<tr>
+<th>FirstName</th>
+<th>LastName</th>
+<th>Age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Peter</td>
+<td>Griffin</td>
+<td>35</td>
+</tr>
+<tr>
+<td>Glenn</td>
+<td>Quagmire</td>
+<td>33</td>
+</tr>
+</tbody>
+</table>
+<p>下面的例子删除 “Persons” 表中所有 LastName=’Griffin’ 的记录：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$con = mysql_connect(<span class="string">"localhost"</span>,<span class="string">"peter"</span>,<span class="string">"abc123"</span>);</div><div class="line"><span class="keyword">if</span> (!$con)</div><div class="line">  &#123;</div><div class="line">  <span class="keyword">die</span>(<span class="string">'Could not connect: '</span> . mysql_error());</div><div class="line">  &#125;</div><div class="line"></div><div class="line">mysql_select_db(<span class="string">"my_db"</span>, $con);</div><div class="line"></div><div class="line">mysql_query(<span class="string">"DELETE FROM Persons WHERE LastName='Griffin'"</span>);</div><div class="line"></div><div class="line">mysql_close($con);</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
+<p>在这次删除之后，表是这样的：</p>
+<table>
+<thead>
+<tr>
+<th>FirstName</th>
+<th>LastName</th>
+<th>Age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Glenn</td>
+<td>Quagmire</td>
+<td>33</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<hr>
+<h1 id="改"><a href="#改" class="headerlink" title="改"></a>改</h1><h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><p><code>UPDATE</code> 语句用于修改数据库表中的数据。<br>语法<br><figure class="highlight ceylon"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mysql</div><div class="line">UPDATE table<span class="number">_n</span>ame</div><div class="line">SET column<span class="number">_n</span>ame = <span class="keyword">new</span><span class="number">_</span><span class="keyword">value</span></div><div class="line">WHERE column<span class="number">_n</span>ame = some<span class="number">_</span><span class="keyword">value</span></div></pre></td></tr></table></figure></p>
+<p>注释：SQL 对大小写不敏感。UPDATE 与 update 等效。<br>为了让 PHP 执行上面的语句，我们必须使用 mysql_query( 函数。该函数用于向 SQL 连接发送查询和命令。<br>例子<br>稍早时，我们在本教程中创建了一个名为 “Persons” 的表。它看起来类似这样：</p>
+<table>
+<thead>
+<tr>
+<th>FirstName</th>
+<th>LastName</th>
+<th>Age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Peter</td>
+<td>Griffin</td>
+<td>35</td>
+</tr>
+<tr>
+<td>Glenn</td>
+<td>Quagmire</td>
+<td>33</td>
+</tr>
+</tbody>
+</table>
+<p>下面的例子更新 “Persons” 表的一些数据：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$con = mysql_connect(<span class="string">"localhost"</span>,<span class="string">"peter"</span>,<span class="string">"abc123"</span>);</div><div class="line"><span class="keyword">if</span> (!$con)</div><div class="line">  &#123;</div><div class="line">  <span class="keyword">die</span>(<span class="string">'Could not connect: '</span> . mysql_error());</div><div class="line">  &#125;</div><div class="line"></div><div class="line">mysql_select_db(<span class="string">"my_db"</span>, $con);</div><div class="line"></div><div class="line">mysql_query(<span class="string">"UPDATE Persons SET Age = '36'</span></div><div class="line">WHERE FirstName = 'Peter' AND LastName = 'Griffin'");</div><div class="line"></div><div class="line">mysql_close($con);</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
+<p>在这次更新后，”Persons” 表格是这样的：</p>
+<table>
+<thead>
+<tr>
+<th>FirstName</th>
+<th>LastName</th>
+<th>Age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Peter</td>
+<td>Griffin</td>
+<td>36</td>
+</tr>
+<tr>
+<td>Glenn</td>
+<td>Quagmire</td>
+<td>33</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name</div><div class="line"><span class="keyword">VALUES</span> (value1, value2,....)</div></pre></td></tr></table></figure>
+<p>您还可以规定希望在其中插入数据的列：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">INSERT</span></span> INTO table_name (column1, column2,...)</div><div class="line"><span class="function"><span class="title">VALUES</span></span> (value1, value2,....)</div></pre></td></tr></table></figure></p>
+<p>注释：SQL 语句对大小写不敏感。<strong>INSERT INTO 与 insert into</strong> 相同。</p>
+<p>为了让 PHP 执行该语句，我们必须使用 <strong>mysql_query()</strong> 函数。该函数用于向 MySQL 连接发送查询或命令。<br>例子<br>在前面的章节，我们创建了一个名为 “Persons” 的表，有三个列：”Firstname”, “Lastname” 以及 “Age”。我们将在本例中使用同样的表。下面的例子向 “Persons” 表添加了两个新记录：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$con = mysql_connect(<span class="string">"localhost"</span>,<span class="string">"peter"</span>,<span class="string">"abc123"</span>);</div><div class="line"><span class="keyword">if</span> (!$con)</div><div class="line">  &#123;</div><div class="line">  <span class="keyword">die</span>(<span class="string">'Could not connect: '</span> . mysql_error());</div><div class="line">  &#125;</div><div class="line"></div><div class="line">mysql_select_db(<span class="string">"my_db"</span>, $con);</div><div class="line"></div><div class="line">mysql_query(<span class="string">"INSERT INTO Persons (FirstName, LastName, Age) </span></div><div class="line">VALUES ('Peter', 'Griffin', '35')");</div><div class="line"></div><div class="line">mysql_query(<span class="string">"INSERT INTO Persons (FirstName, LastName, Age) </span></div><div class="line">VALUES ('Glenn', 'Quagmire', '33')");</div><div class="line"></div><div class="line">mysql_close($con);</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="更改表结构"><a href="#更改表结构" class="headerlink" title="更改表结构"></a>更改表结构</h2><ul>
+<li>增加一列：<br>  <code>alter table pet add des char(100) null;</code></li>
+<li>删除：<br>  <code>alter table pet drop column des;</code></li>
+<li>重命名表：<br>  <code>rename table pet to animals;</code></li>
+<li>添加id字段：<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">alter</span> <span class="keyword">table</span> pet <span class="keyword">add</span> <span class="keyword">id</span> <span class="built_in">int</span> <span class="keyword">not</span> <span class="literal">null</span></div><div class="line">primary <span class="keyword">key</span> auto_increment <span class="keyword">first</span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>详见：<a href="http://www.cnblogs.com/beginman/p/3249472.html" target="_blank" rel="external">http://www.cnblogs.com/beginman/p/3249472.html</a></p>
+<hr>
+<h2 id="把来自表单的数据插入数据库"><a href="#把来自表单的数据插入数据库" class="headerlink" title="把来自表单的数据插入数据库"></a>把来自表单的数据插入数据库</h2><p>现在，我们创建一个 HTML 表单，这个表单可把新记录插入 “Persons” 表。<br>这是这个 HTML 表单：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"insert.php"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></div><div class="line">Firstname: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"firstname"</span> /&gt;</span></div><div class="line">Lastname: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"lastname"</span> /&gt;</span></div><div class="line">Age: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"age"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>当用户点击上例中 HTML 表单中的提交按钮时，表单数据被发送到 “insert.php”。”insert.php” 文件连接数据库，并通过 <strong>$_POST</strong> 变量从表单取回值。然后，mysql_query() 函数执行 <strong>INSERT INTO</strong> 语句，一条新的记录会添加到数据库表中。<br>下面是 “insert.php” 页面的代码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$con = mysql_connect(<span class="string">"localhost"</span>,<span class="string">"peter"</span>,<span class="string">"abc123"</span>);</div><div class="line"><span class="keyword">if</span> (!$con)</div><div class="line">  &#123;</div><div class="line">  <span class="keyword">die</span>(<span class="string">'Could not connect: '</span> . mysql_error());</div><div class="line">  &#125;</div><div class="line"></div><div class="line">mysql_select_db(<span class="string">"my_db"</span>, $con);</div><div class="line"></div><div class="line">$sql=<span class="string">"INSERT INTO Persons (FirstName, LastName, Age)</span></div><div class="line">VALUES</div><div class="line">('$_POST[firstname]','$_POST[lastname]','$_POST[age]')";</div><div class="line"></div><div class="line"><span class="keyword">if</span> (!mysql_query($sql,$con))</div><div class="line">  &#123;</div><div class="line">  <span class="keyword">die</span>(<span class="string">'Error: '</span> . mysql_error());</div><div class="line">  &#125;</div><div class="line"><span class="keyword">echo</span> <span class="string">"1 record added"</span>;</div><div class="line"></div><div class="line">mysql_close($con)</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
+<hr>
+<hr>
+<h1 id="查"><a href="#查" class="headerlink" title="查"></a>查</h1><h2 id="查看数据库"><a href="#查看数据库" class="headerlink" title="查看数据库"></a>查看数据库</h2><p><code>SHOW DATABASES;</code></p>
+<hr>
+<h2 id="查看表"><a href="#查看表" class="headerlink" title="查看表"></a>查看表</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">USE</span> blog;</div><div class="line"><span class="keyword">SHOW</span> <span class="keyword">TABLES</span>;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="查看表中的列"><a href="#查看表中的列" class="headerlink" title="查看表中的列"></a>查看表中的列</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SHOW</span> <span class="keyword">COLUMNS</span> <span class="keyword">FROM</span> auth_user; </div><div class="line">或</div><div class="line"><span class="keyword">DESCRIBE</span> auth_user;</div></pre></td></tr></table></figure>
+<p><strong>describe 表名</strong> 是 <strong>show columns from 表名</strong> 的一种快捷方式。</p>
+<hr>
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><p><code>SELECT</code> 语句用于从数据库中选取数据。<br>语法<br>SELECT column_name(s) FROM table_name<br>注释：SQL 语句对大小写不敏感。SELECT 与 select 等效。<br>为了让 PHP 执行上面的语句，我们必须使用<strong> mysql_query()</strong> 函数。该函数用于向 MySQL 发送查询或命令。<br>例子<br>下面的例子选取存储在 “Persons” 表中的所有数据（* 字符选取表中所有数据）：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$con = mysql_connect(<span class="string">"localhost"</span>,<span class="string">"peter"</span>,<span class="string">"abc123"</span>);</div><div class="line"><span class="keyword">if</span> (!$con)</div><div class="line">  &#123;</div><div class="line">  <span class="keyword">die</span>(<span class="string">'Could not connect: '</span> . mysql_error());</div><div class="line">  &#125;</div><div class="line"></div><div class="line">mysql_select_db(<span class="string">"my_db"</span>, $con);</div><div class="line"></div><div class="line">$result = mysql_query(<span class="string">"SELECT * FROM Persons"</span>);</div><div class="line"></div><div class="line"><span class="keyword">while</span>($row = mysql_fetch_array($result))</div><div class="line">  &#123;</div><div class="line">  <span class="keyword">echo</span> $row[<span class="string">'FirstName'</span>] . <span class="string">" "</span> . $row[<span class="string">'LastName'</span>];</div><div class="line">  <span class="keyword">echo</span> <span class="string">"&lt;br /&gt;"</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">mysql_close($con);</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
+<p>上面这个例子在 <code>$result</code>变量中存放由 <code>mysql_query()</code> 函数返回的数据。接下来，我们使用 <code>mysql_fetch_array()</code>函数以数组的形式从记录集返回第一行。每个随后对 <code>mysql_fetch_array()</code> 函数的调用都会返回记录集中的下一行。 <code>while loop</code>语句会循环记录集中的所有记录。为了输出每行的值，我们使用了 PHP 的 <code>$row</code>变量( <code>$row[&#39;FirstName&#39;]</code> 和 <code>$row[&#39;LastName&#39;]</code>)。<br>以上代码的输出：<br>Peter Griffin<br>Glenn Quagmire</p>
+<hr>
+<hr>
+<h1 id="其他情况"><a href="#其他情况" class="headerlink" title="其他情况"></a>其他情况</h1><h2 id="在-HTML-表格中显示结果"><a href="#在-HTML-表格中显示结果" class="headerlink" title="在 HTML 表格中显示结果"></a>在 HTML 表格中显示结果</h2><p>下面的例子选取的数据与上面的例子相同，但是将把数据显示在一个 HTML 表格中：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$con = mysql_connect(<span class="string">"localhost"</span>,<span class="string">"peter"</span>,<span class="string">"abc123"</span>);</div><div class="line"><span class="keyword">if</span> (!$con)</div><div class="line">  &#123;</div><div class="line">  <span class="keyword">die</span>(<span class="string">'Could not connect: '</span> . mysql_error());</div><div class="line">  &#125;</div><div class="line"></div><div class="line">mysql_select_db(<span class="string">"my_db"</span>, $con);</div><div class="line"></div><div class="line">$result = mysql_query(<span class="string">"SELECT * FROM Persons"</span>);</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"&lt;table border='1'&gt;</span></div><div class="line">&lt;tr&gt;</div><div class="line">&lt;th&gt;Firstname&lt;/th&gt;</div><div class="line">&lt;th&gt;Lastname&lt;/th&gt;</div><div class="line">&lt;/tr&gt;";</div><div class="line"></div><div class="line"><span class="keyword">while</span>($row = mysql_fetch_array($result))</div><div class="line">  &#123;</div><div class="line">  <span class="keyword">echo</span> <span class="string">"&lt;tr&gt;"</span>;</div><div class="line">  <span class="keyword">echo</span> <span class="string">"&lt;td&gt;"</span> . $row[<span class="string">'FirstName'</span>] . <span class="string">"&lt;/td&gt;"</span>;</div><div class="line">  <span class="keyword">echo</span> <span class="string">"&lt;td&gt;"</span> . $row[<span class="string">'LastName'</span>] . <span class="string">"&lt;/td&gt;"</span>;</div><div class="line">  <span class="keyword">echo</span> <span class="string">"&lt;/tr&gt;"</span>;</div><div class="line">  &#125;</div><div class="line"><span class="keyword">echo</span> <span class="string">"&lt;/table&gt;"</span>;</div><div class="line"></div><div class="line">mysql_close($con);</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
+<p>以上代码的输出：</p>
+<table>
+<thead>
+<tr>
+<th>FirstName</th>
+<th>LastName</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Peter</td>
+<td>Griffin</td>
+</tr>
+<tr>
+<td>Glenn</td>
+<td>Quagmire</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="连接数据库失败"><a href="#连接数据库失败" class="headerlink" title="连接数据库失败"></a>连接数据库失败</h2><p>看提示，PHP执行时看错误，是用mysql还是mysqli<br>语法<br><strong>mysql_connect(servername,username,password);</strong></p>
+<p>参数描述servername可选。规定要连接的服务器。默认是 “localhost:3306”。username可选。规定登录所使用的用户名。默认值是拥有服务器进程的用户的名称。password可选。规定登录所用的密码。默认是 “”。</p>
+<p>语法<br><strong>CREATE DATABASE database_name</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>servername</td>
+<td>可选。规定要连接的服务器。默认是 “localhost:3306”。</td>
+</tr>
+<tr>
+<td>username</td>
+<td>可选。规定登录所使用的用户名。默认值是拥有服务器进程的用户的名称。</td>
+</tr>
+<tr>
+<td>passwd</td>
+<td>可选。规定登录所用的密码。默认是 “”。</td>
+</tr>
+</tbody>
+</table>
+<p>为了让 PHP 执行上面的语句，我们必须使用 mysql_query() 函数。此函数用于向 MySQL 连接发送查询或命令。<br>连接：<br>例子:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">php</div><div class="line"><span class="php"><span class="meta">&lt;?php</span></span></div><div class="line"><span class="comment">//在一个变量中 ($con) 存放了在脚本中供稍后使用的连接。如果连接失败，将执行 "die" 部分：</span></div><div class="line">$con = mysql_connect(<span class="string">"localhost"</span>,<span class="string">"peter"</span>,<span class="string">"abc123"</span>);</div><div class="line"><span class="keyword">if</span> (!$con)</div><div class="line">  &#123;</div><div class="line">  <span class="keyword">die</span>(<span class="string">'Could not connect: '</span> . mysql_error());</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>创建：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">mysql</div><div class="line"><span class="comment">// Create database</span></div><div class="line"><span class="comment">//创建了一个名为 "my_db" 的数据库：</span></div><div class="line"><span class="keyword">if</span> (mysql_query(<span class="string">"CREATE DATABASE my_db"</span>,$con))</div><div class="line">  &#123;</div><div class="line">  <span class="keyword">echo</span> <span class="string">"Database created"</span>;</div><div class="line">  &#125;</div><div class="line"><span class="keyword">else</span></div><div class="line">  &#123;</div><div class="line">  <span class="keyword">echo</span> <span class="string">"Error creating database: "</span> . mysql_error();</div><div class="line">  &#125;</div><div class="line"></div><div class="line"><span class="comment">// Create table in my_db database</span></div><div class="line"><span class="comment">//创建一个名为 "Persons" 的表，此表有三列。列名是 "FirstName", "LastName" 以及 "Age"：</span></div><div class="line"><span class="comment">//重要事项：在创建表之前，必须首先选择数据库。通过 mysql_select_db() 函数选取数据库。</span></div><div class="line"><span class="comment">//注释：当您创建 varchar 类型的数据库字段时，必须规定该字段的最大长度，例如：varchar(15)。</span></div><div class="line">mysql_select_db(<span class="string">"my_db"</span>, $con);</div><div class="line">$sql = <span class="string">"CREATE TABLE Persons </span></div><div class="line">(</div><div class="line">FirstName varchar(15),</div><div class="line">LastName varchar(15),</div><div class="line">Age int</div><div class="line">)";</div><div class="line">mysql_query($sql,$con);</div><div class="line"></div><div class="line">mysql_close($con);   <span class="comment">//提前关闭连接，请使用 mysql_close() 函数,不加此句则脚本结束后关闭。</span></div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
+<hr>
+
+<!--这里是每篇文章的尾巴-->
+<html>
+  <body>
+    <h1>结语</h1>
+      <p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p>
+      <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<!--
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p></blockquote></div>
+    <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎收藏书签，欢迎多提宝贵意见，非常感谢！</p>
+    <footer><strong>Welcome to LeoLan'S BLOG</strong>
+    <cite><a href="#" onclick="go_my_site()" rel="external">Leo Lan Blog Share For you!</a></cite></footer></blockquote></div>
+  </body>
+</html>
+-->
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div style="margin-bottom: 10px;font-size: 16px;font-weight: 600;">想请我吃辣条吗？</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/alipay.jpg" alt="LeoLan Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/weixinpay.png" alt="LeoLan WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>微信打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+<h3 id="最近访客"><a href="#最近访客" class="headerlink" title="最近访客"></a>最近访客</h3><div class="ds-recent-visitors" data-num-items="36" data-avatar-size="42" id="ds-recent-visitors"></div>
+      
+    </div>
+
+<!--这是文章底部标签云链接
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL常用命令/" rel="tag"># MySQL常用命令</a>
+          
+        </div>
+      
+-->
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/7260/" rel="next" title="KVM虚拟化">
+                <i class="fa fa-chevron-left"></i> KVM虚拟化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/41070/" rel="prev" title="Docker安装、管理">
+                Docker安装、管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js;
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="posts/37198/"
+           data-title="MySQL数据库" data-url="https://www.leolan.top/posts/37198/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="LeoLan" />
+          <p class="site-author-name" itemprop="name">LeoLan</p>
+          <p class="site-description motion-element" itemprop="description">Better late than never</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">68</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="https://www.leolan.top/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+
+<!-- 自定义High一下的功能 -->
+ <a rel="alternate" class="mw-harlem_shake_slow wobble shake" href='javascript:(
+   function go() {
+   var songs = [
+               "http://ofyfogrgx.bkt.clouddn.com/tongxingSibel%20-%20Im%20Sorry.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com/Music-sunburst.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com//blog/Apple%20&%20Stone%20-%20Lost.mp3"
+   ];
+
+<!--"http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150103346.mp3","http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150842689.mp3",-->
+
+   function c() {
+       var e = document.createElement("link");
+       e.setAttribute("type", "text/css");
+       e.setAttribute("rel", "stylesheet");
+       e.setAttribute("href", f);
+       e.setAttribute("class", l);
+       document.body.appendChild(e)
+   }
+   function h() {
+       var e = document.getElementsByClassName(l);
+       for (var t = 0; t < e.length; t++) {
+           document.body.removeChild(e[t])
+       }
+   }
+   function p() {
+       var e = document.createElement("div");
+       e.setAttribute("class", a);
+       document.body.appendChild(e);
+       setTimeout(function() {
+           document.body.removeChild(e)
+       }, 100)
+   }
+   function d(e) {
+       return {
+           height : e.offsetHeight,
+           width : e.offsetWidth
+       }
+   }
+   function v(i) {
+       var s = d(i);
+       return s.height > e && s.height < n && s.width > t && s.width < r
+   }
+   function m(e) {
+       var t = e;
+       var n = 0;
+       while (!!t) {
+           n += t.offsetTop;
+           t = t.offsetParent
+       }
+       return n
+   }
+   function g() {
+       var e = document.documentElement;
+       if (!!window.innerWidth) {
+           return window.innerHeight
+       } else if (e && !isNaN(e.clientHeight)) {
+           return e.clientHeight
+       }
+       return 0
+   }
+   function y() {
+       if (window.pageYOffset) {
+           return window.pageYOffset
+       }
+       return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+   }
+   function E(e) {
+       var t = m(e);
+       return t >= w && t <= b + w
+   }
+   function S() {
+       var e = document.getElementById("audio_element_id");
+       if(e != null){
+           var index = parseInt(e.getAttribute("curSongIndex"));
+           if(index > songs.length - 2) {
+               index = 0;
+           } else {
+               index++;
+           }
+           e.setAttribute("curSongIndex", index);
+           N();
+       }
+       e.src = i;
+       e.play()
+   }
+   function x(e) {
+       e.className += " " + s + " " + o
+   }
+   function T(e) {
+       e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+   }
+   function N() {
+       var e = document.getElementsByClassName(s);
+       var t = new RegExp("\\b" + s + "\\b");
+       for (var n = 0; n < e.length; ) {
+           e[n].className = e[n].className.replace(t, "")
+       }
+   }
+   function initAudioEle() {
+       var e = document.getElementById("audio_element_id");
+       if(e === null){
+           e = document.createElement("audio");
+           e.setAttribute("class", l);
+           e.setAttribute("curSongIndex", 0);
+           e.id = "audio_element_id";
+           e.loop = false;
+           e.bgcolor = 0;
+           e.addEventListener("canplay", function() {
+           setTimeout(function() {
+               x(k)
+           }, 500);
+           setTimeout(function() {
+               N();
+               p();
+               for (var e = 0; e < O.length; e++) {
+                   T(O[e])
+               }
+           }, 15500)
+       }, true);
+       e.addEventListener("ended", function() {
+           N();
+           h();
+           go();
+       }, true);
+       e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+       document.body.appendChild(e);
+       }
+   }
+   
+   initAudioEle();
+   var e = 30;
+   var t = 30;
+   var n = 350;
+   var r = 350;
+   var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+   var i = songs[curSongIndex];
+   
+   var s = "mw-harlem_shake_me";
+   var o = "im_first";
+   var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+   var a = "mw-strobe_light";
+   /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css
+   //7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css  七牛云地址*/
+   var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";  
+   /* var f = "/css/harlem_shake_style.css";  */
+
+   var l = "mw_added_css";
+   var b = g();
+   var w = y();
+   var C = document.getElementsByTagName("*");
+   var k = null;
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           if (E(A)) {
+               k = A;
+               break
+           }
+       }
+   }
+   if (A === null) {
+       console.warn("Could not find a node of the right size. Please try a different page.");
+       return
+   }
+   c();
+   S();
+   var O = [];
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           O.push(A)
+       }
+   }
+   })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High</a>
+</div>
+         <!-- end High一下 -->
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/myleolan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://coding.net/u/leolan" target="_blank" title="Coding">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  Coding
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://quickconnect.to/myleolan" target="_blank" title="Cloud1">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud1
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://git.oschina.net/leolan" target="_blank" title="OSchina">
+                  
+                    <i class="fa fa-fw fa-git-square"></i>
+                  
+                  OSchina
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://leolan.picp.net" target="_blank" title="Cloud2">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud2
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.leolan.top/posts/44568/" target="_blank" title="Links">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Links
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-heartbeat"></i>
+              友链
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://jerry.hk/" title="Jerry Locke" target="_blank" rel="external nofollow">Jerry Locke</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://login926.top" title="Raintons" target="_blank" rel="external nofollow">Raintons</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.anotherhome.net" title="DIYgod" target="_blank" rel="external nofollow">DIYgod</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mblack.cn/" title="小黑" target="_blank" rel="external nofollow">小黑</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.iamlj.com/" title="Jing's Blog" target="_blank" rel="external nofollow">Jing's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://cyang.tech/" title="cyang's blog" target="_blank" rel="external nofollow">cyang's blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.showerlee.com/" title="一路向北" target="_blank" rel="external nofollow">一路向北</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://lusongsong.com/" title="卢松松的博客" target="_blank" rel="external nofollow">卢松松的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://v.lusongsong.com/" title="松松视频" target="_blank" rel="external nofollow">松松视频</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#密码"><span class="nav-number">1.</span> <span class="nav-text">密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置密码"><span class="nav-number">1.1.</span> <span class="nav-text">设置密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置数据库密码"><span class="nav-number">1.2.</span> <span class="nav-text">设置数据库密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改Mysql密码"><span class="nav-number">1.3.</span> <span class="nav-text">修改Mysql密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#忘记密码"><span class="nav-number">1.4.</span> <span class="nav-text">忘记密码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL特性"><span class="nav-number">2.</span> <span class="nav-text">MySQL特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL-数据类型"><span class="nav-number">2.1.</span> <span class="nav-text">MySQL 数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主键和自动递增字段"><span class="nav-number">2.2.</span> <span class="nav-text">主键和自动递增字段</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#增"><span class="nav-number">3.</span> <span class="nav-text">增</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建数据库"><span class="nav-number">3.1.</span> <span class="nav-text">创建数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建表"><span class="nav-number">3.2.</span> <span class="nav-text">创建表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建表-复杂形式-："><span class="nav-number">3.3.</span> <span class="nav-text">创建表(复杂形式)：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建customer表："><span class="nav-number">3.3.1.</span> <span class="nav-text">创建customer表：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删"><span class="nav-number">4.</span> <span class="nav-text">删</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#删除数据库"><span class="nav-number">4.1.</span> <span class="nav-text">删除数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除数据表"><span class="nav-number">4.2.</span> <span class="nav-text">删除数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将表中记录清空"><span class="nav-number">4.3.</span> <span class="nav-text">将表中记录清空</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除数据库中的数据"><span class="nav-number">4.4.</span> <span class="nav-text">删除数据库中的数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#改"><span class="nav-number">5.</span> <span class="nav-text">改</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#修改"><span class="nav-number">5.1.</span> <span class="nav-text">修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入"><span class="nav-number">5.2.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更改表结构"><span class="nav-number">5.3.</span> <span class="nav-text">更改表结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#把来自表单的数据插入数据库"><span class="nav-number">5.4.</span> <span class="nav-text">把来自表单的数据插入数据库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查"><span class="nav-number">6.</span> <span class="nav-text">查</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看数据库"><span class="nav-number">6.1.</span> <span class="nav-text">查看数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看表"><span class="nav-number">6.2.</span> <span class="nav-text">查看表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看表中的列"><span class="nav-number">6.3.</span> <span class="nav-text">查看表中的列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询"><span class="nav-number">6.4.</span> <span class="nav-text">查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他情况"><span class="nav-number">7.</span> <span class="nav-text">其他情况</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在-HTML-表格中显示结果"><span class="nav-number">7.1.</span> <span class="nav-text">在 HTML 表格中显示结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接数据库失败"><span class="nav-number">7.2.</span> <span class="nav-text">连接数据库失败</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LeoLan</span>
+</div>
+
+<div class="powered-by">
+  <a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备16026009号-2</a>  |  本站总访问量<span id="busuanzi_value_site_pv"></span>
+</div>
+
+<div class="theme-info">
+  您是第<span id="busuanzi_value_site_uv"></span>位小伙伴
+</div>
+
+<script async src="/js/src/busuanzi.pure.mini.js">
+</script>
+
+<!--
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+-->
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"leolan"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '/js/src/duoshuo_embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementById('footer')
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("zieuxKa4IjAP6VgxxvBe4vkj-gzGzoHsz", "MHGN54IEuofFNV1AROiRkEoG");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js" count="50" zindex="-2" opacity="1" color="0,104,183"></script>
+
+</body>
+</html>

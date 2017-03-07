@@ -1,0 +1,1583 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic|Georgia:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="群晖DSM_Synology,Aria2,迅雷离线,opkg、ipkg、dpkg,Entware,shadowsocks," />
+
+
+
+
+
+  <link rel="alternate" href="https://www.leolan.top/atom.xml" title="LeoLan's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/200.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="群晖官网：https://www.synology.cn开发者专区：https://www.synology.cn/zh-cn/support/developer开源项目：https://sourceforge.net/u/synology/profile/CPU信息查询：https://www.synology.com/en-global/knowledgebase/DSM/tutorial">
+<meta property="og:type" content="article">
+<meta property="og:title" content="群晖DSM_Synology">
+<meta property="og:url" content="https://www.leolan.top/posts/26301/index.html">
+<meta property="og:site_name" content="LeoLan's Blog">
+<meta property="og:description" content="群晖官网：https://www.synology.cn开发者专区：https://www.synology.cn/zh-cn/support/developer开源项目：https://sourceforge.net/u/synology/profile/CPU信息查询：https://www.synology.com/en-global/knowledgebase/DSM/tutorial">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161129/151859616.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161129/152000090.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161202/111813709.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161202/120106459.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161129/154631465.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161129/154246686.PNG">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161129/161120656.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161129/161802732.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161202/122419252.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161202/122615977.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161229/083143984.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161229/083232912.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161228/111920349.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161222/090936723.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161222/101644792.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161222/101602040.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161222/141001114.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161222/171554297.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161227/164348644.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161227/163522654.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161227/163803852.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161227/164015157.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161228/120135818.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161229/145417486.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170112/110804674.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170112/111010324.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170112/112101700.png">
+<meta property="og:updated_time" content="2017-02-27T08:47:33.046Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="群晖DSM_Synology">
+<meta name="twitter:description" content="群晖官网：https://www.synology.cn开发者专区：https://www.synology.cn/zh-cn/support/developer开源项目：https://sourceforge.net/u/synology/profile/CPU信息查询：https://www.synology.com/en-global/knowledgebase/DSM/tutorial">
+<meta name="twitter:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161129/151859616.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6343395544286627000',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.leolan.top/posts/26301/"/>
+
+
+
+
+
+  <title> 群晖DSM_Synology | LeoLan's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">LeoLan's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">有时候正是不报期望的人做出了人们不敢期望之事！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签云
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时间轴
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-commenting"></i> <br />
+            
+            给我留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            本地搜索
+          </a>
+        </li>
+               
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://www.leolan.top/posts/26301/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="LeoLan">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="LeoLan's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="LeoLan's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                群晖DSM_Synology
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-29T14:04:23+08:00">
+              2016-11-29
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2017-02-27T16:47:33+08:00">
+              2017-02-27
+            </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NAS/" itemprop="url" rel="index">
+                    <span itemprop="name">NAS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/posts/26301/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/26301/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/posts/26301/" class="leancloud_visitors" data-flag-title="群晖DSM_Synology">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+         <span class="post-time">
+     &nbsp; | &nbsp;
+           <span class="post-meta-item-icon">
+             <i class="fa fa-calendar-o"></i>
+           </span>
+           <span class="post-meta-item-text">字数统计:</span>
+           <span class="post-count">7,123(字)</span>
+           
+         </span>
+
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="群晖"><a href="#群晖" class="headerlink" title="群晖"></a>群晖</h1><p>官网：<a href="https://www.synology.cn" target="_blank" rel="external">https://www.synology.cn</a><br>开发者专区：<a href="https://www.synology.cn/zh-cn/support/developer" target="_blank" rel="external">https://www.synology.cn/zh-cn/support/developer</a><br>开源项目：<a href="https://sourceforge.net/u/synology/profile/" target="_blank" rel="external">https://sourceforge.net/u/synology/profile/</a><br>CPU信息查询：<a href="https://www.synology.com/en-global/knowledgebase/DSM/tutorial/General/What_kind_of_CPU_does_my_NAS_have" target="_blank" rel="external">https://www.synology.com/en-global/knowledgebase/DSM/tutorial/General/What_kind_of_CPU_does_my_NAS_have</a><br>群晖中文论坛：<a href="https://forum.synology.com/cht/" target="_blank" rel="external">https://forum.synology.com/cht/</a><br>群晖英文论坛（内容更全面）：<a href="https://forum.synology.com/enu/index.php" target="_blank" rel="external">https://forum.synology.com/enu/index.php</a></p>
+<p>第三方套件地址：<br><a href="http://www.gebi1.com/thread-84115-1-1.html?_dsign=b839635c" target="_blank" rel="external">http://www.gebi1.com/thread-84115-1-1.html?_dsign=b839635c</a><br>原文：<a href="http://xpenology.com/forum/viewtopic.php?f=2&amp;t=2994" target="_blank" rel="external">http://xpenology.com/forum/viewtopic.php?f=2&amp;t=2994</a></p>
+<hr>
+<h1 id="黑群晖"><a href="#黑群晖" class="headerlink" title="黑群晖"></a>黑群晖</h1><p>一般都是黑群晖的型号都为DS3615xs(高配置)，这样才能适应不同硬件环境。在虚拟机中安装可以设置硬件，很容易洗白；一般家用都是用低配机子安装，这里主要是实体机安装。</p>
+<p>如果是虚拟机安装可以用VMware、EXSI、Virtual（<a href="https://www.synology.com/zh-cn/support/download/VirtualDSM" target="_blank" rel="external">VirtualDSM</a>）或者Docker（<a href="https://www.synology.com/zh-cn/support/download/DockerDSM" target="_blank" rel="external">Docker版的群晖</a>）</p>
+<p>黑群晖中<strong>引导</strong>是很重要的。<br>引导有Nanoboot、gnoboot和XPEnoboot（xpenology）建议用XPEnoboot，支持的主板多，更新快。</p>
+<h2 id="黑群晖所需工具下载"><a href="#黑群晖所需工具下载" class="headerlink" title="黑群晖所需工具下载"></a>黑群晖所需工具下载</h2><p><strong>引导下载</strong>：<a href="http://xpenology.me/downloads/" target="_blank" rel="external">xpenology</a>　　<a href="http://nanoboot.eu.org/" target="_blank" rel="external">nanoboot</a><br><strong>写U盘引导工具</strong>：<a href="http://sourceforge.net/projects/win32diskimager/files/latest/download" target="_blank" rel="external">win32diskimager</a>或<a href="http://ofyfogrgx.bkt.clouddn.com/blog/20161202/104059350.exe" target="_blank" rel="external">Roadkil DiskImage</a>或<a href="http://ofyfogrgx.bkt.clouddn.com/blog/20170114/120704544.zip" target="_blank" rel="external">USBImageTool_v1.66汉化版</a><br><strong>代码编辑工具</strong>：<a href="https://notepad-plus-plus.org/download/v7.2.2.html" target="_blank" rel="external">Notepad++</a>或<a href="http://www.sublimetext.com/3" target="_blank" rel="external">sublimetext</a><br><strong>启动测试</strong>：<a href="http://ofyfogrgx.bkt.clouddn.com/blog/20161202/105826397.exe" target="_blank" rel="external">Qemu启动测试器</a></p>
+<p>虚拟机可能会用到的镜像转换工具，img-虚拟磁盘格式互转：<a href="http://ofyfogrgx.bkt.clouddn.com/blog/20170114/120751140.zip" target="_blank" rel="external">StarWind Converter</a></p>
+<hr>
+<h2 id="黑群晖DSM-5-2"><a href="#黑群晖DSM-5-2" class="headerlink" title="黑群晖DSM_5.2"></a>黑群晖DSM_5.2</h2><p>引导下载：<a href="http://xpenology.me/downloads/" target="_blank" rel="external">xpenology官网</a><br>5.2_5592是比较新的版本，也相对稳定一些，5.2_5644和<a href="http://source.wifihell.com/8-NAS-BUFFALO/ts5000/DSM5.2-5967/" target="_blank" rel="external">5.2_5967</a>也是可以的。<br>用写U盘引导工具，把下载的img镜像文件用工具写进U盘中（U盘数据全无，做好备份），写好后重插U盘，U盘空间显示很小，其他空间被屏蔽掉了。用<strong>Qemu启动测试器</strong>测试一下能否启动，正常就插入主机设置U盘启动（事先没有设置好的要接显示器）。</p>
+<p><strong>选择机型是DS3615xs的</strong><br>官网下载DSM系统：<a href="https://www.synology.com/zh-cn/support/download/DS3615xs" target="_blank" rel="external">DS3615xs</a>下载PAT文件。<br>历史版本：<a href="http://cndl.synology.cn/download/DSM/release" target="_blank" rel="external">http://cndl.synology.cn/download/DSM/release</a></p>
+<p><strong>开始安装：</strong><br>如果局域网内只有少量待安装的机子直接浏览器输入：<strong><a href="http://find.synology.com" target="_blank" rel="external">http://find.synology.com</a></strong> 即可直接跳转到安装界面（对于黑群晖，用的sn码如果网上有人使用了，可能看到的是别人的机子）。如果你知道机子分配的IP地址也可以输入：<strong><a href="http://IP:5000" target="_blank" rel="external">http://IP:5000</a></strong></p>
+<p>当然也可以用群晖官方的管理工具：<strong>群晖助手Synology Assistant</strong><br><a href="https://global.download.synology.com/download/Tools/Assistant/6.0-7319/Windows/SynologyAssistantSetup-6.0-7319.exe" target="_blank" rel="external">windows</a><br><a href="https://global.download.synology.com/download/Tools/Assistant/6.0-7319/Mac/Synology-Assistant-6.0-7319.dmg" target="_blank" rel="external">mac</a><br><a href="https://global.download.synology.com/download/Tools/Assistant/6.0-7319/Ubuntu/x86_64/synology-assistant_6.0-7319_amd64.deb" target="_blank" rel="external">Ubuntu</a></p>
+<hr>
+<h2 id="黑群晖DSM-6-0"><a href="#黑群晖DSM-6-0" class="headerlink" title="黑群晖DSM_6.0"></a>黑群晖DSM_6.0</h2><p>引导下载：<a href="http://ofyfogrgx.bkt.clouddn.com/DS3615xs%206.0.2%20Jun%27s%20Mod%20V1.01.zip" target="_blank" rel="external">DS3615xs 6.0.2 Jun’s Mod V1.01</a>或<a href="http://source.wifihell.com/8-NAS-BUFFALO/ts5000/DSM6.02-v1.01/" target="_blank" rel="external">Jun’s的网盘</a><br>此压缩文件包含了img引导文件和VMware虚拟机配置文件（支持6.0.2_8451），虚拟机配置文件点开即可使用（自己设置网卡桥接并添加硬盘（设置为SATA接口），硬盘空间小于5G无法安装）。img镜像刻录到U盘后是<strong>GPT+BIOS/UEFI</strong>格式的分区，太老的主板可能无法识别到分区。</p>
+<p>用写U盘引导工具，把下载的img镜像文件用工具写进U盘中（U盘数据全无，做好备份），写好后重插U盘，U盘空间显示很小，其他空间被屏蔽掉了。用<strong>Qemu启动测试器</strong>测试一下能否启动，正常就插入主机设置U盘启动（事先没有设置好的要接显示器）。</p>
+<p><strong>选择机型是DS3615xs的</strong><br>官网下载DSM系统：<a href="https://www.synology.com/zh-cn/support/download/DS3615xs" target="_blank" rel="external">DS3615xs</a>下载PAT文件。<br>历史版本：<a href="http://cndl.synology.cn/download/DSM/release" target="_blank" rel="external">http://cndl.synology.cn/download/DSM/release</a></p>
+<p><strong>开始安装：</strong><br>如果局域网内只有少量待安装的机子直接浏览器输入：<strong><a href="http://find.synology.com" target="_blank" rel="external">http://find.synology.com</a></strong> 即可直接跳转到安装界面（对于黑群晖，用的sn码如果网上有人使用了，可能看到的是别人的机子）。如果你知道机子分配的IP地址也可以输入：<strong><a href="http://IP:5000" target="_blank" rel="external">http://IP:5000</a></strong></p>
+<p>当然也可以用群晖官方的管理工具：<strong>群晖助手Synology Assistant</strong><br><a href="https://global.download.synology.com/download/Tools/Assistant/6.0-7319/Windows/SynologyAssistantSetup-6.0-7319.exe" target="_blank" rel="external">windows</a>  |  <a href="https://global.download.synology.com/download/Tools/Assistant/6.0-7319/Mac/Synology-Assistant-6.0-7319.dmg" target="_blank" rel="external">mac</a>  |  <a href="https://global.download.synology.com/download/Tools/Assistant/6.0-7319/Ubuntu/x86_64/synology-assistant_6.0-7319_amd64.deb" target="_blank" rel="external">Ubuntu</a></p>
+<p>新的6.0设定好mac,sn,vid,pid和老的5.2系统一样的话，可以无损数据直接从5.2升级到6.0；个人不建议，有时会出现数据升天的情况。那就有的玩咯，建议全新安装。附升级教程原文：<a href="http://xpenology.com/forum/viewtopic.php?f=2&amp;t=22100" target="_blank" rel="external">Migrate from DSM 5.2 to 6.0 - Baremetal</a></p>
+<hr>
+<hr>
+<h1 id="配置设置技巧"><a href="#配置设置技巧" class="headerlink" title="配置设置技巧"></a>配置设置技巧</h1><p><strong>以下软硬件配置都是本人实验过的，确实可行，偶尔经常断线，不稳定，报错等，首先检查是不是用的大天朝的长城宽带，如果是，那么恭喜你，很可能是NAT3，连DDNS都没法用，更别说其他什么服务了，鼓励你去申请IP；另外检查你的路由是不是那种多登陆几次就打不开路由管理界面的那种路由，例如K1、K2、newifi（官方固件）等换路由，果断或其他路由测试你就明白了</strong></p>
+<h2 id="洗白"><a href="#洗白" class="headerlink" title="洗白"></a>洗白</h2><h3 id="修改引导U盘syslinux-cfg文件"><a href="#修改引导U盘syslinux-cfg文件" class="headerlink" title="修改引导U盘syslinux.cfg文件"></a>修改引导U盘syslinux.cfg文件</h3><p>把U盘插入电脑，查看VID和PID<br><strong>linux</strong>：命令行输入<code>lsusb</code><br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161129/151859616.png" alt="mark"></p>
+<p><strong>mac</strong>：终端输入<code>system_profiler SPUSBDataType</code><br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161129/152000090.png" alt="mark"></p>
+<p><strong>windows</strong>:在设备管理器的属性中，或用什么芯片无忧、芯片精灵等工具都可以看得到。</p>
+<p><strong>SN生成并计算Mac</strong><br>1.<a href="https://onedrive.live.com/view.aspx?resid=AFD1164BAADDF81C!168&amp;ithint=file%2cxlsm&amp;app=Excel&amp;authkey=!AAQuOGpVwRe7bu8" target="_blank" rel="external">群晖所有型号官方SN和MAC生成器(在线版，需翻墙)</a><br>2.<a href="http://ofyfogrgx.bkt.clouddn.com/blog/20161202/110736454.xlsm" target="_blank" rel="external">群晖所有型号官方SN和MAC生成器下载</a><br>Exelc打开后启用宏，选择型号后<strong>在空白地方双击生成SN</strong>，记录下来，底部选项卡选择Mac<strong>已经计算出对应了SN的Mac</strong>了，也记录下来备用。</p>
+<p>在U盘根目录下有个<strong>syslinux.cfg</strong>文件（如果是6.0版本则修改grub下的<strong>grub.cfg</strong>文件），修改该文件的sn、vid、pid、mac的值，三处都要修改,mac1在群晖硬件版本DS3615xs之后，在sn前面，如果多网卡再加上mac2…别忘了空格是整行的没有换行，是编辑器显示区域不够了。<br>类似于这样：<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161202/111813709.png" alt="mark"><br>改好后插回机子中启动系统，顺利的话在DSM中看不到此U盘外接设备了，在群晖助手中的MAC和序列号也是对应设定的，这时<strong>Quickconnect ID</strong>已经可以正常使用了。<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161202/120106459.png" alt=""></p>
+<p>6.0.x系统在升级过程中，不管是在线升级，还是手动上传pat档，均提示pat损毁，升级失败的问题。修改U盘<strong>grub.cfg</strong>文件中<strong>SataPortMap=x</strong>的值（这是指主板原生SATA接口数，主板固件总线中已经定义了，而不是通过外设方式集成的），默认为1 改成<strong>SataPortMap=2</strong>试试。可以搜索主板厂商去核实主板原生的SATA口的个数，也就是 x 的值，自己对应更改，错误的值可能启动不了系统的。</p>
+<hr>
+<p>如果要设置网卡远程唤醒（当然路由已经设置了5000端口转发）要刷网卡MAC<strong>（不建议这么做，这里只提供方法，不提供工具，由此造成的任何问题，本人不负责。）</strong>根据网卡型号的不同方法不同，一般有通用的MSDOS工具刷，用软碟通制作MSDOS启动U盘并把MAC刷写工具拷到U盘根目录，插上黑群晖主机启动到DOS，进入U盘根目录命令行刷写MAC（先备份网卡BIOS），一般刷网卡MAC只需要改前面六位就行了(改为00:11:32)，后面的保持原来的不变。刷好后远程唤醒功能就正常使用了。如果没刷成功很可能网卡就废了（用备份的BIOS恢复）。</p>
+<p><strong>启动盘与系统盘集成</strong>可参考：<a href="http://www.xxxxxbbs.com/thread/95147.html" target="_blank" rel="external">洗白+启动盘与系统盘集成</a></p>
+<hr>
+<h3 id="修改synoinfo-conf（高级定制系统，不建议这么做，除非你是极客）"><a href="#修改synoinfo-conf（高级定制系统，不建议这么做，除非你是极客）" class="headerlink" title="修改synoinfo.conf（高级定制系统，不建议这么做，除非你是极客）"></a>修改synoinfo.conf（高级定制系统，不建议这么做，除非你是极客）</h3><p><strong>synoinfo.conf文件是整个群晖系统的主要配置文件，几乎所有的网络端口、主板接口、系统功能都在这里设定。配置错误将导致系统崩溃，请谨慎修改。</strong></p>
+<hr>
+<h4 id="修改SATA、eSATA"><a href="#修改SATA、eSATA" class="headerlink" title="修改SATA、eSATA"></a>修改SATA、eSATA</h4><p>开启DSM系统的终端登录功能，自己用shell工具连接群晖主机，账号密码是群晖系统中的用户和密码。<br>用admin账户登陆，编辑<code>vi /etc.defaults/synoinfo.conf</code>文件。<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161129/154631465.png" alt="mark"></p>
+<ul>
+<li>修改指定的SATA口为eSATA口，这样原来装有资料的硬盘就不用格式化，作为eSATA外接硬盘接入，群晖中SATA设备是不支持NTFS格式的。<br>修改<strong>esataportcfg</strong>和<strong>internalportcfg</strong>对应的16进制的值，<strong>esataportcfg</strong>值不够位数就写最后三位；<strong>internalportcfg</strong>值要写全。<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161129/154246686.PNG" alt="mark"><br>1-12代表1-12号SATA接口，用作群晖系统盘的那个接口必须是SATA接口，必须由群晖系统来初始化硬盘（数据提前做好备份）<br>参考：<a href="http://www.7po.com/thread-456016-1-1.html" target="_blank" rel="external">http://www.7po.com/thread-456016-1-1.html</a></li>
+</ul>
+<hr>
+<h4 id="修改网络端口"><a href="#修改网络端口" class="headerlink" title="修改网络端口"></a>修改网络端口</h4><ul>
+<li>可以修改默认的管理端口<strong>admin_port=”5000”</strong>；及各种端口修改，一般不建议随便修改（部分端口在DSM系统中可以修改）。</li>
+</ul>
+<hr>
+<h2 id="DMS6-0后无法用root登陆的问题"><a href="#DMS6-0后无法用root登陆的问题" class="headerlink" title="DMS6.0后无法用root登陆的问题"></a><strong>DMS6.0后无法用root登陆的问题</strong></h2><p>shell登陆后输入 sudo -i，可切换root账号登陆（root账号密码同admin密码）<br>直接输入<code>chmod 7777 /etc/ssh/sshd_config</code>然后就可以修改这个文件了，把root登陆那一块被打上了注释符  “//”，删除即可。<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161129/161120656.png" alt="mark"></p>
+<hr>
+<h2 id="DMS6-0后无法用迅雷远程下载（官方不支持了）"><a href="#DMS6-0后无法用迅雷远程下载（官方不支持了）" class="headerlink" title="DMS6.0后无法用迅雷远程下载（官方不支持了）"></a><strong>DMS6.0后无法用迅雷远程下载（官方不支持了）</strong></h2><p>安装Docker套件，搜索<strong>xware</strong>，安装yinheli/docker-thunder-xware；配置启动时端口什么的都不用管，设置好<strong>挂载目录</strong>就行了，要有<strong>读写权限</strong>！启动后看容器日志，<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161129/161802732.png" alt="mark"><br>在迅雷远程下载官网登录账号绑定即可。</p>
+<hr>
+<h2 id="虚拟机U盘启动无法挂载问题"><a href="#虚拟机U盘启动无法挂载问题" class="headerlink" title="虚拟机U盘启动无法挂载问题"></a><strong>虚拟机U盘启动无法挂载问题</strong></h2><p>虚拟机U盘启动有两种，一种是直接U盘连接进虚拟机并设置可移动磁盘启动（前提是虚拟机能正常识别到你的U盘）；另一种是对于虚拟机无法识别到U盘的情况，就只能在虚拟机中添加硬盘，在创建新硬盘时有个使用物理磁盘选项，选择它，之后选择物理磁盘时一般最后一个就是你的U盘，最后确定后能看到U盘容量；开机启动提示：<img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161202/122419252.png" alt="mark"><br>勾选独立，永久模式，即可解决问题。<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161202/122615977.png" alt="mark"></p>
+<hr>
+<h2 id="硬盘分区模式-RAID、SHR、BASIC、JBOD"><a href="#硬盘分区模式-RAID、SHR、BASIC、JBOD" class="headerlink" title="硬盘分区模式 RAID、SHR、BASIC、JBOD"></a>硬盘分区模式 RAID、SHR、BASIC、JBOD</h2><p>SATA接口数量不多，挂的硬盘不多，但不想RAID的（RAID0不安全，RAID1太浪费，自带的SHR混合模式数据恢复麻烦一点；JBOD是类似SHR的软阵列模式，没用过，不评论），建议用BASIC方式(硬盘挂久了就知道原因了)，一个新硬盘怎么也得3-5年才会出现坏道，用BASIC方式创建ext4或btrfs分区，对于更换硬盘特别方便挂载在其他系统下转移数据。组RAID0的目的在于合并容量和提升速度，一般大于2T家用级以上的的硬盘，读写速度都有100M左右，千兆网口速度也差不多，瓶颈不在硬盘上。<br><strong>群晖双盘位机器SHR、RAID1阵列模式拆分、降级为BASIC教程</strong>参考：<br><a href="https://www.chiphell.com/thread-1392816-1-1.html" target="_blank" rel="external">https://www.chiphell.com/thread-1392816-1-1.html</a><br><a href="http://support-cn.synology.me/wordpress/?p=589" target="_blank" rel="external">http://support-cn.synology.me/wordpress/?p=589</a></p>
+<p>官网容量计算器：<a href="https://www.synology.com/zh-cn/support/RAID_calculator" target="_blank" rel="external">RAID 容量计算器</a></p>
+<hr>
+<h2 id="硬盘数据恢复"><a href="#硬盘数据恢复" class="headerlink" title="硬盘数据恢复"></a>硬盘数据恢复</h2><p>当系统或硬盘出现问题导致无法启动时，可以恢复数据，当时心疼数据，折腾了2天终于找到办法了，原谅我忘记截图了。后来换硬盘了，补上<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161229/083143984.png" alt="mark"><br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161229/083232912.png" alt="mark"></p>
+<p><strong>重要：</strong>群晖在初次安装系统时，不管有几块硬盘，则默认且必须有一块硬盘是SHR阵列，这样在之后添加的硬盘不管选用何种模式，分区都为RAID类型；恢复数据有以下<strong>三种方法</strong></p>
+<h3 id="克隆DSM系统分区"><a href="#克隆DSM系统分区" class="headerlink" title="克隆DSM系统分区"></a>克隆DSM系统分区</h3><p>这种方法对于喜欢装系统的朋友来说很好理解，群晖DSM是在每个硬盘之前分了三个分区（第一个空闲，第二个系统分区，第三个SWAP分区），之后第四个分区开始才是存储数据的，这也是为什么拔掉任何一块硬盘，系统也不会崩溃的原因（因为其他硬盘上还是有DSM系统的）。<br>那么我们只要克隆系统分区就行了，注意<strong>GPT分区格式的硬盘只能克隆到GPT分区上，MBR的也同理</strong>，混刻是启动不了系统的，但是可以插入正常运行的DSM系统（有SHR阵列）中恢复（会自动挂载，就要要等10分钟左右）这样也比装Ubuntu恢复省了不少时间。</p>
+<hr>
+<h3 id="群晖系统内恢复"><a href="#群晖系统内恢复" class="headerlink" title="群晖系统内恢复"></a>群晖系统内恢复</h3><p><strong>适用于：BASIC、SHR等等</strong><br>随便一块能正常启动群晖的硬盘，就是SHR阵列，带有系统的那个硬盘（就是所谓的“必须有一块硬盘是SHR阵列”），没有这种硬盘可以随便找一块没有存数据的硬盘安装群晖或用别的群晖机子初始化并建立SHR阵列。</p>
+<p>完成后，用该硬盘启动群晖系统，启动后把要恢复数据的硬盘连接主机，DSM检测到硬盘显示为未初始化，不用管，就这样等上10分钟左右就会自动挂载（这时文件管理器里可以看到数据了），这时DSM是橙色报警，显示无法访问该硬盘的系统分区，只要点修复就行啦（怕丢失数据的先不要点，在文件管理器中先备份或转移资料），数据是无损的，但还是强烈建议备份（例如扇区复制）</p>
+<hr>
+<h3 id="安装Ubuntu进行恢复"><a href="#安装Ubuntu进行恢复" class="headerlink" title="安装Ubuntu进行恢复"></a>安装Ubuntu进行恢复</h3><p><strong>适用于：SHR、RAID0、RAID1、JDOB等等阵列（<code>fdisk -l</code>显示有RAID字样的）</strong></p>
+<p><strong>下载Ubuntu镜像：</strong><a href="http://www.ubuntu.com/download/desktop" target="_blank" rel="external">http://www.ubuntu.com/download/desktop</a><br>制作U盘启动或虚拟机什么的都行，能进入系统就行，注意考虑恢复数据的速度及时间，这就决定了多长时间内要稳定运行，要是U盘启动用live模式，恢复时突然崩溃就白玩了。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo -i</div><div class="line">apt-get <span class="keyword">update</span></div><div class="line">apt-<span class="keyword">get</span> <span class="keyword">install</span> lvm2</div><div class="line">apt-<span class="keyword">get</span> <span class="keyword">install</span> mdadm</div></pre></td></tr></table></figure></p>
+<p>安装mdadm的时候如果是Ubuntu14的选No configuration 来完成安装。<br>Ubuntu16的不会有这个选择窗口，默认就行。<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161228/111920349.png" alt="mark"><br>安装完成后运行：<code>mdadm -Asf &amp;&amp; vgchange -ay</code><br>可能会报错，不用管，打开文件管理器就能看到了</p>
+<p>参考：<a href="https://www.synology.cn/zh-cn/knowledgebase/faq/579" target="_blank" rel="external">还原存储在 DiskStation 中的数据</a></p>
+<hr>
+<h2 id="群晖绑定自己的域名"><a href="#群晖绑定自己的域名" class="headerlink" title="群晖绑定自己的域名"></a>群晖绑定自己的域名</h2><p>方法有很多，可以在DDNS里设置花生壳、万网账号、用已备案的域名跳转到quickconnectID等等。</p>
+<p><a href="http://post.smzdm.com/p/306444/" target="_blank" rel="external">用NAT123做无公网IP的远程连接</a></p>
+<hr>
+<h2 id="永久屏蔽黑群晖升级或去除更新提示"><a href="#永久屏蔽黑群晖升级或去除更新提示" class="headerlink" title="永久屏蔽黑群晖升级或去除更新提示"></a>永久屏蔽黑群晖升级或去除更新提示</h2><h3 id="替换图形文件（法1）"><a href="#替换图形文件（法1）" class="headerlink" title="替换图形文件（法1）"></a>替换图形文件（法1）</h3><p>用WinSCP使用root权限登录到群辉。<br>定位到<strong>/usr/syno/synoman/synoSDSjslib/images</strong>目录。<br>下载文件：<a href="http://ofyfogrgx.bkt.clouddn.com/blog/20161222/105033516.zip" target="_blank" rel="external">http://ofyfogrgx.bkt.clouddn.com/blog/20161222/105033516.zip</a><br>替换该目录下的<strong>dsm5_badge_num.png</strong>和<strong>dsm5_notification_num.png</strong>文件</p>
+<hr>
+<h3 id="修改VERSION文件（法2）"><a href="#修改VERSION文件（法2）" class="headerlink" title="修改VERSION文件（法2）"></a>修改VERSION文件（法2）</h3><p>开启群晖系统的终端SSH功能，用任意ssh工具连接，账号密码是群晖系统的管理员账号和密码，连接进入系统sshell后；输入<code>su</code>(5.2及以下版本的系统)；<code>sudo -i</code>(6.0及以上版本的系统)后输入密码，进行提权（#号开头拥有root权限）<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161222/090936723.png" alt="mark"><br><figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">cd</span> /etc.defaults/</div><div class="line">vi <span class="keyword">VERSION</span></div></pre></td></tr></table></figure></p>
+<p>文件内容是类似下面这样子的<br>进官网查参数：<a href="https://www.synology.cn/zh-cn/releaseNote/DS3615xs" target="_blank" rel="external">https://www.synology.cn/zh-cn/releaseNote/DS3615xs</a><br>经群晖系统升级界面看看可升级的最新版本是多少？最好不要跨大版本。<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161222/101644792.png" alt="mark"></p>
+<p><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161222/101602040.png" alt="mark"><br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attr">majorversion</span>=<span class="string">"5"</span>        #大版本号</div><div class="line"><span class="attr">minorversion</span>=<span class="string">"2"</span>         #小版本</div><div class="line"><span class="attr">buildphase</span>=<span class="string">"hotfix"</span></div><div class="line"><span class="attr">buildnumber</span>=<span class="string">"5967"</span>       #细分版本号</div><div class="line"><span class="attr">smallfixnumber</span>=<span class="string">"2"</span>       #Update版本号，这是是DSM <span class="number">5.2</span>-<span class="number">5967</span> Update <span class="number">2</span></div><div class="line"><span class="attr">builddate</span>=<span class="string">"2016/07/27"</span>   #版本时间</div><div class="line"><span class="attr">buildtime</span>=<span class="string">"17:15:53"</span></div></pre></td></tr></table></figure></p>
+<p><code>:wq</code>或<code>ZZ</code>保存退出vi编辑器。</p>
+<p>实际上我的是5.2_5592的，但目前5.2最新的是5.2-5967 Update 2就更改为此版本，这样就会显示为最新版本了。不要改为远大于官方的版本，比如10.1_9999之类的，会出现所有套件无法安装的情况。</p>
+<hr>
+<h3 id="一行代码搞定（法3）"><a href="#一行代码搞定（法3）" class="headerlink" title="一行代码搞定（法3）"></a>一行代码搞定（法3）</h3><p><code>vi /usr/syno/synoman/synoSDSjslib/sds-default.css</code><br>按<code>shift+$</code>跳到行尾，增加以下这行代码，同一行，不要换行。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.sds-application-notify-badge-num</span>&#123;<span class="attribute">display</span>:none <span class="meta">!important</span>;&#125;</div></pre></td></tr></table></figure>
+<p>保存退出，刷新一下网页桌面的控制面板就不会显示小角标了（所有提示都不显示小角标了，所以不建议此法），不过设置中还是会显示的。</p>
+<hr>
+<h2 id="DDNS设置3322"><a href="#DDNS设置3322" class="headerlink" title="DDNS设置3322"></a>DDNS设置3322</h2><p>DSM6.0后的DDNS没<a href="http://www.pubyun.com/" target="_blank" rel="external">3322.org</a>了。<br>在自定义中添加以下代码就行啦！<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://members.<span class="number">3322</span>.net/dyndns/<span class="keyword">update</span>?<span class="built_in">system</span>=dyndns&amp;<span class="built_in">hostname</span>=__HOSTNAME__</div></pre></td></tr></table></figure></p>
+<p><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161222/141001114.png" alt="mark"><br>之后新建就能看到3322了。</p>
+<hr>
+<h2 id="SVN-和-Git"><a href="#SVN-和-Git" class="headerlink" title="SVN 和 Git"></a>SVN 和 Git</h2><p>SVN的话直接安装套件，设置用户，设置仓库名就可以正常使用了。</p>
+<h3 id="创建git仓库"><a href="#创建git仓库" class="headerlink" title="创建git仓库"></a>创建git仓库</h3><p>Git的话先安装git server套件<br>进入<strong>“控制面板”“用户账户”</strong>，然后新增一个用户，当然也可以用现用账户（如果单独增加的是git用户，最好修改用户和用户组的权限，其他任何权限什么都没有，不能登陆，不能同步文件，不能ssh登陆等等，普通用户因为要用这些功能就不用改了），然后再git server中对应用户打钩，允许访问。群晖的用户改权限可以用图形化界面，当然也可以用命令行，参考：<a href="https://www.leolan.top/posts/41310/">自己搭建Git服务器</a></p>
+<p>接着开启群晖的ssh功能，用root或admin管理员账户登录shell。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /volume1     <span class="comment">#硬盘挂载点一般是/volume1或者/volume2，你可以通过 ls /来查看</span></div><div class="line">mkdir git       <span class="comment">#在硬盘中创建一个git目录，我们会把所有的git repos放在这里</span></div><div class="line"><span class="built_in">cd</span> git</div><div class="line">git init --bare testgit.git         <span class="comment">#初始化一个版本库，并创建一个testgit.git项目仓库</span></div><div class="line">chown -R leolan:users testgit.git   </div><div class="line"><span class="comment"># 格式【用户名:用户组】让git用户对这个板块库目录拥有可执行的权限，否则push的时候，是没有权限写入文件的</span></div></pre></td></tr></table></figure>
+<p>服务端就OK了，接下来本地电脑克隆下来。<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">git clone ssh://leolan@<span class="number">192.168</span>.<span class="number">0.58</span>/volume1/git/testgit.git          </div><div class="line"><span class="comment"># ssh://协议可能会提示某些错误，可以先不要理会，只要能克隆下来就可以了。</span></div><div class="line"><span class="comment">#如果不克隆，可以在本地创建文件夹，绑定ssh://leolan@192.168.0.58/volume1/git/testgit.git源即可。</span></div><div class="line"><span class="comment">#在windows上通过git客户端克隆时，要勾选克隆空项目的一个选项。</span></div><div class="line"></div><div class="line">cd testgit.git</div><div class="line">git remote -v     <span class="comment">#查看项目的远程仓库地址</span></div><div class="line">git config --global <span class="keyword">user</span>.name <span class="string">"leolan"</span>            <span class="comment">#绑定用户名</span></div><div class="line">git config --global <span class="keyword">user</span>.email <span class="number">842632422</span>@qq.com   <span class="comment">#设置邮箱</span></div><div class="line">echo <span class="string">"hello Git"</span> &gt;&gt; hello.txt</div><div class="line">git <span class="keyword">add</span><span class="bash"> . &amp;&amp; git commit -m <span class="string">"first push"</span> &amp;&amp; git push</span></div><div class="line"><span class="comment">#如果正常提交不报错就可以使用啦，如果报错了再看具体内容，解决。</span></div></pre></td></tr></table></figure></p>
+<p>以后新建仓库时<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /volume1/git/</div><div class="line">git init --bare newgit.git  <span class="comment">#创建新的仓库并初始化（初始化会清除该项目的所有数据）</span></div><div class="line"><span class="comment">#如果已有目录或需要重新初始化则进入目录执行：git init --bare 命令</span></div></pre></td></tr></table></figure></p>
+<p>接着克隆下来，和上面的步骤是一样的。</p>
+<h3 id="免密钥登录"><a href="#免密钥登录" class="headerlink" title="免密钥登录"></a>免密钥登录</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat ~<span class="regexp">/.ssh/i</span>d_rsa.pub  <span class="comment">#查看本地的ssh密钥，copy备用</span></div></pre></td></tr></table></figure>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mkdir <span class="meta-keyword">/volume1/</span>homes<span class="meta-keyword">/leolan/</span>.ssh</div><div class="line">cd <span class="meta-keyword">/volume1/</span>homes<span class="meta-keyword">/leolan/</span>.ssh/</div><div class="line">vi authorized_keys</div><div class="line"><span class="meta">#粘贴上一步copy的ssh密钥，一行一个</span></div><div class="line">chown -R leolan:users <span class="meta-keyword">/volume1/</span>homes<span class="meta-keyword">/leolan/</span>.ssh</div><div class="line">chmod <span class="number">644</span> <span class="meta-keyword">/volume1/</span>homes<span class="meta-keyword">/leolan/</span>.ssh/authorized_keys</div></pre></td></tr></table></figure>
+<p>编辑ssh配置文件<code>vim /etc/ssh/sshd_config</code><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">RSAAuthentication</span> <span class="literal">yes</span>     </div><div class="line">PubkeyAuthentication <span class="literal">yes</span>     </div><div class="line">AuthorizedKeysFile  .ssh/authorized_keys</div></pre></td></tr></table></figure></p>
+<p><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161222/171554297.png" alt="mark"><br>然后在群晖系统中停用ssh功能，再次开启。就能免密钥操作啦！</p>
+<hr>
+<h2 id="VPN"><a href="#VPN" class="headerlink" title="VPN"></a>VPN</h2><p>群晖的VPN服务是安装套件的，简单设置就行<br>但是群晖连接别的VPN并不是在套件中设置的，而是在网络中设置<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161227/164348644.png" alt="mark"><br>填写IP，账号密码就行，其他不知道的参数默认就行。</p>
+<hr>
+<h2 id="shadowsocks"><a href="#shadowsocks" class="headerlink" title="shadowsocks"></a>shadowsocks</h2><p>群晖DSM是基于Debain定制的系统，但是移除了apt包管理程序，只支持dpkg安装包，但是我们可以通过第三方软件安装插件的形式来安装说需要的软件。</p>
+<p>连接SS本来是路由上设置是比较方便的，但某些路由不支持SS，所以用群晖连接SS，再把代理地址指向群晖的地址。</p>
+<h3 id="pip安装SS"><a href="#pip安装SS" class="headerlink" title="pip安装SS"></a>pip安装SS</h3><p><strong>此篇未完成，结尾运行报RuntimeError: can not find library crypto错误，目前还没有找到解决方法，有知道怎么解决的朋友欢迎留言</strong></p>
+<p>首先通过套件中心安装python及python3<br>开启SSH服务。并通过SSH连入NAS<br><figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="string">su </span>        <span class="comment">#DSM5.x</span></div><div class="line">或 </div><div class="line"><span class="string">sudo </span>-i    <span class="comment">#DSM6.x</span></div><div class="line"></div><div class="line"><span class="string">cd </span>/<span class="string">tmp​</span></div><div class="line">​<span class="string">wget </span><span class="string">https:</span>//<span class="string">bootstrap.</span><span class="string">pypa.</span><span class="string">io/</span><span class="built_in">get-pip.py</span></div><div class="line"><span class="string">python </span><span class="built_in">get-pip.py</span></div><div class="line"><span class="string">pip </span><span class="string">install </span><span class="string">shadowsocks</span></div><div class="line"><span class="string">pip </span><span class="string">install </span><span class="string">crypto</span></div><div class="line">​<span class="string">cd </span>/<span class="string">etc/</span></div><div class="line"><span class="string">vi </span><span class="string">shadowsocks.</span><span class="string">json</span></div></pre></td></tr></table></figure></p>
+<p>内容如下：配置文件参考：<a href="www.leolan.top/posts/13905">编写配置文件</a><br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123; </div><div class="line"><span class="string">"server"</span>:<span class="string">"远程的SS服务器地址"</span>, </div><div class="line"><span class="string">"server_port"</span>:<span class="number">8388</span>,            <span class="comment">#远程SS服务器的服务端口</span></div><div class="line"><span class="string">"local_address"</span>: <span class="string">"127.0.0.1"</span>, </div><div class="line"><span class="string">"local_port"</span>:<span class="number">1080</span>,             <span class="comment">#端口随意，不要冲突就行，默认1080</span></div><div class="line"><span class="string">"password"</span>:<span class="string">"mypassword"</span>,       <span class="comment">#SS密码</span></div><div class="line"><span class="string">"timeout"</span>:<span class="number">300</span>, </div><div class="line"><span class="string">"method"</span>:<span class="string">"aes-256-cfb"</span>,        <span class="comment">#加密方式</span></div><div class="line"><span class="string">"fast_open"</span>: <span class="literal">false</span>             <span class="comment">#FS加速</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>退出保存并运行服务<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sslocal -c /etc/shadowsocks<span class="selector-class">.json</span> -d start</div></pre></td></tr></table></figure></p>
+<p>设置开机自启<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">vi <span class="regexp">/etc/</span>rc</div><div class="line"><span class="comment">#光标移动到最底下，在exit 0 之前添加以下这一句，保存退出。</span></div><div class="line">sslocal -c <span class="regexp">/etc/</span>shadowsocks.json -d start</div></pre></td></tr></table></figure></p>
+<p>添加开机自启也可以通过计划任务添加，只是麻烦一点<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161227/163522654.png" alt="mark"></p>
+<hr>
+<h3 id="Docker安装SS"><a href="#Docker安装SS" class="headerlink" title="Docker安装SS"></a>Docker安装SS</h3><p>Docker安装也是可行的，直接下载安装，一定要看镜像说明，不同的作者定义的端口不同，打开看了才知道端口是什么。<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161227/163803852.png" alt="mark"><br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161227/164015157.png" alt="mark"><br>这里的端口是1984，运行Docker容器后，代理的端口,设置1984就OK了（当然，1984只是容器端口，真正的端口取决于你映射出来的端口）</p>
+<hr>
+<h3 id="shadowsocks-libev-C语言版"><a href="#shadowsocks-libev-C语言版" class="headerlink" title="shadowsocks-libev(C语言版)"></a>shadowsocks-libev(C语言版)</h3><p><strong>这节内容摘录网文，只提供思路，本人没有进行测试，有需求测试后会改写内容并删除此段文字</strong></p>
+<blockquote>
+<p>先要在 <a href="https://sourceforge.net/projects/dsgpl/files/" target="_blank" rel="external">群晖开源项目(Synology Open Source Project)</a> 找到 DS216Play 的交叉编译工具：monaco-gcc493_glibc220_hard-GPL.txz<br>然后 SSH 连接 VPS 进行编译工作:<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">apt-get -y install make binutils</div><div class="line">mkdir ss</div><div class="line">cd ss</div><div class="line">wget <span class="symbol">http:</span>/<span class="regexp">/iweb.dl.sourceforge.net/project</span><span class="regexp">/dsgpl/</span>DSM%<span class="number">206.0</span>%<span class="number">20</span>Tool%<span class="number">20</span>Chains/STMicroelectronics%<span class="number">20</span>Monaco%<span class="number">20</span>Linux%<span class="number">203.10</span>.<span class="number">77</span>/monaco-gcc493_glibc220_hard-GPL.txz</div><div class="line">tar xvf monaco-gcc493_glibc220_hard-GPL.txz</div><div class="line">export PATH=<span class="string">"/root/ss/arm-unknown-linux-gnueabi/bin:$PATH"</span></div><div class="line">export CC=<span class="regexp">/root/ss</span><span class="regexp">/arm-unknown-linux-gnueabi/bin</span><span class="regexp">/arm-unknown-linux-gnueabi-gcc</span></div><div class="line">export LD=/root<span class="regexp">/ss/arm</span>-unknown-linux-gnueabi/bin/arm-unknown-linux-gnueabi-ld</div><div class="line">export RANLIB=<span class="regexp">/root/ss</span><span class="regexp">/arm-unknown-linux-gnueabi/bin</span><span class="regexp">/arm-unknown-linux-gnueabi-ranlib</span></div><div class="line">export CFLAGS="-I/root<span class="regexp">/ss/arm</span>-unknown-linux-gnueabi/arm-unknown-linux-gnueabi/<span class="keyword">include</span><span class="string">"</span></div><div class="line">export LDFLAGS="-L/root/ss/arm-unknown-linux-gnueabi/arm-unknown-linux-gnueabi/<span class="class"><span class="keyword">lib</span>"</span></div><div class="line"></div><div class="line"><span class="comment"># 依赖zlib，下载编译</span></div><div class="line">wget <span class="symbol">http:</span>/<span class="regexp">/zlib.net/zlib</span>-<span class="number">1.2</span>.<span class="number">8</span>.tar.gz</div><div class="line">tar xvf zlib-<span class="number">1.2</span>.<span class="number">8</span>.tar.gz</div><div class="line">cd zlib-<span class="number">1.2</span>.<span class="number">8</span>/</div><div class="line">./configure --prefix=<span class="regexp">/root/dist</span><span class="regexp">/zlib-1.2.8</span></div><div class="line">make &amp; make install</div><div class="line"></div><div class="line"># 依赖openssl，下载编译</div><div class="line">wget https:/<span class="regexp">/www.openssl.org/source</span><span class="regexp">/openssl-1.0.2h.tar.gz</span></div><div class="line">tar xvf openssl-1.0.2h.tar.gz</div><div class="line">cd openssl-1.0.2h</div><div class="line">./Configure dist --prefix=<span class="regexp">/root/dist</span><span class="regexp">/openssl-1.0.2h</span></div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line"># 编译shadowsocks-libev</div><div class="line">wget https:/<span class="regexp">/github.com/shadowsocks</span><span class="regexp">/shadowsocks-libev/archive</span><span class="regexp">/v2.4.6.tar.gz</span></div><div class="line">tar xvf v2.4.6.tar.gz</div><div class="line">cd shadowsocks-libev-2.4.6</div><div class="line"># 配置 需要注意的是--host选项，目标NAS不同值可能也会不同</div><div class="line"># 详见Synology开发指南的Compile Open Source Projects章节</div><div class="line">./configure \</div><div class="line">    --<span class="keyword">with</span>-zlib=<span class="regexp">/root/dist</span><span class="regexp">/zlib-1.2.8 \</span></div><div class="line">    --with-openssl=/root<span class="regexp">/dist/openssl</span>-<span class="number">1.0</span>.<span class="number">2</span>h \</div><div class="line">    --prefix=<span class="regexp">/root/dist</span><span class="regexp">/ss \</span></div><div class="line">    --host=arm-unknown-linux-gnueabi</div><div class="line">make</div><div class="line">make install</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>这样 ss 就会编译到 /root/dist/ss 目录，这个时候打包:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar cvf shadowsocks<span class="selector-class">.tar</span> ss/</div></pre></td></tr></table></figure></p>
+<p>登录群晖终端从远程取回文件：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp xxx@xxx<span class="selector-class">.xxx</span><span class="selector-class">.xxx</span><span class="selector-class">.xxx</span>:/root/dist/shadowsocks<span class="selector-class">.tar</span> .</div></pre></td></tr></table></figure></p>
+<p><strong>运行</strong></p>
+<p>需要知道的是 shadowsocks 是一个 socket 代理，而群晖 NAS 只支持 HTTP 代理，所以我们需要 Privoxy软件转换下，幸运的是 ipkg 里面刚好有此软件包。<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo ipkg <span class="keyword">install</span> privoxy</div></pre></td></tr></table></figure></p>
+<p>新建 shadowsocks 配置文件 config.json，内容如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line"> <span class="attr">"server"</span>:<span class="string">"xxx.xx.xx.xx"</span>,</div><div class="line"> <span class="attr">"server_port"</span>:<span class="number">1984</span>,</div><div class="line"> <span class="attr">"local_port"</span>:<span class="number">16800</span>,</div><div class="line"> <span class="attr">"password"</span>:<span class="string">"xxxx"</span>,</div><div class="line"> <span class="attr">"method"</span>:<span class="string">"aes-256-cfb"</span>,</div><div class="line"> <span class="attr">"timeout"</span>:<span class="number">60</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>新建 Privoxy 配置文件 privoxy.config：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">listen-<span class="selector-tag">address</span> <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">16801</span>  #监听本地的<span class="number">16801</span>端口</div><div class="line">forward / .</div><div class="line">forward-socks5 <span class="selector-class">.dropbox</span><span class="selector-class">.com</span> <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">16800</span> . #把访问 dropbox 的数据都通过ss 的代理端口转发出去</div><div class="line">forward-socks5 <span class="selector-class">.tmdb</span><span class="selector-class">.org</span> <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">16800</span> .  #把访问 tmdb 的数据都通过ss 的代理端口转发出去</div><div class="line"><span class="selector-id">#forward-socks5</span> / <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">16800</span> . #全部转发</div></pre></td></tr></table></figure></p>
+<p>表示监听本地 16801 的端口数据转发到本地的socks5 16800 端口。这里只有两个网站的数据经过 ss 代理，一个是 Dropbox ，另一个是 tmdb（VideoStation 封面数据抓取网址）。如果需要更多可以一个个添加进去或者使用 actionfiles。</p>
+<p>后台运行：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">./ss-local -c <span class="built_in">config</span>.json &amp; </div><div class="line">privoxy privoxy.<span class="built_in">config</span></div></pre></td></tr></table></figure></p>
+<p>然后进 NAS 设置一下就 OK 了：<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161228/120135818.png" alt="mark"></p>
+<hr>
+<p><strong>自动运行</strong></p>
+<p>最后写一段自动运行脚本，放在 NAS 的任务计划中，设置每二十分钟运行一下，因为发现两个进程会有意外退出的情况，还没找原因：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"Please run it with source command!"</span></div><div class="line">i1=`ps -ef | grep -E <span class="string">"ss-local*"</span>|grep -v grep|awk <span class="string">'&#123;print $2&#125;'</span>`</div><div class="line"><span class="keyword">if</span> (<span class="built_in">kill</span> -9 <span class="variable">$i1</span>)</div><div class="line"><span class="keyword">then</span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">echo</span> <span class="string">'ss killed'</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">echo</span> <span class="string">'no ss found!'</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">fi</span></div><div class="line">~/Software/ShadowSocks/bin/ss-local -c ~/Software/ShadowSocks/bin/config.json &amp;</div><div class="line"><span class="built_in">echo</span> <span class="string">"ss lunched!"</span></div><div class="line"></div><div class="line">i2=`ps -ef | grep -E <span class="string">"privoxy*"</span>|grep -v grep|awk <span class="string">'&#123;print $2&#125;'</span>`</div><div class="line"><span class="keyword">if</span> (<span class="built_in">kill</span> -9 <span class="variable">$i2</span>)</div><div class="line"><span class="keyword">then</span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">echo</span> <span class="string">'privoxy killed'</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">echo</span> <span class="string">'no privoxy found!'</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">fi</span></div><div class="line">privoxy ~/Software/ShadowSocks/privoxy.config</div><div class="line"><span class="built_in">echo</span> <span class="string">"privoxy lunched!"</span></div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="ipkg、opkg、dpkg、Entware"><a href="#ipkg、opkg、dpkg、Entware" class="headerlink" title="ipkg、opkg、dpkg、Entware"></a>ipkg、opkg、dpkg、Entware</h2><p>ipkg、opkg、dpkg是包管理程序，类似于yum和apt-get，群晖安装后可以扩展许多功能。<br><strong>Optware</strong>运行库，opkg就是基于此。<br><strong>Entware</strong>本身是一个跨平台运行库，自动识别Intel、ARM平台，可以提供Linux运行环境，严格来说可以算是一种系统，可以实现Linux非常多的功能，神器！<br>实在不懂的进<a href="https://forum.synology.com/enu/" target="_blank" rel="external">群晖英文论坛</a>能找到你想要的。</p>
+<h3 id="dpkg"><a href="#dpkg" class="headerlink" title="dpkg"></a>dpkg</h3><p>群晖自带了dpkg，但好像只能安装下载好的ipk文件，命令也很繁琐，没什么用处。</p>
+<hr>
+<h3 id="安装ipkg"><a href="#安装ipkg" class="headerlink" title="安装ipkg"></a>安装ipkg</h3><p>ipkg功能很强大，可以在线安装，但是在大天朝完全给墙了，只有Google能访问到<a href="http://webcache.googleusercontent.com/search?q=cache:http://ipkg.nslu2-linux.org/feeds/optware/syno-i686/cross/unstable/" target="_blank" rel="external">官网的快照</a>。如果无法安装可用opdk</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sudo -<span class="selector-tag">i</span></div><div class="line">wget http:<span class="comment">//ipkg.nslu2-linux.org/feeds/optware/syno-i686/cross/unstable/syno-i686-bootstrap_1.2-7_i686.xsh</span></div><div class="line">chmod +x syno-i686-bootstrap_1.<span class="number">2</span>-<span class="number">7</span>_i686<span class="selector-class">.xsh</span></div><div class="line">sh syno-i686-bootstrap_1.<span class="number">2</span>-<span class="number">7</span>_i686<span class="selector-class">.xsh</span></div><div class="line">rm syno-i686-bootstrap_1.<span class="number">2</span>-<span class="number">7</span>_i686<span class="selector-class">.xsh</span></div><div class="line">vi /root/<span class="selector-class">.profile</span></div><div class="line"></div><div class="line">#在PATH的等号后面加入以下这一句(注意格式和其他一样，千万不要改错了，不然几乎全部命令都失效)</div><div class="line">/opt/bin:</div></pre></td></tr></table></figure>
+<p>然后保存退出，重启DSM（必须重启），重启运行<code>ipkg update</code>，之后就可以使用ipkg命令啦。</p>
+<hr>
+<h3 id="安装opdk"><a href="#安装opdk" class="headerlink" title="安装opdk"></a>安装opdk</h3><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">sudo -i</div><div class="line">wget <span class="symbol">http:</span>/<span class="regexp">/qnapware.zyxmon.org/binaries</span>-x86/installer/qnapware_install_x86.sh</div><div class="line">chmod +x qnapware_install_x86.sh</div><div class="line">./qnapware_install_x86.sh</div><div class="line"><span class="comment">#安装完了可能会报Info:Found a Bug?，不用理。</span></div><div class="line"></div><div class="line">vi /etc/profile</div><div class="line">vi /root/.profile</div><div class="line"><span class="comment">#分别在这两个文件的export CLASSPATH PATH JAVA_HOME LANG # Synology Java runtime enviroment（最后一行）的下一行加入以下这一句(注意格式和其他一样，千万不要改错了，不然几乎全部命令都失效)</span></div><div class="line">PATH=<span class="variable">$PATH</span><span class="symbol">:/Apps/opt/bin</span><span class="symbol">:/Apps/opt/sbin</span></div></pre></td></tr></table></figure>
+<p>然后保存退出，重启DSM（必须重启），重启运行<code>opkg update</code>，之后就可以使用opkg命令啦。</p>
+<hr>
+<h3 id="Entware-ng神器"><a href="#Entware-ng神器" class="headerlink" title="Entware-ng神器"></a>Entware-ng神器</h3><p>Entware-ng是全平台运行库</p>
+<p>官方项目：<a href="https://github.com/Entware-ng/Entware-ng" target="_blank" rel="external">https://github.com/Entware-ng/Entware-ng</a><br>README有说明安装在各个平台的链接</p>
+<p>安装在群晖上：<a href="https://github.com/Entware-ng/Entware-ng/wiki/Install-on-Synology-NAS" target="_blank" rel="external">https://github.com/Entware-ng/Entware-ng/wiki/Install-on-Synology-NAS</a></p>
+<p>安装Entware同时会安装opkg</p>
+<hr>
+<h2 id="Aria2-下载神器"><a href="#Aria2-下载神器" class="headerlink" title="Aria2 下载神器"></a>Aria2 下载神器</h2><h3 id="Docker安装Aria2"><a href="#Docker安装Aria2" class="headerlink" title="Docker安装Aria2"></a>Docker安装Aria2</h3><p>直接在镜像中心搜索下载镜像运行。<br>添加端口映射和目录挂载，端口默认是6800，不知道的看镜像文档。挂载目录可以把容器目录挂载到群晖的指定目录中。</p>
+<hr>
+<h3 id="通过opkg安装Aria2"><a href="#通过opkg安装Aria2" class="headerlink" title="通过opkg安装Aria2"></a>通过opkg安装Aria2</h3><figure class="highlight nsis"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">opkg update</div><div class="line">opkg install aria2</div><div class="line"></div><div class="line"><span class="comment">#启动aria2</span></div><div class="line">aria2c --enable-rpc=<span class="literal">true</span> --rpc-listen-<span class="literal">all</span>=<span class="literal">true</span> --rpc-allow-origin-<span class="literal">all</span>=<span class="literal">true</span> --dir=/volume1/<span class="number">139</span>G/aria2(这里是你的存储位置)/ --file-allocation=<span class="literal">none</span> -s <span class="number">5</span> -j <span class="number">3</span> -x <span class="number">5</span> -c -D</div></pre></td></tr></table></figure>
+<p>下载Aria2管理界面：<a href="https://github.com/ziahamza/webui-aria2" target="_blank" rel="external">webui-aria2</a><br>解压后得到webui-aria2-master文件夹，改名为aria2放在web网站根目录<br>然后通过：<strong><a href="http://群晖IP/aria2/" target="_blank" rel="external">http://群晖IP/aria2/</a></strong>  访问<br>然后就可以正常使用了，速度还是很快的<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20161229/145417486.png" alt="mark"></p>
+<p>Aria2配置参考：<a href="http://aria2c.com/usage.html" target="_blank" rel="external">http://aria2c.com/usage.html</a></p>
+<hr>
+<p><strong>以下功能有时间再折腾，之后完善</strong></p>
+<p><strong>开机启动Aria2</strong><br>参考：<a href="http://www.tweaking4all.com/qnap/qnap-aria2-download-manager/" target="_blank" rel="external">http://www.tweaking4all.com/qnap/qnap-aria2-download-manager/</a></p>
+<p>放弃迅雷Xware3.0 转投Aria2：<a href="http://www.nasyun.com/thread-25850-1-1.html" target="_blank" rel="external">http://www.nasyun.com/thread-25850-1-1.html</a><br>迅雷离线<a href="https://github.com/binux/ThunderLixianExporter" target="_blank" rel="external">https://github.com/binux/ThunderLixianExporter</a><br>，百度云下载，，，，，，，</p>
+<p>远程下载，远程控制，百度云导出<br>若<a href="https://github.com/acgotaku/BaiduExporter/releases" target="_blank" rel="external">BaiduExporter</a>插件不行就用以下这个<br><a href="https://chrome.google.com/webstore/detail/aria2c-integration/edcakfpjaobkpdfpicldlccdffkhpbfk?hl=en-US" target="_blank" rel="external">https://chrome.google.com/webstore/detail/aria2c-integration/edcakfpjaobkpdfpicldlccdffkhpbfk?hl=en-US</a></p>
+<p><a href="http://www.cnplugins.com/fuzhu/baiduexporter/detail.html" target="_blank" rel="external">http://www.cnplugins.com/fuzhu/baiduexporter/detail.html</a><br><a href="http://www.nasyun.com/forum.php?mod=viewthread&amp;tid=26077&amp;pid=83563&amp;page=1&amp;extra=" target="_blank" rel="external">http://www.nasyun.com/forum.php?mod=viewthread&amp;tid=26077&amp;pid=83563&amp;page=1&amp;extra=</a></p>
+<hr>
+<h2 id="VirtualBox"><a href="#VirtualBox" class="headerlink" title="VirtualBox"></a>VirtualBox</h2><p>在群晖中群晖中安装此第三方套件之后就可以在群晖中运行虚拟机了。目前是还有版本范围限制，目前只支持x86以上且支持虚拟化的CPU。</p>
+<p>官网：<a href="http://spk.diablos-netzwerk.de/#showhistory_virtualbox" target="_blank" rel="external">http://spk.diablos-netzwerk.de/#showhistory_virtualbox</a><br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20170112/110804674.png" alt="mark"></p>
+<p>先在设置中打开<strong>Web Station</strong>服务，然后在套件中心添加第三方源：<a href="http://spk.diablos-netzwerk.de" target="_blank" rel="external">http://spk.diablos-netzwerk.de</a><br>保存刷新之后就能在套件中心看到这个插件了。<br><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20170112/111010324.png" alt="mark"></p>
+<p><img src="http://ofyfogrgx.bkt.clouddn.com/blog/20170112/112101700.png" alt="mark"></p>
+<hr>
+
+<!--这里是每篇文章的尾巴-->
+<html>
+  <body>
+    <h1>结语</h1>
+      <p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p>
+      <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<!--
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p></blockquote></div>
+    <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎收藏书签，欢迎多提宝贵意见，非常感谢！</p>
+    <footer><strong>Welcome to LeoLan'S BLOG</strong>
+    <cite><a href="#" onclick="go_my_site()" rel="external">Leo Lan Blog Share For you!</a></cite></footer></blockquote></div>
+  </body>
+</html>
+-->
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div style="margin-bottom: 10px;font-size: 16px;font-weight: 600;">想请我吃辣条吗？</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/alipay.jpg" alt="LeoLan Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/weixinpay.png" alt="LeoLan WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>微信打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+<h3 id="最近访客"><a href="#最近访客" class="headerlink" title="最近访客"></a>最近访客</h3><div class="ds-recent-visitors" data-num-items="36" data-avatar-size="42" id="ds-recent-visitors"></div>
+      
+    </div>
+
+<!--这是文章底部标签云链接
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/群晖DSM-Synology/" rel="tag"># 群晖DSM_Synology</a>
+          
+            <a href="/tags/Aria2/" rel="tag"># Aria2</a>
+          
+            <a href="/tags/迅雷离线/" rel="tag"># 迅雷离线</a>
+          
+            <a href="/tags/opkg、ipkg、dpkg/" rel="tag"># opkg、ipkg、dpkg</a>
+          
+            <a href="/tags/Entware/" rel="tag"># Entware</a>
+          
+            <a href="/tags/shadowsocks/" rel="tag"># shadowsocks</a>
+          
+        </div>
+      
+-->
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/48230/" rel="next" title="Linux常用命令">
+                <i class="fa fa-chevron-left"></i> Linux常用命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/27125/" rel="prev" title="博客中插入音乐_视频">
+                博客中插入音乐_视频 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js;
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="posts/26301/"
+           data-title="群晖DSM_Synology" data-url="https://www.leolan.top/posts/26301/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="LeoLan" />
+          <p class="site-author-name" itemprop="name">LeoLan</p>
+          <p class="site-description motion-element" itemprop="description">Better late than never</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">68</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="https://www.leolan.top/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+
+<!-- 自定义High一下的功能 -->
+ <a rel="alternate" class="mw-harlem_shake_slow wobble shake" href='javascript:(
+   function go() {
+   var songs = [
+               "http://ofyfogrgx.bkt.clouddn.com/tongxingSibel%20-%20Im%20Sorry.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com/Music-sunburst.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com//blog/Apple%20&%20Stone%20-%20Lost.mp3"
+   ];
+
+<!--"http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150103346.mp3","http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150842689.mp3",-->
+
+   function c() {
+       var e = document.createElement("link");
+       e.setAttribute("type", "text/css");
+       e.setAttribute("rel", "stylesheet");
+       e.setAttribute("href", f);
+       e.setAttribute("class", l);
+       document.body.appendChild(e)
+   }
+   function h() {
+       var e = document.getElementsByClassName(l);
+       for (var t = 0; t < e.length; t++) {
+           document.body.removeChild(e[t])
+       }
+   }
+   function p() {
+       var e = document.createElement("div");
+       e.setAttribute("class", a);
+       document.body.appendChild(e);
+       setTimeout(function() {
+           document.body.removeChild(e)
+       }, 100)
+   }
+   function d(e) {
+       return {
+           height : e.offsetHeight,
+           width : e.offsetWidth
+       }
+   }
+   function v(i) {
+       var s = d(i);
+       return s.height > e && s.height < n && s.width > t && s.width < r
+   }
+   function m(e) {
+       var t = e;
+       var n = 0;
+       while (!!t) {
+           n += t.offsetTop;
+           t = t.offsetParent
+       }
+       return n
+   }
+   function g() {
+       var e = document.documentElement;
+       if (!!window.innerWidth) {
+           return window.innerHeight
+       } else if (e && !isNaN(e.clientHeight)) {
+           return e.clientHeight
+       }
+       return 0
+   }
+   function y() {
+       if (window.pageYOffset) {
+           return window.pageYOffset
+       }
+       return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+   }
+   function E(e) {
+       var t = m(e);
+       return t >= w && t <= b + w
+   }
+   function S() {
+       var e = document.getElementById("audio_element_id");
+       if(e != null){
+           var index = parseInt(e.getAttribute("curSongIndex"));
+           if(index > songs.length - 2) {
+               index = 0;
+           } else {
+               index++;
+           }
+           e.setAttribute("curSongIndex", index);
+           N();
+       }
+       e.src = i;
+       e.play()
+   }
+   function x(e) {
+       e.className += " " + s + " " + o
+   }
+   function T(e) {
+       e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+   }
+   function N() {
+       var e = document.getElementsByClassName(s);
+       var t = new RegExp("\\b" + s + "\\b");
+       for (var n = 0; n < e.length; ) {
+           e[n].className = e[n].className.replace(t, "")
+       }
+   }
+   function initAudioEle() {
+       var e = document.getElementById("audio_element_id");
+       if(e === null){
+           e = document.createElement("audio");
+           e.setAttribute("class", l);
+           e.setAttribute("curSongIndex", 0);
+           e.id = "audio_element_id";
+           e.loop = false;
+           e.bgcolor = 0;
+           e.addEventListener("canplay", function() {
+           setTimeout(function() {
+               x(k)
+           }, 500);
+           setTimeout(function() {
+               N();
+               p();
+               for (var e = 0; e < O.length; e++) {
+                   T(O[e])
+               }
+           }, 15500)
+       }, true);
+       e.addEventListener("ended", function() {
+           N();
+           h();
+           go();
+       }, true);
+       e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+       document.body.appendChild(e);
+       }
+   }
+   
+   initAudioEle();
+   var e = 30;
+   var t = 30;
+   var n = 350;
+   var r = 350;
+   var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+   var i = songs[curSongIndex];
+   
+   var s = "mw-harlem_shake_me";
+   var o = "im_first";
+   var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+   var a = "mw-strobe_light";
+   /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css
+   //7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css  七牛云地址*/
+   var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";  
+   /* var f = "/css/harlem_shake_style.css";  */
+
+   var l = "mw_added_css";
+   var b = g();
+   var w = y();
+   var C = document.getElementsByTagName("*");
+   var k = null;
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           if (E(A)) {
+               k = A;
+               break
+           }
+       }
+   }
+   if (A === null) {
+       console.warn("Could not find a node of the right size. Please try a different page.");
+       return
+   }
+   c();
+   S();
+   var O = [];
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           O.push(A)
+       }
+   }
+   })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High</a>
+</div>
+         <!-- end High一下 -->
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/myleolan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://coding.net/u/leolan" target="_blank" title="Coding">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  Coding
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://quickconnect.to/myleolan" target="_blank" title="Cloud1">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud1
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://git.oschina.net/leolan" target="_blank" title="OSchina">
+                  
+                    <i class="fa fa-fw fa-git-square"></i>
+                  
+                  OSchina
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://leolan.picp.net" target="_blank" title="Cloud2">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud2
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.leolan.top/posts/44568/" target="_blank" title="Links">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Links
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-heartbeat"></i>
+              友链
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://jerry.hk/" title="Jerry Locke" target="_blank" rel="external nofollow">Jerry Locke</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://login926.top" title="Raintons" target="_blank" rel="external nofollow">Raintons</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.anotherhome.net" title="DIYgod" target="_blank" rel="external nofollow">DIYgod</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mblack.cn/" title="小黑" target="_blank" rel="external nofollow">小黑</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.iamlj.com/" title="Jing's Blog" target="_blank" rel="external nofollow">Jing's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://cyang.tech/" title="cyang's blog" target="_blank" rel="external nofollow">cyang's blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.showerlee.com/" title="一路向北" target="_blank" rel="external nofollow">一路向北</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://lusongsong.com/" title="卢松松的博客" target="_blank" rel="external nofollow">卢松松的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://v.lusongsong.com/" title="松松视频" target="_blank" rel="external nofollow">松松视频</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#群晖"><span class="nav-number">1.</span> <span class="nav-text">群晖</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#黑群晖"><span class="nav-number">2.</span> <span class="nav-text">黑群晖</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#黑群晖所需工具下载"><span class="nav-number">2.1.</span> <span class="nav-text">黑群晖所需工具下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#黑群晖DSM-5-2"><span class="nav-number">2.2.</span> <span class="nav-text">黑群晖DSM_5.2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#黑群晖DSM-6-0"><span class="nav-number">2.3.</span> <span class="nav-text">黑群晖DSM_6.0</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置设置技巧"><span class="nav-number">3.</span> <span class="nav-text">配置设置技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#洗白"><span class="nav-number">3.1.</span> <span class="nav-text">洗白</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改引导U盘syslinux-cfg文件"><span class="nav-number">3.1.1.</span> <span class="nav-text">修改引导U盘syslinux.cfg文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改synoinfo-conf（高级定制系统，不建议这么做，除非你是极客）"><span class="nav-number">3.1.2.</span> <span class="nav-text">修改synoinfo.conf（高级定制系统，不建议这么做，除非你是极客）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改SATA、eSATA"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">修改SATA、eSATA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改网络端口"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">修改网络端口</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DMS6-0后无法用root登陆的问题"><span class="nav-number">3.2.</span> <span class="nav-text">DMS6.0后无法用root登陆的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DMS6-0后无法用迅雷远程下载（官方不支持了）"><span class="nav-number">3.3.</span> <span class="nav-text">DMS6.0后无法用迅雷远程下载（官方不支持了）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机U盘启动无法挂载问题"><span class="nav-number">3.4.</span> <span class="nav-text">虚拟机U盘启动无法挂载问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬盘分区模式-RAID、SHR、BASIC、JBOD"><span class="nav-number">3.5.</span> <span class="nav-text">硬盘分区模式 RAID、SHR、BASIC、JBOD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬盘数据恢复"><span class="nav-number">3.6.</span> <span class="nav-text">硬盘数据恢复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#克隆DSM系统分区"><span class="nav-number">3.6.1.</span> <span class="nav-text">克隆DSM系统分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#群晖系统内恢复"><span class="nav-number">3.6.2.</span> <span class="nav-text">群晖系统内恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Ubuntu进行恢复"><span class="nav-number">3.6.3.</span> <span class="nav-text">安装Ubuntu进行恢复</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#群晖绑定自己的域名"><span class="nav-number">3.7.</span> <span class="nav-text">群晖绑定自己的域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#永久屏蔽黑群晖升级或去除更新提示"><span class="nav-number">3.8.</span> <span class="nav-text">永久屏蔽黑群晖升级或去除更新提示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#替换图形文件（法1）"><span class="nav-number">3.8.1.</span> <span class="nav-text">替换图形文件（法1）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改VERSION文件（法2）"><span class="nav-number">3.8.2.</span> <span class="nav-text">修改VERSION文件（法2）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一行代码搞定（法3）"><span class="nav-number">3.8.3.</span> <span class="nav-text">一行代码搞定（法3）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DDNS设置3322"><span class="nav-number">3.9.</span> <span class="nav-text">DDNS设置3322</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVN-和-Git"><span class="nav-number">3.10.</span> <span class="nav-text">SVN 和 Git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建git仓库"><span class="nav-number">3.10.1.</span> <span class="nav-text">创建git仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#免密钥登录"><span class="nav-number">3.10.2.</span> <span class="nav-text">免密钥登录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VPN"><span class="nav-number">3.11.</span> <span class="nav-text">VPN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shadowsocks"><span class="nav-number">3.12.</span> <span class="nav-text">shadowsocks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pip安装SS"><span class="nav-number">3.12.1.</span> <span class="nav-text">pip安装SS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker安装SS"><span class="nav-number">3.12.2.</span> <span class="nav-text">Docker安装SS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shadowsocks-libev-C语言版"><span class="nav-number">3.12.3.</span> <span class="nav-text">shadowsocks-libev(C语言版)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ipkg、opkg、dpkg、Entware"><span class="nav-number">3.13.</span> <span class="nav-text">ipkg、opkg、dpkg、Entware</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dpkg"><span class="nav-number">3.13.1.</span> <span class="nav-text">dpkg</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装ipkg"><span class="nav-number">3.13.2.</span> <span class="nav-text">安装ipkg</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装opdk"><span class="nav-number">3.13.3.</span> <span class="nav-text">安装opdk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Entware-ng神器"><span class="nav-number">3.13.4.</span> <span class="nav-text">Entware-ng神器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Aria2-下载神器"><span class="nav-number">3.14.</span> <span class="nav-text">Aria2 下载神器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker安装Aria2"><span class="nav-number">3.14.1.</span> <span class="nav-text">Docker安装Aria2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过opkg安装Aria2"><span class="nav-number">3.14.2.</span> <span class="nav-text">通过opkg安装Aria2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VirtualBox"><span class="nav-number">3.15.</span> <span class="nav-text">VirtualBox</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LeoLan</span>
+</div>
+
+<div class="powered-by">
+  <a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备16026009号-2</a>  |  本站总访问量<span id="busuanzi_value_site_pv"></span>
+</div>
+
+<div class="theme-info">
+  您是第<span id="busuanzi_value_site_uv"></span>位小伙伴
+</div>
+
+<script async src="/js/src/busuanzi.pure.mini.js">
+</script>
+
+<!--
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+-->
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"leolan"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '/js/src/duoshuo_embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementById('footer')
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("zieuxKa4IjAP6VgxxvBe4vkj-gzGzoHsz", "MHGN54IEuofFNV1AROiRkEoG");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js" count="50" zindex="-2" opacity="1" color="0,104,183"></script>
+
+</body>
+</html>

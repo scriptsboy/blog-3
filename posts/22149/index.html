@@ -1,0 +1,1461 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic|Georgia:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="GitLab,版本控制," />
+
+
+
+
+
+  <link rel="alternate" href="https://www.leolan.top/atom.xml" title="LeoLan's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/200.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一键安装 gitlab并设置邮件发送(简单教程)
+
+本节是根据烂泥大神分享的笔记摘录的！
+安装 GitLabGitLab   下载：http://www.gitlab.cc/downloads/GitLab 中文文档：http://doc.gitlab.cc安装方式官方有详细说明，这里使用Centos 6安装，其他系统参考官方文档。
+1234567#切换到root用户登录yum -y ins">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitLab服务器搭建">
+<meta property="og:url" content="https://www.leolan.top/posts/22149/index.html">
+<meta property="og:site_name" content="LeoLan's Blog">
+<meta property="og:description" content="一键安装 gitlab并设置邮件发送(简单教程)
+
+本节是根据烂泥大神分享的笔记摘录的！
+安装 GitLabGitLab   下载：http://www.gitlab.cc/downloads/GitLab 中文文档：http://doc.gitlab.cc安装方式官方有详细说明，这里使用Centos 6安装，其他系统参考官方文档。
+1234567#切换到root用户登录yum -y ins">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA1.png">
+<meta property="og:updated_time" content="2017-02-27T08:47:33.059Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GitLab服务器搭建">
+<meta name="twitter:description" content="一键安装 gitlab并设置邮件发送(简单教程)
+
+本节是根据烂泥大神分享的笔记摘录的！
+安装 GitLabGitLab   下载：http://www.gitlab.cc/downloads/GitLab 中文文档：http://doc.gitlab.cc安装方式官方有详细说明，这里使用Centos 6安装，其他系统参考官方文档。
+1234567#切换到root用户登录yum -y ins">
+<meta name="twitter:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6343395544286627000',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.leolan.top/posts/22149/"/>
+
+
+
+
+
+  <title> GitLab服务器搭建 | LeoLan's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">LeoLan's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">有时候正是不报期望的人做出了人们不敢期望之事！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签云
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时间轴
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-commenting"></i> <br />
+            
+            给我留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            本地搜索
+          </a>
+        </li>
+               
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://www.leolan.top/posts/22149/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="LeoLan">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="LeoLan's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="LeoLan's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                GitLab服务器搭建
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-10T15:57:58+08:00">
+              2016-11-10
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2017-02-27T16:47:33+08:00">
+              2017-02-27
+            </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/环境搭建/" itemprop="url" rel="index">
+                    <span itemprop="name">环境搭建</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/posts/22149/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/22149/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/posts/22149/" class="leancloud_visitors" data-flag-title="GitLab服务器搭建">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+         <span class="post-time">
+     &nbsp; | &nbsp;
+           <span class="post-meta-item-icon">
+             <i class="fa fa-calendar-o"></i>
+           </span>
+           <span class="post-meta-item-text">字数统计:</span>
+           <span class="post-count">1,325(字)</span>
+           
+         </span>
+
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><hr>
+<p><strong><a href="http://lib.csdn.net/article/git/47824" target="_blank" rel="external">一键安装 gitlab并设置邮件发送</a></strong>(简单教程)</p>
+<hr>
+<p>本节是根据<a href="http://www.ilanni.com/" target="_blank" rel="external">烂泥大神</a>分享的笔记摘录的！</p>
+<h1 id="安装-GitLab"><a href="#安装-GitLab" class="headerlink" title="安装 GitLab"></a>安装 GitLab</h1><p>GitLab   下载：<a href="http://www.gitlab.cc/downloads/" target="_blank" rel="external">http://www.gitlab.cc/downloads/</a><br>GitLab 中文文档：<a href="http://doc.gitlab.cc" target="_blank" rel="external">http://doc.gitlab.cc</a><br>安装方式官方有详细说明，这里使用Centos 6安装，其他系统参考官方文档。</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#切换到root用户登录</span></div><div class="line">yum -y install curl openssh-server openssh-clients postfix cronie</div><div class="line">service postfix <span class="built_in">start</span></div><div class="line">chkconfig postfix <span class="keyword">on</span></div><div class="line"></div><div class="line"><span class="comment">#这句是用来做防火墙的。避免用户通过ssh方式和http来访问</span></div><div class="line">sudo lokkit -s <span class="keyword">http</span> -s ssh</div></pre></td></tr></table></figure>
+<h2 id="添加GitLab仓库-并安装到服务器上"><a href="#添加GitLab仓库-并安装到服务器上" class="headerlink" title="添加GitLab仓库,并安装到服务器上"></a>添加GitLab仓库,并安装到服务器上</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">第一步：</div><div class="line">curl -sS http://packages.gitlab.<span class="keyword">cc</span>/install/gitlab-<span class="keyword">ce</span>/script.rpm.<span class="keyword">sh</span> | sudo bash</div><div class="line">yum -<span class="keyword">y</span> install gitlab-<span class="keyword">ce</span></div><div class="line"></div><div class="line">或者使用国内的镜像源：</div><div class="line"><span class="keyword">vim</span> /etc/yum.repos.d/gitlab-<span class="keyword">ce</span>.repo</div><div class="line">[gitlab-<span class="keyword">ce</span>]</div><div class="line">name=gitlab-<span class="keyword">ce</span></div><div class="line">baseurl=http://mirrors.lifetoy.org/gitlab-<span class="keyword">ce</span>/yum/el6</div><div class="line">repo_gpgcheck=<span class="number">0</span></div><div class="line">gpgcheck=<span class="number">0</span></div><div class="line">enabled=<span class="number">1</span></div><div class="line">gpgkey=http<span class="variable">s:</span>//packages.gitlab.<span class="keyword">com</span>/gpg.key</div><div class="line"></div><div class="line">yum -<span class="keyword">y</span> install gitlab-<span class="keyword">ce</span></div><div class="line"></div><div class="line">或者使用</div><div class="line"><span class="keyword">vim</span> /etc/yum.repos.d/gitlab-<span class="keyword">ce</span>.repo</div><div class="line">[gitlab-<span class="keyword">ce</span>]</div><div class="line">name=gitlab-<span class="keyword">ce</span></div><div class="line">baseurl=http://mirrors.lifetoy.org/gitlab-<span class="keyword">ce</span>/yum/el6/</div><div class="line">repo_gpgcheck=<span class="number">0</span></div><div class="line">gpgcheck=<span class="number">0</span></div><div class="line">enabled=<span class="number">1</span></div><div class="line">gpgkey=http<span class="variable">s:</span>//packages.gitlab.<span class="keyword">com</span>/gpg.key</div><div class="line"></div><div class="line">yum -<span class="keyword">y</span> install gitlab-<span class="keyword">ce</span></div><div class="line"></div><div class="line">-----------------------------------------------------------------------------------------</div><div class="line"></div><div class="line">第二步：</div><div class="line">rpm -ivh http<span class="variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="keyword">cn</span>/gitlab-<span class="keyword">ce</span>/yum/el6/gitlab-<span class="keyword">ce</span>-<span class="number">8.9</span>.<span class="number">6</span>-<span class="keyword">ce</span>.<span class="number">0</span>.el6.x86_64.rpm</div><div class="line">#截至到<span class="number">7.16</span>为止，<span class="number">8.9</span>.<span class="number">6</span>版本还没有中文汉化版</div><div class="line"></div><div class="line">或者</div><div class="line">rpm -ivh http://mirrors.lifetoy.org/gitlab-<span class="keyword">ce</span>/yum/el6/gitlab-<span class="keyword">ce</span>-<span class="number">8.8</span>.<span class="number">7</span>-<span class="keyword">ce</span>.<span class="number">1</span>.el6.x86_64.rpm</div></pre></td></tr></table></figure>
+<p>查看gitlab-ce安装的软件包：<code>rpm -ql gitlab-ce |more</code></p>
+<h2 id="启动gitLab"><a href="#启动gitLab" class="headerlink" title="启动gitLab"></a>启动gitLab</h2><p><code>sudo gitlab-ctl reconfigure</code></p>
+<hr>
+<h1 id="使用mysql数据库代替gitlab-ce"><a href="#使用mysql数据库代替gitlab-ce" class="headerlink" title="使用mysql数据库代替gitlab-ce"></a>使用mysql数据库代替gitlab-ce</h1><h2 id="添加yum仓库源"><a href="#添加yum仓库源" class="headerlink" title="添加yum仓库源"></a>添加yum仓库源</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget -P <span class="regexp">/etc/yum</span>.repos.d  http:<span class="regexp">//mi</span>rrors.aliyun.com<span class="regexp">/repo/</span>Centos-<span class="number">6</span>.repo  <span class="comment">#Centos7 源不一样，官网找。</span></div><div class="line">yum -y install mysql mysql-server mysql-devel gcc</div></pre></td></tr></table></figure>
+<h2 id="初始化mysql"><a href="#初始化mysql" class="headerlink" title="初始化mysql"></a>初始化mysql</h2><p>设定root用户密码为：12345gitlab<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/mysqld <span class="keyword">start</span></div><div class="line">/usr/<span class="keyword">bin</span>/mysqladmin -u root <span class="keyword">password</span> <span class="string">'12345gitlab'</span></div></pre></td></tr></table></figure></p>
+<h2 id="创建gitlab相关的数据库"><a href="#创建gitlab相关的数据库" class="headerlink" title="创建gitlab相关的数据库"></a>创建gitlab相关的数据库</h2><p>创建gitlab用户，并设定密码为：gitlab12345aa<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mysql -uroot -p'12345gitlab'</div><div class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">'gitlab'</span>@<span class="string">'%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'gitlab12345aa'</span>;</div><div class="line"><span class="keyword">set</span> storage_engine=<span class="keyword">innodb</span>;</div><div class="line"><span class="keyword">create</span> <span class="keyword">database</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> <span class="string">`gitlabhq_production`</span> <span class="keyword">default</span> <span class="built_in">character</span> <span class="keyword">set</span> <span class="string">`utf8`</span> <span class="keyword">collate</span> <span class="string">`utf8_unicode_ci`</span>;</div><div class="line"><span class="keyword">grant</span> <span class="keyword">select</span>,<span class="keyword">insert</span>,<span class="keyword">update</span>,<span class="keyword">delete</span>,<span class="keyword">create</span>,<span class="keyword">create</span> <span class="keyword">temporary</span> <span class="keyword">tables</span>,<span class="keyword">drop</span>,<span class="keyword">index</span>,<span class="keyword">alter</span>,<span class="keyword">lock</span> <span class="keyword">tables</span> <span class="keyword">on</span> <span class="string">`gitlabhq_production`</span>.* <span class="keyword">to</span> <span class="string">'gitlab'</span>@<span class="string">'%'</span>;</div></pre></td></tr></table></figure></p>
+<h2 id="删除用户名为空的主机，并刷新mysql权限"><a href="#删除用户名为空的主机，并刷新mysql权限" class="headerlink" title="删除用户名为空的主机，并刷新mysql权限"></a>删除用户名为空的主机，并刷新mysql权限</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -uroot -p'12345gitlab' mysql -e "<span class="keyword">delete</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> <span class="keyword">user</span>=<span class="string">''</span>;<span class="keyword">flush</span> <span class="keyword">privileges</span>;"</div></pre></td></tr></table></figure>
+<h2 id="测试gitlab用户连接数据库"><a href="#测试gitlab用户连接数据库" class="headerlink" title="测试gitlab用户连接数据库"></a>测试gitlab用户连接数据库</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -h127<span class="number">.0</span><span class="number">.0</span><span class="number">.1</span> -ugitlab -p'gitlab12345aa'</div></pre></td></tr></table></figure>
+<p>gitlab配置文件：<code>vim /etc/gitlab/gitlab.rb</code><br>gitlab_rails[‘db_adapter’] = “mysql2”<br>gitlab_rails[‘db_encoding’] = “utf8”<br>gitlab_rails[‘db_database’] = “gitlabhq_production”<br>gitlab_rails[‘db_pool’] = 10<br>gitlab_rails[‘db_username’] = “gitlab”<br>gitlab_rails[‘db_password’] = “<strong>gitlab12345aa</strong>“<br>gitlab_rails[‘db_host’] = “127.0.0.1”<br>gitlab_rails[‘db_port’] = 3306<br>postgresql[‘enable’] = false</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim <span class="regexp">/opt/gi</span>tlab<span class="regexp">/embedded/</span>service<span class="regexp">/gitlab-rails/</span>.bundle<span class="regexp">/config</span></div></pre></td></tr></table></figure>
+<hr>
+<p>BUNDLE_RETRY: 5<br>BUNDLE_PATH: “/opt/gitlab/embedded/service/gem”<br>BUNDLE_JOBS: 9<br><code>BUNDLE_WITHOUT: development:test:postgres</code><br>BUNDLE_DISABLE_SHARED_GEMS: ‘1’</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cd <span class="regexp">/opt/</span>gitlab<span class="regexp">/embedded/</span>service/gitlab-rails</div><div class="line"><span class="regexp">/opt/</span>gitlab<span class="regexp">/embedded/</span>bin/bundle install</div><div class="line">gitlab-ctl reconfigure</div><div class="line">gitlab-ctl restart</div><div class="line">gitlab-rake <span class="string">gitlab:</span>setup</div></pre></td></tr></table></figure>
+<p>到此gitlab-ce更换成mysql完成。</p>
+<p>打开<a href="http://IP/" target="_blank" rel="external">http://IP/</a> 即可访问，首次访问GitLab,系统会让你重新设置管理员的密码,设置成功后会返回登录界面.<br>默认的管理员账号是root,如果你想更改默认管理员账号,请输入上面设置的新密码登录系统后修改帐号名</p>
+<hr>
+<h1 id="修改gitlab通过域名访问："><a href="#修改gitlab通过域名访问：" class="headerlink" title="修改gitlab通过域名访问："></a>修改gitlab通过域名访问：</h1><figure class="highlight rust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vim /etc/gitlab/gitlab.rb</div><div class="line">external_url <span class="symbol">'http</span>:<span class="comment">//your.domain'</span></div></pre></td></tr></table></figure>
+<p>重启配置<br><code>sudo gitlab-ctl reconfigure</code></p>
+<p>实时查看所有执行日志<br><code>gitlab-ctl tail</code></p>
+<p>查看版本：<code>cat /opt/gitlab/embedded/service/gitlab-rails/VERSION</code></p>
+<p>/var/opt/gitlab/gitlab-workhorse<br>/opt/gitlab/embedded/service/gitlab-rails/public<br>/opt/gitlab/etc/gitlab-workhorse</p>
+<p>/var/log/gitlab/gitlab-workhorse</p>
+<p>配置文件路径：<br>/var/opt/gitlab/nginx<br>/var/opt/gitlab/nginx/conf/nginx.conf<br>/var/opt/gitlab/nginx/conf/gitlab-http.conf</p>
+<hr>
+<h1 id="汉化"><a href="#汉化" class="headerlink" title="汉化"></a>汉化</h1><h2 id="法一"><a href="#法一" class="headerlink" title="法一"></a>法一</h2><p>中文社区：<a href="https://gitlab.com/larryli/gitlab" target="_blank" rel="external">https://gitlab.com/larryli/gitlab</a><br>确认gitlab版本与当前汉化版本的 VERSION 是否相同，当前最新的汉化版本为 8.13.5 。<br>如果安装版本小于当前汉化版本，请先升级。如果安装版本大于当前汉化版本，请在<a href="https://gitlab.com/larryli/gitlab/issues" target="_blank" rel="external">项目</a>中提交新的 issue。<br>如果版本相同，首先在本地clone仓库。</p>
+<h3 id="下载汉化补丁包"><a href="#下载汉化补丁包" class="headerlink" title="下载汉化补丁包"></a>下载汉化补丁包</h3><ul>
+<li>1.先停止gitlab<br><code>gitlab-ctl stop</code></li>
+<li>2.克隆gitLab.com仓库，有中文补丁<br><code>git clone https://gitlab.com/xhang/gitlab.git   #注意对应的版本地址不同</code></li>
+</ul>
+<p>或gitcafe.com镜像，速度更快，暂时不支持中文补丁<br><code>git clone https://git.oschina.net/qiai365/gitlab-ce.git</code><br>或者<br><code>git clone https://git.oschina.net/johnwu/gitlab-zh.git</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> gitlab</div><div class="line">git branch <span class="_">-a</span> |tac</div></pre></td></tr></table></figure>
+<p><img src="http://ofyfogrgx.bkt.clouddn.com//blog/gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA1.png" alt=""><br>8.8版本的汉化补丁（8-8-stable是英文稳定版，8-8-zh是中文版，两个diff结果便是汉化补丁）<br>git diff origin/8-8-stable origin/8-8-zh &gt; /tmp/8.8.diff</p>
+<h3 id="应用汉化补丁"><a href="#应用汉化补丁" class="headerlink" title="应用汉化补丁"></a>应用汉化补丁</h3><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd <span class="meta-keyword">/opt/</span>gitlab<span class="meta-keyword">/embedded/</span>service/gitlab-rails</div><div class="line">git apply <span class="meta-keyword">/tmp/</span><span class="number">8.8</span>.diff</div></pre></td></tr></table></figure>
+<p>启动gitlab：<code>gitlab-ctl start</code></p>
+<h2 id="法二"><a href="#法二" class="headerlink" title="法二"></a>法二</h2><figure class="highlight subunit"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget https://gitlab.com/larryli/gitlab/repository/archive.zip?ref=8<span class="string">-7</span>-zh</div><div class="line">unzip gitlab<span class="string">-8</span><span class="string">-7</span>-zh-faeea0c584b042eaa433ed6c82335fe0c124af97.zip</div><div class="line">cd gitlab<span class="string">-8</span><span class="string">-7</span>-zh-faeea0c584b042eaa433ed6c82335fe0c124af97</div><div class="line">sudo gitlab-ctl reconfigure</div><div class="line">sudo gitlab-ctl restart</div></pre></td></tr></table></figure>
+<hr>
+<h1 id="最后配置"><a href="#最后配置" class="headerlink" title="最后配置"></a>最后配置</h1><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">vim  <span class="meta-keyword">/etc/</span>gitlab/gitlab.rb</div><div class="line">vim <span class="meta-keyword">/opt/</span>gitlab<span class="meta-keyword">/embedded/</span>service<span class="meta-keyword">/gitlab-rails/</span>config<span class="meta-keyword">/environments/</span>production.rb</div><div class="line">vim <span class="meta-keyword">/var/</span>opt<span class="meta-keyword">/gitlab/</span>gitlab-rails<span class="meta-keyword">/etc/</span>smtp_settings.rb</div><div class="line">vim <span class="meta-keyword">/opt/</span>gitlab<span class="meta-keyword">/embedded/</span>service<span class="meta-keyword">/gitlab-rails/</span>config/gitlab.yml</div><div class="line"><span class="symbol">time_zone:</span> Asia/Shanghai</div><div class="line">vim <span class="meta-keyword">/opt/</span>gitlab<span class="meta-keyword">/embedded/</span>service<span class="meta-keyword">/gitlab-rails/</span>config<span class="meta-keyword">/environments/</span>development.rb</div></pre></td></tr></table></figure>
+<ul>
+<li><p>1.设置存放代码库的主目录：<code>vim /etc/gitlab/gitlab.rb</code><br>默认是在<strong>/var/opt/gitlab/git-data</strong>下<br><code>git_data_dir &quot;/var/opt/gitlab/git-data&quot;</code></p>
+</li>
+<li><p>2.访问刚搭建的GitLab站点，创建一个<strong>group</strong>，比如<strong>devusers</strong>。<br>这时会在<strong>/var/opt/gitlab/git-data</strong>下创建<strong>/var/opt/gitlab/git-data/devusers</strong>文件夹。<br>然后在<strong>/var/opt/gitlab/git-data/repositories/</strong>创建一个文件夹，比如<strong>devusers</strong></p>
+</li>
+<li><p>3.将现有的所有git项目文件复制到这个文件夹<br><code>cp -r /data/git/*  /var/opt/gitlab/git-data/devusers</code></p>
+</li>
+<li><p>4.修改一下复制过来的文件夹的所有者：<br><code>chown -R git:git /var/opt/gitlab/git-data/devusers</code></p>
+</li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd <span class="regexp">/var/</span>opt/gitlab</div><div class="line">gitlab-rake <span class="string">gitlab:</span><span class="string">import:</span>repos</div></pre></td></tr></table></figure>
+<p>gitlab仓库地址<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta-keyword">/var/</span>opt<span class="meta-keyword">/gitlab/</span>git-data/repositories</div><div class="line">sudo vi <span class="meta-keyword">/etc/</span>gitlab/gitlab.rb</div><div class="line">git_data_dir</div></pre></td></tr></table></figure></p>
+<hr>
+
+<!--这里是每篇文章的尾巴-->
+<html>
+  <body>
+    <h1>结语</h1>
+      <p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p>
+      <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<!--
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p></blockquote></div>
+    <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎收藏书签，欢迎多提宝贵意见，非常感谢！</p>
+    <footer><strong>Welcome to LeoLan'S BLOG</strong>
+    <cite><a href="#" onclick="go_my_site()" rel="external">Leo Lan Blog Share For you!</a></cite></footer></blockquote></div>
+  </body>
+</html>
+-->
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div style="margin-bottom: 10px;font-size: 16px;font-weight: 600;">想请我吃辣条吗？</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/alipay.jpg" alt="LeoLan Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/weixinpay.png" alt="LeoLan WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>微信打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+<h3 id="最近访客"><a href="#最近访客" class="headerlink" title="最近访客"></a>最近访客</h3><div class="ds-recent-visitors" data-num-items="36" data-avatar-size="42" id="ds-recent-visitors"></div>
+      
+    </div>
+
+<!--这是文章底部标签云链接
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/GitLab/" rel="tag"># GitLab</a>
+          
+            <a href="/tags/版本控制/" rel="tag"># 版本控制</a>
+          
+        </div>
+      
+-->
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/51937/" rel="next" title="MongoDB">
+                <i class="fa fa-chevron-left"></i> MongoDB
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/27740/" rel="prev" title="数据库主主互备（高可用）">
+                数据库主主互备（高可用） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js;
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="posts/22149/"
+           data-title="GitLab服务器搭建" data-url="https://www.leolan.top/posts/22149/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="LeoLan" />
+          <p class="site-author-name" itemprop="name">LeoLan</p>
+          <p class="site-description motion-element" itemprop="description">Better late than never</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">68</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="https://www.leolan.top/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+
+<!-- 自定义High一下的功能 -->
+ <a rel="alternate" class="mw-harlem_shake_slow wobble shake" href='javascript:(
+   function go() {
+   var songs = [
+               "http://ofyfogrgx.bkt.clouddn.com/tongxingSibel%20-%20Im%20Sorry.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com/Music-sunburst.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com//blog/Apple%20&%20Stone%20-%20Lost.mp3"
+   ];
+
+<!--"http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150103346.mp3","http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150842689.mp3",-->
+
+   function c() {
+       var e = document.createElement("link");
+       e.setAttribute("type", "text/css");
+       e.setAttribute("rel", "stylesheet");
+       e.setAttribute("href", f);
+       e.setAttribute("class", l);
+       document.body.appendChild(e)
+   }
+   function h() {
+       var e = document.getElementsByClassName(l);
+       for (var t = 0; t < e.length; t++) {
+           document.body.removeChild(e[t])
+       }
+   }
+   function p() {
+       var e = document.createElement("div");
+       e.setAttribute("class", a);
+       document.body.appendChild(e);
+       setTimeout(function() {
+           document.body.removeChild(e)
+       }, 100)
+   }
+   function d(e) {
+       return {
+           height : e.offsetHeight,
+           width : e.offsetWidth
+       }
+   }
+   function v(i) {
+       var s = d(i);
+       return s.height > e && s.height < n && s.width > t && s.width < r
+   }
+   function m(e) {
+       var t = e;
+       var n = 0;
+       while (!!t) {
+           n += t.offsetTop;
+           t = t.offsetParent
+       }
+       return n
+   }
+   function g() {
+       var e = document.documentElement;
+       if (!!window.innerWidth) {
+           return window.innerHeight
+       } else if (e && !isNaN(e.clientHeight)) {
+           return e.clientHeight
+       }
+       return 0
+   }
+   function y() {
+       if (window.pageYOffset) {
+           return window.pageYOffset
+       }
+       return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+   }
+   function E(e) {
+       var t = m(e);
+       return t >= w && t <= b + w
+   }
+   function S() {
+       var e = document.getElementById("audio_element_id");
+       if(e != null){
+           var index = parseInt(e.getAttribute("curSongIndex"));
+           if(index > songs.length - 2) {
+               index = 0;
+           } else {
+               index++;
+           }
+           e.setAttribute("curSongIndex", index);
+           N();
+       }
+       e.src = i;
+       e.play()
+   }
+   function x(e) {
+       e.className += " " + s + " " + o
+   }
+   function T(e) {
+       e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+   }
+   function N() {
+       var e = document.getElementsByClassName(s);
+       var t = new RegExp("\\b" + s + "\\b");
+       for (var n = 0; n < e.length; ) {
+           e[n].className = e[n].className.replace(t, "")
+       }
+   }
+   function initAudioEle() {
+       var e = document.getElementById("audio_element_id");
+       if(e === null){
+           e = document.createElement("audio");
+           e.setAttribute("class", l);
+           e.setAttribute("curSongIndex", 0);
+           e.id = "audio_element_id";
+           e.loop = false;
+           e.bgcolor = 0;
+           e.addEventListener("canplay", function() {
+           setTimeout(function() {
+               x(k)
+           }, 500);
+           setTimeout(function() {
+               N();
+               p();
+               for (var e = 0; e < O.length; e++) {
+                   T(O[e])
+               }
+           }, 15500)
+       }, true);
+       e.addEventListener("ended", function() {
+           N();
+           h();
+           go();
+       }, true);
+       e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+       document.body.appendChild(e);
+       }
+   }
+   
+   initAudioEle();
+   var e = 30;
+   var t = 30;
+   var n = 350;
+   var r = 350;
+   var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+   var i = songs[curSongIndex];
+   
+   var s = "mw-harlem_shake_me";
+   var o = "im_first";
+   var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+   var a = "mw-strobe_light";
+   /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css
+   //7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css  七牛云地址*/
+   var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";  
+   /* var f = "/css/harlem_shake_style.css";  */
+
+   var l = "mw_added_css";
+   var b = g();
+   var w = y();
+   var C = document.getElementsByTagName("*");
+   var k = null;
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           if (E(A)) {
+               k = A;
+               break
+           }
+       }
+   }
+   if (A === null) {
+       console.warn("Could not find a node of the right size. Please try a different page.");
+       return
+   }
+   c();
+   S();
+   var O = [];
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           O.push(A)
+       }
+   }
+   })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High</a>
+</div>
+         <!-- end High一下 -->
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/myleolan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://coding.net/u/leolan" target="_blank" title="Coding">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  Coding
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://quickconnect.to/myleolan" target="_blank" title="Cloud1">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud1
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://git.oschina.net/leolan" target="_blank" title="OSchina">
+                  
+                    <i class="fa fa-fw fa-git-square"></i>
+                  
+                  OSchina
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://leolan.picp.net" target="_blank" title="Cloud2">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud2
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.leolan.top/posts/44568/" target="_blank" title="Links">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Links
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-heartbeat"></i>
+              友链
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://jerry.hk/" title="Jerry Locke" target="_blank" rel="external nofollow">Jerry Locke</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://login926.top" title="Raintons" target="_blank" rel="external nofollow">Raintons</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.anotherhome.net" title="DIYgod" target="_blank" rel="external nofollow">DIYgod</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mblack.cn/" title="小黑" target="_blank" rel="external nofollow">小黑</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.iamlj.com/" title="Jing's Blog" target="_blank" rel="external nofollow">Jing's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://cyang.tech/" title="cyang's blog" target="_blank" rel="external nofollow">cyang's blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.showerlee.com/" title="一路向北" target="_blank" rel="external nofollow">一路向北</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://lusongsong.com/" title="卢松松的博客" target="_blank" rel="external nofollow">卢松松的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://v.lusongsong.com/" title="松松视频" target="_blank" rel="external nofollow">松松视频</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装-GitLab"><span class="nav-number">1.</span> <span class="nav-text">安装 GitLab</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#添加GitLab仓库-并安装到服务器上"><span class="nav-number">1.1.</span> <span class="nav-text">添加GitLab仓库,并安装到服务器上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动gitLab"><span class="nav-number">1.2.</span> <span class="nav-text">启动gitLab</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用mysql数据库代替gitlab-ce"><span class="nav-number">2.</span> <span class="nav-text">使用mysql数据库代替gitlab-ce</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#添加yum仓库源"><span class="nav-number">2.1.</span> <span class="nav-text">添加yum仓库源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化mysql"><span class="nav-number">2.2.</span> <span class="nav-text">初始化mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建gitlab相关的数据库"><span class="nav-number">2.3.</span> <span class="nav-text">创建gitlab相关的数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除用户名为空的主机，并刷新mysql权限"><span class="nav-number">2.4.</span> <span class="nav-text">删除用户名为空的主机，并刷新mysql权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试gitlab用户连接数据库"><span class="nav-number">2.5.</span> <span class="nav-text">测试gitlab用户连接数据库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改gitlab通过域名访问："><span class="nav-number">3.</span> <span class="nav-text">修改gitlab通过域名访问：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#汉化"><span class="nav-number">4.</span> <span class="nav-text">汉化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#法一"><span class="nav-number">4.1.</span> <span class="nav-text">法一</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载汉化补丁包"><span class="nav-number">4.1.1.</span> <span class="nav-text">下载汉化补丁包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用汉化补丁"><span class="nav-number">4.1.2.</span> <span class="nav-text">应用汉化补丁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#法二"><span class="nav-number">4.2.</span> <span class="nav-text">法二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后配置"><span class="nav-number">5.</span> <span class="nav-text">最后配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LeoLan</span>
+</div>
+
+<div class="powered-by">
+  <a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备16026009号-2</a>  |  本站总访问量<span id="busuanzi_value_site_pv"></span>
+</div>
+
+<div class="theme-info">
+  您是第<span id="busuanzi_value_site_uv"></span>位小伙伴
+</div>
+
+<script async src="/js/src/busuanzi.pure.mini.js">
+</script>
+
+<!--
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+-->
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"leolan"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '/js/src/duoshuo_embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementById('footer')
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("zieuxKa4IjAP6VgxxvBe4vkj-gzGzoHsz", "MHGN54IEuofFNV1AROiRkEoG");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js" count="50" zindex="-2" opacity="1" color="0,104,183"></script>
+
+</body>
+</html>
