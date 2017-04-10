@@ -115,7 +115,7 @@
 <meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/LVM%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86003.png">
 <meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/LVM%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86004.png">
 <meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/LVM%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86005.png">
-<meta property="og:updated_time" content="2017-02-27T10:13:23.690Z">
+<meta property="og:updated_time" content="2017-04-10T01:54:46.438Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LVM磁盘管理">
 <meta name="twitter:description" content="动态扩容LVM是在磁盘分区和文件系统之间添加的一个逻辑层，来为文件系统屏蔽下层磁盘分区布局，提供一个抽象的盘卷，在盘卷上建立文件系统。首先我们讨论以下几个LVM术语：
@@ -365,8 +365,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2017-02-27T18:13:23+08:00">
-              2017-02-27
+            <time title="Post modified" itemprop="dateModified" datetime="2017-04-10T09:54:46+08:00">
+              2017-04-10
             </time>
             
           </span>
@@ -423,7 +423,7 @@
              <i class="fa fa-calendar-o"></i>
            </span>
            <span class="post-meta-item-text">字数统计:</span>
-           <span class="post-count">1,646(字)</span>
+           <span class="post-count">2,417(字)</span>
            
          </span>
 
@@ -458,14 +458,16 @@
 <li>VG:LVM中的物理的磁盘分区，也就是PV，必须加入VG，可以将VG理解为一个仓库或者是几个大的硬盘。</li>
 <li>LV：也就是从VG中划分的逻辑分区<br>如下图所示PV、VG、LV三者关系：<br><img src="http://ofyfogrgx.bkt.clouddn.com/LVM%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86001.png" alt=""><br><img src="http://ofyfogrgx.bkt.clouddn.com/LVM%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86002.png" alt=""></li>
 </ul>
-<h2 id="扩容原理："><a href="#扩容原理：" class="headerlink" title="扩容原理："></a>扩容原理：</h2><h4 id="用新磁盘创建PV，然后合并到现有的VG中，然后再扩容某个LV。"><a href="#用新磁盘创建PV，然后合并到现有的VG中，然后再扩容某个LV。" class="headerlink" title="用新磁盘创建PV，然后合并到现有的VG中，然后再扩容某个LV。"></a>用新磁盘创建PV，然后合并到现有的VG中，然后再扩容某个LV。</h4><p>貌似全程都不用格式化新建分区</p>
-<p>安装LVM<br>首先确定系统中是否安装了lvm工具：</p>
+<hr>
+<h2 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h2><h3 id="新分区用于扩容"><a href="#新分区用于扩容" class="headerlink" title="新分区用于扩容"></a>新分区用于扩容</h3><p>貌似全程都不用格式化新建分区</p>
+<p>运行的系统什么系统都行，都可以操作，但要注意ext3好像不支持在线扩容，要在liveCD中才行。ext4和xfs都支持动态扩容。如果是出了问题需要修复的话，建议用Ubuntu的liveCD 支持NTFS分区的自动挂载，方便备份资料后转移。</p>
+<p><strong>安装LVM</strong><br>首先确定系统中是否安装了lvm工具：</p>
 <ul>
 <li>Centos:<code>yum install lvm2</code>              </li>
 <li>Ubuntu:<code>apt-get install lvm2</code></li>
 </ul>
 <p><code>df -h</code> 和 <code>fdisk -l</code>  查看分区情况</p>
-<h4 id="开始分区："><a href="#开始分区：" class="headerlink" title="开始分区："></a>开始分区：</h4><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">fdisk /dev/sdb</div><div class="line">n          <span class="comment">#新建</span></div><div class="line">p          <span class="comment">#设定为主分区</span></div><div class="line">Partition <span class="built_in">number</span>（<span class="number">1</span><span class="number">-4</span>）：<span class="number">1</span>     <span class="comment">#指定分区，即为之后创建的sdb1-4(主分区只能4个)</span></div><div class="line">回车       <span class="comment">#设定起始扇区</span></div><div class="line">回车       <span class="comment">#设定结束扇区（直接回车默认用全部空间创建，也可以输入+500M设定为500M）</span></div><div class="line"></div><div class="line">t           <span class="comment">#此时输入L能看到所有格式的代码，指定分区格式，8e为LVM</span></div><div class="line"><span class="number">8</span>e          <span class="comment"># 设定为LVM</span></div><div class="line">p           <span class="comment"># 查看当前分区情况</span></div><div class="line">w           <span class="comment"># 写入硬盘</span></div><div class="line"></div><div class="line">partprobe   <span class="comment"># 重读分区表，可能会提示无法只读。。。。不用理会</span></div></pre></td></tr></table></figure>
+<h4 id="开始分区"><a href="#开始分区" class="headerlink" title="开始分区"></a>开始分区</h4><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">fdisk /dev/sdb</div><div class="line">n          <span class="comment">#新建</span></div><div class="line">p          <span class="comment">#设定为主分区</span></div><div class="line">Partition <span class="built_in">number</span>（<span class="number">1</span><span class="number">-4</span>）：<span class="number">1</span>     <span class="comment">#指定分区，即为之后创建的sdb1-4(主分区只能4个)</span></div><div class="line">回车       <span class="comment">#设定起始扇区</span></div><div class="line">回车       <span class="comment">#设定结束扇区（直接回车默认用全部空间创建，也可以输入+500M设定为500M）</span></div><div class="line"></div><div class="line">t           <span class="comment">#此时输入L能看到所有格式的代码，指定分区格式，8e为LVM</span></div><div class="line"><span class="number">8</span>e          <span class="comment"># 设定为LVM</span></div><div class="line">p           <span class="comment"># 查看当前分区情况</span></div><div class="line">w           <span class="comment"># 写入硬盘</span></div><div class="line"></div><div class="line">partprobe   <span class="comment"># 重读分区表，可能会提示无法只读。。。。不用理会</span></div></pre></td></tr></table></figure>
 <p>查看当前PV:<br><code>pvdisplay</code> 或 <code>pvscan</code></p>
 <p>创建PV（物理卷）<br><code>pvcreate /dev/sdb1</code>  使用之前创建的sdb1的全部空间创建PV，不想使用全部空间，之前分区时就要注意了。</p>
 <p>查看当前VG（卷组）<br><code>vgdisplay</code> 或 <code>vgscan</code></p>
@@ -473,20 +475,22 @@
 <p>查看当前VG<code>vgdisplay</code><br><img src="http://ofyfogrgx.bkt.clouddn.com/LVM%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86003.png" alt=""><br>发现有9.99G的空间</p>
 <h4 id="扩容-分区所在的LV（逻辑卷）"><a href="#扩容-分区所在的LV（逻辑卷）" class="headerlink" title="扩容/分区所在的LV（逻辑卷）"></a>扩容/分区所在的LV（逻辑卷）</h4><p><strong>/dev/vg_bogon/LogVol01为正在使用的/分区</strong><br><code>lvextend -l +100%FREE /dev/vg_bogon/LogVol01</code>   <strong>路径用/dev/vg_bogon/LogVol01</strong>或<strong>/dev/mapper/vg_bogon-LogVol01</strong>都是可以的,<strong>df -h</strong>就能查看,或 <code>lvextend -L +10G  /dev/vg_bogon/LogVol01</code>   来增加10G空间。</p>
 <p>查看当前VG:<br><code>vgdisplay</code>已经扩容了，但<strong>df -h</strong> 显示没有扩容</p>
-<p>重设逻辑卷大小，对于当前正在使用的LogVol01有效<br><code>resize2fs /dev/vg_bogon/LogVol01</code></p>
+<p>重设逻辑卷大小，对于当前正在使用的LogVol01有效<br><code>resize2fs /dev/vg_bogon/LogVol01   #ext*分区有效，xfs分区不用执行</code><br><strong>xfs分区不支持缩小，只支持扩容，被缩小的分区必须重新格式化才能使用</strong></p>
 <hr>
-<h4 id="缩小其他分区扩容根分区"><a href="#缩小其他分区扩容根分区" class="headerlink" title="缩小其他分区扩容根分区"></a>缩小其他分区扩容根分区</h4><ul>
+<h3 id="缩小其他分区扩容根分区"><a href="#缩小其他分区扩容根分区" class="headerlink" title="缩小其他分区扩容根分区"></a>缩小其他分区扩容根分区</h3><ul>
 <li><p>1.首先查看磁盘使用情况:<code>df -h</code><br>文件系统 容量  已用 可用  已用% 挂载点<br>Filesystem              Size  Used Avail Use% Mounted on<br>/dev/mapper/VolGroup-lv_root 154G  7.9G  139G   6% /<br>tmpfs                  1.9G  100K  1.9G   1% /dev/shm<br>/dev/sda1              485M   69M  391M  15% /boot<br>/dev/mapper/VolGroup-lv_home 299G  984M  283G   1% /home</p>
 </li>
-<li><p>2、卸载/home <strong>这里缩小home，把扩容/分区</strong><br><code>umount /home</code><br><strong>umount /home</strong> 如果提示无法卸载，则是有进程占用/home，使用如下命令来终止占用进程：<code>fuser -m /home</code></p>
+<li><p>2、卸载/home <strong>这里缩小home，把扩容/分区</strong><br><strong>注意：</strong>如果缩小的分区是xfs的，<strong>先备份资料</strong>，缩小后必须重新格式化才能使用。</p>
 </li>
-<li><p>3、调整分区大小<br><code>resize2fs -p /dev/mapper/VolGroup-lv_home 20G</code>  <strong>此处缩小home分区到20G</strong><br>如果提示运行“e2fsck -f /dev/mapper/VolGroup-lv_home”，则执行相关命令：<br><code>e2fsck -f /dev/mapper/VolGroup-lv_home</code><br>然后重新执行命令:<code>resize2fs -p /dev/mapper/VolGroup-lv_home 20G</code><br>注：<strong>resize2fs</strong> 为重新设定磁盘大小，只是重新指定一下大小，并不对结果有影响，需要下面lvreduce的配合</p>
-</li>
+</ul>
+<p><code>umount /home</code><br><strong>umount /home</strong> 如果提示无法卸载，则是有进程占用/home，使用如下命令来终止占用进程：<code>fuser -m /home</code></p>
+<ul>
+<li>3、调整分区大小<br><code>resize2fs -p /dev/mapper/VolGroup-lv_home 20G</code>  <strong>此处缩小home分区到20G</strong><br>如果提示运行“e2fsck -f /dev/mapper/VolGroup-lv_home”，则执行相关命令：<br><code>e2fsck -f /dev/mapper/VolGroup-lv_home</code><br>然后重新执行命令:<code>resize2fs -p /dev/mapper/VolGroup-lv_home 20G</code><br>注：<strong>resize2fs</strong> 为重新设定磁盘大小，只是重新指定一下大小，并不对结果有影响，需要下面lvreduce的配合</li>
 <li><p>4、挂载上/home，查看磁盘使用情况</p>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mount /<span class="built_in">home</span></div><div class="line">df -h</div></pre></td></tr></table></figure>
 <p>此时看/home分区只有20G了。</p>
 </li>
-<li><p>5、设置空闲空间<br>使用<strong>lvreduce</strong>指令用于减少LVM逻辑卷占用的空间大小。可能会删除逻辑卷上已有的数据，所以在操作前必须进行确认。记得输入 “y”<br><code>lvreduce -L 20G /dev/mapper/VolGroup-lv_home</code> <strong>刚才只是把/home多余的空间标记为不使用，这一步开始真正分割lv，把/home的lv分割为刚刚设定的大小，只能比20G大，比20G小，多分割出来的地方数据会丢失（上面已经设定了为20G了）</strong></p>
+<li><p>5、设置空闲空间<br>使用<strong>lvreduce</strong>指令用于减少LVM逻辑卷占用的空间大小。可能会删除逻辑卷上已有的数据，所以在操作前必须进行确认。记得输入 “y”<br><code>lvreduce -L 20G /dev/mapper/VolGroup-lv_home</code> <font color="#EE7600">这里是指定VolGroup-lv_home的空间为20G，</font> <strong>刚才只是把/home多余的空间标记为不使用，这一步开始真正分割lv，把/home的lv分割为刚刚设定的大小，只能比20G大，比20G小，多分割出来的地方数据会丢失（上面已经设定了为20G了）</strong></p>
 </li>
 </ul>
 <p>注：<strong>lvreduce -L 20G</strong>的意思为设置当前文件系统为20G，如果lvreduce -l 20G是指从当前文件系统上减少20G <strong>(-L设定为指定大小，-l减小指定大小),使用lvreduce减小逻辑卷的大小。注意：减小后的大小不能小于文件的大小，否则会丢失数据。 </strong></p>
@@ -494,14 +498,27 @@
 <ul>
 <li>6.把闲置空间挂在到根目录下<br><code>lvextend -l +100%FREE  /dev/mapper/VolGroup-lv_root</code>  <strong>把free空间全部分给/分区</strong><br>注：如果使用<strong>lvextend -L +283G</strong>则为在文件系统上增加283G</li>
 </ul>
-<p><code>resize2fs -p /dev/mapper/VolGroup-lv_root</code>   <strong>重设磁盘大小</strong></p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">resize2fs -p <span class="meta-keyword">/dev/</span>mapper/VolGroup-lv_root   <span class="meta">#ext*分区有效,重设磁盘大小</span></div><div class="line">xfs_growfs <span class="meta-keyword">/dev/</span>mapper/VolGroup-lv_root     <span class="meta">#xfs分区有效,自动扩大到最大可用空间（VG空闲多少就用掉多少）</span></div><div class="line"></div><div class="line">xfs_info <span class="meta-keyword">/dev/</span>mapper/VolGroup-lv_root       <span class="meta">#查看lv的相关信息，能看到区块大小。</span></div><div class="line">xfs_growfs <span class="meta-keyword">/dev/</span>mapper/VolGroup-lv_root -D <span class="number">1986208</span>  <span class="meta">#扩容到指定区块大小</span></div><div class="line"></div><div class="line"><span class="meta">#xfs_growfs报错：提示结构需要清理 看下面xfs常用命令</span></div></pre></td></tr></table></figure>
 <ul>
-<li>7、检查调整结果<br><code>df -h</code><br>OK扩容完成</li>
+<li><p>7、检查调整结果<br><code>df -h</code></p>
+</li>
+<li><p>8、如果是ext*分区，到此步就完成了，但如果是xfs分区，被缩小的分区现在是无法挂载的，因为不支持缩小，所以被缩小的分区必须要重新格式化才能使用。</p>
+</li>
+</ul>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mkfs.xfs -f <span class="meta-keyword">/dev/</span>mapper/VolGroup-lv_home     <span class="meta">#格式化为xfs分区</span></div><div class="line">mkfs -t ext3 <span class="meta-keyword">/dev/</span>mapper/VolGroup-lv_home    <span class="meta">#格式化为ext3分区</span></div><div class="line"></div><div class="line">mount -t xfs <span class="meta-keyword">/dev/</span>mapper/VolGroup-lv_home /mnt   <span class="meta">#挂载分区到/mnt下 </span></div><div class="line">df -Th /mnt    <span class="meta">#测试是否挂载成功</span></div><div class="line"><span class="meta">#能到这一步的基本是没有问题的了。</span></div></pre></td></tr></table></figure>
+<p>OK扩容完成。</p>
+<ul>
+<li>9、此时要注意，一定要看看/etc/fstab 文件有没有相应的自动挂载参数，分区格式也要对应，不然开机会进入一个XXX模式，结果开不了机。</li>
 </ul>
 <hr>
-<h4 id="其他命令："><a href="#其他命令：" class="headerlink" title="其他命令："></a>其他命令：</h4><ul>
+<p><strong>xfs相关常用命令</strong><br>需要安装：<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum <span class="keyword">install</span> xfsprogs -y</div><div class="line">apt <span class="keyword">install</span> xfsprogs -y</div></pre></td></tr></table></figure></p>
+<p>xfs_admin: 调整 xfs 文件系统的各种参数<br>xfs_copy: 拷贝 xfs 文件系统的内容到一个或多个目标系统（并行方式）<br>xfs_db: 调试或检测 xfs 文件系统（查看文件系统碎片等）<br>xfs_check: 检测 xfs 文件系统的完整性<br>xfs_bmap: 查看一个文件的块映射<br>xfs_repair: 尝试修复受损的 xfs 文件系统（）<br>xfs_fsr: 碎片整理<br>xfs_quota: 管理 xfs 文件系统的磁盘配额<br>xfs_metadump: 将 xfs 文件系统的元数据 (metadata) 拷贝到一个文件中<br>xfs_mdrestore: 从一个文件中将元数据 (metadata) 恢复到 xfs 文件系统<br>xfs_growfs: 调整一个 xfs 文件系统大小（只能扩展）<br>xfs_freeze    暂停（-f）和恢复（-u）xfs 文件系统<br>xfs_logprint: 打印xfs文件系统的日志<br>xfs_mkfile: 创建xfs文件系统<br>xfs_info: 查询文件系统详细信息<br>xfs_ncheck: generate pathnames from i-numbers for XFS<br>xfs_rtcp: XFS实时拷贝命令<br>xfs_io: 调试xfs I/O路径</p>
+<p><strong>关于xfs_repair：</strong><br>一般<code>xfs_repair /dev/mapper/VolGroup-lv_root</code> 就可以了，<strong>一定要先备份被修复分区的资料，可以tar备份</strong><br>完整备份整个根分区命令：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -cvpzf <span class="regexp">/media/</span>sda7<span class="regexp">/backup.tgz --exclude=/</span>proc --<span class="keyword">exclude</span>=<span class="regexp">/lost+found --exclude=/m</span>nt --<span class="keyword">exclude</span>=<span class="regexp">/sys --exclude=/m</span>edia <span class="regexp">/</span></div></pre></td></tr></table></figure></p>
+<p>xfs_repair慎用<strong>-L</strong>参数，会丢失一些数据。具体参考：<br><a href="http://www.mamicode.com/info-detail-669354.html" target="_blank" rel="external">http://www.mamicode.com/info-detail-669354.html</a><br><a href="http://blog.chinaunix.net/uid-522675-id-4665059.html" target="_blank" rel="external">http://blog.chinaunix.net/uid-522675-id-4665059.html</a></p>
+<hr>
+<h2 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h2><ul>
 <li><p>移除lv逻辑卷：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">lvdisplay</div><div class="line">lvremove -f <span class="regexp">/dev/</span>vg_bogon<span class="regexp">/LogVol02  **移除该lv逻辑卷**</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">lvdisplay</div><div class="line">lvremove <span class="_">-f</span> /dev/vg_bogon/LogVol02  <span class="comment">#移除该lv逻辑卷</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>lv逻辑卷重命名：<br><code>lvrename /dev/vg_bogon/LogVol02 /dev/vg_bogon/lv_root</code><br>如果无法修改可能是因为激活原因，激活VG就可以修改LV名了<br><code>lvchange -an /dev/vg_bogon/LogVol02</code></p>
 </li>
@@ -686,7 +703,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">68</span>
+              <span class="site-state-item-count">77</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -703,7 +720,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-count">102</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -719,6 +736,7 @@
             </a>
 
 <!-- 自定义High一下的功能 -->
+
  <a rel="alternate" class="mw-harlem_shake_slow wobble shake" href='javascript:(
    function go() {
    var songs = [
@@ -726,8 +744,6 @@
                "http://ofyfogrgx.bkt.clouddn.com/Music-sunburst.mp3",
                "http://ofyfogrgx.bkt.clouddn.com//blog/Apple%20&%20Stone%20-%20Lost.mp3"
    ];
-
-<!--"http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150103346.mp3","http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150842689.mp3",-->
 
    function c() {
        var e = document.createElement("link");
@@ -860,10 +876,11 @@
    var o = "im_first";
    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
    var a = "mw-strobe_light";
+   var f = "//7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css";
    /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css
-   //7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css  七牛云地址*/
-   var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";  
-   /* var f = "/css/harlem_shake_style.css";  */
+   //7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css  七牛云地址
+   var f = "/css/harlem_shake_style.css"; */
+   
 
    var l = "mw_added_css";
    var b = g();
@@ -895,7 +912,9 @@
    })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High</a>
 </div>
          <!-- end High一下 -->
-        
+
+          
+
 
         <div class="links-of-author motion-element">
           
@@ -1023,7 +1042,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#动态扩容"><span class="nav-number">1.</span> <span class="nav-text">动态扩容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩容原理："><span class="nav-number">2.</span> <span class="nav-text">扩容原理：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用新磁盘创建PV，然后合并到现有的VG中，然后再扩容某个LV。"><span class="nav-number">2.0.1.</span> <span class="nav-text">用新磁盘创建PV，然后合并到现有的VG中，然后再扩容某个LV。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开始分区："><span class="nav-number">2.0.2.</span> <span class="nav-text">开始分区：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扩容-分区所在的LV（逻辑卷）"><span class="nav-number">2.0.3.</span> <span class="nav-text">扩容/分区所在的LV（逻辑卷）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缩小其他分区扩容根分区"><span class="nav-number">2.0.4.</span> <span class="nav-text">缩小其他分区扩容根分区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他命令："><span class="nav-number">2.0.5.</span> <span class="nav-text">其他命令：</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#动态扩容"><span class="nav-number">1.</span> <span class="nav-text">动态扩容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩容"><span class="nav-number">2.</span> <span class="nav-text">扩容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新分区用于扩容"><span class="nav-number">2.1.</span> <span class="nav-text">新分区用于扩容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开始分区"><span class="nav-number">2.1.1.</span> <span class="nav-text">开始分区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扩容-分区所在的LV（逻辑卷）"><span class="nav-number">2.1.2.</span> <span class="nav-text">扩容/分区所在的LV（逻辑卷）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缩小其他分区扩容根分区"><span class="nav-number">2.2.</span> <span class="nav-text">缩小其他分区扩容根分区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他命令"><span class="nav-number">3.</span> <span class="nav-text">其他命令</span></a></li></ol></div>
             
 
           </div>

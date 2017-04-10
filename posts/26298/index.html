@@ -1,0 +1,1454 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic|Georgia:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="邮件服务器," />
+
+
+
+
+
+  <link rel="alternate" href="https://www.leolan.top/atom.xml" title="LeoLan's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/200.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="域名解析第三方接管域名这种情况适合域名由第三方接管的情况下。目前的设置是这样的，就是MX记录指向mail.域名，最后通过A记录指向IP。这种情况下访问mail.域名也会跳转到IP:80的网站上。@ ---》MX ---》mail.域名mail ---》A ---》IP
+
+域名未被第三方接管这种情况(域名在原营运商的DNS下[没有被第三方DNS接管的情况下])：第三方DNS接管之后，即使没有开启">
+<meta property="og:type" content="article">
+<meta property="og:title" content="邮件服务器、第三方邮件服务">
+<meta property="og:url" content="https://www.leolan.top/posts/26298/index.html">
+<meta property="og:site_name" content="LeoLan's Blog">
+<meta property="og:description" content="域名解析第三方接管域名这种情况适合域名由第三方接管的情况下。目前的设置是这样的，就是MX记录指向mail.域名，最后通过A记录指向IP。这种情况下访问mail.域名也会跳转到IP:80的网站上。@ ---》MX ---》mail.域名mail ---》A ---》IP
+
+域名未被第三方接管这种情况(域名在原营运商的DNS下[没有被第三方DNS接管的情况下])：第三方DNS接管之后，即使没有开启">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/youjianjiexi.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/%E9%82%AE%E4%BB%B6%E8%A7%A3%E6%9E%902.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/1111132435363.png">
+<meta property="og:updated_time" content="2017-04-10T01:54:46.413Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="邮件服务器、第三方邮件服务">
+<meta name="twitter:description" content="域名解析第三方接管域名这种情况适合域名由第三方接管的情况下。目前的设置是这样的，就是MX记录指向mail.域名，最后通过A记录指向IP。这种情况下访问mail.域名也会跳转到IP:80的网站上。@ ---》MX ---》mail.域名mail ---》A ---》IP
+
+域名未被第三方接管这种情况(域名在原营运商的DNS下[没有被第三方DNS接管的情况下])：第三方DNS接管之后，即使没有开启">
+<meta name="twitter:image" content="http://ofyfogrgx.bkt.clouddn.com/youjianjiexi.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6343395544286627000',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.leolan.top/posts/26298/"/>
+
+
+
+
+
+  <title> 邮件服务器、第三方邮件服务 | LeoLan's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">LeoLan's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">有时候正是不报期望的人做出了人们不敢期望之事！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签云
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时间轴
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-commenting"></i> <br />
+            
+            给我留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            本地搜索
+          </a>
+        </li>
+               
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://www.leolan.top/posts/26298/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="LeoLan">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="LeoLan's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="LeoLan's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                邮件服务器、第三方邮件服务
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-08T12:16:50+08:00">
+              2017-04-08
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2017-04-10T09:54:46+08:00">
+              2017-04-10
+            </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/环境搭建/" itemprop="url" rel="index">
+                    <span itemprop="name">环境搭建</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/posts/26298/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/26298/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/posts/26298/" class="leancloud_visitors" data-flag-title="邮件服务器、第三方邮件服务">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+         <span class="post-time">
+     &nbsp; | &nbsp;
+           <span class="post-meta-item-icon">
+             <i class="fa fa-calendar-o"></i>
+           </span>
+           <span class="post-meta-item-text">字数统计:</span>
+           <span class="post-count">1,310(字)</span>
+           
+         </span>
+
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h1><h2 id="第三方接管域名"><a href="#第三方接管域名" class="headerlink" title="第三方接管域名"></a>第三方接管域名</h2><p><strong>这种情况适合域名由第三方接管的情况下。</strong><br><img src="http://ofyfogrgx.bkt.clouddn.com/youjianjiexi.png" alt=""><br>目前的设置是这样的，就是MX记录指向<strong>mail.域名</strong>，最后通过A记录指向IP。这种情况下访问<strong>mail.域名</strong>也会跳转到IP:80的网站上。<br>@ ---》MX ---》mail.域名<br>mail ---》A ---》IP</p>
+<hr>
+<h2 id="域名未被第三方接管"><a href="#域名未被第三方接管" class="headerlink" title="域名未被第三方接管"></a>域名未被第三方接管</h2><p><strong>这种情况(域名在原营运商的DNS下[没有被第三方DNS接管的情况下])</strong>：<br>第三方DNS接管之后，即使没有开启<strong>mail.域名</strong>的解析也会被解析到DNS的主服务器上，导致发送到该邮件地址时导向到了DNS的服务器IP上，找不到邮件服务器的IP，于是变成了退信，无法接收。<br><img src="http://ofyfogrgx.bkt.clouddn.com/%E9%82%AE%E4%BB%B6%E8%A7%A3%E6%9E%902.png" alt=""><br>这种情况下<strong>有@ —》A记录指向了IP</strong>则不需要<strong>mail —》A记录指向了IP</strong>如果域名已经备案过了，可以设置<strong>隐性跳转</strong>（看图红字）；这访问<strong>mail.域名</strong>时就能打开网页版的邮箱。</p>
+<p>域名后面的点是自动加的，不同的DNS解析方式不同，有的会自动加点，有的不会，没有影响。</p>
+<hr>
+<p>TXT记录一般用来做反垃圾邮件，格式有很多种：</p>
+<ul>
+<li>“v=spf1 include:spf.mail.域名 ~all”</li>
+<li>“v=spf1 ip4:邮件服务器的IP ~all”</li>
+</ul>
+<hr>
+<h2 id="域名解析测试验证"><a href="#域名解析测试验证" class="headerlink" title="域名解析测试验证"></a>域名解析测试验证</h2><p>win中用nslookup测试：<a href="http://jingyan.baidu.com/article/ce09321b2bae742bfe858f59.html" target="_blank" rel="external">http://jingyan.baidu.com/article/ce09321b2bae742bfe858f59.html</a><br>只要符合<strong>@ ---》MX ---》mail.域名 ---》A ---》IP</strong>这样的话应该是正确的，能够正常收发邮件。</p>
+<p><a href="http://www.cnblogs.com/moonvan/archive/2010/08/24/1807003.html" target="_blank" rel="external">http://www.cnblogs.com/moonvan/archive/2010/08/24/1807003.html</a><br><a href="http://www.docin.com/p-580267583.html" target="_blank" rel="external">http://www.docin.com/p-580267583.html</a></p>
+<hr>
+<h1 id="邮件服务器的搭建"><a href="#邮件服务器的搭建" class="headerlink" title="邮件服务器的搭建"></a>邮件服务器的搭建</h1><p>一定要注意路由的端口转发有没有开启<br><strong>邮件服务的端口</strong>：<br>SMTP(发):25 　　SSL:465　　TLS:587<br>IMAP(收):143　　SSL:993<br>POP3(收):110　　SSL:995</p>
+<hr>
+<h1 id="群晖DSM搭建邮件服务器"><a href="#群晖DSM搭建邮件服务器" class="headerlink" title="群晖DSM搭建邮件服务器"></a>群晖DSM搭建邮件服务器</h1><p>群晖里自带了邮件服务器的套件，安装之后简单设置就可以使用了。<br><img src="http://ofyfogrgx.bkt.clouddn.com/1111132435363.png" alt=""><br>主机名（FQDN）:填域名就行，最后的邮件地址就是：<strong>user_name@域名</strong>；如果填的是<strong>mail.域名</strong>，则最后得到的邮件地址是：<strong>user_name@mail.域名</strong></p>
+<ul>
+<li>IMAP/POP3 功能全部开启。</li>
+<li>控制面板中安全性中最好开启<strong>自动封锁</strong>（邮件服务器很容易遭受攻击）</li>
+<li>控制面板安全性中默认没有开启防火墙的，如果需要路由的端口转发的话即使不开防火墙也是比较安全的（云服务器默认是开启全部端口，这时就需要防火墙来保护了）。</li>
+<li>设置完成后，记得设置端口转发，在win下用<code>telnet “IP” “port”</code>测试是否能通。</li>
+</ul>
+<p><strong>邮件客户端</strong>：</p>
+<ul>
+<li>网页版的做好把80端口映射到群晖的80端口，这个访问web版的mail就可以直接使用：<strong>http(s)://IP/mail</strong> 就能访问，登录账号密码就是系统中设置的用户的账户密码（不是用邮件地址登录）</li>
+<li>第三方邮件客户端登录时看清是邮件地址还是账户，邮件地址是：<strong>user_name@域名</strong> 用户：user_name 密码：user_passwd<br>地址是：<strong>smtp.域名、imap.域名、pop3.域名</strong>   对应的的端口看你是不是用SSL。</li>
+</ul>
+<hr>
+<h1 id="Windsws-Server搭建邮件服务器"><a href="#Windsws-Server搭建邮件服务器" class="headerlink" title="Windsws_Server搭建邮件服务器"></a>Windsws_Server搭建邮件服务器</h1><p>不建议使用什么破解版的邮件服务器软件（免费版的还是可以的免费版不是破解版），非常不安全。预算充足的话可以考虑收费的服务。</p>
+<font color="#A52A2A">看参考，但不要一步一步设置，全部看完再设置。</font><strong>参考</strong>：<br><a href="http://liujb.blog.51cto.com/269257/1784870" target="_blank" rel="external">http://liujb.blog.51cto.com/269257/1784870</a><br><a href="http://www.2cto.com/os/201604/498893.html" target="_blank" rel="external">http://www.2cto.com/os/201604/498893.html</a><br><a href="http://www.mamicode.com/info-detail-1370549.html" target="_blank" rel="external">http://www.mamicode.com/info-detail-1370549.html</a><br><a href="http://www.360doc.com/content/09/0924/12/32573_6370328.shtml" target="_blank" rel="external">http://www.360doc.com/content/09/0924/12/32573_6370328.shtml</a><br><a href="https://msdn.microsoft.com/zh-cn/library/dn292550.aspx" target="_blank" rel="external">https://msdn.microsoft.com/zh-cn/library/dn292550.aspx</a><br><br><br><font color="#A52A2A">截图看本地磁盘的备份文件夹（重要）</font>
+
+<hr>
+<h2 id="测试SMTP-包括中继模式）"><a href="#测试SMTP-包括中继模式）" class="headerlink" title="测试SMTP(包括中继模式）"></a>测试SMTP(包括中继模式）</h2><ul>
+<li><p>创建一个txt文档，如名为email.txt，内容如下：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">FROM</span>:mail.travelwebsite<span class="variable">@travelwebsite</span>.com     #发件箱必须为你在邮件服务器上设置的那个账户，否则没有权限发送</div><div class="line"><span class="attribute">TO</span>:<span class="number">842632422</span><span class="variable">@qq</span>.com</div><div class="line"><span class="attribute">SUBJECT</span>: Test email from SMTP</div><div class="line">This is a test email sent from my SMTP server</div></pre></td></tr></table></figure>
+</li>
+<li><p>将email.txt复制到如下路径<strong>c:\inetpub\mailroot\pickup</strong>(SMTP的默认目录)</p>
+</li>
+</ul>
+<p>关于报错：<a href="https://torontoprogrammer.ca/2011/04/fixing-the-cannot-get-iis-pickup-directory-error-in-asp-net/" target="_blank" rel="external">IIS 拾取目录</a></p>
+<p>Windows下通过程序实现SMTP发送邮件（本人未测试）：<a href="http://www.jianshu.com/p/5005a8642103" target="_blank" rel="external">http://www.jianshu.com/p/5005a8642103</a></p>
+<hr>
+<h2 id="Win中免费的邮件系统"><a href="#Win中免费的邮件系统" class="headerlink" title="Win中免费的邮件系统"></a>Win中免费的邮件系统</h2><p><a href="https://www.hmailserver.org/" target="_blank" rel="external">https://www.hmailserver.org/</a><br><a href="https://macallan-mail-solution.en.softonic.com/" target="_blank" rel="external">https://macallan-mail-solution.en.softonic.com/</a><br><a href="http://download.cnet.com/ArGoSoft-Mail-Server-Freeware/3000-2369_4-10038331.html" target="_blank" rel="external">http://download.cnet.com/ArGoSoft-Mail-Server-Freeware/3000-2369_4-10038331.html</a><br><a href="http://www.exchangecn.com/exchange2016" target="_blank" rel="external">http://www.exchangecn.com/exchange2016</a></p>
+<hr>
+<hr>
+<h1 id="Linux搭建邮件服务器"><a href="#Linux搭建邮件服务器" class="headerlink" title="Linux搭建邮件服务器"></a>Linux搭建邮件服务器</h1><p><font color="#A52A2A">待整理(还未完成)：</font><br><a href="http://www.cnblogs.com/llius/p/5076235.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">http://www.cnblogs.com/llius/p/5076235.html?utm_source=tuicool&amp;utm_medium=referral</a><br><a href="https://www.freehao123.com/iredmail/" target="_blank" rel="external">https://www.freehao123.com/iredmail/</a><br><a href="http://rfyiamcool.blog.51cto.com/1030776/948744/" target="_blank" rel="external">http://rfyiamcool.blog.51cto.com/1030776/948744/</a><br><a href="http://www.ilanni.com/?cat=936" target="_blank" rel="external">http://www.ilanni.com/?cat=936</a></p>
+<p>centos7邮件：<a href="https://www.fancycoding.com/centos7-mail-server-with-dovecot-postfix-ssl/" target="_blank" rel="external">https://www.fancycoding.com/centos7-mail-server-with-dovecot-postfix-ssl/</a></p>
+<hr>
+<h1 id="第三方邮件服务（企业）"><a href="#第三方邮件服务（企业）" class="headerlink" title="第三方邮件服务（企业）"></a>第三方邮件服务（企业）</h1><h2 id="Office365"><a href="#Office365" class="headerlink" title="Office365"></a>Office365</h2><p>购买了账号后可以填写到自己的邮件服务器中，用作STMP，IMAP，POP3等中继，这样不用设置域名，证书等等，原理就是把自己的服务器转变为客户端一样去链接微软的服务器。</p>
+<p>POP设置（接收）<br>服务器名称: outlook.office365.com<br>端口: 995<br>加密方法: TLS</p>
+<p>IMAP设置（接收）<br>服务器名称: outlook.office365.com<br>端口: 993<br>加密方法: TLS</p>
+<p>SMTP设置（发送）<br>服务器名称: smtp.office365.com<br>端口: 587<br>加密方法: STARTTLS    （也是可以用TLS加密的）</p>
+<hr>
+
+<!--这里是每篇文章的尾巴-->
+<html>
+  <body>
+    <h1>结语</h1>
+      <p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p>
+      <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<!--
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p></blockquote></div>
+    <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎收藏书签，欢迎多提宝贵意见，非常感谢！</p>
+    <footer><strong>Welcome to LeoLan'S BLOG</strong>
+    <cite><a href="#" onclick="go_my_site()" rel="external">Leo Lan Blog Share For you!</a></cite></footer></blockquote></div>
+  </body>
+</html>
+-->
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div style="margin-bottom: 10px;font-size: 16px;font-weight: 600;">想请我吃辣条吗？</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/alipay.jpg" alt="LeoLan Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/weixinpay.png" alt="LeoLan WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>微信打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+<h3 id="最近访客"><a href="#最近访客" class="headerlink" title="最近访客"></a>最近访客</h3><div class="ds-recent-visitors" data-num-items="36" data-avatar-size="42" id="ds-recent-visitors"></div>
+      
+    </div>
+
+<!--这是文章底部标签云链接
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/邮件服务器/" rel="tag"># 邮件服务器</a>
+          
+        </div>
+      
+-->
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/57404/" rel="next" title="珠海迈科笔记">
+                <i class="fa fa-chevron-left"></i> 珠海迈科笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/37588/" rel="prev" title="TFS代码管理">
+                TFS代码管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js;
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="posts/26298/"
+           data-title="邮件服务器、第三方邮件服务" data-url="https://www.leolan.top/posts/26298/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="LeoLan" />
+          <p class="site-author-name" itemprop="name">LeoLan</p>
+          <p class="site-description motion-element" itemprop="description">Better late than never</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">77</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">102</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="https://www.leolan.top/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+
+<!-- 自定义High一下的功能 -->
+
+ <a rel="alternate" class="mw-harlem_shake_slow wobble shake" href='javascript:(
+   function go() {
+   var songs = [
+               "http://ofyfogrgx.bkt.clouddn.com/tongxingSibel%20-%20Im%20Sorry.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com/Music-sunburst.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com//blog/Apple%20&%20Stone%20-%20Lost.mp3"
+   ];
+
+   function c() {
+       var e = document.createElement("link");
+       e.setAttribute("type", "text/css");
+       e.setAttribute("rel", "stylesheet");
+       e.setAttribute("href", f);
+       e.setAttribute("class", l);
+       document.body.appendChild(e)
+   }
+   function h() {
+       var e = document.getElementsByClassName(l);
+       for (var t = 0; t < e.length; t++) {
+           document.body.removeChild(e[t])
+       }
+   }
+   function p() {
+       var e = document.createElement("div");
+       e.setAttribute("class", a);
+       document.body.appendChild(e);
+       setTimeout(function() {
+           document.body.removeChild(e)
+       }, 100)
+   }
+   function d(e) {
+       return {
+           height : e.offsetHeight,
+           width : e.offsetWidth
+       }
+   }
+   function v(i) {
+       var s = d(i);
+       return s.height > e && s.height < n && s.width > t && s.width < r
+   }
+   function m(e) {
+       var t = e;
+       var n = 0;
+       while (!!t) {
+           n += t.offsetTop;
+           t = t.offsetParent
+       }
+       return n
+   }
+   function g() {
+       var e = document.documentElement;
+       if (!!window.innerWidth) {
+           return window.innerHeight
+       } else if (e && !isNaN(e.clientHeight)) {
+           return e.clientHeight
+       }
+       return 0
+   }
+   function y() {
+       if (window.pageYOffset) {
+           return window.pageYOffset
+       }
+       return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+   }
+   function E(e) {
+       var t = m(e);
+       return t >= w && t <= b + w
+   }
+   function S() {
+       var e = document.getElementById("audio_element_id");
+       if(e != null){
+           var index = parseInt(e.getAttribute("curSongIndex"));
+           if(index > songs.length - 2) {
+               index = 0;
+           } else {
+               index++;
+           }
+           e.setAttribute("curSongIndex", index);
+           N();
+       }
+       e.src = i;
+       e.play()
+   }
+   function x(e) {
+       e.className += " " + s + " " + o
+   }
+   function T(e) {
+       e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+   }
+   function N() {
+       var e = document.getElementsByClassName(s);
+       var t = new RegExp("\\b" + s + "\\b");
+       for (var n = 0; n < e.length; ) {
+           e[n].className = e[n].className.replace(t, "")
+       }
+   }
+   function initAudioEle() {
+       var e = document.getElementById("audio_element_id");
+       if(e === null){
+           e = document.createElement("audio");
+           e.setAttribute("class", l);
+           e.setAttribute("curSongIndex", 0);
+           e.id = "audio_element_id";
+           e.loop = false;
+           e.bgcolor = 0;
+           e.addEventListener("canplay", function() {
+           setTimeout(function() {
+               x(k)
+           }, 500);
+           setTimeout(function() {
+               N();
+               p();
+               for (var e = 0; e < O.length; e++) {
+                   T(O[e])
+               }
+           }, 15500)
+       }, true);
+       e.addEventListener("ended", function() {
+           N();
+           h();
+           go();
+       }, true);
+       e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+       document.body.appendChild(e);
+       }
+   }
+   
+   initAudioEle();
+   var e = 30;
+   var t = 30;
+   var n = 350;
+   var r = 350;
+   var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+   var i = songs[curSongIndex];
+   
+   var s = "mw-harlem_shake_me";
+   var o = "im_first";
+   var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+   var a = "mw-strobe_light";
+   var f = "//7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css";
+   /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css
+   //7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css  七牛云地址
+   var f = "/css/harlem_shake_style.css"; */
+   
+
+   var l = "mw_added_css";
+   var b = g();
+   var w = y();
+   var C = document.getElementsByTagName("*");
+   var k = null;
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           if (E(A)) {
+               k = A;
+               break
+           }
+       }
+   }
+   if (A === null) {
+       console.warn("Could not find a node of the right size. Please try a different page.");
+       return
+   }
+   c();
+   S();
+   var O = [];
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           O.push(A)
+       }
+   }
+   })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High</a>
+</div>
+         <!-- end High一下 -->
+
+          
+
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/myleolan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://coding.net/u/leolan" target="_blank" title="Coding">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  Coding
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://quickconnect.to/myleolan" target="_blank" title="Cloud1">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud1
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://git.oschina.net/leolan" target="_blank" title="OSchina">
+                  
+                    <i class="fa fa-fw fa-git-square"></i>
+                  
+                  OSchina
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://leolan.picp.net" target="_blank" title="Cloud2">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud2
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.leolan.top/posts/44568/" target="_blank" title="Links">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Links
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-heartbeat"></i>
+              友链
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://jerry.hk/" title="Jerry Locke" target="_blank" rel="external nofollow">Jerry Locke</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://login926.top" title="Raintons" target="_blank" rel="external nofollow">Raintons</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.anotherhome.net" title="DIYgod" target="_blank" rel="external nofollow">DIYgod</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mblack.cn/" title="小黑" target="_blank" rel="external nofollow">小黑</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.iamlj.com/" title="Jing's Blog" target="_blank" rel="external nofollow">Jing's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://cyang.tech/" title="cyang's blog" target="_blank" rel="external nofollow">cyang's blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.showerlee.com/" title="一路向北" target="_blank" rel="external nofollow">一路向北</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://lusongsong.com/" title="卢松松的博客" target="_blank" rel="external nofollow">卢松松的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://v.lusongsong.com/" title="松松视频" target="_blank" rel="external nofollow">松松视频</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#域名解析"><span class="nav-number">1.</span> <span class="nav-text">域名解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第三方接管域名"><span class="nav-number">1.1.</span> <span class="nav-text">第三方接管域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#域名未被第三方接管"><span class="nav-number">1.2.</span> <span class="nav-text">域名未被第三方接管</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#域名解析测试验证"><span class="nav-number">1.3.</span> <span class="nav-text">域名解析测试验证</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#邮件服务器的搭建"><span class="nav-number">2.</span> <span class="nav-text">邮件服务器的搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#群晖DSM搭建邮件服务器"><span class="nav-number">3.</span> <span class="nav-text">群晖DSM搭建邮件服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Windsws-Server搭建邮件服务器"><span class="nav-number">4.</span> <span class="nav-text">Windsws_Server搭建邮件服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#测试SMTP-包括中继模式）"><span class="nav-number">4.1.</span> <span class="nav-text">测试SMTP(包括中继模式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Win中免费的邮件系统"><span class="nav-number">4.2.</span> <span class="nav-text">Win中免费的邮件系统</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux搭建邮件服务器"><span class="nav-number">5.</span> <span class="nav-text">Linux搭建邮件服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三方邮件服务（企业）"><span class="nav-number">6.</span> <span class="nav-text">第三方邮件服务（企业）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Office365"><span class="nav-number">6.1.</span> <span class="nav-text">Office365</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LeoLan</span>
+</div>
+
+<div class="powered-by">
+  <a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备16026009号-2</a>  |  本站总访问量<span id="busuanzi_value_site_pv"></span>
+</div>
+
+<div class="theme-info">
+  您是第<span id="busuanzi_value_site_uv"></span>位小伙伴
+</div>
+
+<script async src="/js/src/busuanzi.pure.mini.js">
+</script>
+
+<!--
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+-->
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"leolan"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '/js/src/duoshuo_embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementById('footer')
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("zieuxKa4IjAP6VgxxvBe4vkj-gzGzoHsz", "MHGN54IEuofFNV1AROiRkEoG");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js" count="50" zindex="-2" opacity="1" color="0,104,183"></script>
+
+</body>
+</html>

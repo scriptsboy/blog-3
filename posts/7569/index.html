@@ -99,18 +99,21 @@
 
 
 <meta name="description" content="Docker是基于容器的，直接用带有相应功能的镜像就行，而不必运行Docker容器来自己搭建环境那么麻烦。Docker 中文网 http://www.docker.org.cn
-常用操作12345678910docker pull url    #下载镜像docker images      #查看镜像ID#运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上docker ru">
+常用操作docker pull url    #下载镜像docker images      #查看镜像ID
+运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上这条命令是在启动容器之前运行的docke">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker常用命令">
 <meta property="og:url" content="https://www.leolan.top/posts/7569/index.html">
 <meta property="og:site_name" content="LeoLan's Blog">
 <meta property="og:description" content="Docker是基于容器的，直接用带有相应功能的镜像就行，而不必运行Docker容器来自己搭建环境那么麻烦。Docker 中文网 http://www.docker.org.cn
-常用操作12345678910docker pull url    #下载镜像docker images      #查看镜像ID#运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上docker ru">
-<meta property="og:updated_time" content="2017-02-27T09:45:00.715Z">
+常用操作docker pull url    #下载镜像docker images      #查看镜像ID
+运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上这条命令是在启动容器之前运行的docke">
+<meta property="og:updated_time" content="2017-04-06T09:45:25.197Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker常用命令">
 <meta name="twitter:description" content="Docker是基于容器的，直接用带有相应功能的镜像就行，而不必运行Docker容器来自己搭建环境那么麻烦。Docker 中文网 http://www.docker.org.cn
-常用操作12345678910docker pull url    #下载镜像docker images      #查看镜像ID#运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上docker ru">
+常用操作docker pull url    #下载镜像docker images      #查看镜像ID
+运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上这条命令是在启动容器之前运行的docke">
 
 
 
@@ -353,8 +356,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2017-02-27T17:45:00+08:00">
-              2017-02-27
+            <time title="Post modified" itemprop="dateModified" datetime="2017-04-06T17:45:25+08:00">
+              2017-04-06
             </time>
             
           </span>
@@ -411,7 +414,7 @@
              <i class="fa fa-calendar-o"></i>
            </span>
            <span class="post-meta-item-text">字数统计:</span>
-           <span class="post-count">1,374(字)</span>
+           <span class="post-count">1,565(字)</span>
            
          </span>
 
@@ -432,7 +435,14 @@
 
       
         <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>Docker是基于容器的，直接用带有相应功能的镜像就行，而不必运行Docker容器来自己搭建环境那么麻烦。<br>Docker 中文网 <a href="http://www.docker.org.cn" target="_blank" rel="external">http://www.docker.org.cn</a></p>
-<h1 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h1><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">docker pull url    <span class="comment">#下载镜像</span></div><div class="line">docker images      <span class="comment">#查看镜像ID</span></div><div class="line"></div><div class="line"><span class="comment">#运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上</span></div><div class="line">docker <span class="keyword">run</span><span class="bash"> -i -p 4000:80 -t imagesID /bin/bash</span></div><div class="line"></div><div class="line">docker ps          <span class="comment">#查看正在运行的容器及容器ID</span></div><div class="line"></div><div class="line"><span class="comment">#提交当前版本制作新的镜像</span></div><div class="line">docker commit xxx(容器ID) new_images_name</div></pre></td></tr></table></figure>
+<h1 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h1><p>docker pull url    #下载镜像<br>docker images      #查看镜像ID</p>
+<h2 id="运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上"><a href="#运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上" class="headerlink" title="运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上"></a>运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上</h2><p>这条命令是在启动容器之前运行的<br>docker run -i -p 4000:80 -t imagesID /bin/bash</p>
+<p><code>docker ps</code>   查看正在运行的容器及容器ID</p>
+<h2 id="交互进入正在运行的容器02"><a href="#交互进入正在运行的容器02" class="headerlink" title="交互进入正在运行的容器02"></a>交互进入正在运行的容器02</h2><p>这条命令是在启动容器之后需要修改配置运行的，变更的数据会被保存下来。容器不会退出后台运行。<code>docker ps</code>   查看正在运行的容器及容器ID，容器名。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">docker exec -it Nginx01 <span class="regexp">/bin/</span>sh  <span class="comment">#Nginx01是容器名</span></div><div class="line">或者</div><div class="line">docker exec -it d48b21a7e439 <span class="regexp">/bin/</span>sh   <span class="comment">#d48b21a7e439是CONTAINER ID</span></div><div class="line"></div><div class="line">退出直接用<span class="keyword">exit</span>命令退出即可。</div></pre></td></tr></table></figure>
+<h2 id="交互进入正在运行的容器03"><a href="#交互进入正在运行的容器03" class="headerlink" title="交互进入正在运行的容器03"></a>交互进入正在运行的容器03</h2><p>和上面的docker exec命令语法是一样的；但这条命令有一个缺点，只要这个连接终止，或者使用了exit命令，容器就会退出后台运行<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker <span class="built_in">attach</span> Nginx01</div><div class="line">或者</div><div class="line">docker <span class="built_in">attach</span> d48b21a7e439</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="提交当前版本制作新的镜像"><a href="#提交当前版本制作新的镜像" class="headerlink" title="提交当前版本制作新的镜像"></a>提交当前版本制作新的镜像</h2><p>docker commit xxx(容器ID) new_images_name</p>
 <hr>
 <h1 id="查看docker信息"><a href="#查看docker信息" class="headerlink" title="查看docker信息"></a>查看docker信息</h1><h2 id="查看docker版本"><a href="#查看docker版本" class="headerlink" title="查看docker版本"></a>查看docker版本</h2><p><code>docker version</code></p>
 <h2 id="显示docker系统的信息"><a href="#显示docker系统的信息" class="headerlink" title="显示docker系统的信息"></a>显示docker系统的信息</h2><p><code>docker info</code> </p>
@@ -690,7 +700,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">68</span>
+              <span class="site-state-item-count">77</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -707,7 +717,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-count">102</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -723,6 +733,7 @@
             </a>
 
 <!-- 自定义High一下的功能 -->
+
  <a rel="alternate" class="mw-harlem_shake_slow wobble shake" href='javascript:(
    function go() {
    var songs = [
@@ -730,8 +741,6 @@
                "http://ofyfogrgx.bkt.clouddn.com/Music-sunburst.mp3",
                "http://ofyfogrgx.bkt.clouddn.com//blog/Apple%20&%20Stone%20-%20Lost.mp3"
    ];
-
-<!--"http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150103346.mp3","http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150842689.mp3",-->
 
    function c() {
        var e = document.createElement("link");
@@ -864,10 +873,11 @@
    var o = "im_first";
    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
    var a = "mw-strobe_light";
+   var f = "//7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css";
    /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css
-   //7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css  七牛云地址*/
-   var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";  
-   /* var f = "/css/harlem_shake_style.css";  */
+   //7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css  七牛云地址
+   var f = "/css/harlem_shake_style.css"; */
+   
 
    var l = "mw_added_css";
    var b = g();
@@ -899,7 +909,9 @@
    })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High</a>
 </div>
          <!-- end High一下 -->
-        
+
+          
+
 
         <div class="links-of-author motion-element">
           
@@ -1027,7 +1039,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用操作"><span class="nav-number">1.</span> <span class="nav-text">常用操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看docker信息"><span class="nav-number">2.</span> <span class="nav-text">查看docker信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看docker版本"><span class="nav-number">2.1.</span> <span class="nav-text">查看docker版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示docker系统的信息"><span class="nav-number">2.2.</span> <span class="nav-text">显示docker系统的信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对image的操作"><span class="nav-number">3.</span> <span class="nav-text">对image的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#检索、搜索image"><span class="nav-number">3.1.</span> <span class="nav-text">检索、搜索image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载image"><span class="nav-number">3.2.</span> <span class="nav-text">下载image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列出镜像列表"><span class="nav-number">3.3.</span> <span class="nav-text">列出镜像列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除一个或者多个镜像"><span class="nav-number">3.4.</span> <span class="nav-text">删除一个或者多个镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示一个镜像的历史"><span class="nav-number">3.5.</span> <span class="nav-text">显示一个镜像的历史</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动容器"><span class="nav-number">4.</span> <span class="nav-text">启动容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在容器中运行”echo”命令，输出”hello-word”"><span class="nav-number">4.1.</span> <span class="nav-text">在容器中运行”echo”命令，输出”hello word”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交互式进入容器中"><span class="nav-number">4.2.</span> <span class="nav-text">交互式进入容器中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在容器中安装新的程序"><span class="nav-number">4.3.</span> <span class="nav-text">在容器中安装新的程序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看容器（ps）"><span class="nav-number">5.</span> <span class="nav-text">查看容器（ps）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#列出当前所有正在运行的container"><span class="nav-number">5.1.</span> <span class="nav-text">列出当前所有正在运行的container</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列出所有的container"><span class="nav-number">5.2.</span> <span class="nav-text">列出所有的container</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列出最近一次启动的container"><span class="nav-number">5.3.</span> <span class="nav-text">列出最近一次启动的container</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#保存对容器的修改（commit）"><span class="nav-number">6.</span> <span class="nav-text">保存对容器的修改（commit）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#保存对容器的修改"><span class="nav-number">6.1.</span> <span class="nav-text">保存对容器的修改</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对容器的操作"><span class="nav-number">7.</span> <span class="nav-text">对容器的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#删除所有容器"><span class="nav-number">7.1.</span> <span class="nav-text">删除所有容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除单个容器参数："><span class="nav-number">7.2.</span> <span class="nav-text">删除单个容器参数：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#停止、启动、杀死一个容器"><span class="nav-number">7.3.</span> <span class="nav-text">停止、启动、杀死一个容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从一个容器中取日志"><span class="nav-number">7.4.</span> <span class="nav-text">从一个容器中取日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列出一个容器里面被改变的文件或者目录"><span class="nav-number">7.5.</span> <span class="nav-text">列出一个容器里面被改变的文件或者目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示一个运行的容器里面的进程信息"><span class="nav-number">7.6.</span> <span class="nav-text">显示一个运行的容器里面的进程信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从容器里面拷贝文件-目录到本地一个路径"><span class="nav-number">7.7.</span> <span class="nav-text">从容器里面拷贝文件/目录到本地一个路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启一个正在运行的容器"><span class="nav-number">7.8.</span> <span class="nav-text">重启一个正在运行的容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附加到一个运行的容器上面"><span class="nav-number">7.9.</span> <span class="nav-text">附加到一个运行的容器上面</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#保存和加载镜像（save、load）"><span class="nav-number">8.</span> <span class="nav-text">保存和加载镜像（save、load）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#保存镜像到一个tar包"><span class="nav-number">8.1.</span> <span class="nav-text">保存镜像到一个tar包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加载一个tar包格式的镜像"><span class="nav-number">8.2.</span> <span class="nav-text">加载一个tar包格式的镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A、B机器间拷贝数据"><span class="nav-number">8.3.</span> <span class="nav-text">A、B机器间拷贝数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#登录registry-server（login）"><span class="nav-number">9.</span> <span class="nav-text">登录registry server（login）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#登陆registry-server"><span class="nav-number">9.1.</span> <span class="nav-text">登陆registry server</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发布image（push）"><span class="nav-number">10.</span> <span class="nav-text">发布image（push）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#发布docker镜像"><span class="nav-number">10.1.</span> <span class="nav-text">发布docker镜像</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#根据Dockerfile-构建出一个容器"><span class="nav-number">11.</span> <span class="nav-text">根据Dockerfile 构建出一个容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#build"><span class="nav-number">11.1.</span> <span class="nav-text">build</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料："><span class="nav-number">12.</span> <span class="nav-text">参考资料：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用操作"><span class="nav-number">1.</span> <span class="nav-text">常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上"><span class="nav-number">1.1.</span> <span class="nav-text">运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交互进入正在运行的容器02"><span class="nav-number">1.2.</span> <span class="nav-text">交互进入正在运行的容器02</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交互进入正在运行的容器03"><span class="nav-number">1.3.</span> <span class="nav-text">交互进入正在运行的容器03</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交当前版本制作新的镜像"><span class="nav-number">1.4.</span> <span class="nav-text">提交当前版本制作新的镜像</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看docker信息"><span class="nav-number">2.</span> <span class="nav-text">查看docker信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看docker版本"><span class="nav-number">2.1.</span> <span class="nav-text">查看docker版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示docker系统的信息"><span class="nav-number">2.2.</span> <span class="nav-text">显示docker系统的信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对image的操作"><span class="nav-number">3.</span> <span class="nav-text">对image的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#检索、搜索image"><span class="nav-number">3.1.</span> <span class="nav-text">检索、搜索image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载image"><span class="nav-number">3.2.</span> <span class="nav-text">下载image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列出镜像列表"><span class="nav-number">3.3.</span> <span class="nav-text">列出镜像列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除一个或者多个镜像"><span class="nav-number">3.4.</span> <span class="nav-text">删除一个或者多个镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示一个镜像的历史"><span class="nav-number">3.5.</span> <span class="nav-text">显示一个镜像的历史</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动容器"><span class="nav-number">4.</span> <span class="nav-text">启动容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在容器中运行”echo”命令，输出”hello-word”"><span class="nav-number">4.1.</span> <span class="nav-text">在容器中运行”echo”命令，输出”hello word”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交互式进入容器中"><span class="nav-number">4.2.</span> <span class="nav-text">交互式进入容器中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在容器中安装新的程序"><span class="nav-number">4.3.</span> <span class="nav-text">在容器中安装新的程序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看容器（ps）"><span class="nav-number">5.</span> <span class="nav-text">查看容器（ps）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#列出当前所有正在运行的container"><span class="nav-number">5.1.</span> <span class="nav-text">列出当前所有正在运行的container</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列出所有的container"><span class="nav-number">5.2.</span> <span class="nav-text">列出所有的container</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列出最近一次启动的container"><span class="nav-number">5.3.</span> <span class="nav-text">列出最近一次启动的container</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#保存对容器的修改（commit）"><span class="nav-number">6.</span> <span class="nav-text">保存对容器的修改（commit）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#保存对容器的修改"><span class="nav-number">6.1.</span> <span class="nav-text">保存对容器的修改</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对容器的操作"><span class="nav-number">7.</span> <span class="nav-text">对容器的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#删除所有容器"><span class="nav-number">7.1.</span> <span class="nav-text">删除所有容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除单个容器参数："><span class="nav-number">7.2.</span> <span class="nav-text">删除单个容器参数：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#停止、启动、杀死一个容器"><span class="nav-number">7.3.</span> <span class="nav-text">停止、启动、杀死一个容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从一个容器中取日志"><span class="nav-number">7.4.</span> <span class="nav-text">从一个容器中取日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列出一个容器里面被改变的文件或者目录"><span class="nav-number">7.5.</span> <span class="nav-text">列出一个容器里面被改变的文件或者目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示一个运行的容器里面的进程信息"><span class="nav-number">7.6.</span> <span class="nav-text">显示一个运行的容器里面的进程信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从容器里面拷贝文件-目录到本地一个路径"><span class="nav-number">7.7.</span> <span class="nav-text">从容器里面拷贝文件/目录到本地一个路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启一个正在运行的容器"><span class="nav-number">7.8.</span> <span class="nav-text">重启一个正在运行的容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附加到一个运行的容器上面"><span class="nav-number">7.9.</span> <span class="nav-text">附加到一个运行的容器上面</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#保存和加载镜像（save、load）"><span class="nav-number">8.</span> <span class="nav-text">保存和加载镜像（save、load）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#保存镜像到一个tar包"><span class="nav-number">8.1.</span> <span class="nav-text">保存镜像到一个tar包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加载一个tar包格式的镜像"><span class="nav-number">8.2.</span> <span class="nav-text">加载一个tar包格式的镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A、B机器间拷贝数据"><span class="nav-number">8.3.</span> <span class="nav-text">A、B机器间拷贝数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#登录registry-server（login）"><span class="nav-number">9.</span> <span class="nav-text">登录registry server（login）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#登陆registry-server"><span class="nav-number">9.1.</span> <span class="nav-text">登陆registry server</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发布image（push）"><span class="nav-number">10.</span> <span class="nav-text">发布image（push）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#发布docker镜像"><span class="nav-number">10.1.</span> <span class="nav-text">发布docker镜像</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#根据Dockerfile-构建出一个容器"><span class="nav-number">11.</span> <span class="nav-text">根据Dockerfile 构建出一个容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#build"><span class="nav-number">11.1.</span> <span class="nav-text">build</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料："><span class="nav-number">12.</span> <span class="nav-text">参考资料：</span></a></li></ol></div>
             
 
           </div>

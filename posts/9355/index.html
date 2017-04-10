@@ -98,22 +98,22 @@
 
 
 
-<meta name="description" content="Nginx负载均衡Nginx负载均衡适用于小规模的集群，负载均衡的本质是所有客户端都从服务器A入口，最后被分流到B,C,D,E…服务器，出口也是经过服务器A，这样在同一个机房内只需要一个公网IP即可实现分流，但服务器A的压力及带宽是关键部分。（对于大集群可以用DNS分流）
+<meta name="description" content="Nginx安装参考：https://wizardforcel.gitbooks.io/nginx-doc/content/Text/1.3_install.htmlhttps://wizardforcel.gitbooks.io/nginx-doc/content/Text/6.html
 
-Nginx反向代理Nginx反向代理是所有客户端都从服务器A入口，最后被分流到B,C,D,E…服务器，之后的连接是和各自">
+Nginx负载均衡Nginx负载均衡适用于小规模的集群，负载均衡的本质是所有客户端都从服务器A入口，最后">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nginx">
 <meta property="og:url" content="https://www.leolan.top/posts/9355/index.html">
 <meta property="og:site_name" content="LeoLan's Blog">
-<meta property="og:description" content="Nginx负载均衡Nginx负载均衡适用于小规模的集群，负载均衡的本质是所有客户端都从服务器A入口，最后被分流到B,C,D,E…服务器，出口也是经过服务器A，这样在同一个机房内只需要一个公网IP即可实现分流，但服务器A的压力及带宽是关键部分。（对于大集群可以用DNS分流）
+<meta property="og:description" content="Nginx安装参考：https://wizardforcel.gitbooks.io/nginx-doc/content/Text/1.3_install.htmlhttps://wizardforcel.gitbooks.io/nginx-doc/content/Text/6.html
 
-Nginx反向代理Nginx反向代理是所有客户端都从服务器A入口，最后被分流到B,C,D,E…服务器，之后的连接是和各自">
-<meta property="og:updated_time" content="2017-02-27T08:47:33.048Z">
+Nginx负载均衡Nginx负载均衡适用于小规模的集群，负载均衡的本质是所有客户端都从服务器A入口，最后">
+<meta property="og:updated_time" content="2017-03-09T07:39:18.177Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx">
-<meta name="twitter:description" content="Nginx负载均衡Nginx负载均衡适用于小规模的集群，负载均衡的本质是所有客户端都从服务器A入口，最后被分流到B,C,D,E…服务器，出口也是经过服务器A，这样在同一个机房内只需要一个公网IP即可实现分流，但服务器A的压力及带宽是关键部分。（对于大集群可以用DNS分流）
+<meta name="twitter:description" content="Nginx安装参考：https://wizardforcel.gitbooks.io/nginx-doc/content/Text/1.3_install.htmlhttps://wizardforcel.gitbooks.io/nginx-doc/content/Text/6.html
 
-Nginx反向代理Nginx反向代理是所有客户端都从服务器A入口，最后被分流到B,C,D,E…服务器，之后的连接是和各自">
+Nginx负载均衡Nginx负载均衡适用于小规模的集群，负载均衡的本质是所有客户端都从服务器A入口，最后">
 
 
 
@@ -356,8 +356,8 @@ Nginx反向代理Nginx反向代理是所有客户端都从服务器A入口，最
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2017-02-27T16:47:33+08:00">
-              2017-02-27
+            <time title="Post modified" itemprop="dateModified" datetime="2017-03-09T15:39:18+08:00">
+              2017-03-09
             </time>
             
           </span>
@@ -414,7 +414,7 @@ Nginx反向代理Nginx反向代理是所有客户端都从服务器A入口，最
              <i class="fa fa-calendar-o"></i>
            </span>
            <span class="post-meta-item-text">字数统计:</span>
-           <span class="post-count">901(字)</span>
+           <span class="post-count">938(字)</span>
            
          </span>
 
@@ -434,7 +434,9 @@ Nginx反向代理Nginx反向代理是所有客户端都从服务器A入口，最
       
 
       
-        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="Nginx负载均衡"><a href="#Nginx负载均衡" class="headerlink" title="Nginx负载均衡"></a>Nginx负载均衡</h1><p>Nginx负载均衡适用于小规模的集群，负载均衡的本质是所有客户端都从服务器A入口，最后被分流到B,C,D,E…服务器，出口也是经过服务器A，这样在同一个机房内只需要一个公网IP即可实现分流，但服务器A的压力及带宽是关键部分。（对于大集群可以用DNS分流）</p>
+        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="Nginx安装"><a href="#Nginx安装" class="headerlink" title="Nginx安装"></a>Nginx安装</h1><p>参考：<a href="https://wizardforcel.gitbooks.io/nginx-doc/content/Text/1.3_install.html" target="_blank" rel="external">https://wizardforcel.gitbooks.io/nginx-doc/content/Text/1.3_install.html</a><br><a href="https://wizardforcel.gitbooks.io/nginx-doc/content/Text/6.html" target="_blank" rel="external">https://wizardforcel.gitbooks.io/nginx-doc/content/Text/6.html</a></p>
+<hr>
+<h1 id="Nginx负载均衡"><a href="#Nginx负载均衡" class="headerlink" title="Nginx负载均衡"></a>Nginx负载均衡</h1><p>Nginx负载均衡适用于小规模的集群，负载均衡的本质是所有客户端都从服务器A入口，最后被分流到B,C,D,E…服务器，出口也是经过服务器A，这样在同一个机房内只需要一个公网IP即可实现分流，但服务器A的压力及带宽是关键部分。（对于大集群可以用DNS分流）</p>
 <hr>
 <h1 id="Nginx反向代理"><a href="#Nginx反向代理" class="headerlink" title="Nginx反向代理"></a>Nginx反向代理</h1><p>Nginx反向代理是所有客户端都从服务器A入口，最后被分流到B,C,D,E…服务器，之后的连接是和各自的B,C,D,E…服务器的连接，这样每台服务器都要有公网IP可跨机房，也减少了服务器A的压力。</p>
 <hr>
@@ -479,7 +481,7 @@ Nginx反向代理Nginx反向代理是所有客户端都从服务器A入口，最
 <p>简单的Nginx负载均衡和反向代理：</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">upstream</span> linuxleolan&#123;</div><div class="line"><span class="comment">#server后用ip,不要用localhost和127.0.0.1，这两个地址测试不了。</span></div><div class="line">                <span class="attribute">server</span> <span class="number">123.207.92.209</span>;</div><div class="line">                <span class="attribute">server</span> <span class="number">123.207.92.245</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="section">server</span> &#123;</div><div class="line">    <span class="attribute">listen</span>       <span class="number">80</span>;</div><div class="line">    <span class="attribute">server_name</span>  localhost;           <span class="comment">#localhost或www.xxx.com(域名指向此服务器)</span></div><div class="line"></div><div class="line">    <span class="attribute">location</span> / &#123;</div><div class="line">        <span class="attribute">proxy_pass</span> http://linuxidcleolan;   <span class="comment">#调用upstream里设定的变量</span></div><div class="line">        <span class="attribute">proxy_buffering</span> <span class="literal">off</span>;          <span class="comment">#缓存开关</span></div><div class="line">        </div><div class="line">        <span class="comment">#以下三行是获得前端IP，反向代理设置。</span></div><div class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</div><div class="line">        <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</div><div class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <hr>
-<p>参考资料：<br><a href="http://www.ilanni.com/?p=7631" target="_blank" rel="external">http://www.ilanni.com/?p=7631</a><br><a href="http://www.cnblogs.com/jacktang/p/3669115.html" target="_blank" rel="external">http://www.cnblogs.com/jacktang/p/3669115.html</a><br><a href="http://www.linuxidc.com/Linux/2016-04/130350.htm" target="_blank" rel="external">http://www.linuxidc.com/Linux/2016-04/130350.htm</a><br><a href="http://www.cnblogs.com/mecity/archive/2011/06/20/2085529.html" target="_blank" rel="external">http://www.cnblogs.com/mecity/archive/2011/06/20/2085529.html</a></p>
+<p>参考资料：<br><a href="http://www.ilanni.com/?p=7631" target="_blank" rel="external">http://www.ilanni.com/?p=7631</a><br><a href="http://www.cnblogs.com/jacktang/p/3669115.html" target="_blank" rel="external">http://www.cnblogs.com/jacktang/p/3669115.html</a><br><a href="http://www.linuxidc.com/Linux/2016-04/130350.htm" target="_blank" rel="external">http://www.linuxidc.com/Linux/2016-04/130350.htm</a><br><a href="http://www.cnblogs.com/mecity/archive/2011/06/20/2085529.html" target="_blank" rel="external">http://www.cnblogs.com/mecity/archive/2011/06/20/2085529.html</a><br><a href="https://wizardforcel.gitbooks.io/nginx-doc/content/Text/7.4_loadbalance.html" target="_blank" rel="external">https://wizardforcel.gitbooks.io/nginx-doc/content/Text/7.4_loadbalance.html</a></p>
 <hr>
 
 <!--这里是每篇文章的尾巴-->
@@ -655,7 +657,7 @@ Nginx反向代理Nginx反向代理是所有客户端都从服务器A入口，最
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">68</span>
+              <span class="site-state-item-count">77</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -672,7 +674,7 @@ Nginx反向代理Nginx反向代理是所有客户端都从服务器A入口，最
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-count">102</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -688,6 +690,7 @@ Nginx反向代理Nginx反向代理是所有客户端都从服务器A入口，最
             </a>
 
 <!-- 自定义High一下的功能 -->
+
  <a rel="alternate" class="mw-harlem_shake_slow wobble shake" href='javascript:(
    function go() {
    var songs = [
@@ -695,8 +698,6 @@ Nginx反向代理Nginx反向代理是所有客户端都从服务器A入口，最
                "http://ofyfogrgx.bkt.clouddn.com/Music-sunburst.mp3",
                "http://ofyfogrgx.bkt.clouddn.com//blog/Apple%20&%20Stone%20-%20Lost.mp3"
    ];
-
-<!--"http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150103346.mp3","http://ofyfogrgx.bkt.clouddn.com/blog/20161115/150842689.mp3",-->
 
    function c() {
        var e = document.createElement("link");
@@ -829,10 +830,11 @@ Nginx反向代理Nginx反向代理是所有客户端都从服务器A入口，最
    var o = "im_first";
    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
    var a = "mw-strobe_light";
+   var f = "//7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css";
    /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css
-   //7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css  七牛云地址*/
-   var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";  
-   /* var f = "/css/harlem_shake_style.css";  */
+   //7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css  七牛云地址
+   var f = "/css/harlem_shake_style.css"; */
+   
 
    var l = "mw_added_css";
    var b = g();
@@ -864,7 +866,9 @@ Nginx反向代理Nginx反向代理是所有客户端都从服务器A入口，最
    })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High</a>
 </div>
          <!-- end High一下 -->
-        
+
+          
+
 
         <div class="links-of-author motion-element">
           
@@ -992,7 +996,7 @@ Nginx反向代理Nginx反向代理是所有客户端都从服务器A入口，最
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx负载均衡"><span class="nav-number">1.</span> <span class="nav-text">Nginx负载均衡</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx反向代理"><span class="nav-number">2.</span> <span class="nav-text">Nginx反向代理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参数"><span class="nav-number">3.</span> <span class="nav-text">参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#upstream模块常用参数"><span class="nav-number">3.1.</span> <span class="nav-text">upstream模块常用参数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置部分"><span class="nav-number">4.</span> <span class="nav-text">配置部分</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx安装"><span class="nav-number">1.</span> <span class="nav-text">Nginx安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx负载均衡"><span class="nav-number">2.</span> <span class="nav-text">Nginx负载均衡</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx反向代理"><span class="nav-number">3.</span> <span class="nav-text">Nginx反向代理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参数"><span class="nav-number">4.</span> <span class="nav-text">参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#upstream模块常用参数"><span class="nav-number">4.1.</span> <span class="nav-text">upstream模块常用参数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置部分"><span class="nav-number">5.</span> <span class="nav-text">配置部分</span></a></li></ol></div>
             
 
           </div>
