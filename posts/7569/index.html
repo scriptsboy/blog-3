@@ -99,21 +99,21 @@
 
 
 <meta name="description" content="Docker是基于容器的，直接用带有相应功能的镜像就行，而不必运行Docker容器来自己搭建环境那么麻烦。Docker 中文网 http://www.docker.org.cn
-常用操作docker pull url    #下载镜像docker images      #查看镜像ID
-运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上这条命令是在启动容器之前运行的docke">
+常用操作12docker pull url    #下载镜像docker images      #查看镜像ID
+运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上这条命令是在启动容器之前运行的doc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker常用命令">
 <meta property="og:url" content="https://www.leolan.top/posts/7569/index.html">
 <meta property="og:site_name" content="LeoLan's Blog">
 <meta property="og:description" content="Docker是基于容器的，直接用带有相应功能的镜像就行，而不必运行Docker容器来自己搭建环境那么麻烦。Docker 中文网 http://www.docker.org.cn
-常用操作docker pull url    #下载镜像docker images      #查看镜像ID
-运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上这条命令是在启动容器之前运行的docke">
-<meta property="og:updated_time" content="2017-04-06T09:45:25.197Z">
+常用操作12docker pull url    #下载镜像docker images      #查看镜像ID
+运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上这条命令是在启动容器之前运行的doc">
+<meta property="og:updated_time" content="2017-04-10T06:08:38.920Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker常用命令">
 <meta name="twitter:description" content="Docker是基于容器的，直接用带有相应功能的镜像就行，而不必运行Docker容器来自己搭建环境那么麻烦。Docker 中文网 http://www.docker.org.cn
-常用操作docker pull url    #下载镜像docker images      #查看镜像ID
-运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上这条命令是在启动容器之前运行的docke">
+常用操作12docker pull url    #下载镜像docker images      #查看镜像ID
+运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上这条命令是在启动容器之前运行的doc">
 
 
 
@@ -356,8 +356,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2017-04-06T17:45:25+08:00">
-              2017-04-06
+            <time title="Post modified" itemprop="dateModified" datetime="2017-04-10T14:08:38+08:00">
+              2017-04-10
             </time>
             
           </span>
@@ -414,7 +414,7 @@
              <i class="fa fa-calendar-o"></i>
            </span>
            <span class="post-meta-item-text">字数统计:</span>
-           <span class="post-count">1,565(字)</span>
+           <span class="post-count">1,566(字)</span>
            
          </span>
 
@@ -435,8 +435,8 @@
 
       
         <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>Docker是基于容器的，直接用带有相应功能的镜像就行，而不必运行Docker容器来自己搭建环境那么麻烦。<br>Docker 中文网 <a href="http://www.docker.org.cn" target="_blank" rel="external">http://www.docker.org.cn</a></p>
-<h1 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h1><p>docker pull url    #下载镜像<br>docker images      #查看镜像ID</p>
-<h2 id="运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上"><a href="#运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上" class="headerlink" title="运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上"></a>运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上</h2><p>这条命令是在启动容器之前运行的<br>docker run -i -p 4000:80 -t imagesID /bin/bash</p>
+<h1 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h1><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">docker</span> pull url    <span class="comment">#下载镜像</span></div><div class="line">docker images      <span class="comment">#查看镜像ID</span></div></pre></td></tr></table></figure>
+<h2 id="运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上"><a href="#运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上" class="headerlink" title="运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上"></a>运行并交互方式进入容器的bash，同时暴露端口把80映射到4000上</h2><p>这条命令是在启动容器之前运行的<br><code>docker run -i -p 4000:80 -t imagesID /bin/bash</code></p>
 <p><code>docker ps</code>   查看正在运行的容器及容器ID</p>
 <h2 id="交互进入正在运行的容器02"><a href="#交互进入正在运行的容器02" class="headerlink" title="交互进入正在运行的容器02"></a>交互进入正在运行的容器02</h2><p>这条命令是在启动容器之后需要修改配置运行的，变更的数据会被保存下来。容器不会退出后台运行。<code>docker ps</code>   查看正在运行的容器及容器ID，容器名。</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">docker exec -it Nginx01 <span class="regexp">/bin/</span>sh  <span class="comment">#Nginx01是容器名</span></div><div class="line">或者</div><div class="line">docker exec -it d48b21a7e439 <span class="regexp">/bin/</span>sh   <span class="comment">#d48b21a7e439是CONTAINER ID</span></div><div class="line"></div><div class="line">退出直接用<span class="keyword">exit</span>命令退出即可。</div></pre></td></tr></table></figure>
@@ -700,7 +700,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">77</span>
+              <span class="site-state-item-count">79</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -717,7 +717,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">102</span>
+                <span class="site-state-item-count">104</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

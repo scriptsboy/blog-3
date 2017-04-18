@@ -114,7 +114,7 @@ root用户登录，un">
 
 Centos 7Centos 6的内核版本太低，需要升级内核及整个系统的依赖库，比较复杂，不建议使用。
 root用户登录，un">
-<meta property="og:updated_time" content="2017-02-27T08:47:33.065Z">
+<meta property="og:updated_time" content="2017-04-10T05:57:50.985Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker安装、管理">
 <meta name="twitter:description" content="Docker官网下载：https://www.docker.com/products/overview
@@ -365,8 +365,8 @@ root用户登录，un">
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2017-02-27T16:47:33+08:00">
-              2017-02-27
+            <time title="Post modified" itemprop="dateModified" datetime="2017-04-10T13:57:50+08:00">
+              2017-04-10
             </time>
             
           </span>
@@ -423,7 +423,7 @@ root用户登录，un">
              <i class="fa fa-calendar-o"></i>
            </span>
            <span class="post-meta-item-text">字数统计:</span>
-           <span class="post-count">966(字)</span>
+           <span class="post-count">967(字)</span>
            
          </span>
 
@@ -450,7 +450,7 @@ root用户登录，un">
 <h1 id="Centos-7"><a href="#Centos-7" class="headerlink" title="Centos 7"></a>Centos 7</h1><p>Centos 6的内核版本太低，需要升级内核及整个系统的依赖库，比较复杂，不建议使用。</p>
 <p>root用户登录，<code>uname -r</code>确保内核版本大于等于3.10<br><code>yum update</code>更新系统</p>
 <p>加入Docker源<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">tee /etc/yum<span class="selector-class">.repos</span><span class="selector-class">.d</span>/docker<span class="selector-class">.repo</span> &lt;&lt;-<span class="string">'EOF'</span></div><div class="line">[dockerrepo]</div><div class="line">name=Docker Repository</div><div class="line">baseurl=https:<span class="comment">//yum.dockerproject.org/repo/main/centos/7/</span></div><div class="line">enabled=<span class="number">1</span></div><div class="line">gpgcheck=<span class="number">1</span></div><div class="line">gpgkey=https:<span class="comment">//yum.dockerproject.org/gpg</span></div><div class="line">EOF</div></pre></td></tr></table></figure></p>
-<p>安装<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum <span class="keyword">install</span> docker-<span class="keyword">engine</span></div><div class="line">systemctl <span class="keyword">enable</span> docker.service</div><div class="line">systemctl <span class="keyword">start</span> docker</div></pre></td></tr></table></figure></p>
+<p>安装<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum <span class="keyword">install</span> docker-<span class="keyword">engine</span> -y</div><div class="line">systemctl <span class="keyword">enable</span> docker.service</div><div class="line">systemctl <span class="keyword">start</span> docker</div></pre></td></tr></table></figure></p>
 <hr>
 <h1 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h1><p>下载最新exe安装包进行安装。安装后看能否正常运行Docker，出现闪退，报错等等，先打开virtual虚拟机看虚拟机是否正常，虚拟机报错很可能是3个Windows字体的<strong>.dll</strong>文件被破解了，下载原版替换，<strong>C:\Program Files\Oracle\VirtualBox\drivers\vboxdrv\VBoxDrv.inf</strong>文件右键安装，然后重启。</p>
 <h2 id="Windows-10以下"><a href="#Windows-10以下" class="headerlink" title="Windows 10以下"></a>Windows 10以下</h2><p>Boot2docker：<br><a href="https://github.com/boot2docker/windows-installer/releases" target="_blank" rel="external">https://github.com/boot2docker/windows-installer/releases</a></p>
@@ -665,7 +665,7 @@ root用户登录，un">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">77</span>
+              <span class="site-state-item-count">79</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -682,7 +682,7 @@ root用户登录，un">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">102</span>
+                <span class="site-state-item-count">104</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

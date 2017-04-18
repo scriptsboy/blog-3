@@ -110,8 +110,18 @@
 域名未被第三方接管这种情况(域名在原营运商的DNS下[没有被第三方DNS接管的情况下])：第三方DNS接管之后，即使没有开启">
 <meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/youjianjiexi.png">
 <meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/%E9%82%AE%E4%BB%B6%E8%A7%A3%E6%9E%902.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/image/20170413/155031547.png">
 <meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/1111132435363.png">
-<meta property="og:updated_time" content="2017-04-10T01:54:46.413Z">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/image/20170410/130228027.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/image/20170410/130242002.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/image/20170410/130253217.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/image/20170410/130301361.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/image/20170410/130308602.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/image/20170410/130315954.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/image/20170410/130322970.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/image/20170410/130330673.png">
+<meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/image/20170410/130338673.png">
+<meta property="og:updated_time" content="2017-04-13T09:16:48.221Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="邮件服务器、第三方邮件服务">
 <meta name="twitter:description" content="域名解析第三方接管域名这种情况适合域名由第三方接管的情况下。目前的设置是这样的，就是MX记录指向mail.域名，最后通过A记录指向IP。这种情况下访问mail.域名也会跳转到IP:80的网站上。@ ---》MX ---》mail.域名mail ---》A ---》IP
@@ -360,8 +370,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2017-04-10T09:54:46+08:00">
-              2017-04-10
+            <time title="Post modified" itemprop="dateModified" datetime="2017-04-13T17:16:48+08:00">
+              2017-04-13
             </time>
             
           </span>
@@ -418,7 +428,7 @@
              <i class="fa fa-calendar-o"></i>
            </span>
            <span class="post-meta-item-text">字数统计:</span>
-           <span class="post-count">1,310(字)</span>
+           <span class="post-count">1,534(字)</span>
            
          </span>
 
@@ -449,6 +459,9 @@
 <li>“v=spf1 ip4:邮件服务器的IP ~all”</li>
 </ul>
 <hr>
+<h2 id="DNS反向解析（PTR）"><a href="#DNS反向解析（PTR）" class="headerlink" title="DNS反向解析（PTR）"></a>DNS反向解析（PTR）</h2><p>解析测试：<a href="https://mxtoolbox.com/SuperTool.aspx" target="_blank" rel="external">https://mxtoolbox.com/SuperTool.aspx</a><br>输入邮件服务器的域名检测<br><img src="http://ofyfogrgx.bkt.clouddn.com/image/20170413/155031547.png" alt="mark"><br>如果是没有设置DNS反向解析，有些邮件服务器是不接受没有PTR的邮件的，会拒收，导致无法发送给对方，也会导致部分邮件丢件。</p>
+<p>这时需要联系ISP（提供公网固定IP的服务商），叫他们添加DNS反向解析，把邮件服务器IP，指向到你的邮件域名。如果ISP无法帮你设置，在<strong>群晖Synology</strong>中可以把网线直连NAS，不要经过路由，在NAS中获取IP，然后搭建DNS服务器。在<strong>Win_Server</strong>中也可以添加DNS服务器后添加反向解析，具体方法请自行搜索。</p>
+<hr>
 <h2 id="域名解析测试验证"><a href="#域名解析测试验证" class="headerlink" title="域名解析测试验证"></a>域名解析测试验证</h2><p>win中用nslookup测试：<a href="http://jingyan.baidu.com/article/ce09321b2bae742bfe858f59.html" target="_blank" rel="external">http://jingyan.baidu.com/article/ce09321b2bae742bfe858f59.html</a><br>只要符合<strong>@ ---》MX ---》mail.域名 ---》A ---》IP</strong>这样的话应该是正确的，能够正常收发邮件。</p>
 <p><a href="http://www.cnblogs.com/moonvan/archive/2010/08/24/1807003.html" target="_blank" rel="external">http://www.cnblogs.com/moonvan/archive/2010/08/24/1807003.html</a><br><a href="http://www.docin.com/p-580267583.html" target="_blank" rel="external">http://www.docin.com/p-580267583.html</a></p>
 <hr>
@@ -468,17 +481,18 @@
 </ul>
 <hr>
 <h1 id="Windsws-Server搭建邮件服务器"><a href="#Windsws-Server搭建邮件服务器" class="headerlink" title="Windsws_Server搭建邮件服务器"></a>Windsws_Server搭建邮件服务器</h1><p>不建议使用什么破解版的邮件服务器软件（免费版的还是可以的免费版不是破解版），非常不安全。预算充足的话可以考虑收费的服务。</p>
-<font color="#A52A2A">看参考，但不要一步一步设置，全部看完再设置。</font><strong>参考</strong>：<br><a href="http://liujb.blog.51cto.com/269257/1784870" target="_blank" rel="external">http://liujb.blog.51cto.com/269257/1784870</a><br><a href="http://www.2cto.com/os/201604/498893.html" target="_blank" rel="external">http://www.2cto.com/os/201604/498893.html</a><br><a href="http://www.mamicode.com/info-detail-1370549.html" target="_blank" rel="external">http://www.mamicode.com/info-detail-1370549.html</a><br><a href="http://www.360doc.com/content/09/0924/12/32573_6370328.shtml" target="_blank" rel="external">http://www.360doc.com/content/09/0924/12/32573_6370328.shtml</a><br><a href="https://msdn.microsoft.com/zh-cn/library/dn292550.aspx" target="_blank" rel="external">https://msdn.microsoft.com/zh-cn/library/dn292550.aspx</a><br><br><br><font color="#A52A2A">截图看本地磁盘的备份文件夹（重要）</font>
-
+<p><font color="#A52A2A">看参考，但不要一步一步设置，全部看完再设置。</font><strong>参考</strong>：<br><a href="http://liujb.blog.51cto.com/269257/1784870" target="_blank" rel="external">http://liujb.blog.51cto.com/269257/1784870</a><br><a href="http://www.2cto.com/os/201604/498893.html" target="_blank" rel="external">http://www.2cto.com/os/201604/498893.html</a><br><a href="http://www.mamicode.com/info-detail-1370549.html" target="_blank" rel="external">http://www.mamicode.com/info-detail-1370549.html</a><br><a href="http://www.360doc.com/content/09/0924/12/32573_6370328.shtml" target="_blank" rel="external">http://www.360doc.com/content/09/0924/12/32573_6370328.shtml</a><br><a href="https://msdn.microsoft.com/zh-cn/library/dn292550.aspx" target="_blank" rel="external">https://msdn.microsoft.com/zh-cn/library/dn292550.aspx</a></p>
+<p><img src="http://ofyfogrgx.bkt.clouddn.com/image/20170410/130228027.png" alt="mark"><br><img src="http://ofyfogrgx.bkt.clouddn.com/image/20170410/130242002.png" alt="mark"><br><img src="http://ofyfogrgx.bkt.clouddn.com/image/20170410/130253217.png" alt="mark"><br><img src="http://ofyfogrgx.bkt.clouddn.com/image/20170410/130301361.png" alt="mark"><br><img src="http://ofyfogrgx.bkt.clouddn.com/image/20170410/130308602.png" alt="mark"><br><img src="http://ofyfogrgx.bkt.clouddn.com/image/20170410/130315954.png" alt="mark"><br><img src="http://ofyfogrgx.bkt.clouddn.com/image/20170410/130322970.png" alt="mark"><br><img src="http://ofyfogrgx.bkt.clouddn.com/image/20170410/130330673.png" alt="mark"><br><img src="http://ofyfogrgx.bkt.clouddn.com/image/20170410/130338673.png" alt="mark"></p>
 <hr>
 <h2 id="测试SMTP-包括中继模式）"><a href="#测试SMTP-包括中继模式）" class="headerlink" title="测试SMTP(包括中继模式）"></a>测试SMTP(包括中继模式）</h2><ul>
 <li><p>创建一个txt文档，如名为email.txt，内容如下：</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">FROM</span>:mail.travelwebsite<span class="variable">@travelwebsite</span>.com     #发件箱必须为你在邮件服务器上设置的那个账户，否则没有权限发送</div><div class="line"><span class="attribute">TO</span>:<span class="number">842632422</span><span class="variable">@qq</span>.com</div><div class="line"><span class="attribute">SUBJECT</span>: Test email from SMTP</div><div class="line">This is a test email sent from my SMTP server</div></pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">FROM</span>:mail.travelwebsite<span class="variable">@travelwebsite</span>.com     #发件箱必须为你在邮件服务器上设置的那个账户，否则没有权限发送</div><div class="line"><span class="attribute">TO</span>:<span class="number">842632422</span><span class="variable">@qq</span>.com</div><div class="line"><span class="attribute">SUBJECT</span>: Test email from SMTP</div><div class="line">This is a test email sent from my SMTP server</div><div class="line"></div><div class="line">[上面要空一行，不然邮件的内容会变成标题]这里是body，邮件内容</div></pre></td></tr></table></figure>
 </li>
 <li><p>将email.txt复制到如下路径<strong>c:\inetpub\mailroot\pickup</strong>(SMTP的默认目录)</p>
 </li>
 </ul>
 <p>关于报错：<a href="https://torontoprogrammer.ca/2011/04/fixing-the-cannot-get-iis-pickup-directory-error-in-asp-net/" target="_blank" rel="external">IIS 拾取目录</a></p>
+<p>windows测试工具：<br><a href="http://ofyfogrgx.bkt.clouddn.com/image/20170413/170002671.exe" target="_blank" rel="external">http://ofyfogrgx.bkt.clouddn.com/image/20170413/170002671.exe</a><br><a href="http://ofyfogrgx.bkt.clouddn.com/image/20170413/170020980.exe" target="_blank" rel="external">http://ofyfogrgx.bkt.clouddn.com/image/20170413/170020980.exe</a></p>
 <p>Windows下通过程序实现SMTP发送邮件（本人未测试）：<a href="http://www.jianshu.com/p/5005a8642103" target="_blank" rel="external">http://www.jianshu.com/p/5005a8642103</a></p>
 <hr>
 <h2 id="Win中免费的邮件系统"><a href="#Win中免费的邮件系统" class="headerlink" title="Win中免费的邮件系统"></a>Win中免费的邮件系统</h2><p><a href="https://www.hmailserver.org/" target="_blank" rel="external">https://www.hmailserver.org/</a><br><a href="https://macallan-mail-solution.en.softonic.com/" target="_blank" rel="external">https://macallan-mail-solution.en.softonic.com/</a><br><a href="http://download.cnet.com/ArGoSoft-Mail-Server-Freeware/3000-2369_4-10038331.html" target="_blank" rel="external">http://download.cnet.com/ArGoSoft-Mail-Server-Freeware/3000-2369_4-10038331.html</a><br><a href="http://www.exchangecn.com/exchange2016" target="_blank" rel="external">http://www.exchangecn.com/exchange2016</a></p>
@@ -666,7 +680,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">77</span>
+              <span class="site-state-item-count">79</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -683,7 +697,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">102</span>
+                <span class="site-state-item-count">104</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1005,7 +1019,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#域名解析"><span class="nav-number">1.</span> <span class="nav-text">域名解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第三方接管域名"><span class="nav-number">1.1.</span> <span class="nav-text">第三方接管域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#域名未被第三方接管"><span class="nav-number">1.2.</span> <span class="nav-text">域名未被第三方接管</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#域名解析测试验证"><span class="nav-number">1.3.</span> <span class="nav-text">域名解析测试验证</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#邮件服务器的搭建"><span class="nav-number">2.</span> <span class="nav-text">邮件服务器的搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#群晖DSM搭建邮件服务器"><span class="nav-number">3.</span> <span class="nav-text">群晖DSM搭建邮件服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Windsws-Server搭建邮件服务器"><span class="nav-number">4.</span> <span class="nav-text">Windsws_Server搭建邮件服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#测试SMTP-包括中继模式）"><span class="nav-number">4.1.</span> <span class="nav-text">测试SMTP(包括中继模式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Win中免费的邮件系统"><span class="nav-number">4.2.</span> <span class="nav-text">Win中免费的邮件系统</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux搭建邮件服务器"><span class="nav-number">5.</span> <span class="nav-text">Linux搭建邮件服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三方邮件服务（企业）"><span class="nav-number">6.</span> <span class="nav-text">第三方邮件服务（企业）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Office365"><span class="nav-number">6.1.</span> <span class="nav-text">Office365</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#域名解析"><span class="nav-number">1.</span> <span class="nav-text">域名解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第三方接管域名"><span class="nav-number">1.1.</span> <span class="nav-text">第三方接管域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#域名未被第三方接管"><span class="nav-number">1.2.</span> <span class="nav-text">域名未被第三方接管</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS反向解析（PTR）"><span class="nav-number">1.3.</span> <span class="nav-text">DNS反向解析（PTR）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#域名解析测试验证"><span class="nav-number">1.4.</span> <span class="nav-text">域名解析测试验证</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#邮件服务器的搭建"><span class="nav-number">2.</span> <span class="nav-text">邮件服务器的搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#群晖DSM搭建邮件服务器"><span class="nav-number">3.</span> <span class="nav-text">群晖DSM搭建邮件服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Windsws-Server搭建邮件服务器"><span class="nav-number">4.</span> <span class="nav-text">Windsws_Server搭建邮件服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#测试SMTP-包括中继模式）"><span class="nav-number">4.1.</span> <span class="nav-text">测试SMTP(包括中继模式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Win中免费的邮件系统"><span class="nav-number">4.2.</span> <span class="nav-text">Win中免费的邮件系统</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux搭建邮件服务器"><span class="nav-number">5.</span> <span class="nav-text">Linux搭建邮件服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三方邮件服务（企业）"><span class="nav-number">6.</span> <span class="nav-text">第三方邮件服务（企业）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Office365"><span class="nav-number">6.1.</span> <span class="nav-text">Office365</span></a></li></ol></li></ol></div>
             
 
           </div>
