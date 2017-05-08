@@ -98,18 +98,13 @@
 
 
 
-<meta name="description" content="动态扩容LVM是在磁盘分区和文件系统之间添加的一个逻辑层，来为文件系统屏蔽下层磁盘分区布局，提供一个抽象的盘卷，在盘卷上建立文件系统。首先我们讨论以下几个LVM术语：
-
-物理存储介质（The physical media）：这里指系统的存储设备：硬盘，如：/dev/hda1、/dev/sda等等，是存储系统最低层的存储单元。
-物理卷（physical volume）：物理卷就是指硬盘分区或从逻">
+<meta name="description" content="动态扩容LVM是在磁盘分区和文件系统之间添加的一个逻辑层，来为文件系统屏蔽下层磁盘分区布局，提供一个抽象的盘卷，在盘卷上建立文件系统。首先我们讨论以下几个LVM术语：  物理存储介质（The physical media）：这里指系统的存储设备：硬盘，如：/dev/hda1、/dev/sda等等，是存储系统最低层的存储单元。 物理卷（physical volume）：物理卷就是指硬盘分区或从逻">
+<meta name="keywords" content="LVM磁盘管理,LVM扩容">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LVM磁盘管理">
 <meta property="og:url" content="https://www.leolan.top/posts/13541/index.html">
-<meta property="og:site_name" content="LeoLan's Blog">
-<meta property="og:description" content="动态扩容LVM是在磁盘分区和文件系统之间添加的一个逻辑层，来为文件系统屏蔽下层磁盘分区布局，提供一个抽象的盘卷，在盘卷上建立文件系统。首先我们讨论以下几个LVM术语：
-
-物理存储介质（The physical media）：这里指系统的存储设备：硬盘，如：/dev/hda1、/dev/sda等等，是存储系统最低层的存储单元。
-物理卷（physical volume）：物理卷就是指硬盘分区或从逻">
+<meta property="og:site_name" content="LeoLan&#39;s Blog">
+<meta property="og:description" content="动态扩容LVM是在磁盘分区和文件系统之间添加的一个逻辑层，来为文件系统屏蔽下层磁盘分区布局，提供一个抽象的盘卷，在盘卷上建立文件系统。首先我们讨论以下几个LVM术语：  物理存储介质（The physical media）：这里指系统的存储设备：硬盘，如：/dev/hda1、/dev/sda等等，是存储系统最低层的存储单元。 物理卷（physical volume）：物理卷就是指硬盘分区或从逻">
 <meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/LVM%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86001.png">
 <meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/LVM%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86002.png">
 <meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/LVM%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86003.png">
@@ -118,10 +113,7 @@
 <meta property="og:updated_time" content="2017-04-10T01:54:46.438Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LVM磁盘管理">
-<meta name="twitter:description" content="动态扩容LVM是在磁盘分区和文件系统之间添加的一个逻辑层，来为文件系统屏蔽下层磁盘分区布局，提供一个抽象的盘卷，在盘卷上建立文件系统。首先我们讨论以下几个LVM术语：
-
-物理存储介质（The physical media）：这里指系统的存储设备：硬盘，如：/dev/hda1、/dev/sda等等，是存储系统最低层的存储单元。
-物理卷（physical volume）：物理卷就是指硬盘分区或从逻">
+<meta name="twitter:description" content="动态扩容LVM是在磁盘分区和文件系统之间添加的一个逻辑层，来为文件系统屏蔽下层磁盘分区布局，提供一个抽象的盘卷，在盘卷上建立文件系统。首先我们讨论以下几个LVM术语：  物理存储介质（The physical media）：这里指系统的存储设备：硬盘，如：/dev/hda1、/dev/sda等等，是存储系统最低层的存储单元。 物理卷（physical volume）：物理卷就是指硬盘分区或从逻">
 <meta name="twitter:image" content="http://ofyfogrgx.bkt.clouddn.com/LVM%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86001.png">
 
 

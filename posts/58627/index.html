@@ -98,19 +98,17 @@
 
 
 
-<meta name="description" content="bat_cmd常用命令::　　　注释md　　　创建目录xcopy　　　xcopy要用绝对路径才能在脚本里运行，遇到目录会提示，要指定参数，具体参数看帮助xcopy /?rd /s /q　　　删除目录如果要删除一个目录下的所有文件，用del命令是无法删除目录的，可以先rd后md。同样移动文件夹时move只能移动文件，而不能移动文件夹；可以先xcopy然后rd。
-puase　　　结尾加上这个，不用">
+<meta name="description" content="bat_cmd常用命令::　　　注释md　　　创建目录xcopy　　　xcopy要用绝对路径才能在脚本里运行，遇到目录会提示，要指定参数，具体参数看帮助xcopy /?rd /s /q　　　删除目录如果要删除一个目录下的所有文件，用del命令是无法删除目录的，可以先rd后md。同样移动文件夹时move只能移动文件，而不能移动文件夹；可以先xcopy然后rd。 puase　　　结尾加上这个，不用">
+<meta name="keywords" content="bat,cmd">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cmd_bat脚本">
 <meta property="og:url" content="https://www.leolan.top/posts/58627/index.html">
-<meta property="og:site_name" content="LeoLan's Blog">
-<meta property="og:description" content="bat_cmd常用命令::　　　注释md　　　创建目录xcopy　　　xcopy要用绝对路径才能在脚本里运行，遇到目录会提示，要指定参数，具体参数看帮助xcopy /?rd /s /q　　　删除目录如果要删除一个目录下的所有文件，用del命令是无法删除目录的，可以先rd后md。同样移动文件夹时move只能移动文件，而不能移动文件夹；可以先xcopy然后rd。
-puase　　　结尾加上这个，不用">
-<meta property="og:updated_time" content="2017-03-31T03:55:09.813Z">
+<meta property="og:site_name" content="LeoLan&#39;s Blog">
+<meta property="og:description" content="bat_cmd常用命令::　　　注释md　　　创建目录xcopy　　　xcopy要用绝对路径才能在脚本里运行，遇到目录会提示，要指定参数，具体参数看帮助xcopy /?rd /s /q　　　删除目录如果要删除一个目录下的所有文件，用del命令是无法删除目录的，可以先rd后md。同样移动文件夹时move只能移动文件，而不能移动文件夹；可以先xcopy然后rd。 puase　　　结尾加上这个，不用">
+<meta property="og:updated_time" content="2017-04-27T10:14:48.487Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cmd_bat脚本">
-<meta name="twitter:description" content="bat_cmd常用命令::　　　注释md　　　创建目录xcopy　　　xcopy要用绝对路径才能在脚本里运行，遇到目录会提示，要指定参数，具体参数看帮助xcopy /?rd /s /q　　　删除目录如果要删除一个目录下的所有文件，用del命令是无法删除目录的，可以先rd后md。同样移动文件夹时move只能移动文件，而不能移动文件夹；可以先xcopy然后rd。
-puase　　　结尾加上这个，不用">
+<meta name="twitter:description" content="bat_cmd常用命令::　　　注释md　　　创建目录xcopy　　　xcopy要用绝对路径才能在脚本里运行，遇到目录会提示，要指定参数，具体参数看帮助xcopy /?rd /s /q　　　删除目录如果要删除一个目录下的所有文件，用del命令是无法删除目录的，可以先rd后md。同样移动文件夹时move只能移动文件，而不能移动文件夹；可以先xcopy然后rd。 puase　　　结尾加上这个，不用">
 
 
 
@@ -353,8 +351,8 @@ puase　　　结尾加上这个，不用">
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2017-03-31T11:55:09+08:00">
-              2017-03-31
+            <time title="Post modified" itemprop="dateModified" datetime="2017-04-27T18:14:48+08:00">
+              2017-04-27
             </time>
             
           </span>
@@ -411,7 +409,7 @@ puase　　　结尾加上这个，不用">
              <i class="fa fa-calendar-o"></i>
            </span>
            <span class="post-meta-item-text">字数统计:</span>
-           <span class="post-count">1,636(字)</span>
+           <span class="post-count">1,653(字)</span>
            
          </span>
 
@@ -487,7 +485,7 @@ puase　　　结尾加上这个，不用">
 <hr>
 <h2 id="示例脚本1"><a href="#示例脚本1" class="headerlink" title="示例脚本1"></a>示例脚本1</h2><p>这个脚本是复制备份文件到指定目录（目录以20170318这种格式创建），并递归查找7天以上的旧内容并删除。<br><figure class="highlight sqf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">@<span class="built_in">echo</span> off</div><div class="line"><span class="built_in">echo</span>  ----------------------------------------------------------- &gt;&gt;SQL_bat.<span class="built_in">log</span></div><div class="line"><span class="built_in">echo</span> SQL Databases backup start %<span class="built_in">Date</span>% - %<span class="built_in">time</span>% &gt;&gt;SQL_bat.<span class="built_in">log</span></div><div class="line"></div><div class="line">::<span class="built_in">set</span> yymmdd=%<span class="built_in">DATE</span>:~<span class="number">0</span>,<span class="number">4</span>%%<span class="built_in">DATE</span>:~<span class="number">5</span>,<span class="number">2</span>%%<span class="built_in">DATE</span>:~<span class="number">8</span>,<span class="number">2</span>%</div><div class="line"><span class="built_in">set</span> yymmdd=%<span class="built_in">date</span>:~<span class="number">10</span>,<span class="number">4</span>%%<span class="built_in">date</span>:~<span class="number">4</span>,<span class="number">2</span>%%<span class="built_in">date</span>:~<span class="number">7</span>,<span class="number">2</span>%</div><div class="line">md F:\DB_Buckup\%yymmdd%</div><div class="line">C:\Windows\System32\xcopy.exe C:\DBBackUp_Plan\* F:\DB_Buckup\%yymmdd% /s /e</div><div class="line">C:\Windows\System32\xcopy.exe /e /i C:\DBBackUp_Plan\* F:\DB_Buckup\%yymmdd%</div><div class="line">rd /s /q C:\DBBackUp_Plan</div><div class="line"></div><div class="line">::下面这段是搜索<span class="number">7</span>天以上旧内容并删除</div><div class="line"><span class="built_in">set</span> file_dir=<span class="string">"F:\DB_Buckup"</span></div><div class="line"><span class="built_in">set</span> bak_dat=<span class="number">7</span></div><div class="line">forfiles /p %file_dir% /S /M *.* /D -%bak_dat% /C <span class="string">"cmd /c echo del@relpath file… &amp; echo. &amp; del /s /q @file"</span> &gt;&gt;SQL_bat.<span class="built_in">log</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> SQL Databases backup <span class="built_in">stop</span> %<span class="built_in">Date</span>% - %<span class="built_in">time</span>% &gt;&gt;SQL_bat.<span class="built_in">log</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span>  ----------------------------------------------------------- &gt;&gt;SQL_bat.<span class="built_in">log</span></div><div class="line"><span class="built_in">goto</span> <span class="keyword">exit</span></div><div class="line">:<span class="keyword">exit</span></div></pre></td></tr></table></figure></p>
 <hr>
-<h1 id="功能实现"><a href="#功能实现" class="headerlink" title="功能实现"></a>功能实现</h1><h2 id="远程执行程序、脚本"><a href="#远程执行程序、脚本" class="headerlink" title="远程执行程序、脚本"></a>远程执行程序、脚本</h2><p>下载PsExec：<a href="https://technet.microsoft.com/en-us/sysinternals/bb897553.aspx" target="_blank" rel="external">https://technet.microsoft.com/en-us/sysinternals/bb897553.aspx</a><br><strong>下载页面有相关的使用说明</strong><br>解压文件后把psexec放到你需要的位置，如果没有添加环境变量就要用绝对路径去执行。</p>
+<h1 id="功能实现"><a href="#功能实现" class="headerlink" title="功能实现"></a>功能实现</h1><h2 id="远程执行程序、脚本"><a href="#远程执行程序、脚本" class="headerlink" title="远程执行程序、脚本"></a>远程执行程序、脚本</h2><p>下载PsExec：<a href="https://technet.microsoft.com/en-us/sysinternals/bb897553.aspx" target="_blank" rel="external">https://technet.microsoft.com/en-us/sysinternals/bb897553.aspx</a><br><strong>下载页面有相关的使用说明</strong><br>解压文件后把psexec放到你需要的位置，如果没有添加环境变量就要用绝对路径去执行。目标主机的防火墙要开135,139这两个端口。</p>
 <p><font color="#EE9A00">常见用法</font><br><strong>语法</strong>：<code>psexec 远程主机名/IP -u 用户名 -p 密码 [参数] [被执行的程序]</code><br>只在局域网内应用成功，外网没有测试过，用IP可能会连接不了远程主机，可能是防火墙的问题，可以改用主机名，在cmd里输入hostname查看主机名。</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">psexec \\hostname -u Administrator -<span class="selector-tag">p</span> mypassword -<span class="selector-tag">i</span> <span class="string">"D:\123.bat"</span></div><div class="line">psexec \\hostname -u Administrator -<span class="selector-tag">p</span> mypassword -c <span class="string">"D:\123.bat"</span></div></pre></td></tr></table></figure>
 <p><strong>参数</strong>：<br>-i　　是执行远程相应位置的脚本。<br>-c　　是复制本地脚本到远程执行。</p>

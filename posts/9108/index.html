@@ -98,25 +98,20 @@
 
 
 
-<meta name="description" content="Btrfs简介Btrfs 是一个 Linux 中的新的写时复制(copy-on-write (COW))的文件系统，目的是实现高级功能的同时着重与容错功能，修复功能以及易于管理。
-Btrfs核心特性：多物理卷支持：btrfs可由多个底层物理卷组成；支持RAID，以联机“添加”、“移除”、“修改”；
-写时复制更新机制(CoW)：复制、更新及替换指针，而非“就地”更新；在文件进行修改的时候，首先将">
+<meta name="description" content="Btrfs简介Btrfs 是一个 Linux 中的新的写时复制(copy-on-write (COW))的文件系统，目的是实现高级功能的同时着重与容错功能，修复功能以及易于管理。 Btrfs核心特性：多物理卷支持：btrfs可由多个底层物理卷组成；支持RAID，以联机“添加”、“移除”、“修改”； 写时复制更新机制(CoW)：复制、更新及替换指针，而非“就地”更新；在文件进行修改的时候，首先将">
+<meta name="keywords" content="Btrfs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Btrfs文件系统">
 <meta property="og:url" content="https://www.leolan.top/posts/9108/index.html">
-<meta property="og:site_name" content="LeoLan's Blog">
-<meta property="og:description" content="Btrfs简介Btrfs 是一个 Linux 中的新的写时复制(copy-on-write (COW))的文件系统，目的是实现高级功能的同时着重与容错功能，修复功能以及易于管理。
-Btrfs核心特性：多物理卷支持：btrfs可由多个底层物理卷组成；支持RAID，以联机“添加”、“移除”、“修改”；
-写时复制更新机制(CoW)：复制、更新及替换指针，而非“就地”更新；在文件进行修改的时候，首先将">
+<meta property="og:site_name" content="LeoLan&#39;s Blog">
+<meta property="og:description" content="Btrfs简介Btrfs 是一个 Linux 中的新的写时复制(copy-on-write (COW))的文件系统，目的是实现高级功能的同时着重与容错功能，修复功能以及易于管理。 Btrfs核心特性：多物理卷支持：btrfs可由多个底层物理卷组成；支持RAID，以联机“添加”、“移除”、“修改”； 写时复制更新机制(CoW)：复制、更新及替换指针，而非“就地”更新；在文件进行修改的时候，首先将">
 <meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/102726838.png">
 <meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/102942852.png">
 <meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/103630400.png">
 <meta property="og:updated_time" content="2017-02-27T08:47:33.056Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Btrfs文件系统">
-<meta name="twitter:description" content="Btrfs简介Btrfs 是一个 Linux 中的新的写时复制(copy-on-write (COW))的文件系统，目的是实现高级功能的同时着重与容错功能，修复功能以及易于管理。
-Btrfs核心特性：多物理卷支持：btrfs可由多个底层物理卷组成；支持RAID，以联机“添加”、“移除”、“修改”；
-写时复制更新机制(CoW)：复制、更新及替换指针，而非“就地”更新；在文件进行修改的时候，首先将">
+<meta name="twitter:description" content="Btrfs简介Btrfs 是一个 Linux 中的新的写时复制(copy-on-write (COW))的文件系统，目的是实现高级功能的同时着重与容错功能，修复功能以及易于管理。 Btrfs核心特性：多物理卷支持：btrfs可由多个底层物理卷组成；支持RAID，以联机“添加”、“移除”、“修改”； 写时复制更新机制(CoW)：复制、更新及替换指针，而非“就地”更新；在文件进行修改的时候，首先将">
 <meta name="twitter:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20170106/102726838.png">
 
 

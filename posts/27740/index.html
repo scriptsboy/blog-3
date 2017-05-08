@@ -98,20 +98,13 @@
 
 
 
-<meta name="description" content="本文是在Neil的博客上看到的一篇博文，由于没有试验环境，没有经过测试，以后测试后会更新并删除本段文字，摘录分享，仅供参考。
-mysql 主主互备双机热备的概念简单说一下，就是要保持两个数据库的状态自动同步。对任何一个数据库的操作都自动应用到另外一个数据库，始终保持两个数据库数据一致。 这样做的好处多。
-
-1.可以做灾备，其中一个坏了可以切换到另一个。 
-2.可以做负载均衡，可以将请求分摊到其">
+<meta name="description" content="本文是在Neil的博客上看到的一篇博文，由于没有试验环境，没有经过测试，以后测试后会更新并删除本段文字，摘录分享，仅供参考。 mysql 主主互备双机热备的概念简单说一下，就是要保持两个数据库的状态自动同步。对任何一个数据库的操作都自动应用到另外一个数据库，始终保持两个数据库数据一致。 这样做的好处多。  1.可以做灾备，其中一个坏了可以切换到另一个。  2.可以做负载均衡，可以将请求分摊到其">
+<meta name="keywords" content="数据库主主互备（高可用）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库主主互备（高可用）">
 <meta property="og:url" content="https://www.leolan.top/posts/27740/index.html">
-<meta property="og:site_name" content="LeoLan's Blog">
-<meta property="og:description" content="本文是在Neil的博客上看到的一篇博文，由于没有试验环境，没有经过测试，以后测试后会更新并删除本段文字，摘录分享，仅供参考。
-mysql 主主互备双机热备的概念简单说一下，就是要保持两个数据库的状态自动同步。对任何一个数据库的操作都自动应用到另外一个数据库，始终保持两个数据库数据一致。 这样做的好处多。
-
-1.可以做灾备，其中一个坏了可以切换到另一个。 
-2.可以做负载均衡，可以将请求分摊到其">
+<meta property="og:site_name" content="LeoLan&#39;s Blog">
+<meta property="og:description" content="本文是在Neil的博客上看到的一篇博文，由于没有试验环境，没有经过测试，以后测试后会更新并删除本段文字，摘录分享，仅供参考。 mysql 主主互备双机热备的概念简单说一下，就是要保持两个数据库的状态自动同步。对任何一个数据库的操作都自动应用到另外一个数据库，始终保持两个数据库数据一致。 这样做的好处多。  1.可以做灾备，其中一个坏了可以切换到另一个。  2.可以做负载均衡，可以将请求分摊到其">
 <meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BB%E4%B8%BB%E4%BA%92%E5%A4%87001.gif">
 <meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BB%E4%B8%BB%E4%BA%92%E5%A4%87002.png">
 <meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com//blog/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BB%E4%B8%BB%E4%BA%92%E5%A4%87003.png">
@@ -143,11 +136,7 @@ mysql 主主互备双机热备的概念简单说一下，就是要保持两个�
 <meta property="og:updated_time" content="2017-02-27T08:47:33.051Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库主主互备（高可用）">
-<meta name="twitter:description" content="本文是在Neil的博客上看到的一篇博文，由于没有试验环境，没有经过测试，以后测试后会更新并删除本段文字，摘录分享，仅供参考。
-mysql 主主互备双机热备的概念简单说一下，就是要保持两个数据库的状态自动同步。对任何一个数据库的操作都自动应用到另外一个数据库，始终保持两个数据库数据一致。 这样做的好处多。
-
-1.可以做灾备，其中一个坏了可以切换到另一个。 
-2.可以做负载均衡，可以将请求分摊到其">
+<meta name="twitter:description" content="本文是在Neil的博客上看到的一篇博文，由于没有试验环境，没有经过测试，以后测试后会更新并删除本段文字，摘录分享，仅供参考。 mysql 主主互备双机热备的概念简单说一下，就是要保持两个数据库的状态自动同步。对任何一个数据库的操作都自动应用到另外一个数据库，始终保持两个数据库数据一致。 这样做的好处多。  1.可以做灾备，其中一个坏了可以切换到另一个。  2.可以做负载均衡，可以将请求分摊到其">
 <meta name="twitter:image" content="http://ofyfogrgx.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BB%E4%B8%BB%E4%BA%92%E5%A4%87001.gif">
 
 
@@ -675,8 +664,8 @@ mysql 主主互备双机热备的概念简单说一下，就是要保持两个�
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/44568/" rel="prev" title="常用网站链接">
-                常用网站链接 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/44568/" rel="prev" title="常用网站链接~~">
+                常用网站链接~~ <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
