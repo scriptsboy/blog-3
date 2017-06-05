@@ -1,0 +1,1455 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic|Georgia:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="firewall防火墙," />
+
+
+
+
+
+  <link rel="alternate" href="https://www.leolan.top/atom.xml" title="LeoLan's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/200.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="简介CentOS 7 中，引入了一个新的服务，Firewalld，下面一张图，让大家明确的了解 Firewall 与 iptables 之间的关系与区别。 防火墙守护 firewalld 服务引入了一个信任级别的概念来管理与之相关联的连接与接口。它支持 ipv4 与 ipv6，并支持网桥，采用 firewall-cmd (command) 或 firewall-config (gui) 来动态">
+<meta name="keywords" content="firewall防火墙">
+<meta property="og:type" content="article">
+<meta property="og:title" content="firewall防火墙">
+<meta property="og:url" content="https://www.leolan.top/posts/8419/index.html">
+<meta property="og:site_name" content="LeoLan&#39;s Blog">
+<meta property="og:description" content="简介CentOS 7 中，引入了一个新的服务，Firewalld，下面一张图，让大家明确的了解 Firewall 与 iptables 之间的关系与区别。 防火墙守护 firewalld 服务引入了一个信任级别的概念来管理与之相关联的连接与接口。它支持 ipv4 与 ipv6，并支持网桥，采用 firewall-cmd (command) 或 firewall-config (gui) 来动态">
+<meta property="og:image" content="https://image.leolan.top/firewall_stack.png">
+<meta property="og:updated_time" content="2017-06-05T02:49:40.001Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="firewall防火墙">
+<meta name="twitter:description" content="简介CentOS 7 中，引入了一个新的服务，Firewalld，下面一张图，让大家明确的了解 Firewall 与 iptables 之间的关系与区别。 防火墙守护 firewalld 服务引入了一个信任级别的概念来管理与之相关联的连接与接口。它支持 ipv4 与 ipv6，并支持网桥，采用 firewall-cmd (command) 或 firewall-config (gui) 来动态">
+<meta name="twitter:image" content="https://image.leolan.top/firewall_stack.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6343395544286627000',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.leolan.top/posts/8419/"/>
+
+
+
+
+
+  <title> firewall防火墙 | LeoLan's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">LeoLan's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">有时候正是不报期望的人做出了人们不敢期望之事！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签云
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时间轴
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-commenting"></i> <br />
+            
+            给我留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            本地搜索
+          </a>
+        </li>
+               
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://www.leolan.top/posts/8419/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="LeoLan">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="LeoLan's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="LeoLan's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                firewall防火墙
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-05T10:39:12+08:00">
+              2017-06-05
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2017-06-05T10:49:40+08:00">
+              2017-06-05
+            </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/posts/8419/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/8419/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/posts/8419/" class="leancloud_visitors" data-flag-title="firewall防火墙">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+         <span class="post-time">
+     &nbsp; | &nbsp;
+           <span class="post-meta-item-icon">
+             <i class="fa fa-calendar-o"></i>
+           </span>
+           <span class="post-meta-item-text">字数统计:</span>
+           <span class="post-count">1,485(字)</span>
+           
+         </span>
+
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>CentOS 7 中，引入了一个新的服务，Firewalld，下面一张图，让大家明确的了解 Firewall 与 iptables 之间的关系与区别。<br><img src="https://image.leolan.top/firewall_stack.png" alt="firewall_stack"></p>
+<p>防火墙守护 firewalld 服务引入了一个信任级别的概念来管理与之相关联的连接与接口。它支持 ipv4 与 ipv6，并支持网桥，采用 firewall-cmd (command) 或 firewall-config (gui) 来动态的管理 kernel netfilter 的临时或永久的接口规则，并实时生效而无需重启服务。</p>
+<h2 id="zone"><a href="#zone" class="headerlink" title="zone"></a>zone</h2><p>Firewall 能将不同的网络连接归类到不同的信任级别，Zone 提供了以下几个级别</p>
+<ul>
+<li>drop: 丢弃所有进入的包，而不给出任何响应</li>
+<li>block: 拒绝所有外部发起的连接，允许内部发起的连接</li>
+<li>public: 允许指定的进入连接</li>
+<li>external: 同上，对伪装的进入连接，一般用于路由转发</li>
+<li>dmz: 允许受限制的进入连接</li>
+<li>work: 允许受信任的计算机被限制的进入连接，类似 workgroup</li>
+<li>home: 同上，类似 homegroup</li>
+<li>internal: 同上，范围针对所有互联网用户</li>
+<li>trusted: 信任所有连接</li>
+</ul>
+<h2 id="过滤规则"><a href="#过滤规则" class="headerlink" title="过滤规则"></a>过滤规则</h2><ul>
+<li>source: 根据源地址过滤</li>
+<li>interface: 根据网卡过滤</li>
+<li>service: 根据服务名过滤</li>
+<li>port: 根据端口过滤</li>
+<li>icmp-block: icmp 报文过滤，按照 icmp 类型配置</li>
+<li>masquerade: ip 地址伪装</li>
+<li>forward-port: 端口转发</li>
+<li><p>rule: 自定义规则<br>其中，过滤规则的优先级遵循如下顺序</p>
+<ol>
+<li>source</li>
+<li>interface</li>
+<li>firewalld.conf</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>如果是CentOS7的话是默认已经安装了firewall，其他情况可以看看服务状态，没安装的话就安装。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum <span class="keyword">install</span> firewalld</div></pre></td></tr></table></figure>
+<p>如果需要图形界面的话，则再安装<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum <span class="keyword">install </span>firewall-<span class="built_in">config</span></div></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">systemctl start firewalld         <span class="meta"># 启动,</span></div><div class="line">systemctl <span class="keyword">enable</span> firewalld        <span class="meta"># 开机启动</span></div><div class="line">systemctl <span class="keyword">stop</span> firewalld          <span class="meta"># 关闭</span></div><div class="line">systemctl <span class="keyword">disable</span> firewalld       <span class="meta"># 取消开机启动</span></div></pre></td></tr></table></figure>
+<p>具体的规则管理，可以使用 firewall-cmd，具体的使用方法可以<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">firewall-cmd --help</div><div class="line"></div><div class="line">-<span class="ruby">-zone=NAME                         <span class="comment"># 指定 zone</span></span></div><div class="line">-<span class="ruby">-permanent                         <span class="comment"># 永久修改，--reload 后生效</span></span></div><div class="line">-<span class="ruby">-timeout=seconds                   <span class="comment"># 持续效果，到期后自动移除，用于调试，不能与 --permanent 同时使用</span></span></div></pre></td></tr></table></figure></p>
+<hr>
+<p><strong>简单用法，开80端口</strong><br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">firewall</span><span class="literal">-</span><span class="comment">cmd</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">zone=public</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">add</span><span class="literal">-</span><span class="comment">port=80/tcp</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">permanent</span></div></pre></td></tr></table></figure></p>
+<p>出现success表明添加成功<br>命令含义：<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-<span class="ruby">-zone <span class="comment">#作用域</span></span></div><div class="line">-<span class="ruby">-add-port=<span class="number">80</span>/tcp  <span class="comment">#添加端口，格式为：端口/通讯协议</span></span></div><div class="line">-<span class="ruby">-permanent   <span class="comment">#永久生效，没有此参数重启后会失效</span></span></div></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="查看规则"><a href="#查看规则" class="headerlink" title="查看规则"></a>查看规则</h1><p>查看运行状态<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">firewall-<span class="keyword">cmd</span><span class="bash"> --state</span></div></pre></td></tr></table></figure></p>
+<p>查看已被激活的 Zone 信息（查看区域信息）<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">firewall-<span class="keyword">cmd</span><span class="bash"> --get-active-zones</span></div><div class="line">public</div><div class="line">  interfaces: eth0 eth1</div></pre></td></tr></table></figure></p>
+<p>查看指定接口的 Zone 信息（接口所属区域）<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">firewall-cmd --<span class="keyword">get</span>-zone-of-<span class="keyword">interface</span>=eth0</div><div class="line"><span class="keyword">public</span></div></pre></td></tr></table></figure></p>
+<p>查看指定级别的接口<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">firewall-<span class="keyword">cmd</span><span class="bash"> --zone=public --list-interfaces</span></div><div class="line">eth0</div></pre></td></tr></table></figure></p>
+<p>查看指定级别的所有信息，譬如 public<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">firewall-cmd --zone=public --<span class="keyword">list</span>-<span class="keyword">all</span></div><div class="line">public (default, active)</div><div class="line">  interface<span class="variable">s:</span> eth0</div><div class="line">  <span class="keyword">source</span><span class="variable">s:</span></div><div class="line">  service<span class="variable">s:</span> dhcpv6-client http ssh</div><div class="line">  port<span class="variable">s:</span></div><div class="line">  masquerade: <span class="keyword">no</span></div><div class="line">  forward-port<span class="variable">s:</span></div><div class="line">  icmp-block<span class="variable">s:</span></div><div class="line">  rich rule<span class="variable">s:</span></div></pre></td></tr></table></figure></p>
+<p>查看所有级别被允许的信息<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">firewall-<span class="keyword">cmd</span><span class="bash"> --get-service</span></div></pre></td></tr></table></figure></p>
+<p>查看重启后所有 Zones 级别中被允许的服务，即永久放行的服务<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">firewall</span><span class="literal">-</span><span class="comment">cmd</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">get</span><span class="literal">-</span><span class="comment">service</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">permanent</span></div></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="管理规则"><a href="#管理规则" class="headerlink" title="管理规则"></a>管理规则</h1><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">firewall-<span class="keyword">cmd</span><span class="bash"> --panic-on           <span class="comment"># 丢弃所有包</span></span></div><div class="line">firewall-<span class="keyword">cmd</span><span class="bash"> --panic-off          <span class="comment"># 取消丢弃</span></span></div><div class="line">firewall-<span class="keyword">cmd</span><span class="bash"> --query-panic        <span class="comment"># 查看丢弃状态</span></span></div><div class="line">firewall-<span class="keyword">cmd</span><span class="bash"> --reload             <span class="comment"># 更新规则，不重启服务</span></span></div><div class="line">firewall-<span class="keyword">cmd</span><span class="bash"> --complete-reload    <span class="comment"># 更新规则，重启服务</span></span></div></pre></td></tr></table></figure>
+<p>添加某接口至某信任等级，譬如添加 eth0 至 public，永久修改<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">firewall-cmd --zone=<span class="keyword">public</span> --<span class="keyword">add</span>-<span class="keyword">interface</span>=eth0 --permanent</div></pre></td></tr></table></figure></p>
+<p>设置 public 为默认的信任级别<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">firewall-cmd --<span class="keyword">set</span>-<span class="keyword">default</span>-zone=<span class="keyword">public</span></div></pre></td></tr></table></figure></p>
+<h2 id="管理端口"><a href="#管理端口" class="headerlink" title="管理端口"></a>管理端口</h2><p>列出 dmz 级别的被允许的进入端口<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">firewall</span><span class="literal">-</span><span class="comment">cmd</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">zone=dmz</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">list</span><span class="literal">-</span><span class="comment">ports</span></div></pre></td></tr></table></figure></p>
+<p>允许 tcp 端口 8080 至 dmz 级别<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">firewall</span><span class="literal">-</span><span class="comment">cmd</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">zone=dmz</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">add</span><span class="literal">-</span><span class="comment">port=8080/tcp</span></div></pre></td></tr></table></figure></p>
+<p>允许某范围的 udp 端口至 public 级别，并永久生效<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">firewall</span><span class="literal">-</span><span class="comment">cmd</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">zone=public</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">add</span><span class="literal">-</span><span class="comment">port=5060</span><span class="literal">-</span><span class="comment">5059/udp</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">permanent</span></div></pre></td></tr></table></figure></p>
+<h2 id="网卡接口"><a href="#网卡接口" class="headerlink" title="网卡接口"></a>网卡接口</h2><p>列出 public zone 所有网卡<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">firewall-cmd --zone=<span class="keyword">public</span> --<span class="built_in">list</span>-interfaces</div></pre></td></tr></table></figure></p>
+<p>将 eth0 添加至 public zone，永久<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">firewall-cmd --zone=<span class="keyword">public</span> --permanent --<span class="keyword">add</span>-<span class="keyword">interface</span>=eth0</div></pre></td></tr></table></figure></p>
+<p>eth0 存在与 public zone，将该网卡添加至 work zone，并将之从 public zone 中删除<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">firewall</span><span class="literal">-</span><span class="comment">cmd</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">zone=work</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">permanent</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">change</span><span class="literal">-</span><span class="comment">interface=eth0</span></div></pre></td></tr></table></figure></p>
+<p>删除 public zone 中的 eth0，永久<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">firewall-cmd --zone=<span class="keyword">public</span> --permanent --<span class="keyword">remove</span>-<span class="keyword">interface</span>=eth0</div></pre></td></tr></table></figure></p>
+<h2 id="管理服务"><a href="#管理服务" class="headerlink" title="管理服务"></a>管理服务</h2><p>添加 smtp 服务至 work zone<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">firewall</span><span class="literal">-</span><span class="comment">cmd</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">zone=work</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">add</span><span class="literal">-</span><span class="comment">service=smtp</span></div></pre></td></tr></table></figure></p>
+<p>移除 work zone 中的 smtp 服务<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">firewall</span><span class="literal">-</span><span class="comment">cmd</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">zone=work</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">remove</span><span class="literal">-</span><span class="comment">service=smtp</span></div></pre></td></tr></table></figure></p>
+<h2 id="配置-external-zone-中的-ip-地址伪装"><a href="#配置-external-zone-中的-ip-地址伪装" class="headerlink" title="配置 external zone 中的 ip 地址伪装"></a>配置 external zone 中的 ip 地址伪装</h2><p>查看<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">firewall</span><span class="literal">-</span><span class="comment">cmd</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">zone=external</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">query</span><span class="literal">-</span><span class="comment">masquerade</span></div></pre></td></tr></table></figure></p>
+<p>打开伪装<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">firewall</span><span class="literal">-</span><span class="comment">cmd</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">zone=external</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">add</span><span class="literal">-</span><span class="comment">masquerade</span></div></pre></td></tr></table></figure></p>
+<p>关闭伪装<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">firewall</span><span class="literal">-</span><span class="comment">cmd</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">zone=external</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">remove</span><span class="literal">-</span><span class="comment">masquerade</span></div></pre></td></tr></table></figure></p>
+<h2 id="配置-public-zone-的端口转发"><a href="#配置-public-zone-的端口转发" class="headerlink" title="配置 public zone 的端口转发"></a>配置 public zone 的端口转发</h2><p>要打开端口转发，则需要先<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">firewall</span><span class="literal">-</span><span class="comment">cmd</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">zone=public</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">add</span><span class="literal">-</span><span class="comment">masquerade</span></div></pre></td></tr></table></figure></p>
+<p>然后转发 tcp 22 端口至 3753<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">firewall-cmd --zone=public --add-forward-port=port=<span class="number">22</span><span class="symbol">:proto=tcp</span><span class="symbol">:toport=</span><span class="number">3753</span></div></pre></td></tr></table></figure></p>
+<p>转发 22 端口数据至另一个 ip 的相同端口上<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">firewall-cmd --zone=<span class="meta">public</span> --<span class="keyword">add</span>-forward-port=port=<span class="number">22</span>:proto=tcp:toaddr=<span class="number">192.168</span><span class="meta">.1</span><span class="meta">.100</span></div></pre></td></tr></table></figure></p>
+<p>转发 22 端口数据至另一 ip 的 2055 端口上<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">firewall-cmd --zone=public --add-forward-port=port=<span class="number">22</span><span class="symbol">:proto=tcp</span><span class="symbol">:toport=</span><span class="number">2055</span><span class="symbol">:toaddr=</span><span class="number">192.168</span>.<span class="number">1.100</span></div></pre></td></tr></table></figure></p>
+<h2 id="配置-public-zone-的-icmp"><a href="#配置-public-zone-的-icmp" class="headerlink" title="配置 public zone 的 icmp"></a>配置 public zone 的 icmp</h2><p>查看所有支持的 icmp 类型<br><figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">firewall-<span class="built_in">cmd</span> --get-icmptypes</div><div class="line">destination-unreachable <span class="built_in">echo</span>-reply <span class="built_in">echo</span>-request parameter-problem redirect router-advertisement router-solicitation source-quench <span class="built_in">time</span>-exceeded</div></pre></td></tr></table></figure></p>
+<p>列出<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">firewall-cmd --zone=<span class="keyword">public</span> --<span class="built_in">list</span>-icmp-blocks</div></pre></td></tr></table></figure></p>
+<p>添加 echo-request 屏蔽<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">firewall</span><span class="literal">-</span><span class="comment">cmd</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">zone=public</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">add</span><span class="literal">-</span><span class="comment">icmp</span><span class="literal">-</span><span class="comment">block=echo</span><span class="literal">-</span><span class="comment">request</span> <span class="title">[</span><span class="literal">-</span><span class="literal">-</span><span class="comment">timeout=seconds</span><span class="title">]</span></div></pre></td></tr></table></figure></p>
+<p>移除 echo-reply 屏蔽<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">firewall-<span class="keyword">cmd</span><span class="bash"> --zone=public --remove-icmp-block=<span class="built_in">echo</span>-reply</span></div></pre></td></tr></table></figure></p>
+<h2 id="IP-封禁"><a href="#IP-封禁" class="headerlink" title="IP 封禁"></a>IP 封禁</h2><figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">firewall-cmd </span><span class="built_in">--permanent</span> <span class="built_in">--add-rich-rule="rule</span> <span class="string">family=</span><span class="string">'ipv4'</span> <span class="string">source </span><span class="string">address=</span><span class="string">'222.222.222.222'</span> <span class="string">reject"</span></div></pre></td></tr></table></figure>
+<p>当然，我们仍然可以通过 ipset 来封禁 ip</p>
+<p>封禁 ip<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">firewall</span><span class="literal">-</span><span class="comment">cmd</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">permanent</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">zone=public</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">new</span><span class="literal">-</span><span class="comment">ipset=blacklist</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">type=hash:ip</span></div><div class="line"><span class="comment">firewall</span><span class="literal">-</span><span class="comment">cmd</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">permanent</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">zone=public</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">ipset=blacklist</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">add</span><span class="literal">-</span><span class="comment">entry=222</span><span class="string">.</span><span class="comment">222</span><span class="string">.</span><span class="comment">222</span><span class="string">.</span><span class="comment">222</span></div></pre></td></tr></table></figure></p>
+<p>封禁网段<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">firewall</span><span class="literal">-</span><span class="comment">cmd</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">permanent</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">zone=public</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">new</span><span class="literal">-</span><span class="comment">ipset=blacklist</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">type=hash:net</span></div><div class="line"><span class="comment">firewall</span><span class="literal">-</span><span class="comment">cmd</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">permanent</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">zone=public</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">ipset=blacklist</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">add</span><span class="literal">-</span><span class="comment">entry=222</span><span class="string">.</span><span class="comment">222</span><span class="string">.</span><span class="comment">222</span><span class="string">.</span><span class="comment">0/24</span></div></pre></td></tr></table></figure></p>
+<p>倒入 ipset 规则<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">firewall-cmd --permanent --zone=<span class="keyword">public</span> --<span class="keyword">new</span>-ipset-<span class="keyword">from</span>-<span class="keyword">file</span>=<span class="regexp">/path/</span>blacklist.xml</div></pre></td></tr></table></figure></p>
+<p>然后封禁 blacklist<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">firewall</span><span class="literal">-</span><span class="comment">cmd</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">permanent</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">zone=public</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">add</span><span class="literal">-</span><span class="comment">rich</span><span class="literal">-</span><span class="comment">rule='rule</span> <span class="comment">source</span> <span class="comment">ipset=blacklist</span> <span class="comment">drop'</span></div></pre></td></tr></table></figure></p>
+<p>重新载入以生效<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">firewall-<span class="keyword">cmd</span><span class="bash"> --reload</span></div></pre></td></tr></table></figure></p>
+<p>以上都是一些常用方法，更多高级方法，请参考：</p>
+<p><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html" target="_blank" rel="external">https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html</a><br><a href="https://fedoraproject.org/wiki/FirewallD" target="_blank" rel="external">https://fedoraproject.org/wiki/FirewallD</a></p>
+
+<!--这里是每篇文章的尾巴-->
+<html>
+  <body>
+    <h1>结语</h1>
+      <p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p>
+      <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<!--
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p></blockquote></div>
+    <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎收藏书签，欢迎多提宝贵意见，非常感谢！</p>
+    <footer><strong>Welcome to LeoLan'S BLOG</strong>
+    <cite><a href="#" onclick="go_my_site()" rel="external">Leo Lan Blog Share For you!</a></cite></footer></blockquote></div>
+  </body>
+</html>
+-->
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div style="margin-bottom: 10px;font-size: 16px;font-weight: 600;">想请我吃辣条吗？</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/alipay.jpg" alt="LeoLan Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/weixinpay.png" alt="LeoLan WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>微信打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+<h3 id="最近访客"><a href="#最近访客" class="headerlink" title="最近访客"></a>最近访客</h3><div class="ds-recent-visitors" data-num-items="36" data-avatar-size="42" id="ds-recent-visitors"></div>
+      
+    </div>
+
+<!--这是文章底部标签云链接
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/firewall防火墙/" rel="tag"># firewall防火墙</a>
+          
+        </div>
+      
+-->
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/40506/" rel="next" title="JIRA">
+                <i class="fa fa-chevron-left"></i> JIRA
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/25/" rel="prev" title="PHP配置">
+                PHP配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js;
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="posts/8419/"
+           data-title="firewall防火墙" data-url="https://www.leolan.top/posts/8419/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="LeoLan" />
+          <p class="site-author-name" itemprop="name">LeoLan</p>
+          <p class="site-description motion-element" itemprop="description">Better late than never</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">87</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">112</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="https://www.leolan.top/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+
+<!-- 自定义High一下的功能 -->
+
+ <a rel="alternate" class="mw-harlem_shake_slow wobble shake" href='javascript:(
+   function go() {
+   var songs = [
+               "http://ofyfogrgx.bkt.clouddn.com/tongxingSibel%20-%20Im%20Sorry.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com/Music-sunburst.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com//blog/Apple%20&%20Stone%20-%20Lost.mp3"
+   ];
+
+   function c() {
+       var e = document.createElement("link");
+       e.setAttribute("type", "text/css");
+       e.setAttribute("rel", "stylesheet");
+       e.setAttribute("href", f);
+       e.setAttribute("class", l);
+       document.body.appendChild(e)
+   }
+   function h() {
+       var e = document.getElementsByClassName(l);
+       for (var t = 0; t < e.length; t++) {
+           document.body.removeChild(e[t])
+       }
+   }
+   function p() {
+       var e = document.createElement("div");
+       e.setAttribute("class", a);
+       document.body.appendChild(e);
+       setTimeout(function() {
+           document.body.removeChild(e)
+       }, 100)
+   }
+   function d(e) {
+       return {
+           height : e.offsetHeight,
+           width : e.offsetWidth
+       }
+   }
+   function v(i) {
+       var s = d(i);
+       return s.height > e && s.height < n && s.width > t && s.width < r
+   }
+   function m(e) {
+       var t = e;
+       var n = 0;
+       while (!!t) {
+           n += t.offsetTop;
+           t = t.offsetParent
+       }
+       return n
+   }
+   function g() {
+       var e = document.documentElement;
+       if (!!window.innerWidth) {
+           return window.innerHeight
+       } else if (e && !isNaN(e.clientHeight)) {
+           return e.clientHeight
+       }
+       return 0
+   }
+   function y() {
+       if (window.pageYOffset) {
+           return window.pageYOffset
+       }
+       return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+   }
+   function E(e) {
+       var t = m(e);
+       return t >= w && t <= b + w
+   }
+   function S() {
+       var e = document.getElementById("audio_element_id");
+       if(e != null){
+           var index = parseInt(e.getAttribute("curSongIndex"));
+           if(index > songs.length - 2) {
+               index = 0;
+           } else {
+               index++;
+           }
+           e.setAttribute("curSongIndex", index);
+           N();
+       }
+       e.src = i;
+       e.play()
+   }
+   function x(e) {
+       e.className += " " + s + " " + o
+   }
+   function T(e) {
+       e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+   }
+   function N() {
+       var e = document.getElementsByClassName(s);
+       var t = new RegExp("\\b" + s + "\\b");
+       for (var n = 0; n < e.length; ) {
+           e[n].className = e[n].className.replace(t, "")
+       }
+   }
+   function initAudioEle() {
+       var e = document.getElementById("audio_element_id");
+       if(e === null){
+           e = document.createElement("audio");
+           e.setAttribute("class", l);
+           e.setAttribute("curSongIndex", 0);
+           e.id = "audio_element_id";
+           e.loop = false;
+           e.bgcolor = 0;
+           e.addEventListener("canplay", function() {
+           setTimeout(function() {
+               x(k)
+           }, 500);
+           setTimeout(function() {
+               N();
+               p();
+               for (var e = 0; e < O.length; e++) {
+                   T(O[e])
+               }
+           }, 15500)
+       }, true);
+       e.addEventListener("ended", function() {
+           N();
+           h();
+           go();
+       }, true);
+       e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+       document.body.appendChild(e);
+       }
+   }
+   
+   initAudioEle();
+   var e = 30;
+   var t = 30;
+   var n = 350;
+   var r = 350;
+   var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+   var i = songs[curSongIndex];
+   
+   var s = "mw-harlem_shake_me";
+   var o = "im_first";
+   var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+   var a = "mw-strobe_light";
+   var f = "//7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css";
+   /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css
+   //7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css  七牛云地址
+   var f = "/css/harlem_shake_style.css"; */
+   
+
+   var l = "mw_added_css";
+   var b = g();
+   var w = y();
+   var C = document.getElementsByTagName("*");
+   var k = null;
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           if (E(A)) {
+               k = A;
+               break
+           }
+       }
+   }
+   if (A === null) {
+       console.warn("Could not find a node of the right size. Please try a different page.");
+       return
+   }
+   c();
+   S();
+   var O = [];
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           O.push(A)
+       }
+   }
+   })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High</a>
+</div>
+         <!-- end High一下 -->
+
+          
+
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/myleolan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://coding.net/u/leolan" target="_blank" title="Coding">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  Coding
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://quickconnect.to/myleolan" target="_blank" title="Cloud1">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud1
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://git.oschina.net/leolan" target="_blank" title="OSchina">
+                  
+                    <i class="fa fa-fw fa-git-square"></i>
+                  
+                  OSchina
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://leolan.picp.net" target="_blank" title="Cloud2">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud2
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.leolan.top/posts/44568/" target="_blank" title="Links">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Links
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-heartbeat"></i>
+              友链
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://jerry.hk/" title="Jerry Locke" target="_blank" rel="external nofollow">Jerry Locke</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://login926.top" title="Raintons" target="_blank" rel="external nofollow">Raintons</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.anotherhome.net" title="DIYgod" target="_blank" rel="external nofollow">DIYgod</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mblack.cn/" title="小黑" target="_blank" rel="external nofollow">小黑</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.iamlj.com/" title="Jing's Blog" target="_blank" rel="external nofollow">Jing's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://cyang.tech/" title="cyang's blog" target="_blank" rel="external nofollow">cyang's blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.showerlee.com/" title="一路向北" target="_blank" rel="external nofollow">一路向北</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://lusongsong.com/" title="卢松松的博客" target="_blank" rel="external nofollow">卢松松的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://v.lusongsong.com/" title="松松视频" target="_blank" rel="external nofollow">松松视频</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#zone"><span class="nav-number">1.1.</span> <span class="nav-text">zone</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过滤规则"><span class="nav-number">1.2.</span> <span class="nav-text">过滤规则</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用方法"><span class="nav-number">3.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看规则"><span class="nav-number">4.</span> <span class="nav-text">查看规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#管理规则"><span class="nav-number">5.</span> <span class="nav-text">管理规则</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#管理端口"><span class="nav-number">5.1.</span> <span class="nav-text">管理端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网卡接口"><span class="nav-number">5.2.</span> <span class="nav-text">网卡接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管理服务"><span class="nav-number">5.3.</span> <span class="nav-text">管理服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-external-zone-中的-ip-地址伪装"><span class="nav-number">5.4.</span> <span class="nav-text">配置 external zone 中的 ip 地址伪装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-public-zone-的端口转发"><span class="nav-number">5.5.</span> <span class="nav-text">配置 public zone 的端口转发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-public-zone-的-icmp"><span class="nav-number">5.6.</span> <span class="nav-text">配置 public zone 的 icmp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-封禁"><span class="nav-number">5.7.</span> <span class="nav-text">IP 封禁</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LeoLan</span>
+</div>
+
+<div class="powered-by">
+  <a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备16026009号-2</a>  |  本站总访问量<span id="busuanzi_value_site_pv"></span>
+</div>
+
+<div class="theme-info">
+  您是第<span id="busuanzi_value_site_uv"></span>位小伙伴
+</div>
+
+<script async src="/js/src/busuanzi.pure.mini.js">
+</script>
+
+<!--
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+-->
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"leolan"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '/js/src/duoshuo_embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementById('footer')
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("zieuxKa4IjAP6VgxxvBe4vkj-gzGzoHsz", "MHGN54IEuofFNV1AROiRkEoG");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js" count="50" zindex="-2" opacity="1" color="0,104,183"></script>
+
+</body>
+</html>

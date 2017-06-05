@@ -1,0 +1,1413 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic|Georgia:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ssl," />
+
+
+
+
+
+  <link rel="alternate" href="https://www.leolan.top/atom.xml" title="LeoLan's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/200.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Let’s Encrypt 证书Let’s Encrypt 证书是免费的，3个月有效，只需要到期前续一下时间就能延长到3个月。 这里一共有3种方法。其中两种是依赖于Python环境的（letsencrypt自动脚本），需要安装很多组件且对pip有版本要求，在大天朝是无法安装的。这里介绍一种简单的方法打开：https://certbot.eff.org选择适合你的系统和web的选项然后按提示运行">
+<meta name="keywords" content="ssl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ssl">
+<meta property="og:url" content="https://www.leolan.top/posts/50900/index.html">
+<meta property="og:site_name" content="LeoLan&#39;s Blog">
+<meta property="og:description" content="Let’s Encrypt 证书Let’s Encrypt 证书是免费的，3个月有效，只需要到期前续一下时间就能延长到3个月。 这里一共有3种方法。其中两种是依赖于Python环境的（letsencrypt自动脚本），需要安装很多组件且对pip有版本要求，在大天朝是无法安装的。这里介绍一种简单的方法打开：https://certbot.eff.org选择适合你的系统和web的选项然后按提示运行">
+<meta property="og:image" content="https://image.leolan.top/SSL.png">
+<meta property="og:updated_time" content="2017-06-05T02:49:40.002Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ssl">
+<meta name="twitter:description" content="Let’s Encrypt 证书Let’s Encrypt 证书是免费的，3个月有效，只需要到期前续一下时间就能延长到3个月。 这里一共有3种方法。其中两种是依赖于Python环境的（letsencrypt自动脚本），需要安装很多组件且对pip有版本要求，在大天朝是无法安装的。这里介绍一种简单的方法打开：https://certbot.eff.org选择适合你的系统和web的选项然后按提示运行">
+<meta name="twitter:image" content="https://image.leolan.top/SSL.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6343395544286627000',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.leolan.top/posts/50900/"/>
+
+
+
+
+
+  <title> ssl | LeoLan's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">LeoLan's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">有时候正是不报期望的人做出了人们不敢期望之事！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签云
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时间轴
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-commenting"></i> <br />
+            
+            给我留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            本地搜索
+          </a>
+        </li>
+               
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://www.leolan.top/posts/50900/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="LeoLan">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="LeoLan's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="LeoLan's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ssl
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-05T10:37:44+08:00">
+              2017-06-05
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2017-06-05T10:49:40+08:00">
+              2017-06-05
+            </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/posts/50900/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/50900/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/posts/50900/" class="leancloud_visitors" data-flag-title="ssl">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+         <span class="post-time">
+     &nbsp; | &nbsp;
+           <span class="post-meta-item-icon">
+             <i class="fa fa-calendar-o"></i>
+           </span>
+           <span class="post-meta-item-text">字数统计:</span>
+           <span class="post-count">2,149(字)</span>
+           
+         </span>
+
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="Let’s-Encrypt-证书"><a href="#Let’s-Encrypt-证书" class="headerlink" title="Let’s Encrypt 证书"></a>Let’s Encrypt 证书</h1><p>Let’s Encrypt 证书是免费的，3个月有效，只需要到期前续一下时间就能延长到3个月。</p>
+<p>这里一共有3种方法。其中两种是依赖于Python环境的（letsencrypt自动脚本），需要安装很多组件且对pip有版本要求，在大天朝是无法安装的。这里介绍一种简单的方法<br>打开：<a href="https://certbot.eff.org" target="_blank" rel="external">https://certbot.eff.org</a><br>选择适合你的系统和web的选项<br><img src="https://image.leolan.top/SSL.png" alt=""><br>然后按提示运行Install栏的那些命令，其他不要运行。</p>
+<p>安装完成后，开始获取证书<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">certbot certonly --webroot -w /var/html/www -d www<span class="selector-class">.leolan</span><span class="selector-class">.top</span>,leolan.<span class="attribute">top</span></div></pre></td></tr></table></figure></p>
+<p>运行该命令后会自动获取证书，并保存到<strong>/etc/letsencrypt/live/</strong>下。如果是一机多站的这种情况可能是会报错的，只有第一个能获取证书，之后的其他都获取不了，这时先停止第一个网站（把ssl的相关配置从配置文件中删掉，等获取后再配置回去），再运行命令，成功之后再启动网站。</p>
+<p>然后修改虚拟主机配置文件，在server栏加入以下部分(对应的路径改为你自己的路径):<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">listen</span>  <span class="number">443</span> default ssl;</div><div class="line"></div><div class="line"><span class="attribute">ssl_certificate</span> /etc/letsencrypt/live/www.leolan.top/fullchain.pem;</div><div class="line"><span class="attribute">ssl_certificate_key</span> /etc/letsencrypt/live/www.leolan.top/privkey.pem;</div><div class="line"><span class="attribute">ssl_ciphers</span> <span class="string">"EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH"</span>;</div><div class="line"><span class="attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>;</div><div class="line"><span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;</div><div class="line"><span class="attribute">ssl_session_cache</span> shared:SSL:<span class="number">10m</span>;</div></pre></td></tr></table></figure></p>
+<p>保存重启Nginx就应该生效了，如果网页中引用了http资源，也是没有小绿标的，可以写一句话测试用的html文件进行测试。<br>之后续期再次运行获取证书的命令就行了，会自动续期的，可以添加到定时任务中（增加到定时任务要注意一机多站这种情况）。<br>关于续期,官方提供了命令：先用这个命令测试：<code>certbot renew --dry-run</code>，没有问题的话运行这个命令续期：<code>certbot renew</code>。一切正常的话就可以加入到计划任务里面了。</p>
+<hr>
+<p>常用命令：<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">certbot <span class="keyword">run</span><span class="bash">             <span class="comment">#（默认）运行在当前的Web服务器中获取并安装证书</span></span></div><div class="line">certbot certonly        <span class="comment">#获取或续订证书，但不要安装</span></div><div class="line">certbot renew           <span class="comment">#续订续订所有以前获得的近期到期的证书</span></div><div class="line"></div><div class="line">certbot certificates    <span class="comment">#证书显示有关Certbot的证书信息</span></div><div class="line">certbot revoke          <span class="comment">#撤销吊销证书（提供--cert-path）</span></div><div class="line">certbot delete          <span class="comment">#删除证书</span></div></pre></td></tr></table></figure></p>
+<hr>
+<p>参考：<br><a href="http://www.laozuo.org/7676.html" target="_blank" rel="external">http://www.laozuo.org/7676.html</a><br><a href="http://www.laozuo.org/5571.html" target="_blank" rel="external">http://www.laozuo.org/5571.html</a><br><a href="http://m.blog.csdn.net/article/details?id=50997606" target="_blank" rel="external">http://m.blog.csdn.net/article/details?id=50997606</a><br><a href="http://www.tuicool.com/articles/iqyERrr" target="_blank" rel="external">http://www.tuicool.com/articles/iqyERrr</a></p>
+<hr>
+<h1 id="StartSSL证书"><a href="#StartSSL证书" class="headerlink" title="StartSSL证书"></a>StartSSL证书</h1><p>StartSSL证书有效期是一年的，但是到期后必须手工续期，且申请流程复杂，不建议。<br>StartSSL申请全过程：<a href="http://www.laozuo.org/2823.html" target="_blank" rel="external">http://www.laozuo.org/2823.html</a></p>
+<hr>
+<h1 id="SSL的相关参数"><a href="#SSL的相关参数" class="headerlink" title="SSL的相关参数"></a>SSL的相关参数</h1><h2 id="ssl"><a href="#ssl" class="headerlink" title="ssl"></a>ssl</h2><p>语法：ssl [on|off]<br>默认值：ssl off<br>使用字段：main, server<br>开启HTTPS。</p>
+<h2 id="ssl-certificate"><a href="#ssl-certificate" class="headerlink" title="ssl_certificate"></a>ssl_certificate</h2><p>语法：ssl_certificate file<br>默认值：ssl_certificate cert.pem<br>使用字段：main, server<br>为这个虚拟主机指定PEM格式的证书文件，这个文件可以包含其他的证书和服务器私钥，同样，密钥也必须是PEM格式，0.6.7版本以后，这里的路径为相对于nginx.conf的路径，而不是编译时的prefix路径。</p>
+<h2 id="ssl-certificate-key"><a href="#ssl-certificate-key" class="headerlink" title="ssl_certificate_key"></a>ssl_certificate_key</h2><p>语法：ssl_certificate_key file<br>默认值：ssl_certificate_key cert.pem<br>使用字段：main, server<br>为这个虚拟主机指定PEM格式的私钥，0.6.7版本以后，这里的路径为相对于nginx.conf的路径，而不是编译时的prefix路径。</p>
+<h2 id="ssl-client-certificate"><a href="#ssl-client-certificate" class="headerlink" title="ssl_client_certificate"></a>ssl_client_certificate</h2><p>语法：ssl_client_certificate file<br>默认值：none<br>使用字段：main, server<br>指出包含PEM格式的CA（root）证书，它将用于检查客户端证书。</p>
+<h2 id="ssl-dhparam"><a href="#ssl-dhparam" class="headerlink" title="ssl_dhparam"></a>ssl_dhparam</h2><p>语法：ssl_dhparam file<br>默认值：none<br>使用字段：main, server<br>该指令指定了一个PEM格式的文件，其中包含的Diffie-Hellman密钥协商协议密码参数，它将用于服务器和客户端之间的会话密钥交换。</p>
+<h2 id="ssl-ciphers"><a href="#ssl-ciphers" class="headerlink" title="ssl_ciphers"></a>ssl_ciphers</h2><p>语法：ssl_ciphers file<br>默认值：ssl_ciphers ALL:!ADH:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP<br>使用字段：main, server<br>指出为建立安全连接，服务器所允许的密码格式列表，密码指定为OpenSSL支持的格式，如：<br>ssl_ciphers  ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;<br>查看当前安装的OpenSSL版本所支持的密码列表，可以使用下列命令：<code>openssl ciphers</code></p>
+<h2 id="ssl-crl"><a href="#ssl-crl" class="headerlink" title="ssl_crl"></a>ssl_crl</h2><p>语法：ssl_crl file<br>默认值：none<br>使用字段：http, server<br>指令可用于0.8.7以后版本，用于指定一个证书吊销列表的文件名，使用PEM格式，它将用于检查证书吊销状态。</p>
+<h2 id="ssl-prefer-server-ciphers"><a href="#ssl-prefer-server-ciphers" class="headerlink" title="ssl_prefer_server_ciphers"></a>ssl_prefer_server_ciphers</h2><p>语法：ssl_prefer_server_ciphers [on|off]<br>默认值：ssl_prefer_server_ciphers off<br>使用字段：main, server<br>依赖SSLv3和TLSv1协议的服务器密码将优先于客户端密码。</p>
+<h2 id="ssl-protocols"><a href="#ssl-protocols" class="headerlink" title="ssl_protocols"></a>ssl_protocols</h2><p>语法：ssl_protocols [SSLv2] [SSLv3] [TLSv1]<br>默认值：ssl_protocols SSLv2 SSLv3 TLSv1<br>使用字段：main, server<br>指定要开启的SSL协议。</p>
+<h2 id="ssl-verify-client"><a href="#ssl-verify-client" class="headerlink" title="ssl_verify_client"></a>ssl_verify_client</h2><p>语法：ssl_verify_client on|off|optional<br>默认值：ssl_verify_client off<br>使用字段：main, server<br>启用客户端身份验证，参数“optional”将使用客户端提供的证书检查它的权限(0.8.7与0.7.63版本之前为”ask”)。</p>
+<h2 id="ssl-verify-depth"><a href="#ssl-verify-depth" class="headerlink" title="ssl_verify_depth"></a>ssl_verify_depth</h2><p>语法：ssl_verify_depth number<br>默认值：ssl_verify_depth 1<br>使用字段：main, server<br>设置服务器按顺序检查客户端提供的证书链的长度。</p>
+<h2 id="ssl-session-cache"><a href="#ssl-session-cache" class="headerlink" title="ssl_session_cache"></a>ssl_session_cache</h2><p>语法：ssl_session_cache off|none|builtin:size and/or shared:name:size<br>默认值：ssl_session_cache off<br>使用字段： main, server<br>设置储存SSL会话的缓存类型和大小。</p>
+<p>缓存类型为：<br>off - 强制关闭：nginx告诉客户端这个会话已经不能被再次使用。<br>none - 非强制关闭：nginx告诉客户端这个会话可以被再次使用，但是nginx实际上并不使用它们，这是为某些使用ssl_session_cache的邮件客户端提供的一种变通方案，可以使用在邮件代理和HTTP服务器中。</p>
+<p>builtin - 内建OpenSSL缓存，仅能用在一个工作进程中，缓存大小在会话总数中指定，注意：如果要使用这个类型可能会引起内存碎片问题，具体请查看下文中参考文档。</p>
+<p>shared - 缓存在所有的工作进程中共享，缓存大小指定单位为字节，1MB缓存大概保存4000个会话，每个共享的缓存必须有自己的名称，相同名称的缓存可以使用在不同的虚拟主机中。<br>可以同时使用两个缓存类型，内建和共享，如：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">ssl_session_cache</span>  <span class="selector-tag">builtin</span><span class="selector-pseudo">:1000</span>  <span class="selector-tag">shared</span><span class="selector-pseudo">:SSL</span><span class="selector-pseudo">:10m</span>;</div></pre></td></tr></table></figure></p>
+<p>但是，使用共享缓存而不使用内建缓存将更为有效。<br>0.8.34版本之前如果ssl_verify_client设置为’on’或者’optional’时这里不能设置为none或off。<br>注意，为了让缓存恢复工作，你需要在服务器为SSL socket配置默认服务器，例如：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">listen</span> <span class="selector-attr">[::]</span><span class="selector-pseudo">:443</span> <span class="selector-tag">ssl</span> <span class="selector-tag">default_server</span>;</div></pre></td></tr></table></figure></p>
+<p>这是因为缓存的重用发生在任何TLS扩展启用之前，即服务器名称认证（Server Name Identification (SNI)），来自一个指定IP地址（服务器）的ClientHello信息请求一个会话ID，为了使其工作，默认（default）服务器必须被设置。<br>最好的方法是将ssl_session_cache放到http字段，这样下面配置的server/虚拟主机字段都将得到相同的SSL缓存配置。</p>
+<h2 id="ssl-session-timeout"><a href="#ssl-session-timeout" class="headerlink" title="ssl_session_timeout"></a>ssl_session_timeout</h2><p>语法：ssl_session_timeout time<br>默认值：ssl_session_timeout 5m<br>使用字段： main, server<br>设置客户端能够反复使用储存在缓存中的会话参数时间。</p>
+<h2 id="ssl-engine"><a href="#ssl-engine" class="headerlink" title="ssl_engine"></a>ssl_engine</h2><p>语法：ssl_engine<br>指定使用的OpenSSL引擎，如Padlock，例如PadLock，下列命令可以查看你的OpenSSL支持的引擎：openssl engine</p>
+<p>Debian系统在版本0.9.8o的OpenSSL运行后返回：<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">openssl engine</span></div></pre></td></tr></table></figure></p>
+<p>(padlock) VIA PadLock (no-RNG, no-ACE)<br>(dynamic) Dynamic engine loading support</p>
+<h2 id="内置变量"><a href="#内置变量" class="headerlink" title="内置变量"></a>内置变量</h2><p>ngx_http_ssl_module模块支持下列内建变量：<br>$ssl_cipher - 返回建立的SSL连接中那些使用的密码字段。<br>$ssl_client_serial - 返回建立的SSL连接中客户端证书的序列号。<br>$ssl_client_s_dn - 返回建立的SSL连接中客户端证书的DN主题字段。<br>$ssl_client_i_dn - 返回建立的SSL连接中客户端证书的DN发行者字段。<br>$ssl_protocol - 返回建立的SSL连接中使用的协议。<br>$ssl_session_id - 需要0.8.20以上版本。<br>$ssl_client_cert<br>$ssl_client_raw_cert<br>$ssl_client_verify - 如果客户端证书审核通过，这个变量为“SUCCESS”。</p>
+<h2 id="非标准错误代码"><a href="#非标准错误代码" class="headerlink" title="非标准错误代码"></a>非标准错误代码</h2><p>这个模块支持一些非标准的HTTP错误代码，可以借助error_page指令用于调试：<br>495 - 检查客户端证书时发生错误。<br>496 - 客户端无法提供必须的证书。<br>497 - 传送到HTTPS的普通请求。<br>在请求完整的废除后调试完成，并取得一些内置变量，如：$request_uri, $uri, $arg等。</p>
+<hr>
+<p>参考：<br>安装SSL证书：<a href="http://zh.wikihow.com/%E5%AE%89%E8%A3%85SSL%E8%AF%81%E4%B9%A6" target="_blank" rel="external">http://zh.wikihow.com/%E5%AE%89%E8%A3%85SSL%E8%AF%81%E4%B9%A6</a><br>在Docker里的web开启SSL:<a href="https://en.abnerchou.me/Blog/75027340" target="_blank" rel="external">https://en.abnerchou.me/Blog/75027340</a></p>
+<hr>
+
+<!--这里是每篇文章的尾巴-->
+<html>
+  <body>
+    <h1>结语</h1>
+      <p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p>
+      <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<!--
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎继续关注本博客，欢迎多提宝贵意见，非常感谢！</p></blockquote></div>
+    <div style="text-align:center;color:#ccc;font-size:14px;">------本文结束<i class="fa fa-paw"></i>感谢阅读------</div>
+  </body>
+</html>
+
+<html>
+  <body>
+    <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+    <blockquote><p>如果您觉得本博客还不错，欢迎收藏书签，欢迎多提宝贵意见，非常感谢！</p>
+    <footer><strong>Welcome to LeoLan'S BLOG</strong>
+    <cite><a href="#" onclick="go_my_site()" rel="external">Leo Lan Blog Share For you!</a></cite></footer></blockquote></div>
+  </body>
+</html>
+-->
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div style="margin-bottom: 10px;font-size: 16px;font-weight: 600;">想请我吃辣条吗？</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/alipay.jpg" alt="LeoLan Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://ofyfogrgx.bkt.clouddn.com//pay/weixinpay.png" alt="LeoLan WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+          <p>微信打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+<h3 id="最近访客"><a href="#最近访客" class="headerlink" title="最近访客"></a>最近访客</h3><div class="ds-recent-visitors" data-num-items="36" data-avatar-size="42" id="ds-recent-visitors"></div>
+      
+    </div>
+
+<!--这是文章底部标签云链接
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ssl/" rel="tag"># ssl</a>
+          
+        </div>
+      
+-->
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/50249/" rel="next" title="关于评论,统一回复">
+                <i class="fa fa-chevron-left"></i> 关于评论,统一回复
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/9286/" rel="prev" title="web性能测试">
+                web性能测试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js;
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="posts/50900/"
+           data-title="ssl" data-url="https://www.leolan.top/posts/50900/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="LeoLan" />
+          <p class="site-author-name" itemprop="name">LeoLan</p>
+          <p class="site-description motion-element" itemprop="description">Better late than never</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">87</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">112</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="https://www.leolan.top/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+
+<!-- 自定义High一下的功能 -->
+
+ <a rel="alternate" class="mw-harlem_shake_slow wobble shake" href='javascript:(
+   function go() {
+   var songs = [
+               "http://ofyfogrgx.bkt.clouddn.com/tongxingSibel%20-%20Im%20Sorry.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com/Music-sunburst.mp3",
+               "http://ofyfogrgx.bkt.clouddn.com//blog/Apple%20&%20Stone%20-%20Lost.mp3"
+   ];
+
+   function c() {
+       var e = document.createElement("link");
+       e.setAttribute("type", "text/css");
+       e.setAttribute("rel", "stylesheet");
+       e.setAttribute("href", f);
+       e.setAttribute("class", l);
+       document.body.appendChild(e)
+   }
+   function h() {
+       var e = document.getElementsByClassName(l);
+       for (var t = 0; t < e.length; t++) {
+           document.body.removeChild(e[t])
+       }
+   }
+   function p() {
+       var e = document.createElement("div");
+       e.setAttribute("class", a);
+       document.body.appendChild(e);
+       setTimeout(function() {
+           document.body.removeChild(e)
+       }, 100)
+   }
+   function d(e) {
+       return {
+           height : e.offsetHeight,
+           width : e.offsetWidth
+       }
+   }
+   function v(i) {
+       var s = d(i);
+       return s.height > e && s.height < n && s.width > t && s.width < r
+   }
+   function m(e) {
+       var t = e;
+       var n = 0;
+       while (!!t) {
+           n += t.offsetTop;
+           t = t.offsetParent
+       }
+       return n
+   }
+   function g() {
+       var e = document.documentElement;
+       if (!!window.innerWidth) {
+           return window.innerHeight
+       } else if (e && !isNaN(e.clientHeight)) {
+           return e.clientHeight
+       }
+       return 0
+   }
+   function y() {
+       if (window.pageYOffset) {
+           return window.pageYOffset
+       }
+       return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+   }
+   function E(e) {
+       var t = m(e);
+       return t >= w && t <= b + w
+   }
+   function S() {
+       var e = document.getElementById("audio_element_id");
+       if(e != null){
+           var index = parseInt(e.getAttribute("curSongIndex"));
+           if(index > songs.length - 2) {
+               index = 0;
+           } else {
+               index++;
+           }
+           e.setAttribute("curSongIndex", index);
+           N();
+       }
+       e.src = i;
+       e.play()
+   }
+   function x(e) {
+       e.className += " " + s + " " + o
+   }
+   function T(e) {
+       e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+   }
+   function N() {
+       var e = document.getElementsByClassName(s);
+       var t = new RegExp("\\b" + s + "\\b");
+       for (var n = 0; n < e.length; ) {
+           e[n].className = e[n].className.replace(t, "")
+       }
+   }
+   function initAudioEle() {
+       var e = document.getElementById("audio_element_id");
+       if(e === null){
+           e = document.createElement("audio");
+           e.setAttribute("class", l);
+           e.setAttribute("curSongIndex", 0);
+           e.id = "audio_element_id";
+           e.loop = false;
+           e.bgcolor = 0;
+           e.addEventListener("canplay", function() {
+           setTimeout(function() {
+               x(k)
+           }, 500);
+           setTimeout(function() {
+               N();
+               p();
+               for (var e = 0; e < O.length; e++) {
+                   T(O[e])
+               }
+           }, 15500)
+       }, true);
+       e.addEventListener("ended", function() {
+           N();
+           h();
+           go();
+       }, true);
+       e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+       document.body.appendChild(e);
+       }
+   }
+   
+   initAudioEle();
+   var e = 30;
+   var t = 30;
+   var n = 350;
+   var r = 350;
+   var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+   var i = songs[curSongIndex];
+   
+   var s = "mw-harlem_shake_me";
+   var o = "im_first";
+   var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+   var a = "mw-strobe_light";
+   var f = "//7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css";
+   /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css
+   //7xncbk.com1.z0.glb.clouddn.com/harlem-shake-style.css  七牛云地址
+   var f = "/css/harlem_shake_style.css"; */
+   
+
+   var l = "mw_added_css";
+   var b = g();
+   var w = y();
+   var C = document.getElementsByTagName("*");
+   var k = null;
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           if (E(A)) {
+               k = A;
+               break
+           }
+       }
+   }
+   if (A === null) {
+       console.warn("Could not find a node of the right size. Please try a different page.");
+       return
+   }
+   c();
+   S();
+   var O = [];
+   for (var L = 0; L < C.length; L++) {
+       var A = C[L];
+       if (v(A)) {
+           O.push(A)
+       }
+   }
+   })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High</a>
+</div>
+         <!-- end High一下 -->
+
+          
+
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/myleolan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://coding.net/u/leolan" target="_blank" title="Coding">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  Coding
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://quickconnect.to/myleolan" target="_blank" title="Cloud1">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud1
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://git.oschina.net/leolan" target="_blank" title="OSchina">
+                  
+                    <i class="fa fa-fw fa-git-square"></i>
+                  
+                  OSchina
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://leolan.picp.net" target="_blank" title="Cloud2">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  Cloud2
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.leolan.top/posts/44568/" target="_blank" title="Links">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Links
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-heartbeat"></i>
+              友链
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://jerry.hk/" title="Jerry Locke" target="_blank" rel="external nofollow">Jerry Locke</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://login926.top" title="Raintons" target="_blank" rel="external nofollow">Raintons</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.anotherhome.net" title="DIYgod" target="_blank" rel="external nofollow">DIYgod</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mblack.cn/" title="小黑" target="_blank" rel="external nofollow">小黑</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.iamlj.com/" title="Jing's Blog" target="_blank" rel="external nofollow">Jing's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://cyang.tech/" title="cyang's blog" target="_blank" rel="external nofollow">cyang's blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.showerlee.com/" title="一路向北" target="_blank" rel="external nofollow">一路向北</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://lusongsong.com/" title="卢松松的博客" target="_blank" rel="external nofollow">卢松松的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://v.lusongsong.com/" title="松松视频" target="_blank" rel="external nofollow">松松视频</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Let’s-Encrypt-证书"><span class="nav-number">1.</span> <span class="nav-text">Let’s Encrypt 证书</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#StartSSL证书"><span class="nav-number">2.</span> <span class="nav-text">StartSSL证书</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSL的相关参数"><span class="nav-number">3.</span> <span class="nav-text">SSL的相关参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ssl"><span class="nav-number">3.1.</span> <span class="nav-text">ssl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssl-certificate"><span class="nav-number">3.2.</span> <span class="nav-text">ssl_certificate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssl-certificate-key"><span class="nav-number">3.3.</span> <span class="nav-text">ssl_certificate_key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssl-client-certificate"><span class="nav-number">3.4.</span> <span class="nav-text">ssl_client_certificate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssl-dhparam"><span class="nav-number">3.5.</span> <span class="nav-text">ssl_dhparam</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssl-ciphers"><span class="nav-number">3.6.</span> <span class="nav-text">ssl_ciphers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssl-crl"><span class="nav-number">3.7.</span> <span class="nav-text">ssl_crl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssl-prefer-server-ciphers"><span class="nav-number">3.8.</span> <span class="nav-text">ssl_prefer_server_ciphers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssl-protocols"><span class="nav-number">3.9.</span> <span class="nav-text">ssl_protocols</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssl-verify-client"><span class="nav-number">3.10.</span> <span class="nav-text">ssl_verify_client</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssl-verify-depth"><span class="nav-number">3.11.</span> <span class="nav-text">ssl_verify_depth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssl-session-cache"><span class="nav-number">3.12.</span> <span class="nav-text">ssl_session_cache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssl-session-timeout"><span class="nav-number">3.13.</span> <span class="nav-text">ssl_session_timeout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssl-engine"><span class="nav-number">3.14.</span> <span class="nav-text">ssl_engine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内置变量"><span class="nav-number">3.15.</span> <span class="nav-text">内置变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非标准错误代码"><span class="nav-number">3.16.</span> <span class="nav-text">非标准错误代码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LeoLan</span>
+</div>
+
+<div class="powered-by">
+  <a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备16026009号-2</a>  |  本站总访问量<span id="busuanzi_value_site_pv"></span>
+</div>
+
+<div class="theme-info">
+  您是第<span id="busuanzi_value_site_uv"></span>位小伙伴
+</div>
+
+<script async src="/js/src/busuanzi.pure.mini.js">
+</script>
+
+<!--
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+-->
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"leolan"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '/js/src/duoshuo_embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementById('footer')
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("zieuxKa4IjAP6VgxxvBe4vkj-gzGzoHsz", "MHGN54IEuofFNV1AROiRkEoG");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js" count="50" zindex="-2" opacity="1" color="0,104,183"></script>
+
+</body>
+</html>
