@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.leolan.top/"/>
-  <updated>2017-06-05T02:49:39.993Z</updated>
+  <updated>2018-07-27T09:26:57.733Z</updated>
   <id>https://www.leolan.top/</id>
   
   <author>
@@ -16,11 +16,32 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>博客转移</title>
+    <link href="https://www.leolan.top/posts/31764/"/>
+    <id>https://www.leolan.top/posts/31764/</id>
+    <published>2018-07-27T09:22:04.000Z</published>
+    <updated>2018-07-27T09:26:57.733Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>本博客已不再更新，请访问新地址：<a href="https://www.leolan.top">www.leolan.top</a> 非常感谢。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;script src=&quot;/assets/js/DPlayer.min.js&quot;&gt; &lt;/script&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerl
+    
+    </summary>
+    
+    
+      <category term="博客转移" scheme="https://www.leolan.top/tags/%E5%8D%9A%E5%AE%A2%E8%BD%AC%E7%A7%BB/"/>
+    
+  </entry>
+  
+  <entry>
     <title>MySQL高可用之MHA</title>
     <link href="https://www.leolan.top/posts/21355/"/>
     <id>https://www.leolan.top/posts/21355/</id>
     <published>2017-06-05T02:44:32.000Z</published>
-    <updated>2017-06-05T02:49:39.993Z</updated>
+    <updated>2017-06-05T02:49:39.994Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>微信看到的文章，原样搬过来，还未试验过，有机会会试验一下。原文：<a href="http://mp.weixin.qq.com/s?mpshare=1&amp;scene=23&amp;mid=2247483680&amp;sn=85027dcad2284a007c1effc412c598b2&amp;idx=1&amp;__biz=MzI0NjgxNzYxMQ%3D%3D&amp;chksm=e9b83704decfbe12d04e9d3bf383236f44984b0dc913c9fcc011b986404adcf2649557502380&amp;srcid=0408q21kEw5mh8I5tcVzQRiK#rd" target="_blank" rel="external">MySQL高可用之MHA—部署MHA</a></p>
 <p>由于MHA不会自动创建主从环境，所以要手动去部署主从环境，也可以在现有主从环境部署MHA。所有slave不要设置为只读，同时也要打开binlog。如果master故障后要切换到指定的slave上，该指定的slave打开binlog，设置可读写，其它不用设置打开binlog或设置只读也可。具体以自身架构为准。<br>        部署MySQL主从可参考：配置MySQL主从复制</p>
@@ -66,7 +87,7 @@
     <link href="https://www.leolan.top/posts/25/"/>
     <id>https://www.leolan.top/posts/25/</id>
     <published>2017-06-05T02:39:25.000Z</published>
-    <updated>2017-06-05T02:49:39.999Z</updated>
+    <updated>2017-06-05T02:49:40.000Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>一直以来，PHP都是用的默认配置，接触到的业务对网站并没有什么特殊要求，本人比较懒，一般都是用一键环境，都是已经优化好了。很少去改动配置文件，但之后自己搭建平台时就遇到了很多问题，某些插件没有啊，缓存设置不当啊，等等，所以也打算积累一些PHP相关的知识。</p>
 <h1 id="几个有用的PHP-ini配置项-路径和目录（网上看到的，还未进行测试）"><a href="#几个有用的PHP-ini配置项-路径和目录（网上看到的，还未进行测试）" class="headerlink" title="几个有用的PHP.ini配置项-路径和目录（网上看到的，还未进行测试）"></a>几个有用的PHP.ini配置项-路径和目录（网上看到的，还未进行测试）</h1><p>路径和目录<br>1、include_path = string<br>作用域：PHP_INI_ALL<br>默认值：NULL<br>此参数指定的路径是include()、require()和fopen_with_path()等函数使用的基本路径。若存在多个目录，用分号分隔。</p>
@@ -93,7 +114,7 @@
     <link href="https://www.leolan.top/posts/8419/"/>
     <id>https://www.leolan.top/posts/8419/</id>
     <published>2017-06-05T02:39:12.000Z</published>
-    <updated>2017-06-05T02:49:40.001Z</updated>
+    <updated>2017-06-05T02:49:40.002Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>CentOS 7 中，引入了一个新的服务，Firewalld，下面一张图，让大家明确的了解 Firewall 与 iptables 之间的关系与区别。<br><img src="https://image.leolan.top/firewall_stack.png" alt="firewall_stack"></p>
 <p>防火墙守护 firewalld 服务引入了一个信任级别的概念来管理与之相关联的连接与接口。它支持 ipv4 与 ipv6，并支持网桥，采用 firewall-cmd (command) 或 firewall-config (gui) 来动态的管理 kernel netfilter 的临时或永久的接口规则，并实时生效而无需重启服务。</p>
@@ -194,7 +215,7 @@
     <link href="https://www.leolan.top/posts/40506/"/>
     <id>https://www.leolan.top/posts/40506/</id>
     <published>2017-06-05T02:38:52.000Z</published>
-    <updated>2017-06-05T02:49:39.996Z</updated>
+    <updated>2017-06-05T02:49:39.997Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="JIRA-SoftWare"><a href="#JIRA-SoftWare" class="headerlink" title="JIRA SoftWare"></a>JIRA SoftWare</h1><p>JIRA SoftWare是一款很强大的项目管理软件。收费的，很贵。关于JIRA 的安装、迁移、管理</p>
 <p><a href="http://wiki.52wcm.com/pages/viewpage.action?pageId=2261388" target="_blank" rel="external">http://wiki.52wcm.com/pages/viewpage.action?pageId=2261388</a><br>使用MySQL数据库需要这个组件mysql-connect.jar:<a href="https://dev.mysql.com/downloads/connector/j/" target="_blank" rel="external">https://dev.mysql.com/downloads/connector/j/</a></p>
@@ -218,7 +239,7 @@
     <link href="https://www.leolan.top/posts/6464/"/>
     <id>https://www.leolan.top/posts/6464/</id>
     <published>2017-06-05T02:38:38.000Z</published>
-    <updated>2017-06-05T02:49:40.005Z</updated>
+    <updated>2017-06-05T02:49:40.006Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>看了一些博文，有了大概的了解，稍微做做笔记。</p>
 <h1 id="Web负载均衡原理与实现"><a href="#Web负载均衡原理与实现" class="headerlink" title="Web负载均衡原理与实现"></a>Web负载均衡原理与实现</h1><p>所谓的“均衡”不能狭义地理解为分配给所有实际服务器一样多的工作量，因为多台服务器的承载能力各不相同，这可能体现在硬件配置、网络带宽的差异，也可能因为某台服务器身兼多职，我们所说的“均衡”，也就是希望所有服务器都不要过载，并且能够最大程序地发挥作用。</p>
@@ -322,7 +343,7 @@
     <link href="https://www.leolan.top/posts/61863/"/>
     <id>https://www.leolan.top/posts/61863/</id>
     <published>2017-06-05T02:38:17.000Z</published>
-    <updated>2017-06-05T02:49:40.006Z</updated>
+    <updated>2017-06-05T02:49:40.007Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="梅林固件"><a href="#梅林固件" class="headerlink" title="梅林固件"></a>梅林固件</h1><p>梅林固件中的策略路由、科学上网<br>参考：<br><a href="http://koolshare.cn/forum.php?mod=viewthread&amp;tid=46687&amp;highlight=%E7%AD%96%E7%95%A5%E8%B7%AF%E7%94%B1" target="_blank" rel="external">http://koolshare.cn/forum.php?mod=viewthread&amp;tid=46687&amp;highlight=%E7%AD%96%E7%95%A5%E8%B7%AF%E7%94%B1</a><br><a href="http://koolshare.cn/forum.php?mod=viewthread&amp;tid=6388&amp;highlight=%E7%AD%96%E7%95%A5%E8%B7%AF%E7%94%B1" target="_blank" rel="external">http://koolshare.cn/forum.php?mod=viewthread&amp;tid=6388&amp;highlight=%E7%AD%96%E7%95%A5%E8%B7%AF%E7%94%B1</a></p>
 <p><a href="http://koolshare.cn/forum.php?mod=viewthread&amp;tid=66514&amp;highlight=%E7%AD%96%E7%95%A5%E8%B7%AF%E7%94%B1" target="_blank" rel="external">http://koolshare.cn/forum.php?mod=viewthread&amp;tid=66514&amp;highlight=%E7%AD%96%E7%95%A5%E8%B7%AF%E7%94%B1</a><br><a href="http://koolshare.cn/thread-4631-1-1.html" target="_blank" rel="external">http://koolshare.cn/thread-4631-1-1.html</a></p>
@@ -344,7 +365,7 @@
     <link href="https://www.leolan.top/posts/9286/"/>
     <id>https://www.leolan.top/posts/9286/</id>
     <published>2017-06-05T02:38:03.000Z</published>
-    <updated>2017-06-05T02:49:40.004Z</updated>
+    <updated>2017-06-05T02:49:40.005Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="Siege"><a href="#Siege" class="headerlink" title="Siege"></a>Siege</h1><p>Siege是一个压力测试和评测工具，设计用于WEB开发这评估应用在压力下的承受能力：可以根据配置对一个WEB站点进行多用户的并发访问，记录每个用户所有请求过程的相应时间，并在一定数量的并发访问下重复进行。</p>
 <p>官网：<a href="https://www.joedog.org/" target="_blank" rel="external">https://www.joedog.org/</a></p>
@@ -373,7 +394,7 @@
     <link href="https://www.leolan.top/posts/50900/"/>
     <id>https://www.leolan.top/posts/50900/</id>
     <published>2017-06-05T02:37:44.000Z</published>
-    <updated>2017-06-05T02:49:40.002Z</updated>
+    <updated>2017-06-05T02:49:40.003Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="Let’s-Encrypt-证书"><a href="#Let’s-Encrypt-证书" class="headerlink" title="Let’s Encrypt 证书"></a>Let’s Encrypt 证书</h1><p>Let’s Encrypt 证书是免费的，3个月有效，只需要到期前续一下时间就能延长到3个月。</p>
 <p>这里一共有3种方法。其中两种是依赖于Python环境的（letsencrypt自动脚本），需要安装很多组件且对pip有版本要求，在大天朝是无法安装的。这里介绍一种简单的方法<br>打开：<a href="https://certbot.eff.org" target="_blank" rel="external">https://certbot.eff.org</a><br>选择适合你的系统和web的选项<br><img src="https://image.leolan.top/SSL.png" alt=""><br>然后按提示运行Install栏的那些命令，其他不要运行。</p>
@@ -489,7 +510,7 @@
     <link href="https://www.leolan.top/posts/32881/"/>
     <id>https://www.leolan.top/posts/32881/</id>
     <published>2017-04-08T17:39:56.000Z</published>
-    <updated>2017-04-10T01:54:46.439Z</updated>
+    <updated>2017-04-10T01:54:46.440Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="文件备份恢复"><a href="#文件备份恢复" class="headerlink" title="文件备份恢复"></a>文件备份恢复</h1><hr>
 <h1 id="Linux系统的备份恢复"><a href="#Linux系统的备份恢复" class="headerlink" title="Linux系统的备份恢复"></a>Linux系统的备份恢复</h1><h2 id="tar命令"><a href="#tar命令" class="headerlink" title="tar命令"></a>tar命令</h2><h3 id="备份整个系统"><a href="#备份整个系统" class="headerlink" title="备份整个系统"></a>备份整个系统</h3><p>注意根目录下要有充足的可用空间用于备份。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cd /</div><div class="line"><span class="selector-id">#tar</span>.gz格式</div><div class="line">tar cvpzf system_backup<span class="selector-class">.tar</span><span class="selector-class">.gz</span> / --exclude=/proc --exclude=/lost+found --exclude=/system_backup<span class="selector-class">.tar</span><span class="selector-class">.gz</span> --exclude=/mnt --exclude=/sys</div><div class="line"></div><div class="line"><span class="selector-id">#tar</span>.bz2格式</div><div class="line">tar cvpjf system_backup<span class="selector-class">.tar</span><span class="selector-class">.bz2</span> / --exclude=/proc --exclude=/lost+found --exclude=/system_backup<span class="selector-class">.tar</span><span class="selector-class">.bz2</span> --exclude=/mnt --exclude=/sys</div></pre></td></tr></table></figure></p>
@@ -529,7 +550,7 @@
     <link href="https://www.leolan.top/posts/53623/"/>
     <id>https://www.leolan.top/posts/53623/</id>
     <published>2017-04-08T17:36:30.000Z</published>
-    <updated>2017-04-10T01:54:46.411Z</updated>
+    <updated>2017-04-10T01:54:46.412Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>官网安装教程：<a href="https://www.postgresql.org/download/linux/redhat/" target="_blank" rel="external">https://www.postgresql.org/download/linux/redhat/</a></p>
 <p><a href="http://www.cnblogs.com/qiyebao/p/4562557.html" target="_blank" rel="external">http://www.cnblogs.com/qiyebao/p/4562557.html</a></p>
@@ -554,7 +575,7 @@
     <link href="https://www.leolan.top/posts/23851/"/>
     <id>https://www.leolan.top/posts/23851/</id>
     <published>2017-04-08T17:11:27.000Z</published>
-    <updated>2017-04-10T01:54:46.440Z</updated>
+    <updated>2017-04-10T01:54:46.441Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="OpenWrt"><a href="#OpenWrt" class="headerlink" title="OpenWrt"></a>OpenWrt</h1><p>官网：<a href="https://openwrt.org" target="_blank" rel="external">https://openwrt.org</a><br>项目地址：:<a href="https://github.com/openwrt/openwrt" target="_blank" rel="external">https://github.com/openwrt/openwrt</a><br>固件：<a href="https://downloads.openwrt.org/chaos_calmer/15.05.1/" target="_blank" rel="external">https://downloads.openwrt.org/chaos_calmer/15.05.1/</a></p>
 <hr>
@@ -580,7 +601,7 @@
     <link href="https://www.leolan.top/posts/39984/"/>
     <id>https://www.leolan.top/posts/39984/</id>
     <published>2017-04-08T16:30:44.000Z</published>
-    <updated>2017-04-10T01:54:46.411Z</updated>
+    <updated>2017-04-10T01:54:46.412Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="Shell快捷键"><a href="#Shell快捷键" class="headerlink" title="Shell快捷键"></a>Shell快捷键</h1><hr>
 <h2 id="编辑命令"><a href="#编辑命令" class="headerlink" title="编辑命令"></a>编辑命令</h2><p>Ctrl + a ：移到命令行首<br>Ctrl + e ：移到命令行尾<br>Ctrl + f ：按字符前移（右向）<br>Ctrl + b ：按字符后移（左向）<br>Alt + f ：按单词前移（右向）<br>Alt + b ：按单词后移（左向）<br>Ctrl + xx：在命令行首和光标之间移动<br>Ctrl + u ：从光标处删除至命令行首<br>Ctrl + k ：从光标处删除至命令行尾<br>Ctrl + w ：从光标处删除至字首<br>Alt + d ：从光标处删除至字尾<br>Ctrl + d ：删除光标处的字符<br>Ctrl + h ：删除光标前的字符<br>Ctrl + y ：粘贴至光标后<br>Alt + c ：从光标处更改为首字母大写的单词<br>Alt + u ：从光标处更改为全部大写的单词<br>Alt + l ：从光标处更改为全部小写的单词<br>Ctrl + t ：交换光标处和之前的字符<br>Alt + t ：交换光标处和之前的单词<br>Alt + Backspace：与 Ctrl + w <del>相同</del>类似，分隔符有些差别 [感谢 rezilla 指正]</p>
@@ -665,7 +686,7 @@
     <link href="https://www.leolan.top/posts/26298/"/>
     <id>https://www.leolan.top/posts/26298/</id>
     <published>2017-04-08T04:16:50.000Z</published>
-    <updated>2017-04-13T09:16:48.221Z</updated>
+    <updated>2017-04-13T09:16:48.222Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h1><h2 id="第三方接管域名"><a href="#第三方接管域名" class="headerlink" title="第三方接管域名"></a>第三方接管域名</h2><p><strong>这种情况适合域名由第三方接管的情况下。</strong><br><img src="http://ofyfogrgx.bkt.clouddn.com/youjianjiexi.png" alt=""><br>目前的设置是这样的，就是MX记录指向<strong>mail.域名</strong>，最后通过A记录指向IP。这种情况下访问<strong>mail.域名</strong>也会跳转到IP:80的网站上。<br>@ ---》MX ---》mail.域名<br>mail ---》A ---》IP</p>
 <hr>
@@ -745,7 +766,7 @@
     <link href="https://www.leolan.top/posts/57404/"/>
     <id>https://www.leolan.top/posts/57404/</id>
     <published>2017-04-08T02:57:23.000Z</published>
-    <updated>2017-04-10T01:54:46.411Z</updated>
+    <updated>2017-04-10T01:54:46.412Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>强迫症犯了，陈列在笔记中，于是弄成笔记保存。</p>
 <h1 id="MK服务器搭建，常用命令"><a href="#MK服务器搭建，常用命令" class="headerlink" title="MK服务器搭建，常用命令"></a>MK服务器搭建，常用命令</h1><hr>
@@ -965,34 +986,6 @@
     
     
       <category term="bat脚本" scheme="https://www.leolan.top/tags/bat%E8%84%9A%E6%9C%AC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>RabbitMQ</title>
-    <link href="https://www.leolan.top/posts/33708/"/>
-    <id>https://www.leolan.top/posts/33708/</id>
-    <published>2017-02-28T05:44:51.000Z</published>
-    <updated>2017-03-07T07:24:33.836Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="Centos"><a href="#Centos" class="headerlink" title="Centos"></a>Centos</h2><p>安装RabbitMQ还比较繁琐，目前先这样，之后有时间再做改动。如果报缺少某些库，看最底下，初始环境不同。</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#安装依赖包和环境</span></div><div class="line">yum -y install unixODBC unixODBC-devel java libxslt xmlto</div><div class="line"></div><div class="line"><span class="comment">#安装Make（版本4以上）</span></div><div class="line">http:<span class="regexp">//</span>ftp.gnu.org/gnu/make/make<span class="number">-4.2</span>.tar.gz   <span class="number">4</span>以上</div><div class="line">tar -zxvf make<span class="number">-4.2</span>.tar.gz</div><div class="line">cd make<span class="number">-4.2</span></div><div class="line">./configure</div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line">mv /usr/bin/make /usr/bin/make.bak</div><div class="line">vim /etc/profile</div><div class="line">export PATH=$PATH:/usr/local/bin/make</div><div class="line">source /etc/profile</div><div class="line"></div><div class="line"><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">#</span></div><div class="line"><span class="comment">#安装simplejson</span></div><div class="line">yum install ptyhon -y</div><div class="line">wget https:<span class="regexp">//</span>pypi.python.org/packages/<span class="number">40</span>/ad/<span class="number">52</span>c1f3a562df3b210e8f165e1aa243a178c454ead65476a39fa3ce1847b6/simplejson<span class="number">-3.10</span><span class="number">.0</span>.tar.gz<span class="comment">#md5=426a9631d22851a7a970b1a677368b15</span></div><div class="line">tar zxvf simplejson<span class="number">-3.10</span><span class="number">.0</span>.tar.gz</div><div class="line">cd simplejson<span class="number">-3.10</span><span class="number">.0</span></div><div class="line">python setup.py build</div><div class="line">python setup.py install</div><div class="line"></div><div class="line"><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">#</span></div><div class="line"><span class="comment">#安装erlang</span></div><div class="line">wget http:<span class="regexp">//</span>www.erlang.org/download/otp_src_19<span class="number">.2</span>.tar.gz</div><div class="line">tar -zxvf otp_src_19<span class="number">.2</span>.tar.gz</div><div class="line">cd otp_src_19<span class="number">.2</span></div><div class="line">./configure --without-javac</div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line"><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">#</span></div><div class="line"><span class="comment">#安装rabbitmq</span></div><div class="line">wget http:<span class="regexp">//</span>www.rabbitmq.com/releases/rabbitmq-server/v3<span class="number">.6</span><span class="number">.6</span>/rabbitmq-server<span class="number">-3.6</span><span class="number">.6</span>.tar.xz</div><div class="line">tar -vxf rabbitmq-server<span class="number">-3.6</span><span class="number">.6</span>.tar.xz</div><div class="line">cd rabbitmq-server<span class="number">-3.6</span><span class="number">.6</span></div><div class="line">/usr/local/bin/make TARGET_DIR=/usr/local/rabbitmq SBIN_DIR=/usr/local/rabbitmq/sbin MAN_DIR=/usr/local/rabbitmq/man DOC_INSTALL_DIR=/usr/local/rabbitmq/doc install</div><div class="line"></div><div class="line"><span class="comment">#配置</span></div><div class="line">mkdir /etc/rabbitmq</div><div class="line">cp ./deps/rabbit/docs/rabbitmq.config.example /etc/rabbitmq/rabbitmq.config</div><div class="line"></div><div class="line"><span class="comment">#启动插件</span></div><div class="line">/usr/local/lib/erlang/lib/rabbitmq_server<span class="number">-0.0</span><span class="number">.0</span>/sbin/rabbitmq-plugins enable rabbitmq_management</div><div class="line">/usr/local/lib/erlang/lib/rabbitmq_server<span class="number">-0.0</span><span class="number">.0</span>/sbin/rabbitmq-plugins enable rabbitmq_mqtt</div><div class="line"></div><div class="line"><span class="comment">#启动</span></div><div class="line">/usr/local/lib/erlang/lib/rabbitmq_server<span class="number">-0.0</span><span class="number">.0</span>/sbin/rabbitmq-server &amp;</div><div class="line"></div><div class="line"><span class="comment">#放行端口</span></div><div class="line">vim /etc/sysconfig/iptables</div><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport <span class="number">15672</span> -j ACCEPT</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#浏览器打开</span></div><div class="line">http:<span class="regexp">//</span>localhost:<span class="number">15672</span>   guest  guest</div><div class="line"></div><div class="line"><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">#</span></div></pre></td></tr></table></figure>
-<hr>
-<p>安装elixir环境的简单方法<br><a href="https://segmentfault.com/a/1190000000741218" target="_blank" rel="external">https://segmentfault.com/a/1190000000741218</a><br><a href="https://github.com/elixir-lang/elixir/archive/v1.4.2.tar.gz" target="_blank" rel="external">https://github.com/elixir-lang/elixir/archive/v1.4.2.tar.gz</a></p>
-<p>配置参考：<br><a href="http://blog.csdn.net/historyasamirror/article/details/6827870" target="_blank" rel="external">http://blog.csdn.net/historyasamirror/article/details/6827870</a><br><a href="http://blog.csdn.net/feng4656/article/details/17371005" target="_blank" rel="external">http://blog.csdn.net/feng4656/article/details/17371005</a></p>
-<hr>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;script src=&quot;/assets/js/DPlayer.min.js&quot;&gt; &lt;/script&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerl
-    
-    </summary>
-    
-      <category term="环境搭建" scheme="https://www.leolan.top/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    
-    
-      <category term="RabbitMQ" scheme="https://www.leolan.top/tags/RabbitMQ/"/>
     
   </entry>
   
