@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.leolan.top/"/>
-  <updated>2017-06-05T02:49:39.994Z</updated>
+  <updated>2018-10-08T07:17:46.970Z</updated>
   <id>https://www.leolan.top/</id>
   
   <author>
@@ -14,6 +14,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="https://www.leolan.top/posts/0/"/>
+    <id>https://www.leolan.top/posts/0/</id>
+    <published>2018-07-26T16:00:00.000Z</published>
+    <updated>2018-10-08T07:17:46.970Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="博客转移"><a href="#博客转移" class="headerlink" title="博客转移"></a>博客转移</h1><p>已改用typecho搭建博客，欢迎访问：<a href="https://www.leolan.top">https://www.leolan.top</a></p>
+<p>此博客不再更新！感谢支持！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;script src=&quot;/assets/js/DPlayer.min.js&quot;&gt; &lt;/script&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;博客转移&quot;&gt;&lt;a href=&quot;#博客转移&quot; class=&quot;hea
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>MySQL高可用之MHA</title>
@@ -428,6 +448,28 @@
   </entry>
   
   <entry>
+    <title>博客迁移</title>
+    <link href="https://www.leolan.top/posts/53348/"/>
+    <id>https://www.leolan.top/posts/53348/</id>
+    <published>2017-05-09T16:21:04.000Z</published>
+    <updated>2018-10-08T07:11:50.995Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>由于平台等多重原因，实在折腾的比较心累，决定把博客迁移到新的平台，由Hexo转Typecho，新站点请访问<font color="#ff0000">新版博客：<a href="http://www.leolan.top">www.leolan.top</a></font>。本博客依然能够用访问：<font color="#ff0000">旧版博客：<a href="https://old.leolan.top" target="_blank" rel="external">https://old.leolan.top</a></font> 但可能不再更新。非常抱歉。</p>
+<p>由于Markdown语法的差异，迁移文章带来了许多麻烦，但是新的博客将会逐渐完善，非常感谢！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;script src=&quot;/assets/js/DPlayer.min.js&quot;&gt; &lt;/script&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;由于平台等多重原因，实在折腾的比较心累，决定把博客迁移到新的平台，由Hex
+    
+    </summary>
+    
+    
+      <category term="博客迁移" scheme="https://www.leolan.top/tags/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/"/>
+    
+  </entry>
+  
+  <entry>
     <title>关于评论,统一回复</title>
     <link href="https://www.leolan.top/posts/50249/"/>
     <id>https://www.leolan.top/posts/50249/</id>
@@ -457,7 +499,7 @@
     <link href="https://www.leolan.top/posts/10719/"/>
     <id>https://www.leolan.top/posts/10719/</id>
     <published>2017-04-14T05:45:43.000Z</published>
-    <updated>2017-04-18T02:02:02.038Z</updated>
+    <updated>2018-10-08T07:11:51.137Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="Centos-不完整，待完成"><a href="#Centos-不完整，待完成" class="headerlink" title="Centos 不完整，待完成"></a>Centos 不完整，待完成</h1><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum <span class="keyword">install</span> vsftpd -y</div></pre></td></tr></table></figure>
 <p>修改配置<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">vim /etc/vsftpd/vsftpd.conf</div><div class="line"></div><div class="line"><span class="comment">#修改以下项目 </span></div><div class="line"><span class="attr">anonymous_enable=NO</span>     <span class="comment">#关闭匿名登录</span></div><div class="line"><span class="attr">chroot_local_user=YES</span>   <span class="comment">#禁止跳出家目录</span></div></pre></td></tr></table></figure></p>
@@ -665,7 +707,7 @@
     <link href="https://www.leolan.top/posts/26298/"/>
     <id>https://www.leolan.top/posts/26298/</id>
     <published>2017-04-08T04:16:50.000Z</published>
-    <updated>2017-04-13T09:16:48.222Z</updated>
+    <updated>2018-10-08T07:11:51.127Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h1><h2 id="第三方接管域名"><a href="#第三方接管域名" class="headerlink" title="第三方接管域名"></a>第三方接管域名</h2><p><strong>这种情况适合域名由第三方接管的情况下。</strong><br><img src="http://ofyfogrgx.bkt.clouddn.com/youjianjiexi.png" alt=""><br>目前的设置是这样的，就是MX记录指向<strong>mail.域名</strong>，最后通过A记录指向IP。这种情况下访问<strong>mail.域名</strong>也会跳转到IP:80的网站上。<br>@ ---》MX ---》mail.域名<br>mail ---》A ---》IP</p>
 <hr>
@@ -857,7 +899,7 @@
     <link href="https://www.leolan.top/posts/55326/"/>
     <id>https://www.leolan.top/posts/55326/</id>
     <published>2017-03-18T15:35:41.000Z</published>
-    <updated>2017-03-20T09:50:40.158Z</updated>
+    <updated>2018-10-08T07:11:51.116Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="搭建同步环境"><a href="#搭建同步环境" class="headerlink" title="搭建同步环境"></a>搭建同步环境</h1><h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><p>下载链接：<br>服务端：<a href="http://ofyfogrgx.bkt.clouddn.com/image/20170318/234212383.exe" target="_blank" rel="external">http://ofyfogrgx.bkt.clouddn.com/image/20170318/234212383.exe</a><br>客户端：<a href="http://ofyfogrgx.bkt.clouddn.com/image/20170318/234502534.exe" target="_blank" rel="external">http://ofyfogrgx.bkt.clouddn.com/image/20170318/234502534.exe</a></p>
 <p>Windows上安装比较简单，直接安装服务端，设置账户密码时不要更改（更改后会认证失败），安装服务端后修改安装目录下的rsyncd.conf文件，增加：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attr">uid</span> = <span class="number">0</span></div><div class="line"><span class="attr">gid</span> = <span class="number">0</span></div></pre></td></tr></table></figure></p>
@@ -879,120 +921,6 @@
     
     
       <category term="Rsync" scheme="https://www.leolan.top/tags/Rsync/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>cmd_bat脚本</title>
-    <link href="https://www.leolan.top/posts/58627/"/>
-    <id>https://www.leolan.top/posts/58627/</id>
-    <published>2017-03-18T14:31:02.000Z</published>
-    <updated>2017-04-27T10:14:48.487Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="bat-cmd常用命令"><a href="#bat-cmd常用命令" class="headerlink" title="bat_cmd常用命令"></a>bat_cmd常用命令</h1><p><strong>::</strong>　　　注释<br><strong>md</strong>　　　创建目录<br><strong>xcopy</strong>　　　xcopy要用绝对路径才能在脚本里运行，遇到目录会提示，要指定参数，具体参数看帮助<code>xcopy /?</code><br><strong>rd /s /q</strong>　　　删除目录<br>如果要删除一个目录下的所有文件，用del命令是无法删除目录的，可以先<strong>rd</strong>后<strong>md</strong>。<br>同样<strong>移动文件夹</strong>时<strong>move</strong>只能移动文件，而不能移动文件夹；可以先<strong>xcopy</strong>然后<strong>rd</strong>。</p>
-<p><strong>puase</strong>　　　结尾加上这个，不用<strong>goto exit</strong>则会等待用户按任意键后才会退出脚本。</p>
-<hr>
-<h1 id="关于时间的获取-格式：20170318-："><a href="#关于时间的获取-格式：20170318-：" class="headerlink" title="关于时间的获取(格式：20170318)："></a><font color="#0000EE">关于时间的获取</font>(格式：20170318)：</h1><p>win7中：<code>%DATE:~0,4%%DATE:~5,2%%DATE:~8,2%</code><br>win_server：<code>%date:~10,4%%date:~4,2%%date:~7,2%</code></p>
-<hr>
-<h1 id="电源管理-具体参数看：shutdown-："><a href="#电源管理-具体参数看：shutdown-：" class="headerlink" title="电源管理(具体参数看：shutdown /?)："></a><font color="#0000EE">电源管理</font>(具体参数看：shutdown /?)：</h1><p>在5：30分自动关机：<code>at 05:30 shutdown -s -f</code><br>在XXX分钟后重启：<code>shutdown -r -t 60</code></p>
-<hr>
-<h1 id="forfiles命令（针对文件的操作命令）："><a href="#forfiles命令（针对文件的操作命令）：" class="headerlink" title="forfiles命令（针对文件的操作命令）："></a><font color="#0000EE">forfiles</font>命令（针对文件的操作命令）：</h1><p>/p 指定的路径<br>/s 包括子目录<br>/m 查找的文件名掩码<br>/d 指定日期,有绝对日期和相对日期, 此处-7指当前日期 的7天前<br>/c 运行的命令行   表示为每个文件执行的命令。命令字符串应该用双引号括起来。默认命令是 “cmd /c echo @file”。下列变量可以用在命令字符串中:</p>
-<ul>
-<li>@file    - 返回文件名。</li>
-<li>@fname   - 返回不带扩展名的文件名。</li>
-<li>@ext     - 只返回文件的扩展。</li>
-<li>@path    - 返回文件的完整路径。</li>
-<li>@relpath - 返回文件的相对路径。</li>
-<li>@isdir   - 如果文件类型是目录，返回 “TRUE”；如果是文件，返回 “FALSE”。</li>
-<li>@fsize   - 以字节为单位返回文件大小。</li>
-<li>@fdate   - 返回文件上一次修改的日期。</li>
-<li>@ftime   - 返回文件上一次修改的时间。</li>
-</ul>
-<p><strong>示例</strong><br>要列出驱动器 C: 上的所有批处理文件，请键入：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">forfiles <span class="regexp">/p c:/</span> <span class="regexp">/s /m</span>*.bat <span class="regexp">/c"cmd /</span>c echo @<span class="keyword">file</span> is a batch <span class="keyword">file</span><span class="string">"</span></div></pre></td></tr></table></figure></p>
-<p>要列出驱动器 C: 上的所有目录，请键入：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">forfiles <span class="regexp">/p c:/</span> <span class="regexp">/s /</span>m*.* <span class="regexp">/c"cmd /</span>c <span class="keyword">if</span> <span class="meta">@isdir</span>==<span class="literal">true</span> echo <span class="meta">@file</span> is a directory<span class="string">"</span></div></pre></td></tr></table></figure></p>
-<p>要列出驱动器 C: 上存在时间多于 100 天的所有文件，请键入：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">forfiles <span class="regexp">/p c:/</span> <span class="regexp">/s /m</span>*.* <span class="regexp">/dt-100 /</span>c<span class="string">"cmd /c echo @file :date &gt;= 100 days"</span></div></pre></td></tr></table></figure></p>
-<p>要列出驱动器 C: 上 1993 年 1 月 1 日以前创建的所有文件，而且对于日期早于 1993 年 1 月 1 日的文件显示“file is quite old!”，请键入：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">forfiles <span class="regexp">/p c:/</span> <span class="regexp">/s /m</span>*.* <span class="regexp">/dt-01011993 /</span>c<span class="string">"cmd /c echo @file is quite old!"</span></div></pre></td></tr></table></figure></p>
-<p>要按列格式列出驱动器 C: 上所有文件的扩展名，请键入：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">forfiles <span class="regexp">/p c:/</span> <span class="regexp">/s /</span>m*.* <span class="regexp">/c "cmd /</span>c echo extension of <span class="meta">@file</span> is <span class="number">0x09</span><span class="meta">@ext</span>0x09<span class="string">" With:</span></div></pre></td></tr></table></figure></p>
-<p>要列出驱动器 C: 上的所有批处理文件，请键入：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">forfiles <span class="regexp">/p c:/</span> <span class="regexp">/s /m</span> *.bat <span class="regexp">/c "cmd /</span>c echo @<span class="keyword">file</span> is a batch <span class="keyword">file</span><span class="string">"</span></div></pre></td></tr></table></figure></p>
-<p>要列出驱动器 C: 上的所有目录，请键入：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">forfiles <span class="regexp">/p c:/</span> <span class="regexp">/s /</span>m *.* <span class="regexp">/c "cmd /</span>c <span class="keyword">if</span> <span class="meta">@isdir</span>==<span class="literal">true</span> echo <span class="meta">@file</span> is a directory<span class="string">"</span></div></pre></td></tr></table></figure></p>
-<p>要列出驱动器 C: 上存在时间多于 100 天的所有文件，请键入：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">forfiles <span class="regexp">/p c:/</span> <span class="regexp">/s /m</span> *.* <span class="regexp">/d t-100 /</span>c <span class="string">"cmd /c echo @file :date &gt;= 100 days"</span></div></pre></td></tr></table></figure></p>
-<p>要列出驱动器 C: 上 1993 年 1 月 1 日以前创建的所有文件，而且对于日期早于 1993 年 1 月 1 日的文件显示“file is quite old!”，请键入：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">forfiles <span class="regexp">/p c:/</span> <span class="regexp">/s /m</span> *.* <span class="regexp">/d t-01011993 /</span>c <span class="string">"cmd /c echo @file is quite old!"</span></div></pre></td></tr></table></figure></p>
-<p>要按列格式列出驱动器 C: 上所有文件的扩展名，请键入：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">forfiles <span class="regexp">/p c:/</span> <span class="regexp">/s /</span>m*.* <span class="regexp">/c "cmd /</span>c echo extension of <span class="meta">@file</span> is <span class="number">0x09</span><span class="meta">@ext</span>0x09<span class="string">"</span></div></pre></td></tr></table></figure></p>
-<hr>
-<h1 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a><font color="#0000EE">for循环</font></h1><p>for /?<br>FOR 变量参照的替换已被增强。您现在可以使用下列<br>选项语法:</p>
-<pre><code> ~I         - 删除任何引号(&quot;)，扩充 %I
- %~fI        - 将 %I 扩充到一个完全合格的路径名
- %~dI        - 仅将 %I 扩充到一个驱动器号
- %~pI        - 仅将 %I 扩充到一个路径
-%~nI        - 仅将 %I 扩充到一个文件名
- %~xI        - 仅将 %I 扩充到一个文件扩展名
- %~sI        - 扩充的路径只含有短名
- %~aI        - 将 %I 扩充到文件的文件属性
- %~tI        - 将 %I 扩充到文件的日期/时间
- %~zI        - 将 %I 扩充到文件的大小
- %~$PATH:I   - 查找列在路径环境变量的目录，并将 %I 扩充
-               到找到的第一个完全合格的名称。如果环境变量名
-               未被定义，或者没有找到文件，此组合键会扩充到
-               空字符串
-</code></pre><p>可以组合修饰符来得到多重结果:</p>
-<pre><code>%~dpI       - 仅将 %I 扩充到一个驱动器号和路径
-%~nxI       - 仅将 %I 扩充到一个文件名和扩展名
-%~fsI       - 仅将 %I 扩充到一个带有短名的完整路径名
-%~dp$PATH:i - 查找列在路径环境变量的目录，并将 %I 扩充
-              到找到的第一个驱动器号和路径。 
-%~ftzaI     - 将 %I 扩充到类似输出线路的 DIR
-</code></pre><h2 id="删除D-Logs下的空目录"><a href="#删除D-Logs下的空目录" class="headerlink" title="删除D:\Logs下的空目录"></a>删除D:\Logs下的空目录</h2><figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> /f "delims=" <span class="variable">%%a</span> <span class="keyword">in</span> ('<span class="built_in">dir</span> D:\Logs /b /ad /s ^|sort /r' ) <span class="keyword">do</span> <span class="built_in">rd</span> /q "<span class="variable">%%a</span>" <span class="number">2</span>&gt;<span class="built_in">nul</span></div></pre></td></tr></table></figure>
-<hr>
-<h2 id="示例脚本1"><a href="#示例脚本1" class="headerlink" title="示例脚本1"></a>示例脚本1</h2><p>这个脚本是复制备份文件到指定目录（目录以20170318这种格式创建），并递归查找7天以上的旧内容并删除。<br><figure class="highlight sqf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">@<span class="built_in">echo</span> off</div><div class="line"><span class="built_in">echo</span>  ----------------------------------------------------------- &gt;&gt;SQL_bat.<span class="built_in">log</span></div><div class="line"><span class="built_in">echo</span> SQL Databases backup start %<span class="built_in">Date</span>% - %<span class="built_in">time</span>% &gt;&gt;SQL_bat.<span class="built_in">log</span></div><div class="line"></div><div class="line">::<span class="built_in">set</span> yymmdd=%<span class="built_in">DATE</span>:~<span class="number">0</span>,<span class="number">4</span>%%<span class="built_in">DATE</span>:~<span class="number">5</span>,<span class="number">2</span>%%<span class="built_in">DATE</span>:~<span class="number">8</span>,<span class="number">2</span>%</div><div class="line"><span class="built_in">set</span> yymmdd=%<span class="built_in">date</span>:~<span class="number">10</span>,<span class="number">4</span>%%<span class="built_in">date</span>:~<span class="number">4</span>,<span class="number">2</span>%%<span class="built_in">date</span>:~<span class="number">7</span>,<span class="number">2</span>%</div><div class="line">md F:\DB_Buckup\%yymmdd%</div><div class="line">C:\Windows\System32\xcopy.exe C:\DBBackUp_Plan\* F:\DB_Buckup\%yymmdd% /s /e</div><div class="line">C:\Windows\System32\xcopy.exe /e /i C:\DBBackUp_Plan\* F:\DB_Buckup\%yymmdd%</div><div class="line">rd /s /q C:\DBBackUp_Plan</div><div class="line"></div><div class="line">::下面这段是搜索<span class="number">7</span>天以上旧内容并删除</div><div class="line"><span class="built_in">set</span> file_dir=<span class="string">"F:\DB_Buckup"</span></div><div class="line"><span class="built_in">set</span> bak_dat=<span class="number">7</span></div><div class="line">forfiles /p %file_dir% /S /M *.* /D -%bak_dat% /C <span class="string">"cmd /c echo del@relpath file… &amp; echo. &amp; del /s /q @file"</span> &gt;&gt;SQL_bat.<span class="built_in">log</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> SQL Databases backup <span class="built_in">stop</span> %<span class="built_in">Date</span>% - %<span class="built_in">time</span>% &gt;&gt;SQL_bat.<span class="built_in">log</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span>  ----------------------------------------------------------- &gt;&gt;SQL_bat.<span class="built_in">log</span></div><div class="line"><span class="built_in">goto</span> <span class="keyword">exit</span></div><div class="line">:<span class="keyword">exit</span></div></pre></td></tr></table></figure></p>
-<hr>
-<h1 id="功能实现"><a href="#功能实现" class="headerlink" title="功能实现"></a>功能实现</h1><h2 id="远程执行程序、脚本"><a href="#远程执行程序、脚本" class="headerlink" title="远程执行程序、脚本"></a>远程执行程序、脚本</h2><p>下载PsExec：<a href="https://technet.microsoft.com/en-us/sysinternals/bb897553.aspx" target="_blank" rel="external">https://technet.microsoft.com/en-us/sysinternals/bb897553.aspx</a><br><strong>下载页面有相关的使用说明</strong><br>解压文件后把psexec放到你需要的位置，如果没有添加环境变量就要用绝对路径去执行。目标主机的防火墙要开135,139这两个端口。</p>
-<p><font color="#EE9A00">常见用法</font><br><strong>语法</strong>：<code>psexec 远程主机名/IP -u 用户名 -p 密码 [参数] [被执行的程序]</code><br>只在局域网内应用成功，外网没有测试过，用IP可能会连接不了远程主机，可能是防火墙的问题，可以改用主机名，在cmd里输入hostname查看主机名。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">psexec \\hostname -u Administrator -<span class="selector-tag">p</span> mypassword -<span class="selector-tag">i</span> <span class="string">"D:\123.bat"</span></div><div class="line">psexec \\hostname -u Administrator -<span class="selector-tag">p</span> mypassword -c <span class="string">"D:\123.bat"</span></div></pre></td></tr></table></figure>
-<p><strong>参数</strong>：<br>-i　　是执行远程相应位置的脚本。<br>-c　　是复制本地脚本到远程执行。</p>
-<p>参考：<br><a href="http://blog.csdn.net/miss_easy/article/details/47780797" target="_blank" rel="external">http://blog.csdn.net/miss_easy/article/details/47780797</a><br><a href="http://blog.sina.com.cn/s/blog_4e46983d0101ovkw.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_4e46983d0101ovkw.html</a></p>
-<hr>
-<h1 id="备份数据库"><a href="#备份数据库" class="headerlink" title="备份数据库"></a>备份数据库</h1><p>备份SqlServer数据库：<a href="http://www.jb51.net/article/61423.htm" target="_blank" rel="external">SqlServer备份数据库的4种方式介绍</a></p>
-<hr>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;script src=&quot;/assets/js/DPlayer.min.js&quot;&gt; &lt;/script&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;bat-cmd常用命令&quot;&gt;&lt;a href=&quot;#bat-cmd常用
-    
-    </summary>
-    
-      <category term="Dev" scheme="https://www.leolan.top/categories/Dev/"/>
-    
-    
-      <category term="bat脚本" scheme="https://www.leolan.top/tags/bat%E8%84%9A%E6%9C%AC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>RabbitMQ</title>
-    <link href="https://www.leolan.top/posts/33708/"/>
-    <id>https://www.leolan.top/posts/33708/</id>
-    <published>2017-02-28T05:44:51.000Z</published>
-    <updated>2017-03-07T07:24:33.837Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="Centos"><a href="#Centos" class="headerlink" title="Centos"></a>Centos</h2><p>安装RabbitMQ还比较繁琐，目前先这样，之后有时间再做改动。如果报缺少某些库，看最底下，初始环境不同。</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#安装依赖包和环境</span></div><div class="line">yum -y install unixODBC unixODBC-devel java libxslt xmlto</div><div class="line"></div><div class="line"><span class="comment">#安装Make（版本4以上）</span></div><div class="line">http:<span class="regexp">//</span>ftp.gnu.org/gnu/make/make<span class="number">-4.2</span>.tar.gz   <span class="number">4</span>以上</div><div class="line">tar -zxvf make<span class="number">-4.2</span>.tar.gz</div><div class="line">cd make<span class="number">-4.2</span></div><div class="line">./configure</div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line">mv /usr/bin/make /usr/bin/make.bak</div><div class="line">vim /etc/profile</div><div class="line">export PATH=$PATH:/usr/local/bin/make</div><div class="line">source /etc/profile</div><div class="line"></div><div class="line"><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">#</span></div><div class="line"><span class="comment">#安装simplejson</span></div><div class="line">yum install ptyhon -y</div><div class="line">wget https:<span class="regexp">//</span>pypi.python.org/packages/<span class="number">40</span>/ad/<span class="number">52</span>c1f3a562df3b210e8f165e1aa243a178c454ead65476a39fa3ce1847b6/simplejson<span class="number">-3.10</span><span class="number">.0</span>.tar.gz<span class="comment">#md5=426a9631d22851a7a970b1a677368b15</span></div><div class="line">tar zxvf simplejson<span class="number">-3.10</span><span class="number">.0</span>.tar.gz</div><div class="line">cd simplejson<span class="number">-3.10</span><span class="number">.0</span></div><div class="line">python setup.py build</div><div class="line">python setup.py install</div><div class="line"></div><div class="line"><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">#</span></div><div class="line"><span class="comment">#安装erlang</span></div><div class="line">wget http:<span class="regexp">//</span>www.erlang.org/download/otp_src_19<span class="number">.2</span>.tar.gz</div><div class="line">tar -zxvf otp_src_19<span class="number">.2</span>.tar.gz</div><div class="line">cd otp_src_19<span class="number">.2</span></div><div class="line">./configure --without-javac</div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line"><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">#</span></div><div class="line"><span class="comment">#安装rabbitmq</span></div><div class="line">wget http:<span class="regexp">//</span>www.rabbitmq.com/releases/rabbitmq-server/v3<span class="number">.6</span><span class="number">.6</span>/rabbitmq-server<span class="number">-3.6</span><span class="number">.6</span>.tar.xz</div><div class="line">tar -vxf rabbitmq-server<span class="number">-3.6</span><span class="number">.6</span>.tar.xz</div><div class="line">cd rabbitmq-server<span class="number">-3.6</span><span class="number">.6</span></div><div class="line">/usr/local/bin/make TARGET_DIR=/usr/local/rabbitmq SBIN_DIR=/usr/local/rabbitmq/sbin MAN_DIR=/usr/local/rabbitmq/man DOC_INSTALL_DIR=/usr/local/rabbitmq/doc install</div><div class="line"></div><div class="line"><span class="comment">#配置</span></div><div class="line">mkdir /etc/rabbitmq</div><div class="line">cp ./deps/rabbit/docs/rabbitmq.config.example /etc/rabbitmq/rabbitmq.config</div><div class="line"></div><div class="line"><span class="comment">#启动插件</span></div><div class="line">/usr/local/lib/erlang/lib/rabbitmq_server<span class="number">-0.0</span><span class="number">.0</span>/sbin/rabbitmq-plugins enable rabbitmq_management</div><div class="line">/usr/local/lib/erlang/lib/rabbitmq_server<span class="number">-0.0</span><span class="number">.0</span>/sbin/rabbitmq-plugins enable rabbitmq_mqtt</div><div class="line"></div><div class="line"><span class="comment">#启动</span></div><div class="line">/usr/local/lib/erlang/lib/rabbitmq_server<span class="number">-0.0</span><span class="number">.0</span>/sbin/rabbitmq-server &amp;</div><div class="line"></div><div class="line"><span class="comment">#放行端口</span></div><div class="line">vim /etc/sysconfig/iptables</div><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport <span class="number">15672</span> -j ACCEPT</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#浏览器打开</span></div><div class="line">http:<span class="regexp">//</span>localhost:<span class="number">15672</span>   guest  guest</div><div class="line"></div><div class="line"><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">#</span></div></pre></td></tr></table></figure>
-<hr>
-<p>安装elixir环境的简单方法<br><a href="https://segmentfault.com/a/1190000000741218" target="_blank" rel="external">https://segmentfault.com/a/1190000000741218</a><br><a href="https://github.com/elixir-lang/elixir/archive/v1.4.2.tar.gz" target="_blank" rel="external">https://github.com/elixir-lang/elixir/archive/v1.4.2.tar.gz</a></p>
-<p>配置参考：<br><a href="http://blog.csdn.net/historyasamirror/article/details/6827870" target="_blank" rel="external">http://blog.csdn.net/historyasamirror/article/details/6827870</a><br><a href="http://blog.csdn.net/feng4656/article/details/17371005" target="_blank" rel="external">http://blog.csdn.net/feng4656/article/details/17371005</a></p>
-<hr>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;script src=&quot;/assets/js/DPlayer.min.js&quot;&gt; &lt;/script&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerl
-    
-    </summary>
-    
-      <category term="环境搭建" scheme="https://www.leolan.top/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    
-    
-      <category term="RabbitMQ" scheme="https://www.leolan.top/tags/RabbitMQ/"/>
     
   </entry>
   

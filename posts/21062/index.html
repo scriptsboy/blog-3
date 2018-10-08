@@ -116,7 +116,7 @@
 <meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161218/144720550.png">
 <meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161218/150425099.png">
 <meta property="og:image" content="http://ofyfogrgx.bkt.clouddn.com/blog/20161218/150947182.png">
-<meta property="og:updated_time" content="2017-02-27T08:47:33.048Z">
+<meta property="og:updated_time" content="2018-10-08T07:11:51.007Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python入门">
 <meta name="twitter:description" content="学习廖雪峰老师的博客整理的一些笔记，目前还很凌乱，很惭愧，还没有掌握知识，大脑中还没有一个清晰的思路，之后会不断的学习和完善ﾍ|･∀･|ﾉ*~● 安装Python官网：www.python.org Mac系统是OS X 10.8~10.10，那么系统自带的Python版本是2.7。要安装最新的Python 3.5，有两个方法：方法一：从Python官网下载Python 3.5的安装程序，双击运">
@@ -363,8 +363,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2017-02-27T16:47:33+08:00">
-              2017-02-27
+            <time title="Post modified" itemprop="dateModified" datetime="2018-10-08T15:11:51+08:00">
+              2018-10-08
             </time>
             
           </span>
@@ -524,12 +524,12 @@
 <p>要删除list末尾的元素，用pop()方法：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;</span>&gt; classmates.pop()</div><div class="line"><span class="string">'Adam'</span></div><div class="line"><span class="meta">&gt;&gt;</span>&gt; classmates</div><div class="line">[<span class="string">'Michael'</span>, <span class="string">'Jack'</span>, <span class="string">'Bob'</span>, <span class="string">'Tracy'</span>]</div></pre></td></tr></table></figure></p>
 <p>要删除指定位置的元素，用pop(i)方法，其中i是索引位置：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;</span>&gt; classmates.pop(<span class="number">1</span>)</div><div class="line"><span class="string">'Jack'</span></div><div class="line"><span class="meta">&gt;&gt;</span>&gt; classmates</div><div class="line">[<span class="string">'Michael'</span>, <span class="string">'Bob'</span>, <span class="string">'Tracy'</span>]</div></pre></td></tr></table></figure></p>
 <p>要把某个元素替换成别的元素，可以直接赋值给对应的索引位置：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;</span>&gt; classmates[<span class="number">1</span>] = <span class="string">'Sarah'</span></div><div class="line"><span class="meta">&gt;&gt;</span>&gt; classmates</div><div class="line">[<span class="string">'Michael'</span>, <span class="string">'Sarah'</span>, <span class="string">'Tracy'</span>]</div></pre></td></tr></table></figure></p>
-<p>list里面的元素的数据类型也可以不同，比如：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;</span>&gt; L = [<span class="string">'Apple'</span>, <span class="number">123</span>, True]</div></pre></td></tr></table></figure></p>
+<p>list里面的元素的数据类型也可以不同，比如：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;</span>&gt; L = [<span class="string">'Apple'</span>, <span class="number">123</span>, True]</div><div class="line"><span class="meta">&gt;&gt;</span>&gt;</div></pre></td></tr></table></figure></p>
 <p>list元素也可以是另一个list，比如：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;</span>&gt; s = [<span class="string">'python'</span>, <span class="string">'java'</span>, [<span class="string">'asp'</span>, <span class="string">'php'</span>], <span class="string">'scheme'</span>]</div><div class="line"><span class="meta">&gt;&gt;</span>&gt; len(s)</div><div class="line"><span class="number">4</span></div></pre></td></tr></table></figure></p>
 <p>要注意s只有4个元素，其中s[2]又是一个list，如果拆开写就更容易理解了：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;</span>&gt; p = [<span class="string">'asp'</span>, <span class="string">'php'</span>]</div><div class="line"><span class="meta">&gt;&gt;</span>&gt; s = [<span class="string">'python'</span>, <span class="string">'java'</span>, p, <span class="string">'scheme'</span>]</div></pre></td></tr></table></figure></p>
 <p>要拿到’php’可以写p[1]或者s[2][1]，因此s可以看成是一个二维数组，类似的还有三维、四维……数组，不过很少用到。<br>如果一个list中一个元素也没有，就是一个空的list，它的长度为0：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;</span>&gt; L = []</div><div class="line"><span class="meta">&gt;&gt;</span>&gt; len(L)</div><div class="line"><span class="number">0</span></div></pre></td></tr></table></figure></p>
 <hr>
-<h2 id="tuple"><a href="#tuple" class="headerlink" title="tuple"></a>tuple</h2><p>另一种有序列表叫元组：tuple。tuple和list非常类似，但是tuple一旦初始化就不能修改，比如同样是列出同学的名字：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;</span>&gt; classmates = (<span class="string">'Michael'</span>, <span class="string">'Bob'</span>, <span class="string">'Tracy'</span>)</div></pre></td></tr></table></figure></p>
+<h2 id="tuple"><a href="#tuple" class="headerlink" title="tuple"></a>tuple</h2><p>另一种有序列表叫元组：tuple。tuple和list非常类似，但是tuple一旦初始化就不能修改，比如同样是列出同学的名字：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;</span>&gt; classmates = (<span class="string">'Michael'</span>, <span class="string">'Bob'</span>, <span class="string">'Tracy'</span>)</div><div class="line"><span class="meta">&gt;&gt;</span>&gt;</div></pre></td></tr></table></figure></p>
 <p>现在，classmates这个tuple不能变了，它也没有append()，insert()这样的方法。其他获取元素的方法和list是一样的，你可以正常地使用classmates[0]，classmates[-1]，但不能赋值成另外的元素。<br>不可变的tuple有什么意义？因为tuple不可变，所以代码更安全。如果可能，能用tuple代替list就尽量用tuple。<br>tuple的陷阱：当你定义一个tuple时，在定义的时候，tuple的元素就必须被确定下来，比如：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;</span>&gt; t = (<span class="number">1</span>, <span class="number">2</span>)</div><div class="line"><span class="meta">&gt;&gt;</span>&gt; t</div><div class="line">(<span class="number">1</span>, <span class="number">2</span>)</div></pre></td></tr></table></figure></p>
 <p>如果要定义一个空的tuple，可以写成()：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;</span>&gt; t = ()</div><div class="line"><span class="meta">&gt;&gt;</span>&gt; t</div><div class="line">()</div></pre></td></tr></table></figure></p>
 <p>但是，要定义一个只有1个元素的tuple，如果你这么定义：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;</span>&gt; t = (<span class="number">1</span>)</div><div class="line"><span class="meta">&gt;&gt;</span>&gt; t</div><div class="line"><span class="number">1</span></div></pre></td></tr></table></figure></p>
@@ -841,7 +841,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">87</span>
+              <span class="site-state-item-count">89</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -858,7 +858,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">112</span>
+                <span class="site-state-item-count">113</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
