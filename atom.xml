@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.leolan.top/"/>
-  <updated>2018-07-27T09:26:57.733Z</updated>
+  <updated>2017-06-05T02:49:39.994Z</updated>
   <id>https://www.leolan.top/</id>
   
   <author>
@@ -14,27 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>博客转移</title>
-    <link href="https://www.leolan.top/posts/31764/"/>
-    <id>https://www.leolan.top/posts/31764/</id>
-    <published>2018-07-27T09:22:04.000Z</published>
-    <updated>2018-07-27T09:26:57.733Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>本博客已不再更新，请访问新地址：<a href="https://www.leolan.top">www.leolan.top</a> 非常感谢。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;script src=&quot;/assets/js/DPlayer.min.js&quot;&gt; &lt;/script&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerl
-    
-    </summary>
-    
-    
-      <category term="博客转移" scheme="https://www.leolan.top/tags/%E5%8D%9A%E5%AE%A2%E8%BD%AC%E7%A7%BB/"/>
-    
-  </entry>
   
   <entry>
     <title>MySQL高可用之MHA</title>
@@ -986,6 +965,34 @@
     
     
       <category term="bat脚本" scheme="https://www.leolan.top/tags/bat%E8%84%9A%E6%9C%AC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RabbitMQ</title>
+    <link href="https://www.leolan.top/posts/33708/"/>
+    <id>https://www.leolan.top/posts/33708/</id>
+    <published>2017-02-28T05:44:51.000Z</published>
+    <updated>2017-03-07T07:24:33.837Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="Centos"><a href="#Centos" class="headerlink" title="Centos"></a>Centos</h2><p>安装RabbitMQ还比较繁琐，目前先这样，之后有时间再做改动。如果报缺少某些库，看最底下，初始环境不同。</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#安装依赖包和环境</span></div><div class="line">yum -y install unixODBC unixODBC-devel java libxslt xmlto</div><div class="line"></div><div class="line"><span class="comment">#安装Make（版本4以上）</span></div><div class="line">http:<span class="regexp">//</span>ftp.gnu.org/gnu/make/make<span class="number">-4.2</span>.tar.gz   <span class="number">4</span>以上</div><div class="line">tar -zxvf make<span class="number">-4.2</span>.tar.gz</div><div class="line">cd make<span class="number">-4.2</span></div><div class="line">./configure</div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line">mv /usr/bin/make /usr/bin/make.bak</div><div class="line">vim /etc/profile</div><div class="line">export PATH=$PATH:/usr/local/bin/make</div><div class="line">source /etc/profile</div><div class="line"></div><div class="line"><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">#</span></div><div class="line"><span class="comment">#安装simplejson</span></div><div class="line">yum install ptyhon -y</div><div class="line">wget https:<span class="regexp">//</span>pypi.python.org/packages/<span class="number">40</span>/ad/<span class="number">52</span>c1f3a562df3b210e8f165e1aa243a178c454ead65476a39fa3ce1847b6/simplejson<span class="number">-3.10</span><span class="number">.0</span>.tar.gz<span class="comment">#md5=426a9631d22851a7a970b1a677368b15</span></div><div class="line">tar zxvf simplejson<span class="number">-3.10</span><span class="number">.0</span>.tar.gz</div><div class="line">cd simplejson<span class="number">-3.10</span><span class="number">.0</span></div><div class="line">python setup.py build</div><div class="line">python setup.py install</div><div class="line"></div><div class="line"><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">#</span></div><div class="line"><span class="comment">#安装erlang</span></div><div class="line">wget http:<span class="regexp">//</span>www.erlang.org/download/otp_src_19<span class="number">.2</span>.tar.gz</div><div class="line">tar -zxvf otp_src_19<span class="number">.2</span>.tar.gz</div><div class="line">cd otp_src_19<span class="number">.2</span></div><div class="line">./configure --without-javac</div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line"><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">#</span></div><div class="line"><span class="comment">#安装rabbitmq</span></div><div class="line">wget http:<span class="regexp">//</span>www.rabbitmq.com/releases/rabbitmq-server/v3<span class="number">.6</span><span class="number">.6</span>/rabbitmq-server<span class="number">-3.6</span><span class="number">.6</span>.tar.xz</div><div class="line">tar -vxf rabbitmq-server<span class="number">-3.6</span><span class="number">.6</span>.tar.xz</div><div class="line">cd rabbitmq-server<span class="number">-3.6</span><span class="number">.6</span></div><div class="line">/usr/local/bin/make TARGET_DIR=/usr/local/rabbitmq SBIN_DIR=/usr/local/rabbitmq/sbin MAN_DIR=/usr/local/rabbitmq/man DOC_INSTALL_DIR=/usr/local/rabbitmq/doc install</div><div class="line"></div><div class="line"><span class="comment">#配置</span></div><div class="line">mkdir /etc/rabbitmq</div><div class="line">cp ./deps/rabbit/docs/rabbitmq.config.example /etc/rabbitmq/rabbitmq.config</div><div class="line"></div><div class="line"><span class="comment">#启动插件</span></div><div class="line">/usr/local/lib/erlang/lib/rabbitmq_server<span class="number">-0.0</span><span class="number">.0</span>/sbin/rabbitmq-plugins enable rabbitmq_management</div><div class="line">/usr/local/lib/erlang/lib/rabbitmq_server<span class="number">-0.0</span><span class="number">.0</span>/sbin/rabbitmq-plugins enable rabbitmq_mqtt</div><div class="line"></div><div class="line"><span class="comment">#启动</span></div><div class="line">/usr/local/lib/erlang/lib/rabbitmq_server<span class="number">-0.0</span><span class="number">.0</span>/sbin/rabbitmq-server &amp;</div><div class="line"></div><div class="line"><span class="comment">#放行端口</span></div><div class="line">vim /etc/sysconfig/iptables</div><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport <span class="number">15672</span> -j ACCEPT</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#浏览器打开</span></div><div class="line">http:<span class="regexp">//</span>localhost:<span class="number">15672</span>   guest  guest</div><div class="line"></div><div class="line"><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">#</span></div></pre></td></tr></table></figure>
+<hr>
+<p>安装elixir环境的简单方法<br><a href="https://segmentfault.com/a/1190000000741218" target="_blank" rel="external">https://segmentfault.com/a/1190000000741218</a><br><a href="https://github.com/elixir-lang/elixir/archive/v1.4.2.tar.gz" target="_blank" rel="external">https://github.com/elixir-lang/elixir/archive/v1.4.2.tar.gz</a></p>
+<p>配置参考：<br><a href="http://blog.csdn.net/historyasamirror/article/details/6827870" target="_blank" rel="external">http://blog.csdn.net/historyasamirror/article/details/6827870</a><br><a href="http://blog.csdn.net/feng4656/article/details/17371005" target="_blank" rel="external">http://blog.csdn.net/feng4656/article/details/17371005</a></p>
+<hr>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;script src=&quot;/assets/js/DPlayer.min.js&quot;&gt; &lt;/script&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerl
+    
+    </summary>
+    
+      <category term="环境搭建" scheme="https://www.leolan.top/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    
+    
+      <category term="RabbitMQ" scheme="https://www.leolan.top/tags/RabbitMQ/"/>
     
   </entry>
   
