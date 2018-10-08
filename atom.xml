@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.leolan.top/"/>
-  <updated>2017-06-05T02:49:39.994Z</updated>
+  <updated>2018-10-08T07:22:19.260Z</updated>
   <id>https://www.leolan.top/</id>
   
   <author>
@@ -14,6 +14,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>博客迁移</title>
+    <link href="https://www.leolan.top/posts/53348/"/>
+    <id>https://www.leolan.top/posts/53348/</id>
+    <published>2017-07-09T16:21:04.000Z</published>
+    <updated>2018-10-08T07:22:19.260Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>由于平台等多重原因，实在折腾的比较心累，决定把博客迁移到新的平台，由Hexo转Typecho，新站点请访问<font color="#ff0000">新版博客：<a href="https://www.leolan.top">www.leolan.top</a></font>。本博客依然能够用访问：<font color="#ff0000">旧版博客：<a href="https://old.leolan.top" target="_blank" rel="external">old.leolan.top</a></font> 但可能不再更新。非常抱歉。</p>
+<p>由于Markdown语法的差异，迁移文章带来了许多麻烦，但是新的博客将会逐渐完善，非常感谢！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;script src=&quot;/assets/js/DPlayer.min.js&quot;&gt; &lt;/script&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;由于平台等多重原因，实在折腾的比较心累，决定把博客迁移到新的平台，由Hex
+    
+    </summary>
+    
+    
+      <category term="博客迁移" scheme="https://www.leolan.top/tags/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/"/>
+    
+  </entry>
   
   <entry>
     <title>MySQL高可用之MHA</title>
@@ -424,28 +446,6 @@
     
     
       <category term="ssl" scheme="https://www.leolan.top/tags/ssl/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>博客迁移</title>
-    <link href="https://www.leolan.top/posts/53348/"/>
-    <id>https://www.leolan.top/posts/53348/</id>
-    <published>2017-05-09T16:21:04.000Z</published>
-    <updated>2018-10-08T07:20:38.646Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>由于平台等多重原因，实在折腾的比较心累，决定把博客迁移到新的平台，由Hexo转Typecho，新站点请访问<font color="#ff0000">新版博客：<a href="https://www.leolan.top">www.leolan.top</a></font>。本博客依然能够用访问：<font color="#ff0000">旧版博客：<a href="https://old.leolan.top" target="_blank" rel="external">old.leolan.top</a></font> 但可能不再更新。非常抱歉。</p>
-<p>由于Markdown语法的差异，迁移文章带来了许多麻烦，但是新的博客将会逐渐完善，非常感谢！</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;script src=&quot;/assets/js/DPlayer.min.js&quot;&gt; &lt;/script&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;由于平台等多重原因，实在折腾的比较心累，决定把博客迁移到新的平台，由Hex
-    
-    </summary>
-    
-    
-      <category term="博客迁移" scheme="https://www.leolan.top/tags/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/"/>
     
   </entry>
   
